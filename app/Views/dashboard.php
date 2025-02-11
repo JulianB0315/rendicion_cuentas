@@ -31,7 +31,7 @@
             <div class="container w-100 d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-between align-items-center w-100 flex-wrap">
                     <img class="navbar-brand img-fluid" src="https://www.munijlo.gob.pe/web/placeholders/logo_10_21.png"></img>
-                    <a href="register" class="text-white register-btn btn my-sm-2 mx-sm-auto" style="background-color: #002F59;">Registra tu asistencia</a>
+                    <a href="<?= base_url('form') ?>" class="text-white register-btn btn my-sm-2 mx-sm-auto" style="background-color: #002F59;">Registra tu asistencia</a>
                 </div>
             </div>
         </nav>
@@ -111,7 +111,7 @@
             </section>
     </main>
     <footer class="container-fluid text-white vh-50" style="background-color: #002F59;">
-        <div class="container bg-dark w-100">
+        <div class="container w-100">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-md-4 col-sm-12">
                     Redes Sociales:
