@@ -12,29 +12,28 @@
 
 <body>
     <!-- HEADER: MENU + HEROE SECTION -->
-    <header class="container-fluid header bg-primary text-white p-4">
-        <nav class="w-100 bg-dark">
+    <header class="container-fluid headertext-white p-3" style="background-color: #fff; box-shadow: 0px 0px 12px #333;">
+        <nav class="w-100 h-100">
             <div class="container">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                    <h1 class="navbar-brand fs-4">Municipalidad Distrital de José Leonardo Ortiz</h1>
-                    <a href="register" class="text-white">Regístrate</a>
+                <div class="d-flex justify-content-between align-items-center w-100 flex-wrap">
+                    <img class="navbar-brand img-fluid" src="https://www.munijlo.gob.pe/web/placeholders/logo_10_21.png"></img>
+                    <a href="register" class="text-white register-btn btn my-sm-2 mx-sm-auto" style="background-color: #002F59;">Registra tu asistencia</a>
                 </div>
             </div>
         </nav>
     </header>
-    <main class="container-fluid w-100-bg-dark">
-        <section class="">
+    <main class="container-fluid w-100 vh-100 mt-3">
             <div class="row">
-                <div class="col-12">
-                    <img src="" alt=""> banner de la conferencia
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <img class="img-fluid w-70 w-xl-50" src="https://static.vecteezy.com/system/resources/thumbnails/001/820/662/small_2x/business-banner-template-simple-geometric-style-vector.jpg" alt="Rendición de Cuentas Banner"> 
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <h2>Conferencia de Rendición de Cuentas</h2>
                     <p>Presentación de la info</p>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <h2>Conferencias</h2>
                     <p>fechas</p>
                 </div>
@@ -45,12 +44,11 @@
                         <div class="col-12">
                             <h2>¿Quieres unirte?</h2>
                             <p>Regístrate para participar en la conferencia</p>
-                            <a href="register" class="btn btn-primary">Regístrate</a>
+                            <a href="<?= base_url('Form') ?>" class="btn btn-primary">Regístrate</a>
                         </div>
                     </div>
                 </div>
             </section>
-        </section>
     </main>
     <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
