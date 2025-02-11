@@ -44,7 +44,7 @@
                         <div class="col-12">
                             <h2>¿Quieres unirte?</h2>
                             <p>Regístrate para participar en la conferencia</p>
-                            <a href="<?= base_url('Form') ?>" class="btn btn-primary">Regístrate</a>
+                            <a href="<?= base_url('form') ?>" class="btn btn-primary">Ir al Formulario</a>
                         </div>
                     </div>
                 </div>
