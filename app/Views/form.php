@@ -37,51 +37,38 @@
         <div class="row">
             <div class="col-12">
                 <form action="" class="form-container">
-                    <div class="form-group text">
-                        <input type="text" class="form-part" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
-                        <label for="dni">DNI*</label>
-                    </div>
-                    <div class="form-group text">
-                        <input type="text" class="form-part" name="nombre" pattern="[A-Za-z\s]+" title="Por favor, ingresar solo letras" placeholder=" " required>
-                        <label for="nombre">Nombres y Apellidos</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="participacion">Participación</label><br>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="asistente" name="participacion" value="Asistente" required>
-                            <label class="form-check-label" for="asistente">Asistente</label>
+                    <div id="persona-info">
+                        <div class="form-group text">
+                            <input type="text" class="form-part" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
+                            <label for="dni">DNI*</label>
                         </div>
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="orador" name="participacion" value="Orador" required>
-                            <label class="form-check-label" for="orador">Orador</label>
+                        <div class="form-group text">
+                            <input type="text" class="form-part" name="nombre" pattern="[A-Za-z\s]+" title="Por favor, ingresar solo letras" placeholder=" " required>
+                            <label for="nombre">Nombres y Apellidos</label>
                         </div>
+                        <div class="form-group">
+                            <label class="d-block mb-3">Participación</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="asistente"
+                                    name="participacion" value="Asistente" required>
+                                <label class="form-check-label" for="asistente">Asistente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="orador"
+                                    name="participacion" value="Orador" required>
+                                <label class="form-check-label" for="orador">Orador</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="submit-buttons">
+                        <button type="submit" class="btn btn-primary btn-form" id="submit-button" style="display: block;">Enviar</button>
+                        <button type="button" class="btn btn-primary btn-form" id="next-button" style="display: none;" disabled>Siguiente</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
     <form action="<?= base_url('procesar_formulario') ?>" method="post" class="container mt-5" style="max-width: 600px; margin: auto; padding: 10px; border-radius: 10px; border: 2px solid #002F59; background-color: #FFFFFF;">
-        <div id="persona-info">
-            <div class="form-group">
-                <label for="dni" style="color: #000000; font-size: 1.2em;">DNI</label>
-                <input type="text" class="form-control" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required style="background-color: transparent; border: none; border-bottom: 1px solid #000000; width: 100%; margin-top: 5px;">
-            </div>
-            <div class="form-group">
-                <label for="nombre" style="color: #000000; font-size: 1.2em;">Nombres y Apellidos</label>
-                <input type="text" class="form-control" name="nombre" pattern="[A-Za-z\s]+" title="Por favor, ingresar solo letras" required style="background-color: transparent; border: none; border-bottom: 1px solid #000000; width: 100%; margin-top: 5px;">
-            </div>
-            <div class="form-group">
-                <label for="participacion" style="color: #000000; font-size: 1.2em;">Participación</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="asistente" name="participacion" value="Asistente" required>
-                    <label class="form-check-label" for="asistente" style="color: #000000; font-size: 1.2em;">Asistente</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" class="form-check-input" id="orador" name="participacion" value="Orador" required>
-                    <label class="form-check-label" for="orador" style="color: #000000; font-size: 1.2em;">Orador</label>
-                </div>
-            </div>
-        </div>
         <div id="orador-info" style="display: none;">
             <div class="form-group">
                 <label for="titular" style="color: #000000; font-size: 1.2em;">Su participación sera a titulo...</label><br>
@@ -120,10 +107,7 @@
                 <input type="text" class="form-control" name="pregunta" pattern="[A-Za-z\s]{1,200}" title="Por favor, ingresar solo letras (máximo 200 caracteres)" style="background-color: transparent; border: none; border-bottom: 1px solid #000000; width: 100%; margin-top: 5px;">
             </div>
         </div>
-        <div id="submit-buttons">
-            <button type="submit" class="btn btn-primary" id="submit-button" style="display: block;">Enviar</button>
-            <button type="button" class="btn btn-primary" id="next-button" style="display: none;" disabled>Siguiente</button>
-        </div>
+
     </form>
 
     <!-- Bootstrap JS and dependencies -->
