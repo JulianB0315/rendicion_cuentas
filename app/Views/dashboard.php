@@ -29,7 +29,7 @@
     <main class="container-fluid w-100 h-100 my-3">
         <div class="row">
             <div class="col-12 d-flex justify-content-center align-items-center">
-                <img class="img-fluid w-70 w-xl-50" src="https://static.vecteezy.com/system/resources/thumbnails/001/820/662/small_2x/business-banner-template-simple-geometric-style-vector.jpg" alt="Rendición de Cuentas Banner">
+                <img class="img-fluid w-70 w-xl-50" src="<?=base_url('img/logo.webp')?>" alt="Rendición de Cuentas Banner">
             </div>
         </div>
         <div class="row my-3">
