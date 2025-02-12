@@ -5,6 +5,10 @@
 	--white: #fff;
 	--gray: #333;
 	--titles: "Encode Sans Semi Expanded", serif;
+	--font: "Asap", serif
+}
+body{
+	font-family: var(--font);
 }
 
 .header {
