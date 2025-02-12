@@ -104,7 +104,7 @@
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center gap-2 gap-md-0">
                 <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
-                    <h5>Redes Sociales:</h5>
+                    <h5 class="fs-2">Redes Sociales:</h5>
                     <ul class="list-unstyled">
                         <li>
                             <a href="https://www.instagram.com/municipalidadjoseleonardoortiz" class="text-white">
@@ -124,20 +124,22 @@
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
-                    <h5>Sedes:</h5>
-                    <p>
+                    <h5 class="fs-2">Sedes:</h5>
+                    <p class="px-3">
                         <i class="fa-solid fa-map-location-dot"></i>
-                        Sede central: Av. Sáenz Peña N.º 2151 - Urb. Latina - José Leonardo Ortiz - Chiclayo - Lambayeque - Perú
+                        <span>
+                            Sede central: Av. Sáenz Peña N.º 2151 - Urb. Latina - José Leonardo Ortiz - Chiclayo - Lambayeque - Perú
+                        </span>
                     </p>
                 </div>
                 <div class="col-md-4 col-sm-12">
-                    <div class="row gap-3">
-                        <div class="col-12 col-md-6 text-center text-md-start">
-                            <h5>Horario de Atención:</h5>
+                    <div class="row text-center">
+                        <div class="col-12 mb-3">
+                            <h5 class="fs-2">Horario de Atención:</h5>
                             <p><i class="fa-solid fa-clock"></i> Lunes a Viernes: 8:00 a.m - 4:00 p.m</p>
                         </div>
-                        <div class="col-12 col-md-6 text-center text-md-start">
-                            <h5>Horario de Mesa de Partes:</h5>
+                        <div class="col-12">
+                            <h5 class="fs-2">Horario de Mesa de Partes:</h5>
                             <p><i class="fa-solid fa-clock"></i> Lunes a Viernes: 8:00 a.m - 4:00 p.m</p>
                         </div>
                     </div>
