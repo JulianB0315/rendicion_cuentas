@@ -9,4 +9,4 @@ writable/uploads/
 vendor/
 .DS_Store
 Thumbs.db
-# TODO: ignore node_modules
+
