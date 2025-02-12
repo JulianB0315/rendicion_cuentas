@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="./styles/index.css">
     <style>
         .card{
             transition: all .3s ease;
@@ -27,7 +28,7 @@
 
 <body>
     <header class="container-fluid headertext-white p-3" style="background-color: #fff; box-shadow: 0px 0px 12px #333;">
-        <nav class="w-100 h-100">
+        <nav class="w-full bg-slate-700">
             <div class="container w-100 d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-between align-items-center w-100 flex-wrap">
                     <img class="navbar-brand img-fluid" src="https://www.munijlo.gob.pe/web/placeholders/logo_10_21.png"></img>
