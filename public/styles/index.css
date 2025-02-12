@@ -4,6 +4,7 @@
 	--tertiary-color: #0dc1f2;
 	--white: #fff;
 	--gray: #333;
+	--titles: "Encode Sans Semi Expanded", serif;
 }
 
 .header {
@@ -12,6 +13,10 @@
 }
 .nav-logo {
 	height: 100px;
+}
+.nav-title {
+	color: var(--seconday-color);
+	font-size: 2rem;
 }
 .info-section {
 	background-color: var(--primary-color);
@@ -72,13 +77,13 @@
 		#dc2743,
 		#cc2366,
 		#bc1888
-	);
-	-webkit-background-clip: text;
-	background-clip: text;
-	color: transparent;
-}
-.socials-link[href*="facebook"]:hover {
-	color: #1877f2;
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.socials-link[href*="facebook"]:hover {
+		color: #1877f2;
 }
 
 .socials-link[href*="tiktok"]:hover {
@@ -115,6 +120,9 @@
 	background-color: var(--primary-color);
 	transform: scale(1.1);
 }
+.titles{
+	font-family: var(--titles);
+}
 
 @media (max-width: 992px) {
 	.nav-logo {
@@ -125,6 +133,10 @@
 @media (max-width: 768px) {
 	.nav-logo {
 		height: 50px;
+	}
+	.nav-title {
+		color: var(--seconday-color);
+		font-size: 1rem;
 	}
 	.btn-header-register {
 		width: 130px;
