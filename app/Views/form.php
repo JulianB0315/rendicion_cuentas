@@ -11,7 +11,7 @@
 <body style="background-color:rgb(230, 243, 255); height: 900px;">
     <div class="text-center my-4" style="border: 2px solid #002F59; width: 600px; border-radius: 10px; margin: auto; background-color: #FFFFFF;">
         <img src="<?= base_url("img/logo.webp") ?>" alt="Logo" style="width: 597px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: block; margin: 0 auto;">
-        <h1 style="color: #002F59;">RENDICIÓN DE CUENTAS - 2024 II</h1>
+        <h2 style="color: #002F59;">RENDICIÓN DE CUENTAS - 2024 II</h2>
         <p style="color: #000000; font-size: 1.2em;">
             📅 DÍA: VIERNES, 27 DE SEPTIEMBRE DEL 2024<br>
             ⏰ HORA: 10:00 A.M.<br>
