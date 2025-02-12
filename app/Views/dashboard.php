@@ -104,26 +104,26 @@
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center gap-2 gap-md-0">
                 <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
-                    <h5 class="fs-2">Redes Sociales:</h5>
-                    <ul class="list-unstyled">
+                    <h5 class="fs-2 mb-4 text-center">Redes Sociales:</h5>
+                    <ul class="socials-list list-unstyled text-center">
                         <li>
-                            <a href="https://www.instagram.com/municipalidadjoseleonardoortiz" class="text-white">
+                            <a href="https://www.instagram.com/municipalidadjoseleonardoortiz" class="socials-link">
                                 <i class="fa-brands fa-instagram"></i> municipalidadjoseleonardoortiz
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com/munijlo" class="text-white">
+                            <a href="https://www.facebook.com/munijlo" class="socials-link">
                                 <i class="fa-brands fa-facebook"></i> munijlo
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.tiktok.com/@muni.jlo" class="text-white">
+                            <a href="https://www.tiktok.com/@muni.jlo" class="socials-link">
                                 <i class="fa-brands fa-tiktok"></i> muni.jlo
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
+                <div class="col-md-4 col-sm-12 text-center mb-4">
                     <h5 class="fs-2">Sedes:</h5>
                     <p class="px-3">
                         <i class="fa-solid fa-map-location-dot"></i>

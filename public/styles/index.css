@@ -44,6 +44,49 @@
 	background-color: var(--primary-color);
 	transform: scale(1.1);
 }
+.socials-list li {
+	margin-bottom: 1rem;
+}
+
+.socials-link {
+	color: var(--white);
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	font-size: 1.2rem;
+	transition: all 0.3s ease;
+}
+.socials-link i {
+	margin-right: 10px;
+	font-size: 2rem;
+}
+.socials-link:hover {
+	transform: translateX(10px) scale(1.1);
+}
+
+.socials-link[href*="instagram"]:hover {
+	background: linear-gradient(
+		to right,
+		#f09433,
+		#e6683c,
+		#dc2743,
+		#cc2366,
+		#bc1888
+	);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+.socials-link[href*="facebook"]:hover {
+	color: #1877f2;
+}
+
+.socials-link[href*="tiktok"]:hover {
+	background: linear-gradient(90deg, #25f4ee, #fe2c55);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
 
 @media (max-width: 992px) {
 	.nav-logo {
@@ -52,10 +95,16 @@
 }
 
 @media (max-width: 768px) {
-    .nav-logo {
-        height: 50px;
+	.nav-logo {
+		height: 50px;
 	}
-    .btn-header-register{
-        width: 130px;
-    }
+	.btn-header-register {
+		width: 130px;
+	}
+	.socials-link{
+		font-size: 1rem;
+	}
+	.socials-link i{
+		font-size: 1.5rem;
+	}
 }
