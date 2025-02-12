@@ -4,9 +4,83 @@
     --tertiary-color: #0dc1f2;
     --white: #fff;
     --gray: #333;
+    --gray-light: #4e4d4d9c;
+    --titles: "Encode Sans Semi Expanded", serif;
+    --font: "Asap", serif;
 }
 
 body {
     background-color: var(--white);
     min-height: 100vh;
+}
+.nav-logo {
+    height: 70px;
+}
+.header-title{
+    color: var(--secondary-color);
+    font-size: 2.4rem;
+    font-family: var(--titles);
+}
+.header-date{
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-family: var(--font);
+}
+.main{
+    width: 40%;
+}
+.form-group{
+    margin-bottom: 1.5em;
+}
+.form-container .form-group.text{
+	position: relative;
+}
+label{
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+.form-container .form-group.text label{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 0 5px;
+	left: 1em;
+	transition: all .3s ease;
+	pointer-events: none;
+}
+.form-container .form-group.text .form-part{
+	width: 100%;
+	padding: 1em;
+	font-size: 1.2rem;
+	border: 2px solid var(--gray-light);
+	border-radius: 5px;
+	outline: none;
+	background: transparent;
+    transition: all .3s ease;
+}
+.form-container .form-group.text .form-part:focus{
+    border-color: var(--primary-color);
+}
+.form-container .form-group.text .form-part:focus + label,
+.form-container .form-group.text .form-part:not(:placeholder-shown) + label {
+    top: 0;
+    background-color: var(--white);
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+
+@media (max-width: 768px) {
+	.logo-container{
+        justify-content: center;
+    }
+    .header-title{
+        font-size: 1.6rem;
+    }
+    .header-date{
+        font-size: 1rem;
+    }
+    .main{
+        width: 80%;
+    }
 }
