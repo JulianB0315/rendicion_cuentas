@@ -30,9 +30,19 @@
 		<nav class="container">
 			<div
 				class="d-flex justify-content-between align-items-center w-100">
-				<img
-					class="navbar-brand img-fluid nav-logo animate__animated animate__jackInTheBox"
-					src="https://www.munijlo.gob.pe/web/placeholders/logo_10_21.png" />
+				<div class="d-flex align-items-center justify-content-center">
+					<img
+						class="navbar-brand img-fluid nav-logo"
+						src="<?= base_url('img/escudo.webp') ?>" />
+					<h3 class=" animate__animated animate__jackInTheBox titles nav-title d-flex flex-column">
+						<span>
+							Municipalidad Distrital de
+						</span>
+						<span>
+							José Leonardo Ortiz
+						</span>
+					</h3>
+				</div>
 				<a
 					href="<?= base_url('form') ?>"
 					class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register">
@@ -140,13 +150,13 @@
 					<ul
 						class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center">
 						<!-- aqui se debe recorrer el array de conferencias y mostrar la informacion -->
-						<li class="text-center d-flex justify-content-evenly align-items-center">
+						<li class="text-center d-flex justify-content-around align-items-center">
 							<span>15 de Mayo</span>
 							<a class="btn rounded-pill btn-conference">
 								<i class="fa-solid fa-arrow-right"></i>
 							</a>
 						</li>
-						<li class="text-center d-flex justify-content-evenly align-items-center">
+						<li class="text-center d-flex justify-content-around align-items-center">
 							<span>15 de Septiembre</span>
 							<a class="btn rounded-pill btn-conference">
 								<i class="fa-solid fa-arrow-right"></i>

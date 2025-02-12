@@ -14,6 +14,10 @@
 .nav-logo {
 	height: 100px;
 }
+.nav-title {
+	color: var(--seconday-color);
+	font-size: 2rem;
+}
 .info-section {
 	background-color: var(--primary-color);
 	color: var(--white);
@@ -73,13 +77,13 @@
 		#dc2743,
 		#cc2366,
 		#bc1888
-	);
-	-webkit-background-clip: text;
-	background-clip: text;
-	color: transparent;
-}
-.socials-link[href*="facebook"]:hover {
-	color: #1877f2;
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.socials-link[href*="facebook"]:hover {
+		color: #1877f2;
 }
 
 .socials-link[href*="tiktok"]:hover {
@@ -129,6 +133,10 @@
 @media (max-width: 768px) {
 	.nav-logo {
 		height: 50px;
+	}
+	.nav-title {
+		color: var(--seconday-color);
+		font-size: 1rem;
 	}
 	.btn-header-register {
 		width: 130px;
