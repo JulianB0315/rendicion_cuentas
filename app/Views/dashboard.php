@@ -146,15 +146,15 @@
 							class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center"
 						>
 						<!-- aqui se debe recorrer el array de conferencias y mostrar la informacion -->
-							<li class="fs-2 text-center d-flex justify-content-evenly align-items-center">
+							<li class="text-center d-flex justify-content-evenly align-items-center">
 								<span>15 de Mayo</span>
-								<a class="btn rounded-pill btn-lg btn-conference">
+								<a class="btn rounded-pill btn-conference">
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
 							</li>
-							<li class="fs-2 text-center d-flex justify-content-evenly align-items-center">
+							<li class="text-center d-flex justify-content-evenly align-items-center">
 								<span>15 de Septiembre</span>
-								<a class="btn rounded-pill btn-lg btn-conference">
+								<a class="btn rounded-pill btn-conference">
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
 						</ul>

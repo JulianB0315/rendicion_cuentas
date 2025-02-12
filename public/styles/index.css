@@ -98,6 +98,7 @@
 	box-shadow: 0px 0px 12px #002f59;
 	width: 40%;
 	transition: all .3s ease;
+	font-size: 2rem;
 }
 .conferences-list > li:hover {
 	transform: scale(1.1);
@@ -107,6 +108,8 @@
 	text-decoration: none;
 	background-color: var(--tertiary-color);
 	transition: all .3s ease;
+	padding: .8rem 1.2rem;
+	font-size: 1.5rem;
 }
 .conferences-list > li > a:hover {
 	background-color: var(--primary-color);
@@ -134,5 +137,13 @@
 	}
 	.place-text{
 		font-size: 1rem;
+	}
+	.conferences-list > li {
+		width: 100%;
+		font-size: 1.2rem;
+	}
+	.conferences-list > li > a {
+		font-size: 1rem;
+		padding: 0.5rem .8rem;
 	}
 }
