@@ -1,4 +1,46 @@
+:root{
+    --primary-color: #2E8ACB;
+    --seconday-color: #002F59;
+    --tertiary-color: #0DC1F2;
+    --white: #fff;
+    --gray: #333;
+}
+
 .header{
-    background-color: #fff;
-    box-shadow: 0px 0px 12px #333;
+    background-color: var(--white);
+    box-shadow: 0px 0px 12px var(--gray);
+}
+.nav-logo{
+    height: 100px;
+}
+.info-section{
+    background-color: var(--primary-color);
+    color: var(--white);
+    transition: all .3s ease;
+}
+.info-section:hover .info-card:not(:hover){
+    opacity: .8;
+}
+.info-card{
+    min-height: 250px;;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.info-card:hover{
+    box-shadow: 0px 0px 12px #002F59;
+}
+.info-card .card-body .card-text{
+    text-align: center;
+}
+.info-card-icon{
+    color: var(--seconday-color);
+    font-size: 4rem;
+}
+.register-btn{
+    background-color: var(--seconday-color);
+    transition: all .3s ease;
+}
+.register-btn:hover{
+    background-color: var(--primary-color);
+    transform: scale(1.1);
 }
