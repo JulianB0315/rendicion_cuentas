@@ -52,7 +52,10 @@
 }
 
 @media (max-width: 768px) {
-	.nav-logo {
-		height: 50px;
+    .nav-logo {
+        height: 50px;
 	}
+    .btn-header-register{
+        width: 130px;
+    }
 }

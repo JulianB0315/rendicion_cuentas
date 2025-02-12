@@ -19,7 +19,7 @@
                 <img class="navbar-brand img-fluid nav-logo"
                     src="https://www.munijlo.gob.pe/web/placeholders/logo_10_21.png">
                 <a href="<?= base_url('form') ?>"
-                    class="text-white register-btn btn">
+                    class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register">
                     Registra tu asistencia
                 </a>
             </div>
