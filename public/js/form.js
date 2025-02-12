@@ -38,3 +38,23 @@ document.addEventListener('DOMContentLoaded', function () {
     inputs.forEach(input => input.addEventListener('input', validarInputs));
     validarInputs();
 });
+async function buscar_persona(){
+    let dniInput = document.getElementById('dni').value;
+    if(dniInput.lemgth != 8){
+        document.getElementById('nombre').value = '';
+        document.getElementById('apellido').value = '';
+        return;
+    }
+    try{
+        let respone = await fetch(`https://localhost/Json prueba/persona/${dniInput}`);
+        if(!respone.ok){
+            throw new Error('Error al buscar la persona');
+        }
+        document.getElementById('nombre').value = (await respone.json()).nombre;
+    }
+    catch(error){
+        console.error(error);
+        document.getElementById('nombre').value = '';
+        document.getElementById('apellido').value = '';
+    }
+}
