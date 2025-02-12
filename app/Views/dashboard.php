@@ -102,43 +102,51 @@
     </main>
     <footer class="container-fluid text-white" style="background-color: #002F59; padding: 20px 0;">
         <div class="container">
-            <div class="row d-flex justify-content-center align-items-center gap-2 gap-md-0">
-                <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
-                    <h5>Redes Sociales:</h5>
-                    <ul class="list-unstyled">
+            <div class="row justify-content-center align-items-start">
+                <div class="col-md-4 col-sm-12 my-4">
+                    <h5 class="fs-2 mb-4 text-center">Redes Sociales:</h5>
+                    <ul class="socials-list list-unstyled text-center">
                         <li>
-                            <a href="https://www.instagram.com/municipalidadjoseleonardoortiz" class="text-white">
+                            <a href="https://www.instagram.com/municipalidadjoseleonardoortiz" target="_blank" class="socials-link">
                                 <i class="fa-brands fa-instagram"></i> municipalidadjoseleonardoortiz
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com/munijlo" class="text-white">
+                            <a href="https://www.facebook.com/munijlo" target="_blank" class="socials-link">
                                 <i class="fa-brands fa-facebook"></i> munijlo
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.tiktok.com/@muni.jlo" class="text-white">
+                            <a href="https://www.tiktok.com/@muni.jlo" target="_blank" class="socials-link">
                                 <i class="fa-brands fa-tiktok"></i> muni.jlo
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-12 text-center text-md-start mb-4">
-                    <h5>Sedes:</h5>
-                    <p>
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        Sede central: Av. Sáenz Peña N.º 2151 - Urb. Latina - José Leonardo Ortiz - Chiclayo - Lambayeque - Perú
+                <div class="col-md-4 col-sm-12 my-4">
+                    <h5 class="fs-2 text-center mb-3">Sedes:</h5>
+                    <p class="px-3 place-text text-center">
+                        <i class="fa-solid fa-map-location-dot me-2"></i>
+                        <span>
+                            Sede central: Av. Sáenz Peña N.º 2151 - Urb. Latina - José Leonardo Ortiz - Chiclayo - Lambayeque - Perú
+                        </span>
                     </p>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="row gap-3">
-                        <div class="col-12 col-md-6 text-center text-md-start">
-                            <h5>Horario de Atención:</h5>
-                            <p><i class="fa-solid fa-clock"></i> Lunes a Viernes: 8:00 a.m - 4:00 p.m</p>
+                <div class="col-md-4 col-sm-12 my-4">
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <h5 class="fs-2 mb-3">Horario de Atención:</h5>
+                            <p class="mb-0">
+                                <i class="fa-solid fa-clock me-2"></i>
+                                Lunes a Viernes: 8:00 a.m - 4:00 p.m
+                            </p>
                         </div>
-                        <div class="col-12 col-md-6 text-center text-md-start">
-                            <h5>Horario de Mesa de Partes:</h5>
-                            <p><i class="fa-solid fa-clock"></i> Lunes a Viernes: 8:00 a.m - 4:00 p.m</p>
+                        <div>
+                            <h5 class="fs-2 mb-3">Horario de Mesa de Partes:</h5>
+                            <p class="mb-0">
+                                <i class="fa-solid fa-clock me-2"></i>
+                                Lunes a Viernes: 8:00 a.m - 4:00 p.m
+                            </p>
                         </div>
                     </div>
                 </div>
