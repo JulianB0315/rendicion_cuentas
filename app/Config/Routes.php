@@ -8,4 +8,4 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('form', 'FormController::index');
 $routes->post('procesar_formulario', 'FormController::procesar_formulario');
-$routes->get('', 'FormController::listar');
+$routes->get('admin', 'adminController::admin');
