@@ -1,46 +1,58 @@
-:root{
-    --primary-color: #2E8ACB;
-    --seconday-color: #002F59;
-    --tertiary-color: #0DC1F2;
-    --white: #fff;
-    --gray: #333;
+:root {
+	--primary-color: #2e8acb;
+	--seconday-color: #002f59;
+	--tertiary-color: #0dc1f2;
+	--white: #fff;
+	--gray: #333;
 }
 
-.header{
-    background-color: var(--white);
-    box-shadow: 0px 0px 12px var(--gray);
+.header {
+	background-color: var(--white);
+	box-shadow: 0px 0px 12px var(--gray);
 }
-.nav-logo{
-    height: 100px;
+.nav-logo {
+	height: 100px;
 }
-.info-section{
-    background-color: var(--primary-color);
-    color: var(--white);
-    transition: all .3s ease;
+.info-section {
+	background-color: var(--primary-color);
+	color: var(--white);
+	transition: all 0.3s ease;
 }
-.info-section:hover .info-card:not(:hover){
-    opacity: .8;
+.info-section:hover .info-card:not(:hover) {
+	opacity: 0.8;
 }
-.info-card{
-    min-height: 250px;;
-    transition: all .3s ease;
-    cursor: pointer;
+.info-card {
+	min-height: 250px;
+	transition: all 0.3s ease;
+	cursor: pointer;
 }
-.info-card:hover{
-    box-shadow: 0px 0px 12px #002F59;
+.info-card:hover {
+	box-shadow: 0px 0px 12px #002f59;
 }
-.info-card .card-body .card-text{
-    text-align: center;
+.info-card .card-body .card-text {
+	text-align: center;
 }
-.info-card-icon{
-    color: var(--seconday-color);
-    font-size: 4rem;
+.info-card-icon {
+	color: var(--seconday-color);
+	font-size: 4rem;
 }
-.register-btn{
-    background-color: var(--seconday-color);
-    transition: all .3s ease;
+.register-btn {
+	background-color: var(--seconday-color);
+	transition: all 0.3s ease;
 }
-.register-btn:hover{
-    background-color: var(--primary-color);
-    transform: scale(1.1);
+.register-btn:hover {
+	background-color: var(--primary-color);
+	transform: scale(1.1);
+}
+
+@media (max-width: 992px) {
+	.nav-logo {
+		height: 100px;
+	}
+}
+
+@media (max-width: 768px) {
+	.nav-logo {
+		height: 50px;
+	}
 }
