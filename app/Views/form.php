@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body style="background-color:rgb(230, 243, 255); height: 900px;">
+<body>
     <div class="text-center my-4" style="border: 2px solid #002F59; width: 600px; border-radius: 10px; margin: auto; background-color: #FFFFFF;">
         <img src="<?= base_url("img/logo.webp") ?>" alt="Logo" style="width: 597px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: block; margin: 0 auto;">
         <h2 style="color: #002F59;">RENDICIÓN DE CUENTAS - 2024 II</h2>
@@ -120,10 +119,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const inputs = document.querySelectorAll('#persona-info input');
             const button = document.getElementById('next-button');
+
             function validarInputs() {
-            const completos = [...inputs].every(input => input.value.trim() !== "");
-            button.disabled = !completos;
-            button.classList.toggle("active", completos);
+                const completos = [...inputs].every(input => input.value.trim() !== "");
+                button.disabled = !completos;
+                button.classList.toggle("active", completos);
             }
             inputs.forEach(input => input.addEventListener('input', validarInputs));
             validarInputs();

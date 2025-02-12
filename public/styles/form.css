@@ -1,0 +1,12 @@
+:root {
+    --primary-color: #2e8acb;
+    --secondary-color: #002f59;
+    --tertiary-color: #0dc1f2;
+    --white: #fff;
+    --gray: #333;
+}
+
+body {
+    background-color: var(--white);
+    min-height: 100vh;
+}
