@@ -4,6 +4,7 @@
 	--tertiary-color: #0dc1f2;
 	--white: #fff;
 	--gray: #333;
+	--titles: "Encode Sans Semi Expanded", serif;
 }
 
 .header {
@@ -114,6 +115,9 @@
 .conferences-list > li > a:hover {
 	background-color: var(--primary-color);
 	transform: scale(1.1);
+}
+.titles{
+	font-family: var(--titles);
 }
 
 @media (max-width: 992px) {

@@ -54,7 +54,7 @@
 		</div>
 		<div class="row my-3">
 			<div class="col-12 py-3 px-5 info-section">
-				<h2 class="text-center my-3">
+				<h2 class="text-center my-3 titles">
 					Conferencia de Rendición de Cuentas
 				</h2>
 				<p class="text-center">
@@ -74,7 +74,7 @@
 									class="fa-solid fa-people-group info-card-icon"></i>
 							</div>
 							<div class="card-body">
-								<h5 class="card-title text-center">
+								<h5 class="card-title text-center titles">
 									Participación Ciudadana
 								</h5>
 								<p class="card-text">
@@ -95,7 +95,7 @@
 									class="fa-solid fa-handshake info-card-icon"></i>
 							</div>
 							<div class="card-body">
-								<h5 class="card-title text-center">
+								<h5 class="card-title text-center titles">
 									Transparencia
 								</h5>
 								<p class="card-text">
@@ -116,7 +116,7 @@
 									class="fa-solid fa-clipboard-list-check info-card-icon"></i>
 							</div>
 							<div class="card-body">
-								<h5 class="card-title text-center">
+								<h5 class="card-title text-center titles">
 									Informes Completos
 								</h5>
 								<p class="card-text">
@@ -130,7 +130,7 @@
 				</div>
 			</div>
 			<div class="col-12 py-3 px-5 conferences-section mt-3">
-				<h2 class="text-center my-2 fs-1">Conferencias</h2>
+				<h2 class="text-center my-2 fs-1 titles">Conferencias</h2>
 				<p class="fs-4 text-center">
 					Las fechas de nuestras conferencias este año:
 				</p>
@@ -159,7 +159,7 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-8 col-12 text-center">
-						<h2 class="mb-4 fw-light">Sé parte del cambio</h2>
+						<h2 class="mb-4 fw-light titles">Sé parte del cambio</h2>
 						<p class="mb-4 lead">
 							Únete a nuestras conferencias y participa
 							activamente en el desarrollo de nuestra ciudad.
@@ -183,7 +183,7 @@
 		<div class="container">
 			<div class="row justify-content-center align-items-start">
 				<div class="col-md-4 col-sm-12 my-4">
-					<h5 class="fs-2 mb-4 text-center">Redes Sociales:</h5>
+					<h5 class="fs-2 mb-4 text-center titles">Redes Sociales:</h5>
 					<ul class="socials-list list-unstyled text-center">
 						<li>
 							<a
@@ -214,7 +214,7 @@
 					</ul>
 				</div>
 				<div class="col-md-4 col-sm-12 my-4">
-					<h5 class="fs-2 text-center mb-3">Sedes:</h5>
+					<h5 class="fs-2 text-center mb-3 titles">Sedes:</h5>
 					<p class="px-3 place-text text-center">
 						<i class="fa-solid fa-map-location-dot me-2"></i>
 						<span>
@@ -227,14 +227,14 @@
 				<div class="col-md-4 col-sm-12 my-4">
 					<div class="text-center">
 						<div class="mb-4">
-							<h5 class="fs-2 mb-3">Horario de Atención:</h5>
+							<h5 class="fs-2 mb-3 titles">Horario de Atención:</h5>
 							<p class="mb-0">
 								<i class="fa-solid fa-clock me-2"></i>
 								Lunes a Viernes: 8:00 a.m - 4:00 p.m
 							</p>
 						</div>
 						<div>
-							<h5 class="fs-2 mb-3">
+							<h5 class="fs-2 mb-3 titles">
 								Horario de Mesa de Partes:
 							</h5>
 							<p class="mb-0">
