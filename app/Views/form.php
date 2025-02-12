@@ -8,17 +8,18 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="text-center my-4" style="border: 2xp solid #002F59;">
-        <img src="<?= base_url("img/logo.webp") ?>" alt="Logo" style="">
-        <h1 style="color: #002F59;">RENDICIÓN DE CUENTAS - 2024 II</h1>
+<body style="background-color:rgb(230, 243, 255); height: 900px;">
+    <div class="text-center my-4" style="border: 2px solid #002F59; width: 600px; border-radius: 10px; margin: auto; background-color: #FFFFFF;">
+        <img src="<?= base_url("img/logo.webp") ?>" alt="Logo" style="width: 597px; border-top-left-radius: 10px; border-top-right-radius: 10px; display: block; margin: 0 auto;">
+        <h2 style="color: #002F59;">RENDICIÓN DE CUENTAS - 2024 II</h2>
         <p style="color: #000000; font-size: 1.2em;">
             📅 DÍA: VIERNES, 27 DE SEPTIEMBRE DEL 2024<br>
             ⏰ HORA: 10:00 A.M.<br>
             📍 LUGAR: AUDITORIO MUNICIPAL
         </p>
     </div>
-    <form action="<?= base_url('procesar_formulario') ?>" method="post" class="container mt-5" style="max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; border: 2px solid #002F59;">
+    </div>
+    <form action="<?= base_url('procesar_formulario') ?>" method="post" class="container mt-5" style="max-width: 600px; margin: auto; padding: 10px; border-radius: 10px; border: 2px solid #002F59; background-color: #FFFFFF;">
         <div id="persona-info">
             <div class="form-group">
                 <label for="numero" style="color: #000000; font-size: 1.2em;">DNI</label>
@@ -80,7 +81,7 @@
         </div>
         <div id="submit-buttons">
             <button type="submit" class="btn btn-primary" id="submit-button" style="display: block;">Enviar</button>
-            <button type="button" class="btn btn-secondary" id="next-button" style="display: none;">Siguiente</button>
+            <button type="button" class="btn btn-primary" id="next-button" style="display: none;" disabled>Siguiente</button>
         </div>
     </form>
 
@@ -112,6 +113,20 @@
             document.getElementById('orador-info').style.display = 'block';
             document.getElementById('next-button').style.display = 'none';
             document.getElementById('submit-button').style.display = 'block';
+        });
+        document.getElementById('submit-button').addEventListener('click', function() {
+            alert('Formulario enviado correctamente');
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('#persona-info input');
+            const button = document.getElementById('next-button');
+            function validarInputs() {
+            const completos = [...inputs].every(input => input.value.trim() !== "");
+            button.disabled = !completos;
+            button.classList.toggle("active", completos);
+            }
+            inputs.forEach(input => input.addEventListener('input', validarInputs));
+            validarInputs();
         });
     </script>
 </body>
