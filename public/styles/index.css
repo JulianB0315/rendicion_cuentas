@@ -87,6 +87,9 @@
 	background-clip: text;
 	color: transparent;
 }
+.place-text{
+	font-size: 1.3rem;
+}
 
 @media (max-width: 992px) {
 	.nav-logo {
@@ -106,5 +109,8 @@
 	}
 	.socials-link i{
 		font-size: 1.5rem;
+	}
+	.place-text{
+		font-size: 1rem;
 	}
 }
