@@ -11,7 +11,7 @@ class FormController extends BaseController
     public function procesar_formulario()
     {
         $data = [
-            'numero' => $this->request->getPost('numero'),
+            'numero' => $this->request->getPost('dni'),
             'nombre' => $this->request->getPost('nombre'),
             'participacion' => $this->request->getPost('participacion'),
             'titular' => $this->request->getPost('titular') ?? null,
@@ -20,7 +20,7 @@ class FormController extends BaseController
             'nombre_organizacion' => $this->request->getPost('nombre_organizacion') ?? null,
             'pregunta' => $this->request->getPost('pregunta') ?? null,
         ];
-        // echo "<p><strong>DNI:</strong> " . $data['numero'] . "</p>";
+        // echo "<p><strong>DNI:</strong> " . $data['dni'] . "</p>";
         // echo "<p><strong>Nombre:</strong> " . $data['nombre'] . "</p>";
         // echo "<p><strong>Participación:</strong> " . $data['participacion'] . "</p>";
         // echo "<p><strong>Titular:</strong> " . $data['titular'] . "</p>";

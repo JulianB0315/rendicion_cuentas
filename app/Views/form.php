@@ -22,8 +22,8 @@
     <form action="<?= base_url('procesar_formulario') ?>" method="post" class="container mt-5" style="max-width: 600px; margin: auto; padding: 10px; border-radius: 10px; border: 2px solid #002F59; background-color: #FFFFFF;">
         <div id="persona-info">
             <div class="form-group">
-                <label for="numero" style="color: #000000; font-size: 1.2em;">DNI</label>
-                <input type="text" class="form-control" name="numero" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required style="background-color: transparent; border: none; border-bottom: 1px solid #000000; width: 100%; margin-top: 5px;">
+                <label for="dni" style="color: #000000; font-size: 1.2em;">DNI</label>
+                <input type="text" class="form-control" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required style="background-color: transparent; border: none; border-bottom: 1px solid #000000; width: 100%; margin-top: 5px;">
             </div>
             <div class="form-group">
                 <label for="nombre" style="color: #000000; font-size: 1.2em;">Nombres y Apellidos</label>
