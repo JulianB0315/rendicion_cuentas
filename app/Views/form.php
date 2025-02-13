@@ -33,7 +33,7 @@
             Fecha: Viernes, 27 de Septiembre del 2025
         </p>
     </section>
-    <main class="container main my-3">
+    <main class="container main my-5">
         <div class="row">
             <div class="col-12">
                 <form action="" class="form-container">
