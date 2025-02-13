@@ -26,6 +26,7 @@ document.getElementById('next-button').addEventListener('click', function () {
 document.getElementById('submit-button').addEventListener('click', function () {
     alert('Formulario enviado correctamente');
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     const inputs = document.querySelectorAll('#persona-info input');
     const button = document.getElementById('next-button');
@@ -38,23 +39,36 @@ document.addEventListener('DOMContentLoaded', function () {
     inputs.forEach(input => input.addEventListener('input', validarInputs));
     validarInputs();
 });
-async function buscar_persona(){
-    let dniInput = document.getElementById('dni').value;
-    if(dniInput.lemgth != 8){
+
+//Funcion de busqueda de persona
+function buscar_persona() {
+    var dni = document.getElementById('dni').value;
+    if (dni.length === 8) {
+        fetch('http://localhost/rendicion_cuentas/Json/personas.json')
+            .then(response => response.json())
+            .then(data => {
+                var persona = data.find(persona => persona.dni === dni);
+                var nombre = persona ? `${persona.nombre} ${persona.apellido}` : '';
+                document.getElementById('nombre').value = nombre;
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    } else {
         document.getElementById('nombre').value = '';
-        document.getElementById('apellido').value = '';
-        return;
     }
-    try{
-        let respone = await fetch(`https://localhost/Json prueba/persona/${dniInput}`);
-        if(!respone.ok){
-            throw new Error('Error al buscar la persona');
-        }
-        document.getElementById('nombre').value = (await respone.json()).nombre;
-    }
-    catch(error){
-        console.error(error);
-        document.getElementById('nombre').value = '';
-        document.getElementById('apellido').value = '';
+}
+//Funcion de busqueda de organizacion
+function buscar_organizacion() {
+    var ruc = document.getElementById('ruc').value;
+    if (ruc.length === 11) {
+        fetch('http://localhost/rendicion_cuentas/Json/organizaciones.json')
+            .then(response => response.json())
+            .then(data => {
+                var organizacion = data.find(organizacion => organizacion.ruc === ruc);
+                var nombre = organizacion ? organizacion.nombre : '';
+                document.getElementById('nombre-organizacion').value = nombre;
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+    } else {
+        document.getElementById('nombre-organizacion').value = '';
     }
 }

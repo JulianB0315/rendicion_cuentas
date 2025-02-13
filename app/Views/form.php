@@ -39,11 +39,11 @@
                 <form action="" class="form-container">
                     <div id="persona-info">
                         <div class="form-group text">
-                            <input type="text" class="form-part" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
+                            <input type="text" class="form-part" id="dni" name="dni" oninput="buscar_persona()" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
                             <label for="dni">DNI*</label>
                         </div>
                         <div class="form-group text">
-                            <input type="text" class="form-part" name="nombre" pattern="[A-Za-z\s]+" title="Por favor, ingresar solo letras" placeholder=" " required>
+                            <input type="text" class="form-part" id="nombre" name="nombre" title="Por favor, ingresar solo letras" placeholder=" " required disabled>
                             <label for="nombre">Nombres y Apellidos</label>
                         </div>
                         <div class="form-group">
@@ -74,11 +74,11 @@
                         </div>
                         <div id="organizacion-info" style="display: none;">
                             <div class="form-group text">
-                                <input type="text" class="form-part" name="ruc" pattern="\d{11}" title="Por favor, ingresar un RUC válido">
+                                <input type="text" class="form-part" name="ruc" id="ruc" oninput="buscar_organizacion()" pattern="\d{11}" title="Por favor, ingresar un RUC válido" >
                                 <label for="ruc">Nº RUC</label>
                             </div>
                             <div class="form-group text">
-                                <input type="text" class="form-part" name="nombre_organizacion" maxlength="80">
+                                <input type="text" class="form-part" id="nombre-organizacion" name="nombre_organizacion" maxlength="80" readonly>
                                 <label for="nombre_organizacion">Nombre de la Organización</label>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="<?= base_url("js/form.js") ?>">
+    <script src="<?= base_url("js/form.js") ?>"></script>
     </script>
 </body>
 
