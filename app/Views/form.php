@@ -99,8 +99,8 @@
                         </div>
                     </div>
                     <div id="submit-buttons">
-                        <button type="submit" class="btn btn-primary btn-form" id="submit-button" style="display: block;">Enviar</button>
-                        <button type="button" class="btn btn-primary btn-form" id="next-button" style="display: none;" disabled>Siguiente</button>
+                        <button type="submit" class="btn btn-form" id="submit-button" style="display: block;">Enviar</button>
+                        <button type="button" class="btn btn-form" id="next-button" style="display: none;" disabled>Siguiente</button>
                     </div>
                 </form>
             </div>
