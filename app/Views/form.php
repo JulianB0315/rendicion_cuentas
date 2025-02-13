@@ -39,7 +39,7 @@
                 <form action="" class="form-container">
                     <div id="persona-info">
                         <div class="form-group text">
-                            <input type="text" class="form-part" id="dni" name="dni" oninput="buscar_persona()" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
+                            <input type="text" class="form-part" id="dni" name="dni" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
                             <label for="dni">DNI*</label>
                         </div>
                         <div class="error" id="dni-error"></div>
@@ -100,6 +100,7 @@
                             <label for="pregunta">Pregunta</label>
                         </div>
                     </div>
+                    <div class="error error-form"></div>
                     <div id="submit-buttons">
                         <button type="submit" class="btn btn-form" id="submit-button" style="display: block;">Enviar</button>
                         <button type="button" class="btn btn-form" id="next-button" style="display: none;" disabled>Siguiente</button>
