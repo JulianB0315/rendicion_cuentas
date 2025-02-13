@@ -42,10 +42,12 @@
                             <input type="text" class="form-part" id="dni" name="dni" oninput="buscar_persona()" pattern="\d{8}" title="Por favor, ingresar bien su DNI" required placeholder=" ">
                             <label for="dni">DNI*</label>
                         </div>
+                        <div class="error" id="dni-error"></div>
                         <div class="form-group text">
                             <input type="text" class="form-part" id="nombre" name="nombre" title="Por favor, ingresar solo letras" placeholder=" " required disabled>
                             <label for="nombre">Nombres y Apellidos</label>
                         </div>
+                        <div class="info" id="nombres-info"></div>
                         <div class="form-group">
                             <label class="d-block mb-3">Participación</label>
                             <div class="form-check form-check-inline">

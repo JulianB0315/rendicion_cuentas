@@ -30,7 +30,7 @@ body {
     width: 40%;
 }
 .form-group{
-    margin-bottom: 1.5em;
+    margin: 1.2em 0;
 }
 .form-container .form-group.text{
 	position: relative;
@@ -68,9 +68,7 @@ label{
     font-size: 1rem;
     color: var(--primary-color);
 }
-/* ...existing code... */
 
-/* Estilos para los radio buttons */
 .form-check-input[type="radio"] {
     width: 1.5rem;
     height: 1.5rem;
@@ -126,6 +124,16 @@ label{
 
 .btn-form:hover:not([disabled]){
     background-color: var(--tertiary-color);
+}
+.error{
+    color: red;
+    font-size: 1.2rem;
+    margin-bottom: 1.5em;
+}
+.info{
+    color: var(--gray);
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
 }
 
 
