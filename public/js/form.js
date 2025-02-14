@@ -13,6 +13,9 @@ const nombresInfo = document.getElementById("nombres-info");
 const dni = document.getElementById("dni");
 const nombre = document.getElementById("nombre");
 const errorForm = document.getElementById("error-form");
+const rucInput = document.getElementById("ruc");
+const nombreOrg = document.getElementById("nombre-organizacion");
+const rucError = document.getElementById("ruc-error");
 
 const validarInputs = () => {
 	if (orador.checked) {
@@ -84,23 +87,46 @@ const buscarPersona = async () => {
 };
 
 //Funcion de busqueda de organizacion
-function buscar_organizacion() {
-    var ruc = document.getElementById("ruc").value;
-	if (ruc.length === 11) {
-        fetch("http://localhost/rendicion_cuentas/Json/organizaciones.json")
-        .then((response) => response.json())
-        .then((data) => {
-            var organizacion = data.find(
-                (organizacion) => organizacion.ruc === ruc
-            );
-            var nombre = organizacion ? organizacion.nombre : "";
-            document.getElementById("nombre-organizacion").value = nombre;
-        })
-        .catch((error) => console.error("Error fetching JSON:", error));
-    } else {
-        document.getElementById("nombre-organizacion").value = "";
+const buscarOrg = async () => {
+	const ruc = rucInput.value;
+	const regex = /^\d{11}$/;
+	rucError.innerHTML = "";
+	nombreOrg.value = "";
+
+	if (ruc.length === 0) {
+		rucError.innerHTML = "";
+		return;
+	}
+	if (ruc.length < 11) {
+		rucError.innerHTML = "El RUC debe tener 11 dígitos";
+		return;
+	}
+	if (!regex.test(ruc)) {
+		rucError.innerHTML = "El RUC debe contener solo números";
+		return;
+	}
+	try {
+		const response = await fetch(
+			"http://localhost/rendicion_cuentas/Json/organizaciones.json"
+		);
+		if (!response.ok) {
+			throw new Error("Error al buscar la organización");
+		}
+		const data = await response.json();
+		const organizacion = data.find((organizacion) => organizacion.ruc === ruc);
+		
+		if (organizacion) {
+			nombreOrg.value = organizacion.nombre;
+		} else {
+			rucError.innerHTML = "No se encontró ninguna organización con ese RUC";
+		}
+	}
+	catch (e){
+		console.error("Error fetching JSON:", e);
+		rucError.innerHTML = "Error al buscar la organización";
 	}
 }
+
 
 document.getElementById("dni").addEventListener("input", () => {
     buscarPersona();
@@ -140,6 +166,7 @@ orador.addEventListener("change", () => {
     submitBtn.style.display = "none";
     validarInputs();
 });
+rucInput.addEventListener("input",buscarOrg);
 
 document.addEventListener("DOMContentLoaded", function () {
     inputs.forEach((input) => input.addEventListener("input", validarInputs));

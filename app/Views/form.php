@@ -76,9 +76,10 @@
                         </div>
                         <div id="organizacion-info" style="display: none;">
                             <div class="form-group text">
-                                <input type="text" class="form-part" name="ruc" id="ruc" oninput="buscar_organizacion()" pattern="\d{11}" title="Por favor, ingresar un RUC válido" >
+                                <input type="text" class="form-part" name="ruc" id="ruc" pattern="\d{11}" title="Por favor, ingresar un RUC válido" >
                                 <label for="ruc">Nº RUC</label>
                             </div>
+                            <div class="error" id="ruc-error"></div>
                             <div class="form-group text">
                                 <input type="text" class="form-part" id="nombre-organizacion" name="nombre_organizacion" maxlength="80" readonly>
                                 <label for="nombre_organizacion">Nombre de la Organización</label>
@@ -100,7 +101,7 @@
                             <label for="pregunta">Pregunta</label>
                         </div>
                     </div>
-                    <div class="error error-form"></div>
+                    <div class="error" id="error-form"></div>
                     <div id="submit-buttons">
                         <button type="submit" class="btn btn-form" id="submit-button" style="display: block;">Enviar</button>
                         <button type="button" class="btn btn-form" id="next-button" style="display: none;" disabled>Siguiente</button>
