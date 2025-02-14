@@ -40,7 +40,7 @@
 		<main class="container main my-5">
 			<div class="row">
 				<div class="col-12">
-					<form action="" class="form-container">
+					<form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container">
 						<div id="persona-info">
 							<div class="form-group text">
 								<input
@@ -65,7 +65,7 @@
 									title="Por favor, ingresar solo letras"
 									placeholder=" "
 									required
-									disabled
+									readonly
 								/>
 								<label for="nombre">Nombres y Apellidos</label>
 							</div>
@@ -159,7 +159,6 @@
 										id="nombre-organizacion"
 										name="nombre_organizacion"
 										maxlength="80"
-										readonly
 									/>
 									<label for="nombre_organizacion"
 										>Nombre de la Organización</label
