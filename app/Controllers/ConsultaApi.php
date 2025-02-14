@@ -13,10 +13,7 @@ class ConsultaApi extends ResourceController
         $response = $this->consultarApi($this->apiUrlDNI, $dni);
 
         if (isset($response['data'])) {
-            return $this->respond([
-                "dni" => $response['data']['numero'],
-                "nombre_completo" => $response['data']['nombre_completo']
-            ], 200);
+            return $this->respond($response['data'], 200);
         }
 
         return $this->failNotFound("DNI no encontrado");
@@ -27,10 +24,7 @@ class ConsultaApi extends ResourceController
         $response = $this->consultarApi($this->apiUrlRUC, $ruc);
 
         if (isset($response['data'])) {
-            return $this->respond([
-                "ruc" => $response['data']['numero'],
-                "razon_social" => $response['data']['razon_social']
-            ], 200);
+            return $this->respond($response['data'], 200);
         }
 
         return $this->failNotFound("RUC no encontrado");
