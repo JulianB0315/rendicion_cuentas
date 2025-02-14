@@ -103,22 +103,18 @@ const buscarOrg = async () => {
 		return;
 	}
 	try {
-		const response = await fetch(
-			"http://localhost/rendicion_cuentas/Json/organizaciones.json"
-		);
+		const response = await fetch(`http://localhost/rendicion_cuentas/public/api/ruc/${ruc}`);
 		if (!response.ok) {
 			throw new Error("Error al buscar la organización");
 		}
 		const data = await response.json();
-		const organizacion = data.find((organizacion) => organizacion.ruc === ruc);
 		
-		if (organizacion) {
-			nombreOrg.value = organizacion.nombre;
+		if (data && data.nombre_o_razon_social) {
+			nombreOrg.value = data.nombre_o_razon_social;
 		} else {
 			rucError.innerHTML = "No se encontró ninguna organización con ese RUC";
 		}
-	}
-	catch (e){
+	} catch (e) {
 		console.error("Error fetching JSON:", e);
 		rucError.innerHTML = "Error al buscar la organización";
 	}
