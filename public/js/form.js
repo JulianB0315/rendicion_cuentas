@@ -37,48 +37,45 @@ const validarInputs = () => {
 };
 
 const buscarPersona = async () => {
-    const dni = document.getElementById("dni").value;
+	const dni = document.getElementById("dni").value;
 	const regex = /^\d{8}$/;
 	errorDniMsg.innerHTML = "";
 	nombresInfo.innerHTML = "";
 	document.getElementById("nombre").value = "";
-    
+	
 	if (dni.length < 8) {
-        errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
+		errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
 		document.getElementById("nombre").value = "";
 		return;
 	}
-    
+	
 	if (!regex.test(dni)) {
-        errorDniMsg.innerHTML = "El DNI debe contener solo números";
+		errorDniMsg.innerHTML = "El DNI debe contener solo números";
 		document.getElementById("nombre").value = "";
 		return;
 	}
-    
+	
 	if (dni.length === 0) {
-        errorDniMsg.innerHTML = "";
+		errorDniMsg.innerHTML = "";
 		return;
 	}
-    
+	
 	try {
-        const response = await fetch(
-            "http://localhost/rendicion_cuentas/Json/personas.json"
-		);
+		const response = await fetch(`http://localhost/rendicion_cuentas/public/api/dni/${dni}`);
 		const data = await response.json();
-		const persona = data.find((persona) => persona.dni === dni);
-        
-		if (persona) {
-            const nombre = `${persona.nombre} ${persona.apellido}`;
+		
+		if (response.ok) {
+			const nombre = `${data.nombre_completo}`;
 			document.getElementById("nombre").value = nombre;
 			nombresInfo.innerHTML =
-            "Si el nombre es incorrecto, por favor, revise el DNI ingresado";
+			"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
 		} else {
-            document.getElementById("nombre").value = "";
+			document.getElementById("nombre").value = "";
 			errorDniMsg.innerHTML =
-            "No se encontró ninguna persona con ese DNI";
+			"No se encontró ninguna persona con ese DNI";
 		}
 	} catch (error) {
-        console.error("Error fetching JSON:", error);
+		console.error("Error fetching JSON:", error);
 		errorDniMsg.innerHTML = "Error al buscar la persona";
 	}
 };
