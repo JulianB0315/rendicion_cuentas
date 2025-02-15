@@ -148,6 +148,7 @@
 										id="ruc"
 										pattern="\d{11}"
 										title="Por favor, ingresar un RUC válido"
+										placeholder=" "
 									/>
 									<label for="ruc">Nº RUC</label>
 								</div>
@@ -159,6 +160,7 @@
 										id="nombre-organizacion"
 										name="nombre_organizacion"
 										maxlength="80"
+										placeholder=" "
 									/>
 									<label for="nombre_organizacion"
 										>Nombre de la Organización</label
@@ -199,6 +201,7 @@
 									pattern="[A-Za-z\s]{1,200}"
 									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
 									id = "pregunta"
+									placeholder=" "
 								/>
 								<label for="pregunta">Pregunta</label>
 							</div>
