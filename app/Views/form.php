@@ -40,7 +40,7 @@
 		<main class="container main my-5">
 			<div class="row">
 				<div class="col-12">
-					<form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container">
+					<form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container" id="form-registro">
 						<div id="persona-info">
 							<div class="form-group text">
 								<input
@@ -198,6 +198,7 @@
 									name="pregunta"
 									pattern="[A-Za-z\s]{1,200}"
 									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
+									id = "pregunta"
 								/>
 								<label for="pregunta">Pregunta</label>
 							</div>

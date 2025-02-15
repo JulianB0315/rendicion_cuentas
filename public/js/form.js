@@ -16,6 +16,8 @@ const errorForm = document.getElementById("error-form");
 const rucInput = document.getElementById("ruc");
 const nombreOrg = document.getElementById("nombre-organizacion");
 const rucError = document.getElementById("ruc-error");
+const formRegistro = document.getElementById("form-registro");
+const pregunta = document.getElementById("pregunta");
 
 const validarInputs = () => {
 	if (orador.checked) {
@@ -146,13 +148,24 @@ nextBtn.addEventListener("click", () => {
     nextBtn.style.display = "none";
     submitBtn.style.display = "block";
 });
-submitBtn.addEventListener("click", () => {
-    if (asistente.checked && dni.value.length === 8 && nombre.value !== "") {
-        alert("Registro exitoso");
-    }else{
-        errorForm.innerHTML = "Por favor, complete los campos";
-    }
-});
+formRegistro.addEventListener("submit", (e) => {
+	e.preventDefault();
+	if (asistente.checked && dni.value.length === 8 && nombre.value !== "") {
+		alert("Registro exitoso");
+		window.location.href = "http://localhost/rendicion_cuentas/public/";
+	}
+	if (orador.checked && dni.value.length === 8 && nombre.value !== "" && pregunta.value !== ""&& personal.checked) {
+		alert("Registro exitoso");
+		window.location.href = "http://localhost/rendicion_cuentas/public/";
+	}
+	if (orador.checked && dni.value.length === 8 && nombre.value !== "" && pregunta.value !== "" && organizacion.checked && rucInput.value.length === 11 && nombreOrg.value !== "") {
+		alert("Registro exitoso");
+		window.location.href = "http://localhost/rendicion_cuentas/public/";
+	}
+	else{
+		errorForm.innerHTML = "Por favor, complete los campos";
+	}
+})
 
 orador.addEventListener("change", () => {
     nextBtn.style.display = "block";
