@@ -20,22 +20,16 @@ const formRegistro = document.getElementById("form-registro");
 const pregunta = document.getElementById("pregunta");
 
 const validarInputs = () => {
+	if (!asistente.checked && !orador.checked) return;
 	if (orador.checked) {
-        const inputsPersonales = document.querySelectorAll(
+		const inputsPersonales = document.querySelectorAll(
 			"#persona-info input[type='text']"
 		);
-		const completos = [...inputsPersonales].every((input) => {
-			if (input.disabled && nombre.value.length!==0) return true;
-			return input.value.trim() !== "";
-		}); 
+		const completos = [...inputsPersonales].every((input) => input.value.trim() !== "");
 		nextBtn.disabled = !completos;
 		nextBtn.classList.toggle("active", completos);
-	}
-	else if (asistente.checked) {
-        const completos = [...inputs].every((input) => {
-			if (input.disabled) return true;
-			return input.value.trim() !== "";
-		});
+	} else if (asistente.checked) {
+		const completos = [...inputs].every((input) => input.value.trim() !== "");
 		submitBtn.disabled = !completos;
 		submitBtn.classList.toggle("active", completos);
 	}
@@ -47,41 +41,46 @@ const buscarPersona = async () => {
 	errorDniMsg.innerHTML = "";
 	nombresInfo.innerHTML = "";
 	document.getElementById("nombre").value = "";
-	
+
 	if (dni.length < 8) {
 		errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
 		document.getElementById("nombre").value = "";
 		return;
 	}
-	
+
 	if (!regex.test(dni)) {
 		errorDniMsg.innerHTML = "El DNI debe contener solo números";
 		document.getElementById("nombre").value = "";
 		return;
 	}
-	
+
 	if (dni.length === 0) {
 		errorDniMsg.innerHTML = "";
 		return;
 	}
-	
+
 	try {
-		const response = await fetch(`http://localhost/rendicion_cuentas/public/api/dni/${dni}`);
+		const response = await fetch(
+			`http://localhost/rendicion_cuentas/public/api/dni/${dni}`
+		);
 		const data = await response.json();
-		
+
 		if (response.ok) {
 			const nombre = `${data.nombre_completo}`;
 			document.getElementById("nombre").value = nombre;
 			nombresInfo.innerHTML =
-			"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
+				"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
+			validarInputs();
 		} else {
 			document.getElementById("nombre").value = "";
 			errorDniMsg.innerHTML =
-			"No se encontró ninguna persona con ese DNI";
+				"No se encontró ninguna persona con ese DNI";
+			validarInputs();
 		}
 	} catch (error) {
 		console.error("Error fetching JSON:", error);
 		errorDniMsg.innerHTML = "Error al buscar la persona";
+		validarInputs();
 	}
 };
 
@@ -105,48 +104,50 @@ const buscarOrg = async () => {
 		return;
 	}
 	try {
-		const response = await fetch(`http://localhost/rendicion_cuentas/public/api/ruc/${ruc}`);
+		const response = await fetch(
+			`http://localhost/rendicion_cuentas/public/api/ruc/${ruc}`
+		);
 		if (!response.ok) {
 			throw new Error("Error al buscar la organización");
 		}
 		const data = await response.json();
-		
+
 		if (data && data.nombre_o_razon_social) {
 			nombreOrg.value = data.nombre_o_razon_social;
 		} else {
-			rucError.innerHTML = "No se encontró ninguna organización con ese RUC";
+			rucError.innerHTML =
+				"No se encontró ninguna organización con ese RUC";
 		}
 	} catch (e) {
 		console.error("Error fetching JSON:", e);
 		rucError.innerHTML = "Error al buscar la organización";
 	}
-}
-
+};
 
 document.getElementById("dni").addEventListener("input", () => {
-    buscarPersona();
+	buscarPersona();
 	validarInputs();
 });
 // Events for inputs
 asistente.addEventListener("change", () => {
-    oradorInfo.style.display = "none";
-    personaInfo.style.display = "block";
-    nextBtn.style.display = "none";
-    submitBtn.style.display = "block";
+	oradorInfo.style.display = "none";
+	personaInfo.style.display = "block";
+	nextBtn.style.display = "none";
+	submitBtn.style.display = "block";
 });
 organizacion.addEventListener("change", () => {
-    organizacionInfo.style.display = "block";
+	organizacionInfo.style.display = "block";
 });
 personal.addEventListener("change", () => {
-    organizacionInfo.style.display = "none";
+	organizacionInfo.style.display = "none";
 });
 
 // Events for buttons
 nextBtn.addEventListener("click", () => {
-    personaInfo.style.display = "none";
-    oradorInfo.style.display = "block";
-    nextBtn.style.display = "none";
-    submitBtn.style.display = "block";
+	personaInfo.style.display = "none";
+	oradorInfo.style.display = "block";
+	nextBtn.style.display = "none";
+	submitBtn.style.display = "block";
 });
 formRegistro.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -154,27 +155,40 @@ formRegistro.addEventListener("submit", (e) => {
 		alert("Registro exitoso");
 		window.location.href = "http://localhost/rendicion_cuentas/public/";
 	}
-	if (orador.checked && dni.value.length === 8 && nombre.value !== "" && pregunta.value !== ""&& personal.checked) {
+	if (
+		orador.checked &&
+		dni.value.length === 8 &&
+		nombre.value !== "" &&
+		pregunta.value !== "" &&
+		personal.checked
+	) {
 		alert("Registro exitoso");
 		window.location.href = "http://localhost/rendicion_cuentas/public/";
 	}
-	if (orador.checked && dni.value.length === 8 && nombre.value !== "" && pregunta.value !== "" && organizacion.checked && rucInput.value.length === 11 && nombreOrg.value !== "") {
+	if (
+		orador.checked &&
+		dni.value.length === 8 &&
+		nombre.value !== "" &&
+		pregunta.value !== "" &&
+		organizacion.checked &&
+		rucInput.value.length === 11 &&
+		nombreOrg.value !== ""
+	) {
 		alert("Registro exitoso");
 		window.location.href = "http://localhost/rendicion_cuentas/public/";
-	}
-	else{
+	} else {
 		errorForm.innerHTML = "Por favor, complete los campos";
 	}
-})
+});
 
 orador.addEventListener("change", () => {
-    nextBtn.style.display = "block";
-    submitBtn.style.display = "none";
-    validarInputs();
+	nextBtn.style.display = "block";
+	submitBtn.style.display = "none";
+	validarInputs();
 });
-rucInput.addEventListener("input",buscarOrg);
+rucInput.addEventListener("input", buscarOrg);
 
 document.addEventListener("DOMContentLoaded", function () {
-    inputs.forEach((input) => input.addEventListener("input", validarInputs));
-    validarInputs();
+	inputs.forEach((input) => input.addEventListener("input", validarInputs));
+	validarInputs();
 });
