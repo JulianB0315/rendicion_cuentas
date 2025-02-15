@@ -58,6 +58,12 @@ label{
 	background: transparent;
     transition: all .3s ease;
 }
+.form-container .form-group.text .form-part.pregunta-textarea{
+    min-height: 3em;
+    max-height: 10em;
+    resize: none;
+    field-sizing: content;
+}
 .form-container .form-group.text .form-part:focus{
     border-color: var(--primary-color);
 }

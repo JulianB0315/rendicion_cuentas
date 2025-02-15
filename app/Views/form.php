@@ -194,15 +194,23 @@
 								</select>
 							</div>
 							<div class="form-group text">
-								<input
+								<textarea 
+									name="pregunta" 
+									id="pregunta" 
+									class="form-part pregunta-textarea"
+									placeholder=" "
+									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
+									maxlength="200"
+								></textarea>
+								<!-- <input
 									type="text"
-									class="form-part"
+									class="form-part pregunta-textarea"
 									name="pregunta"
 									pattern="[A-Za-z\s]{1,200}"
 									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
 									id = "pregunta"
 									placeholder=" "
-								/>
+								/> -->
 								<label for="pregunta">Pregunta</label>
 							</div>
 						</div>
