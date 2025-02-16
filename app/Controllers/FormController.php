@@ -77,7 +77,6 @@ class FormController extends BaseController
             return redirect()->to('/form')->with('error', 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->to('/form')->with('message', 'Formulario procesado correctamente');
         // echo json_encode($data_user);
         // echo json_encode($data_quiz);
     }
