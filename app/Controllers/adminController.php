@@ -18,11 +18,37 @@ class adminController extends BaseController
         $this->Ejes_SeleccionadosModel = new Ejes_SeleccionadosModel();
         $this->EjeModel = new EjeModel();
     }
-    public function crear_id()
+    public function crear_id_rendicion()
     {
-        $id = date('my') . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $fecha = $this->request->getPost('fechaRendicion');
+        $fechaSinGuiones = str_replace('-', '', $fecha);
+
+        do {
+            $random = rand(10, 99);
+            $id = 'RE' . substr($fechaSinGuiones, -6) . $random;
+            $existe = $this->RendicionModel->find($id);
+        } while ($existe);
+
         return $id;
     }
+
+    public function crear_id_selecionados()
+    {
+        do {
+            $id = 'SE' . substr(uniqid(), -8);
+            $existe = $this->Ejes_SeleccionadosModel->find($id);
+        } while ($existe);
+        return $id;
+    }
+    public function crear_id_ejes()
+    {
+        do {
+            $id = 'E' . substr(uniqid(), -8);
+            $existe = $this->EjeModel->find($id);
+        } while ($existe);
+        return $id;
+    }
+
     public function index()
     {
         return view('admin');
@@ -33,12 +59,33 @@ class adminController extends BaseController
         $data['ejes'] = $this->EjeModel->findAll();
         return view('admin', $data);
     }
+    public function crear_rendicion()
+    {
+        $data_rendicion = [
+            'id_rendicion' => $this->crear_id_rendicion(),
+            'fecha' => $this->request->getPost('fechaRendicion')
+        ];
+        $this->RendicionModel->insert($data_rendicion);
+
+        $ejes_seleccionados = $this->request->getPost('ejes');
+
+        foreach ($ejes_seleccionados as $eje) {
+            $data_ejes_seleccionados = [
+                'id_eje_seleccionado' => $this->crear_id_selecionados(),
+                'id_rendicion' => $data_rendicion['id_rendicion'],
+                'id_eje' => $eje
+            ];
+            $this->Ejes_SeleccionadosModel->insert($data_ejes_seleccionados);
+        }
+        return redirect()->to('/admin');
+    }
     public function crear_eje()
     {
         $data_eje = [
-            'id_eje' => $this->crear_id(),
+            'id_eje' => $this->crear_id_ejes(),
             'tematica' => $this->request->getPost('nombreEje')
         ];
+
         $this->EjeModel->insert($data_eje);
         return redirect()->to('/admin');
     }

@@ -40,7 +40,7 @@
         </h2>
     </section>
     <main class="container main my-5">
-        <form>
+        <form action="<?= base_url('/crear_rendicion') ?>" method="post">
             <div class="mb-3">
                 <label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
                 <input type="date" class="form-control" id="fechaRendicion" name="fechaRendicion" required>
@@ -56,12 +56,13 @@
                             </label>
                         </div>
                     <?php endforeach; ?>
+
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
         <div class="mt-5">
-            <h3>Administrar Ejes</h3>
+            <!-- <h3>Administrar Ejes</h3>
             <ul class="list-group">
                 <?php foreach ($ejes as $eje): ?>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -71,7 +72,7 @@
                         </div>
                     </li>
                 <?php endforeach; ?>
-            </ul>
+            </ul> -->
             <div class="mt-4">
                 <h4>Crear Nuevo Eje</h4>
                 <form action="<?= base_url('/crear_eje') ?>" method="post">
