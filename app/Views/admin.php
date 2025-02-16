@@ -1,259 +1,89 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador - Visualización de Preguntas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 50%;
-            margin: auto;
-            margin-bottom: 20px;
-            /* Agregado para separar los contenedores */
-            border: 2px solid #002F59;
-        }
-
-
-        select,
-        button,
-        input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        select,
-        input {
-            border: 1px solid #002F59;
-            background-color: #ffffff;
-        }
-
-        button {
-            background-color: #2E8ACB;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0DC1F2;
-        }
-
-        .ejes-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .eje-btn {
-            padding: 10px 20px;
-            background-color: #2E8ACB;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .eje-btn:hover {
-            background-color: #0DC1F2;
-        }
-
-        h2,
-        h3 {
-            color: #002F59;
-        }
-
-        .pregunta {
-            background-color: #f2f2f2;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border-left: 5px solid #002F59;
-        }
-    </style>
+    <title>Administración de Rendiciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+    <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+    <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container">
-        <h2>Filtrar Preguntas</h2>
-        <label for="year">Selecciona el Año:</label>
-        <select id="year">
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-        </select>
-        <label for="month">Selecciona el Mes:</label>
-        <select id="month">
-            <option value="mayo">Mayo</option>
-            <option value="septiembre">Septiembre</option>
-        </select>
-        <h3>Selecciona el Eje Temático:</h3>
-        <div class="ejes-container">
-            <button class="eje-btn" onclick="fetchData('Seguridad Ciudadana')">Seguridad Ciudadana</button>
-            <button class="eje-btn" onclick="fetchData('Limpieza Pública')">Limpieza Pública</button>
-            <button class="eje-btn" onclick="fetchData('Infraestructura')">Infraestructura</button>
-            <button class="eje-btn" onclick="fetchData('Programas Sociales')">Programas Sociales</button>
-            <button class="eje-btn" onclick="fetchData('Institucionalidad')">Institucionalidad</button>
+    <header>
+        <nav class="nav-header w-100 p-3">
+            <div class="d-flex align-items-center logo-container">
+                <img src="<?= base_url('img/escudo.webp') ?>" alt="Logo" class="nav-logo img-fluid">
+            </div>
+        </nav>
+    </header>
+    <section class="text-center my-4">
+        <h2 class="animate__animated animate__fadeInDown header-title">
+            Administración de Rendiciones
+        </h2>
+    </section>
+    <main class="container main my-5">
+        <form>
+            <div class="mb-3">
+                <label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
+                <input type="date" class="form-control" id="fechaRendicion" name="fechaRendicion" required>
+            </div>
+            <div class="mb-3">
+                <label for="ejes" class="form-label">Seleccionar Ejes</label>
+                <div id="ejes">
+                    <?php foreach ($ejes as $eje): ?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="eje_<?= esc($eje['id_eje']) ?>" name="ejes[]" value="<?= esc($eje['id_eje']) ?>">
+                            <label class="form-check-label" for="eje_<?= esc($eje['id_eje']) ?>">
+                                <?= esc($eje['tematica']) ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+        <div class="mt-5">
+            <h3>Administrar Ejes</h3>
+            <ul class="list-group">
+                <?php foreach ($ejes as $eje): ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <?= $eje['tematica'] ?>
+                        <div>
+                            <button class="btn btn-danger btn-sm">Borrar</button>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="mt-4">
+                <h4>Crear Nuevo Eje</h4>
+                <form action="<?= base_url('/crear_eje') ?>" method="post">
+                    <div class="mb-3">
+                        <label for="nombreEje" class="form-label">Tematica de eje</label>
+                        <input type="text" class="form-control" id="nombreEje" name="nombreEje" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Eje</button>
+                </form>
+            </div>
         </div>
-        <h3>Preguntas Realizadas</h3>
-        <div id="results">
-            <p>Selecciona un eje temático para ver las preguntas.</p>
-        </div>
-    </div>
-
-    <script>
-        // Array simulado con preguntas para cada eje, año y mes
-        const preguntasDatabase = {
-            "2023": {
-                "mayo": {
-                    "Seguridad Ciudadana": ["Pregunta 1 de Seguridad Ciudadana", "Pregunta 2 de Seguridad Ciudadana"],
-                    "Limpieza Pública": ["Pregunta 1 de Limpieza Pública", "Pregunta 2 de Limpieza Pública"]
-                },
-                "septiembre": {
-                    "Seguridad Ciudadana": ["Pregunta 1 de Seguridad Ciudadana en Septiembre", "Pregunta 2 de Seguridad Ciudadana en Septiembre"],
-                    "Infraestructura": ["Pregunta 1 de Infraestructura", "Pregunta 2 de Infraestructura"]
-                }
-            },
-            "2024": {
-                "mayo": {
-                    "Programas Sociales": ["Pregunta 1 de Programas Sociales", "Pregunta 2 de Programas Sociales"],
-                    "Institucionalidad": ["Pregunta 1 de Institucionalidad", "Pregunta 2 de Institucionalidad"]
-                },
-                "septiembre": {
-                    "Infraestructura": ["Pregunta 1 de Infraestructura en Septiembre", "Pregunta 2 de Infraestructura en Septiembre"],
-                    "Seguridad Ciudadana": ["Pregunta 1 de Seguridad Ciudadana en 2024", "Pregunta 2 de Seguridad Ciudadana en 2024"]
-                }
-            }
-        };
-
-        function fetchData(eje) {
-            // Obtener los valores seleccionados para el año, mes y eje temático
-            let year = document.getElementById("year").value;
-            let month = document.getElementById("month").value;
-
-            // Mostrar las preguntas de acuerdo a la selección
-            let resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = ""; // Limpiar el contenedor antes de mostrar las preguntas
-
-            // Simulación de la consulta a la base de datos
-            // Aquí va la conexión a la base de datos y la consulta para obtener las preguntas.
-            // Ejemplo: SELECT * FROM preguntas WHERE año = year AND mes = month AND eje = eje;
-            // Se debe usar el array `preguntasDatabase` para simular lo siguiente:
-
-            if (preguntasDatabase[year] && preguntasDatabase[year][month] && preguntasDatabase[year][month][eje]) {
-                let preguntas = preguntasDatabase[year][month][eje];
-                preguntas.forEach((pregunta) => {
-                    let div = document.createElement("div");
-                    div.className = "pregunta";
-                    div.textContent = pregunta;
-                    resultsContainer.appendChild(div);
-                });
-            } else {
-                resultsContainer.innerHTML = "<p>No se encontraron preguntas para esta selección.</p>";
-            }
-
-        }
-    </script>
-
-
-    <div class="container">
-        <h2>Sortear Preguntas</h2>
-        <label for="ejeSorteo">Eje Temático:</label>
-        <select id="ejeSorteo" onchange="mostrarCantidadPreguntas(); actualizarMaxPreguntas()">
-            <option value="">Seleccione un eje</option>
-            <option value="seguridad">Seguridad Ciudadana</option>
-            <option value="limpieza">Limpieza Pública</option>
-            <option value="infraestructura">Infraestructura</option>
-            <option value="programas">Programas Sociales</option>
-            <option value="institucionalidad">Institucionalidad</option>
-        </select>
-        <div id="cantidadPreguntasContainer" style="display: none;">
-            <label for="cantidadPreguntas">Cantidad de preguntas:</label>
-            <input type="text" id="cantidadPreguntas" readonly>
-        </div>
-        <label for="numPreguntas">Número de preguntas a sortear:</label>
-        <input type="number" id="numPreguntas" min="1" max="10">
-        <button onclick="sortearPreguntas()">Sortear</button>
-        <h3>Preguntas Sorteadas:</h3>
-        <div id="preguntasSorteadas"></div>
-    </div>
-    <script>
-        const preguntasPorEje = {
-            seguridad: 50,
-            limpieza: 30,
-            infraestructura: 40,
-            programas: 25,
-            institucionalidad: 35
-        };
-
-        function mostrarCantidadPreguntas() {
-            let ejeSeleccionado = document.getElementById("ejeSorteo").value;
-            let cantidadPreguntasContainer = document.getElementById("cantidadPreguntasContainer");
-            let cantidadPreguntas = document.getElementById("cantidadPreguntas");
-
-            if (ejeSeleccionado) {
-                cantidadPreguntas.value = preguntasPorEje[ejeSeleccionado] || 0;
-                cantidadPreguntasContainer.style.display = "block";
-            } else {
-                cantidadPreguntasContainer.style.display = "none";
-            }
-        }
-
-        function actualizarMaxPreguntas() {
-            let ejeSeleccionado = document.getElementById("ejeSorteo").value;
-            let numPreguntas = document.getElementById("numPreguntas");
-
-            if (ejeSeleccionado) {
-                numPreguntas.max = preguntasPorEje[ejeSeleccionado] || 1;
-            } else {
-                numPreguntas.max = 1;
-            }
-        }
-
-        function sortearPreguntas() {
-            let ejeSeleccionado = document.getElementById("ejeSorteo").value;
-            let numPreguntas = parseInt(document.getElementById("numPreguntas").value);
-            let contenedorPreguntas = document.getElementById("preguntasSorteadas");
-
-            contenedorPreguntas.innerHTML = ""; // Limpiar preguntas anteriores
-
-            if (!ejeSeleccionado || isNaN(numPreguntas) || numPreguntas < 1) {
-                alert("Seleccione un eje y un número válido de preguntas.");
-                return;
-            }
-
-            let totalPreguntas = preguntasPorEje[ejeSeleccionado];
-            let preguntasArray = Array.from({ length: totalPreguntas }, (_, i) => `Pregunta ${i + 1}`);
-            let preguntasSorteadas = [];
-
-            for (let i = 0; i < numPreguntas && preguntasArray.length > 0; i++) {
-                let index = Math.floor(Math.random() * preguntasArray.length);
-                preguntasSorteadas.push(preguntasArray.splice(index, 1)[0]);
-            }
-
-            preguntasSorteadas.forEach((pregunta) => {
-                let div = document.createElement("div");
-                div.className = "pregunta";
-                div.textContent = pregunta;
-                contenedorPreguntas.appendChild(div);
-            });
-        }
-    </script>
+    </main>
 </body>
 
 </html>
