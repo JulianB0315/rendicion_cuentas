@@ -1,12 +1,21 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\EjeModel;
+use App\Models\RendicionModel;
+use App\Models\Ejes_SeleccionadosModel;
+
 class adminController extends BaseController
 {
     private $EjeModel;
+    private $RendicionModel;
+    private $Ejes_SeleccionadosModel;
+
     function __construct()
     {
+        $this->RendicionModel = new RendicionModel();
+        $this->Ejes_SeleccionadosModel = new Ejes_SeleccionadosModel();
         $this->EjeModel = new EjeModel();
     }
     public function crear_id()
@@ -18,6 +27,7 @@ class adminController extends BaseController
     {
         return view('admin');
     }
+
     public function buscar_eje()
     {
         $data['ejes'] = $this->EjeModel->findAll();
@@ -33,4 +43,3 @@ class adminController extends BaseController
         return redirect()->to('/admin');
     }
 }
-?>
