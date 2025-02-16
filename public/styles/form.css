@@ -18,12 +18,12 @@ body {
 }
 .header-title{
     color: var(--secondary-color);
-    font-size: 2.4rem;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
     font-family: var(--titles);
 }
 .header-date{
     color: var(--secondary-color);
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     font-family: var(--font);
 }
 .main{
@@ -50,8 +50,8 @@ label{
 }
 .form-container .form-group.text .form-part{
 	width: 100%;
-	padding: 1em;
-	font-size: 1.2rem;
+	padding: .8em;
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
 	border: 2px solid var(--gray-light);
 	border-radius: 5px;
 	outline: none;
@@ -133,12 +133,12 @@ label{
 }
 .error{
     color: red;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
     margin-bottom: 1.5em;
 }
 .info{
     color: var(--gray);
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
     margin-bottom: 1.5em;
 }
 .form-select {
@@ -196,12 +196,6 @@ label{
 @media (max-width: 768px) {
 	.logo-container{
         justify-content: center;
-    }
-    .header-title{
-        font-size: 1.6rem;
-    }
-    .header-date{
-        font-size: 1rem;
     }
     .main{
         width: 80%;
