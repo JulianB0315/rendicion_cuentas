@@ -149,37 +149,34 @@ nextBtn.addEventListener("click", () => {
 	nextBtn.style.display = "none";
 	submitBtn.style.display = "block";
 });
-formRegistro.addEventListener("submit", (e) => {
-	e.preventDefault();
-	if (asistente.checked && dni.value.length === 8 && nombre.value !== "") {
-		alert("Registro exitoso");
-		window.location.href = "http://localhost/rendicion_cuentas/public/";
-	}
-	if (
-		orador.checked &&
-		dni.value.length === 8 &&
-		nombre.value !== "" &&
-		pregunta.value !== "" &&
-		personal.checked
-	) {
-		alert("Registro exitoso");
-		window.location.href = "http://localhost/rendicion_cuentas/public/";
-	}
-	if (
-		orador.checked &&
-		dni.value.length === 8 &&
-		nombre.value !== "" &&
-		pregunta.value !== "" &&
-		organizacion.checked &&
-		rucInput.value.length === 11 &&
-		nombreOrg.value !== ""
-	) {
-		alert("Registro exitoso");
-		window.location.href = "http://localhost/rendicion_cuentas/public/";
-	} else {
-		errorForm.innerHTML = "Por favor, complete los campos";
-	}
-});
+// formRegistro.addEventListener("submit", (e) => {
+// 	e.preventDefault();
+// 	if (asistente.checked && dni.value.length === 8 && nombre.value !== "") {
+// 		alert("Registro exitoso");
+// 	}
+// 	if (
+// 		orador.checked &&
+// 		dni.value.length === 8 &&
+// 		nombre.value !== "" &&
+// 		pregunta.value !== "" &&
+// 		personal.checked
+// 	) {
+// 		alert("Registro exitoso");
+// 	}
+// 	if (
+// 		orador.checked &&
+// 		dni.value.length === 8 &&
+// 		nombre.value !== "" &&
+// 		pregunta.value !== "" &&
+// 		organizacion.checked &&
+// 		rucInput.value.length === 11 &&
+// 		nombreOrg.value !== ""
+// 	) {
+// 		alert("Registro exitoso");
+// 	} else {
+// 		errorForm.innerHTML = "Por favor, complete los campos";
+// 	}
+// });
 
 orador.addEventListener("change", () => {
 	nextBtn.style.display = "block";

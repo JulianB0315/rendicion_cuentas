@@ -15,6 +15,8 @@ $routes->post('crear_eje', 'adminController::crear_eje');
 $routes->post('crear_rendicion', 'adminController::crear_rendicion');
 //Rutas Question
 $routes->get('questions', 'QuestionsController::index');
+$routes->post('questions/search', 'QuestionsController::search');
+$routes->post('questions/sort', 'QuestionsController::sort');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
