@@ -31,10 +31,10 @@
 		</header>
 		<section class="text-center my-4">
 			<h2 class="animate__animated animate__fadeInDown header-title">
-				Rendición de Cuentas - 2024 II
+				Rendición de Cuentas - <?= date('Y',strtotime(esc($fecha_rendicion))) ?>
 			</h2>
 			<p class="animate__animated animate__fadeInUp header-date">
-				Fecha: Viernes, 27 de Septiembre del 2025
+				Fecha: <?= date('d \d\e F \d\e\l Y', strtotime(esc($fecha_rendicion))) ?>
 			</p>
 		</section>
 		<main class="container main my-5">

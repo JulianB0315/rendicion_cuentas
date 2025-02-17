@@ -44,12 +44,12 @@ class FormController extends BaseController
     {
         $fecha = date('Y-m-d');
         $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
-            ->orderBy('ABS(DATEDIFF(fecha, "' . $fecha . '")) ASC')
+            ->where('fecha >=', $fecha)
+            ->orderBy('fecha', 'ASC')
             ->first();
 
-        // echo $this->RendicionModel->getLastQuery();
-
         if ($rendicion) {
+            $fecha_rendicion = $rendicion['fecha'];
             $ejes_seleccionados = $this->Ejes_SeleccionadosModel
                 ->select('id_eje')
                 ->where('id_rendicion', $rendicion['id_rendicion'])
@@ -64,7 +64,7 @@ class FormController extends BaseController
                     $ejes[] = $eje_data;
                 }
             }
-            return view('form', ['ejes' => $ejes, 'id_rendicion' => $rendicion['id_rendicion']]);
+            return view('form', ['ejes' => $ejes, 'id_rendicion' => $rendicion['id_rendicion'], 'fecha_rendicion' => $fecha_rendicion]);
         } else {
             echo "No se encontró la rendición";
         }
@@ -110,5 +110,20 @@ class FormController extends BaseController
 
             $this->UsuarioModel->update($id_usuario, ['id_pregunta' => $data_quiz['id_pregunta']]);
         }
+
+        $id_eje = $this->request->getPost('id_eje');
+        $id_rendicion = $this->request->getPost('id_rendicion');
+        $eje_seleccionado = $this->Ejes_SeleccionadosModel
+            ->select('id_eje_seleccionado, cantidad_preguntas')
+            ->where('id_eje', $id_eje)
+            ->where('id_rendicion', $id_rendicion)
+            ->first();
+
+        if ($eje_seleccionado) {
+            $this->Ejes_SeleccionadosModel->update($eje_seleccionado['id_eje_seleccionado'], ['cantidad_preguntas' => $eje_seleccionado['cantidad_preguntas'] + 1]);
+        } else {
+            echo "No se encontró el eje seleccionado para actualizar la cantidad";
+        }
+        return redirect()->to('/form')->with('message', 'Formulario procesado correctamente');
     }
 }
