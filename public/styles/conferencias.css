@@ -1,0 +1,170 @@
+:root {
+    --primary-color: #2e8acb;
+    --secondary-color: #002f59;
+    --tertiary-color: #0dc1f2;
+    --hover-color: #1a5a7a;
+    --white: #fff;
+    --gray: #333;
+    --gray-light: #4e4d4d9c;
+    --titles: "Encode Sans Semi Expanded", serif;
+    --font: "Asap", serif;
+}
+
+body {
+    background-color: var(--white);
+    min-height: 100vh;
+}
+.nav-logo {
+    height: 70px;
+}
+.header-title{
+    color: var(--secondary-color);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-family: var(--titles);
+}
+.header-subtitle{
+    color: var(--gray);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-family: var(--font);
+}
+.main-title{
+    color: var(--secondary-color);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-family: var(--titles);
+}
+.table-ejes {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3rem 0;
+    font-family: var(--font);
+}
+
+.table-ejes th, .table-ejes td {
+    border: 1px solid var(--gray-light);
+    padding: 1em;
+    text-align: left;
+}
+
+.table-ejes th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-family: var(--titles);
+}
+
+.table-ejes tr:nth-child(even) {
+    background-color: var(--gray-light);
+    color: var(--white);
+}
+.table-ejes tr{
+    transition: all .3s ease;
+}
+.table-ejes tr:hover {
+    background-color: var(--hover-color);
+    color: var(--white);
+}
+.table-ejes tr td{
+    font-family: var(--font);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.btn-preguntas{
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: .5em 1em;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    cursor: pointer;
+    transition: all .3s ease;
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+.btn-preguntas:hover{
+    background-color: var(--tertiary-color);
+}
+.modal-pregunta {
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: none; 
+    background-color: rgba(0, 0, 0, 0.4); 
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid var(--gray-light);
+    width: 80%; 
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY( -20px );
+    transition: all 0.3s ease;
+}
+.modal-pregunta.visible{
+    visibility: visible;
+    opacity: 1;
+}
+.modal-pregunta.visible .modal-content{
+    opacity: 1;
+    transform: translateY(0);
+}
+.modal-header{
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.close {
+    color: var(--white);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    transition: all .3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    cursor: pointer;
+}
+
+.modal-list {
+    list-style-type: none;
+    padding: 0;
+    font-family: var(--font);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.modal-list li {
+    padding: 10px;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.modal-list li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .btn-preguntas{
+        width: 100%;
+    }
+    .modal-content {
+        width: 90%;
+        margin: 30% auto; 
+    }
+}

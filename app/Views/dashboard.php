@@ -170,7 +170,7 @@
 								class="text-center d-flex justify-content-around align-items-center"
 							>
 								<span>15 de Mayo</span>
-								<a class="btn rounded-pill btn-conference">
+								<a class="btn rounded-pill btn-conference" href="<?=base_url('conferencias')?>" >
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
 							</li>
