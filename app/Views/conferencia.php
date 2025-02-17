@@ -69,7 +69,7 @@
                     <td>Nombre del Eje</td>
                     <td>Descripción del Eje</td>
                     <td>
-                        <button class="btn-preguntas">
+                        <button class="btn-preguntas" id="btn-preguntas">
                             Preguntas <i class="fas fa-question"></i>
                         </button>
                     </td>
@@ -103,7 +103,39 @@
                 </tr>
             </tbody>
         </table>
+        <div class="modal-pregunta" id="modal-pregunta">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Preguntas Eje xxxx</h5>
+                    <button class=" close" id="btn-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="modal-list">
+                        <!-- Traer de la DB -->
+                        <li>
+                            <h6>Pregunta 1</h6>
+                            <p>Descripción de la pregunta 1</p>
+                        </li>
+                        <li>
+                            <h6>Pregunta 2</h6>
+                            <p>Descripción de la pregunta 2</p>
+                        </li>
+                        <li>
+                            <h6>Pregunta 3</h6>
+                            <p>Descripción de la pregunta 3</p>
+                        </li>
+                        <li>
+                            <h6>Pregunta 4</h6>
+                            <p>Descripción de la pregunta 4</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </main>
+    <script src="<?= base_url('js/conferencias.js') ?>"></script>
 </body>
 
 </html>
