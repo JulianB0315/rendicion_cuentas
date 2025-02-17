@@ -5,12 +5,12 @@ namespace App\Models;
 class UsuarioModel extends \CodeIgniter\Model
 {
     protected $table = 'usuario';
-    protected $primaryKey = 'DNI';
+    protected $primaryKey = 'id_usuario';
     protected $useAutoIncrement = false;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
-        'DNI',
+        'id_usuario',
         'nombres',
         'sexo',
         'tipo_participacion',
@@ -18,7 +18,8 @@ class UsuarioModel extends \CodeIgniter\Model
         'ruc_empresa',
         'nombre_empresa',
         'id_pregunta',
-        'id_usuario'
+        'DNI',
+        'id_rendicion'
     ];
 
     protected $useTimestamps = false;
