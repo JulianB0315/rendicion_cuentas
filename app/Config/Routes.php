@@ -13,6 +13,8 @@ $routes->post('procesar_formulario', 'FormController::procesar_formulario');
 $routes->get('admin', 'adminController::buscar_eje');
 $routes->post('crear_eje', 'adminController::crear_eje');
 $routes->post('crear_rendicion', 'adminController::crear_rendicion');
+//Rutas Question
+$routes->get('questions', 'QuestionsController::index');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');

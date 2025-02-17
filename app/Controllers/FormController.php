@@ -24,22 +24,31 @@ class FormController extends BaseController
         $this->RendicionModel = new RendicionModel();
         $this->EjeModel = new EjeModel();
     }
-    public function crear_id()
+    public function crear_id_usuario()
     {
         do {
-            $id = 'US' . substr(uniqid(), -8);
+            $id = 'US' . substr(uniqid(), -6);
             $existe = $this->UsuarioModel->find($id);
         } while ($existe);
         return $id;
     }
-    public function buscar_rendicion() {
+    public function crear_id_pregunta()
+    {
+        do {
+            $id = 'PRE' . substr(uniqid(), -5);
+            $existe = $this->UsuarioModel->find($id);
+        } while ($existe);
+        return $id;
+    }
+    public function buscar_rendicion()
+    {
         $fecha = date('Y-m-d');
         $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
             ->orderBy('ABS(DATEDIFF(fecha, "' . $fecha . '")) ASC')
             ->first();
-    
+
         // echo $this->RendicionModel->getLastQuery();
-    
+
         if ($rendicion) {
             $ejes_seleccionados = $this->Ejes_SeleccionadosModel
                 ->select('id_eje')
@@ -55,66 +64,51 @@ class FormController extends BaseController
                     $ejes[] = $eje_data;
                 }
             }
-            return view('form', ['ejes' => $ejes]);
+            return view('form', ['ejes' => $ejes, 'id_rendicion' => $rendicion['id_rendicion']]);
         } else {
             echo "No se encontró la rendición";
         }
     }
-    
+
     public function procesar_formulario()
     {
-        $data_quiz = [
-            'id_pregunta' => $this->crear_id(),
-            'contenido' => $this->request->getPost('pregunta'),
-            'dni_usuario' => $this->request->getPost('dni'),
-            'id_eje' => "12345678",
-            'fecha_registro' => date('Y-m-d')
-        ];
+        $id_usuario = $this->crear_id_usuario();
         $data_user = [
-            'DNI' => $this->request->getPost('dni'),
+            'id_usuario' => $id_usuario,
             'nombres' => $this->request->getPost('nombre'),
             'sexo' => "M",
             'tipo_participacion' => $this->request->getPost('participacion'),
             'titulo' => $this->request->getPost('titular') ?? null,
             'ruc_empresa' => $this->request->getPost('ruc') ?? null,
-            'id_pregunta' => $data_quiz['id_pregunta'],
             'nombre_empresa' => $this->request->getPost('nombre_organizacion') ?? null,
-            'id_usuario' => $this->crear_id()
+            'DNI' => $this->request->getPost('dni'),
+            'id_rendicion' => $this->request->getPost('id_rendicion'),
         ];
 
-        $usuarioExistente = $this->UsuarioModel->find($data_user['DNI']);
-        if ($usuarioExistente) {
-            return redirect()->to('/form')->with('error', 'El usuario ya existe.');
-        }
-
         if (!$this->UsuarioModel->insert($data_user)) {
-            echo "Error en la inserción";
+            echo "Error en la inserción del usuario";
             print_r($this->UsuarioModel->errors());
-            exit();
+            return;
         }
 
-        if (!$this->PreguntaModel->insert($data_quiz)) {
-            echo "Error en la inserción";
-            print_r($this->UsuarioModel->errors());
-            exit();
-        }
+        $pregunta = $this->request->getPost('pregunta');
+        if ($pregunta) {
+            $data_quiz = [
+                'id_pregunta' => $this->crear_id_pregunta(),
+                'contenido' => $pregunta,
+                'id_usuario' => $id_usuario,
+                'id_eje' => $this->request->getPost('id_eje'),
+                'fecha_registro' => date('Y-m-d')
+            ];
+            $data_user['id_pregunta'] = $data_quiz['id_pregunta'];
 
-        try {
-            // echo '<pre>';
-            // print_r($data_user);
-            // echo '</pre>';
-            // echo '<pre>';
-            // print_r($data_quiz);
-            // echo '</pre>';
-            exit();
-            $this->UsuarioModel->insert($data_user);
-            $this->PreguntaModel->insert($data_quiz);
-            return redirect()->to('/form')->with('message', 'Formulario procesado correctamente');
-        } catch (\Exception $e) {
-            return redirect()->to('/form')->with('error', 'Error: ' . $e->getMessage());
-        }
+            if (!$this->PreguntaModel->insert($data_quiz)) {
+                echo "Error en la inserción de la pregunta";
+                print_r($this->PreguntaModel->errors());
+                return;
+            }
 
-        // echo json_encode($data_user);
-        // echo json_encode($data_quiz);
+            $this->UsuarioModel->update($id_usuario, ['id_pregunta' => $data_quiz['id_pregunta']]);
+        }
     }
 }

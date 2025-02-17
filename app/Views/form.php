@@ -170,7 +170,7 @@
 							<div class="form-group">
 								<label for="eje">Eje Tematico</label>
 								<select
-									name="eje"
+									name="id_eje"
 									class="form-part form-select"
 								>
 									<option value="" disabled selected>
@@ -222,6 +222,7 @@
 								Siguiente
 							</button>
 						</div>
+						<input type="hidden" name="id_rendicion" value="<?= esc($id_rendicion) ?>" />
 					</form>
 				</div>
 			</div>
