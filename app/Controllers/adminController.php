@@ -48,12 +48,7 @@ class adminController extends BaseController
         } while ($existe);
         return $id;
     }
-
-    public function index()
-    {
-        return view('admin');
-    }
-
+    
     public function buscar_eje()
     {
         $data['ejes'] = $this->EjeModel->findAll();

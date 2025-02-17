@@ -4,24 +4,61 @@ namespace App\Controllers;
 
 use App\Models\UsuarioModel;
 use App\Models\PreguntaModel;
+use App\Models\Ejes_SeleccionadosModel;
+use App\Models\RendicionModel;
+use App\Models\EjeModel;
 
 class FormController extends BaseController
 {
     private $UsuarioModel;
     private $PreguntaModel;
+    private $Ejes_SeleccionadosModel;
+    private $RendicionModel;
+    private $EjeModel;
+
     public function __construct()
     {
         $this->UsuarioModel = new UsuarioModel();
         $this->PreguntaModel = new PreguntaModel();
+        $this->Ejes_SeleccionadosModel = new Ejes_SeleccionadosModel();
+        $this->RendicionModel = new RendicionModel();
+        $this->EjeModel = new EjeModel();
     }
     public function crear_id()
     {
-        $id = date('my') . str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        do {
+            $id = 'US' . substr(uniqid(), -8);
+            $existe = $this->UsuarioModel->find($id);
+        } while ($existe);
         return $id;
     }
-    public function index()
-    {
-        return view('form');
+    public function buscar_rendicion() {
+        $fecha = date('Y-m-d');
+        $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
+            ->orderBy('ABS(DATEDIFF(fecha, "' . $fecha . '")) ASC')
+            ->first();
+    
+        // echo $this->RendicionModel->getLastQuery();
+    
+        if ($rendicion) {
+            $ejes_seleccionados = $this->Ejes_SeleccionadosModel
+                ->select('id_eje')
+                ->where('id_rendicion', $rendicion['id_rendicion'])
+                ->findAll();
+            $ejes = [];
+            foreach ($ejes_seleccionados as $eje) {
+                $eje_data = $this->EjeModel
+                    ->select('id_eje, tematica')
+                    ->where('id_eje', $eje['id_eje'])
+                    ->first();
+                if ($eje_data) {
+                    $ejes[] = $eje_data;
+                }
+            }
+            return view('form', ['ejes' => $ejes]);
+        } else {
+            echo "No se encontró la rendición";
+        }
     }
     
     public function procesar_formulario()

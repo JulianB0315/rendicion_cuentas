@@ -176,21 +176,9 @@
 									<option value="" disabled selected>
 										Seleccione un EJE Tematico
 									</option>
-									<option value="Seguridad Ciudadana">
-										Seguridad Ciudadana
-									</option>
-									<option value="Limpieza Pública">
-										Limpieza Pública
-									</option>
-									<option value="Infraestructura">
-										Infraestructura
-									</option>
-									<option value="Programas Sociales">
-										Programas Sociales
-									</option>
-									<option value="Institucionalidad">
-										Institucionalidad
-									</option>
+									<?php foreach ($ejes as $eje): ?>
+										<option value="<?= $eje['id_eje'] ?>"><?= $eje['tematica'] ?></option>
+									<?php endforeach; ?>
 								</select>
 							</div>
 							<div class="form-group text">
