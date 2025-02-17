@@ -40,7 +40,7 @@
 	<section class="text-center mt-3">
 		<h1 class="animate__animated animate__fadeInDown header-title">
 			Administración de Rendiciones
-			</h2>
+		</h1>
 	</section>
 	<main class="container my-5">
 		<div class="row">
