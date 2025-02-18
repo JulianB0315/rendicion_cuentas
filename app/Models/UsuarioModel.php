@@ -19,7 +19,8 @@ class UsuarioModel extends \CodeIgniter\Model
         'nombre_empresa',
         'id_pregunta',
         'DNI',
-        'id_rendicion'
+        'id_rendicion',
+        'asistencia'
     ];
 
     protected $useTimestamps = false;
