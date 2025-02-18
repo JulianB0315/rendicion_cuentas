@@ -18,21 +18,33 @@ const nombreOrg = document.getElementById("nombre-organizacion");
 const rucError = document.getElementById("ruc-error");
 const formRegistro = document.getElementById("form-registro");
 const pregunta = document.getElementById("pregunta");
+const femInput = document.getElementById("fem");
+const mascInput = document.getElementById("masculino");
 
 const validarInputs = () => {
-	if (!asistente.checked && !orador.checked) return;
-	if (orador.checked) {
-		const inputsPersonales = document.querySelectorAll(
-			"#persona-info input[type='text']"
-		);
-		const completos = [...inputsPersonales].every((input) => input.value.trim() !== "");
-		nextBtn.disabled = !completos;
-		nextBtn.classList.toggle("active", completos);
-	} else if (asistente.checked) {
-		const completos = [...inputs].every((input) => input.value.trim() !== "");
-		submitBtn.disabled = !completos;
-		submitBtn.classList.toggle("active", completos);
-	}
+    nextBtn.disabled = true;
+    submitBtn.disabled = true;
+    nextBtn.classList.remove("active");
+    submitBtn.classList.remove("active");
+
+    if (!asistente.checked && !orador.checked) return;
+
+    if (orador.checked) {
+        const inputsPersonales = document.querySelectorAll(
+            "#persona-info input[type='text']"
+        );
+        const completos = [...inputsPersonales].every(input => 
+            input.value.trim() !== "") && (femInput.checked || mascInput.checked);
+        
+        nextBtn.disabled = !completos;
+        nextBtn.classList.toggle("active", completos);
+    } else if (asistente.checked) {
+        const completos = [...inputs].every(input => 
+            input.value.trim() !== "") && (femInput.checked || mascInput.checked);
+        
+        submitBtn.disabled = !completos;
+        submitBtn.classList.toggle("active", completos);
+    }
 };
 
 const buscarPersona = async () => {
@@ -186,6 +198,10 @@ orador.addEventListener("change", () => {
 rucInput.addEventListener("input", buscarOrg);
 
 document.addEventListener("DOMContentLoaded", function () {
-	inputs.forEach((input) => input.addEventListener("input", validarInputs));
-	validarInputs();
+	nextBtn.disabled = true;
+    submitBtn.disabled = true;
+    inputs.forEach((input) => input.addEventListener("input", validarInputs));
+    femInput.addEventListener("change", validarInputs);
+    mascInput.addEventListener("change", validarInputs);
+    validarInputs();
 });
