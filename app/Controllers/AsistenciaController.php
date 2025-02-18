@@ -17,12 +17,30 @@ class AsistenciaController extends BaseController
     }
     public function index()
     {
+        $year = date('Y');
+        $number = '';
         $fecha = date('Y-m-d', strtotime('now -5 hours'));
         $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
             ->where('fecha >=', $fecha)
             ->orderBy('fecha', 'ASC')
             ->first();
-        return view('asistencia', ['fecha' => $rendicion['fecha']]);
+        if (date('Y', strtotime($rendicion['fecha'])) == $year) {
+            $rendiciones_del_año = $this->RendicionModel
+                ->select('id_rendicion, fecha')
+                ->where('YEAR(fecha)', $year)
+                ->orderBy('fecha', 'ASC')
+                ->findAll();
+
+            // Si hay rendiciones, determinar si es la primera o segunda
+            if (!empty($rendiciones_del_año)) {
+                $number = ($rendiciones_del_año[0]['id_rendicion'] == $rendicion['id_rendicion']) ? 'I' : 'II';
+            }
+        }
+        return view('asistencia', [
+            'fecha' => $rendicion['fecha'], 
+            'number' => $number,
+            'year' => $year
+        ]);
     }
     public function procesar_asistencia()
     {

@@ -30,7 +30,7 @@
     </header>
     <section class="text-center my-4">
         <h2 class="animate__animated animate__fadeInDown header-title">
-            hola
+            Conferencia <?= $number ?> <?= $year ?>
         </h2>
         <p class="animate__animated animate__fadeInUp header-date">
             Fecha: <?= formatear_fecha_esp(esc($fecha)) ?>
@@ -43,9 +43,9 @@
                     <div id="">
                         <div class="form-group text">
                             <input
-                            type="text"
-                            class="form-part"
-                            id="dni-asistencia"
+                                type="text"
+                                class="form-part"
+                                id="dni-asistencia"
                                 name="dni"
                                 pattern="\d{8}"
                                 title="Por favor, ingresar bien su DNI"
@@ -68,7 +68,7 @@
                     <?= session()->getFlashdata('success') ?>
                 </div>
             <?php endif; ?>
-            
+
             <?php if (session()->getFlashdata('error')): ?>
                 <div class="alert alert-danger">
                     <?= session()->getFlashdata('error') ?>
