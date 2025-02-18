@@ -39,55 +39,16 @@
             <ul class="list-group">
                 <?php foreach ($ejes as $eje): ?>
                     <li class="list-group-item">
-                        <?= $eje['tematica'] ?> - <?= $eje['cantidad_preguntas'] ?> preguntas
+                        <form action="" method="post">
+                            <?= $eje['tematica'] ?> - <?= $eje['cantidad_preguntas'] ?> preguntas
+                            <input type="hidden" name="id_eje_seleccionado" value="<?= $eje['id_eje_seleccionado'] ?>" />
+                            <input type="number" name="cantidad_preguntas" value="1" />
+                            <button type="submit" class="btn btn-primary">Sortear preguntas</button>
+                        </form>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </div>
-
-        <div class="mt-5">
-            <h2>Sorteo de Preguntas por cada eje</h2>
-            <form action="<?= base_url('questions/sorteo_preguntas') ?>" method="post">
-                <div class="form-group">
-                    <label for="cantidad_preguntas">Cantidad de Preguntas:</label>
-                    <input type="number" class="form-control" id="cantidad_preguntas" name="cantidad_preguntas" required>
-                    <label for="id_rendicion">Fecha de la Rendición:</label>
-                    <select class="form-control" id="id_rendicion" name="id_rendicion" required>
-                        <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                            <?php foreach ($rendiciones as $rendicion): ?>
-                                <option value="<?= $rendicion['id_rendicion'] ?>"><?= $rendicion['fecha'] ?></option>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <option value="">No hay rendiciones disponibles</option>
-                        <?php endif; ?>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Sortear</button>
-            </form>
-        </div>
-    <?php endif; ?>
-
-    <?php if (!empty($preguntas_sorteadas)): ?>
-        <div class="mt-5">
-            <h2>Preguntas Sorteadas</h2>
-            <ul class="list-group">
-                <?php foreach ($preguntas_sorteadas as $sorteo): ?>
-                    <li class="list-group-item">
-                        <strong>Usuario:</strong> <?= esc($sorteo['usuario']['nombres']) ?>
-                        <ul>
-                            <?php foreach ($sorteo['ejes'] as $eje): ?>
-                                <h4 class="text-primary">Eje: <?= esc($eje['nombre']) ?></h4>
-                                <?php foreach ($eje['preguntas'] as $pregunta): ?>
-                                    <li><?= esc($pregunta['contenido']) ?></li>
-                                <?php endforeach; ?>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php else: ?>
-        <div class="alert alert-warning mt-5">No hay preguntas sorteadas.</div>
     <?php endif; ?>
     </div>
 </body>

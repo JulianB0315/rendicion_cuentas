@@ -43,7 +43,8 @@ class QuestionsController extends BaseController
             $ejeData = $this->EjeModel->find($eje['id_eje']);
             return [
                 'tematica'          => isset($ejeData['tematica']) ? $ejeData['tematica'] : 'Sin tematica',
-                'cantidad_preguntas' => $eje['cantidad_preguntas']
+                'cantidad_preguntas' => $eje['cantidad_preguntas'],
+                'id_eje_seleccionado' => $eje['id_eje_seleccionado']
             ];
         }, $ejes_seleccionados);
 
@@ -51,54 +52,66 @@ class QuestionsController extends BaseController
         return view('questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
 
-    public function sorteo_preguntas()
+    // public function sorteo_preguntas()
+    // {
+    //     $id_rendicion = $this->request->getPost('id_rendicion');
+    //     $cantidad_preguntas = (int) $this->request->getPost('cantidad_preguntas');
+
+    //     $usuarios = $this->UsuarioModel
+    //         ->where('id_rendicion', $id_rendicion)
+    //         ->where('id_pregunta IS NOT NULL', null, false)
+    //         ->findAll();
+
+    //     $preguntas_sorteadas = [];
+    //     foreach ($usuarios as $usuario) {
+    //         // Obtener todas las preguntas del usuario
+    //         $preguntas_usuario = $this->PreguntaModel
+    //             ->where('id_usuario', $usuario['id_usuario'])
+    //             ->findAll();
+
+    //         $ejes = [];
+    //         foreach ($preguntas_usuario as $pregunta) {
+    //             $eje_id = $pregunta['id_eje'];
+    //             if (!isset($ejes[$eje_id])) {
+    //                 $ejeData = $this->EjeModel->find($eje_id);
+    //                 $ejes[$eje_id] = [
+    //                     'id_eje'    => $eje_id,
+    //                     'nombre'    => isset($ejeData['tematica']) ? $ejeData['tematica'] : '',
+    //                     'preguntas' => []
+    //                 ];
+    //             }
+    //             $ejes[$eje_id]['preguntas'][] = $pregunta;
+    //         }
+
+    //         foreach ($ejes as &$eje) {
+    //             shuffle($eje['preguntas']); // Mezclar preguntas para mayor aleatoriedad
+    //             $eje['preguntas'] = array_slice($eje['preguntas'], 0, $cantidad_preguntas); // Limitar a la cantidad seleccionada
+    //         }
+
+    //         $preguntas_sorteadas[] = [
+    //             'usuario'   => $usuario,
+    //             'ejes'      => $ejes
+    //         ];
+    //     }
+
+    //     $rendiciones = $this->RendicionModel->findAll();
+
+    //     return view('questions', [
+    //         'preguntas_sorteadas' => $preguntas_sorteadas,
+    //         'rendiciones'         => $rendiciones,
+    //         'cantidad_preguntas'  => $cantidad_preguntas
+    //     ]);
+    // }
+    public function sorteo_preguntas($id_eje_seleccionado)
     {
-        $id_rendicion = $this->request->getPost('id_rendicion');
-        $cantidad_preguntas = (int) $this->request->getPost('cantidad_preguntas');
+        $eje_seleccionado = $this->Ejes_SeleccionadosModel->find($id_eje_seleccionado);
+        $eje = $this->EjeModel->find($eje_seleccionado['id_eje']);
+        $preguntas = $this->PreguntaModel->where('id_eje', $eje_seleccionado['id_eje'])->findAll();
 
-        $usuarios = $this->UsuarioModel
-            ->where('id_rendicion', $id_rendicion)
-            ->where('id_pregunta IS NOT NULL', null, false)
-            ->findAll();
-
-        $preguntas_sorteadas = [];
-        foreach ($usuarios as $usuario) {
-            // Obtener todas las preguntas del usuario
-            $preguntas_usuario = $this->PreguntaModel
-                ->where('id_usuario', $usuario['id_usuario'])
-                ->findAll();
-
-            $ejes = [];
-            foreach ($preguntas_usuario as $pregunta) {
-                $eje_id = $pregunta['id_eje'];
-                if (!isset($ejes[$eje_id])) {
-                    $ejeData = $this->EjeModel->find($eje_id);
-                    $ejes[$eje_id] = [
-                        'id_eje'    => $eje_id,
-                        'nombre'    => isset($ejeData['tematica']) ? $ejeData['tematica'] : '',
-                        'preguntas' => []
-                    ];
-                }
-                $ejes[$eje_id]['preguntas'][] = $pregunta;
-            }
-
-            foreach ($ejes as &$eje) {
-                shuffle($eje['preguntas']); // Mezclar preguntas para mayor aleatoriedad
-                $eje['preguntas'] = array_slice($eje['preguntas'], 0, $cantidad_preguntas); // Limitar a la cantidad seleccionada
-            }
-
-            $preguntas_sorteadas[] = [
-                'usuario'   => $usuario,
-                'ejes'      => $ejes
-            ];
-        }
-
-        $rendiciones = $this->RendicionModel->findAll();
-
-        return view('questions', [
-            'preguntas_sorteadas' => $preguntas_sorteadas,
-            'rendiciones'         => $rendiciones,
-            'cantidad_preguntas'  => $cantidad_preguntas
+        return view('sort', [
+            'eje' => $eje,
+            'preguntas' => $preguntas,
+            'id_eje_seleccionado' => $id_eje_seleccionado
         ]);
     }
 }
