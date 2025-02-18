@@ -15,51 +15,47 @@
 
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Registrar Asistencia</h1>
-        <form action="<?= base_url('questions/search') ?>" method="post" class="mt-4">
+        <h1 class="text-center">Sorteo de preguntas</h1>
+        <form action="<?= base_url('questions/buscar_rendecion_admin') ?>" method="post" class="mt-4">
             <div class="form-group">
-                <label for="rendicion_date">Fecha de la Rendición:</label>
-                <input type="date" class="form-control" id="rendicion_date" name="rendicion_date" required>
+                <label for="id_rendicion">Fecha de la Rendición:</label>
+                <select class="form-control" id="id_rendicion" name="id_rendicion" required>
+                    <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
+                        <?php foreach ($rendiciones as $rendicion): ?>
+                            <option value="<?= $rendicion['id_rendicion'] ?>"><?= $rendicion['fecha'] ?></option>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <option value="">No hay rendiciones disponibles</option>
+                    <?php endif; ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
+    </div>
 
-        <?php if (isset($ejes) && !empty($ejes)): ?>
-            <div class="mt-5">
-                <h2>Ejes de la Rendición</h2>
-                <ul class="list-group">
-                    <?php foreach ($ejes as $eje): ?>
-                        <li class="list-group-item">
-                            <?= $eje['nombre'] ?> - <?= count($eje['preguntas']) ?> preguntas
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+    <?php if (isset($ejes) && !empty($ejes)): ?>
+        <div class="mt-5">
+            <h2>Ejes de la Rendición</h2>
+            <ul class="list-group">
+                <?php foreach ($ejes as $eje): ?>
+                    <li class="list-group-item">
+                        <?= $eje['nombre'] ?> - <?= count($eje['preguntas']) ?> preguntas
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
-            <div class="mt-5">
-                <h2>Sorteo de Preguntas</h2>
-                <form action="<?= base_url('questions/sort') ?>" method="post">
-                    <div class="form-group">
-                        <label for="cantidad_preguntas">Cantidad de Preguntas:</label>
-                        <input type="number" class="form-control" id="cantidad_preguntas" name="cantidad_preguntas" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Sortear</button>
-                </form>
-
-                <?php if (isset($preguntas_sorteadas) && !empty($preguntas_sorteadas)): ?>
-                    <div class="mt-4">
-                        <h3>Preguntas Sorteadas</h3>
-                        <ul class="list-group">
-                            <?php foreach ($preguntas_sorteadas as $pregunta): ?>
-                                <li class="list-group-item">
-                                    <?= $pregunta['contenido'] ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
+        <div class="mt-5">
+            <h2>Sorteo de Preguntas por cada eje</h2>
+            <form action="<?= base_url('') ?>" method="post">
+                <div class="form-group">
+                    <label for="cantidad_preguntas">Cantidad de Preguntas:</label>
+                    <input type="number" class="form-control" id="cantidad_preguntas" name="cantidad_preguntas" required>
+                </div>
+                <button type="submit" class="btn btn-success">Sortear</button>
+            </form>
+        </div>
+    <?php endif; ?>
     </div>
 </body>
 

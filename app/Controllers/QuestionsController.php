@@ -6,6 +6,7 @@ use App\Models\Ejes_SeleccionadosModel;
 use App\Models\PreguntaModel;
 use App\Models\RendicionModel;
 use App\Models\EjeModel;
+use App\Models\UsuarioModel;
 
 class QuestionsController extends BaseController
 {
@@ -22,52 +23,30 @@ class QuestionsController extends BaseController
         $this->EjeModel = new EjeModel();
     }
 
-    public function index()
+    public function cargar_fechas()
     {
-        return view('questions');
+        $rendiciones = $this->RendicionModel->findAll();
+        return view('questions', ['rendiciones' => $rendiciones]);
     }
 
-    public function search()
+    public function buscar_rendecion_admin()
     {
-        $fecha = $this->request->getPost('rendicion_date');
-        $rendicion = $this->RendicionModel->where('fecha', $fecha)->first();
-
-        if ($rendicion) {
-            $ejes_seleccionados = $this->Ejes_SeleccionadosModel
-                ->where('id_rendicion', $rendicion['id_rendicion'])
+        $id_rendicion = $this->request->getPost('id_rendicion');
+        $ejes_seleccionados = $this->Ejes_SeleccionadosModel
+            ->where('id_rendicion', $id_rendicion)
+            ->findAll();
+        $ejes = array_map(function ($eje) {
+            $preguntas = $this->PreguntaModel
+                ->where('id_eje', $eje['id_eje'])
                 ->findAll();
+            return [
+                'nombre' => $this->EjeModel->find($eje['id_eje'])['tematica'],
+                'preguntas' => $preguntas
+            ];
+        }, $ejes_seleccionados);
 
-            $ejes = [];
-            foreach ($ejes_seleccionados as $eje_seleccionado) {
-                $eje = $this->EjeModel->find($eje_seleccionado['id_eje']);
-                $preguntas = $this->PreguntaModel
-                    ->where('id_eje', $eje_seleccionado['id_eje'])
-                    ->findAll();
+        $rendiciones = $this->RendicionModel->findAll();
 
-                $ejes[] = [
-                    'nombre' => $eje['tematica'],
-                    'preguntas' => $preguntas
-                ];
-            }
-
-            return view('questions', ['ejes' => $ejes]);
-        } else {
-            return view('questions', ['ejes' => []]);
-        }
-    }
-
-    public function sort()
-    {
-        $cantidad_preguntas = $this->request->getPost('cantidad_preguntas');
-        $preguntas = $this->PreguntaModel->findAll();
-
-        if ($cantidad_preguntas > count($preguntas)) {
-            $cantidad_preguntas = count($preguntas);
-        }
-
-        shuffle($preguntas);
-        $preguntas_sorteadas = array_slice($preguntas, 0, $cantidad_preguntas);
-
-        return view('questions', ['preguntas_sorteadas' => $preguntas_sorteadas]);
+        return view('questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
 }
