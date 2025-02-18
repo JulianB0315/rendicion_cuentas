@@ -22,29 +22,56 @@ const femInput = document.getElementById("fem");
 const mascInput = document.getElementById("masculino");
 
 const validarInputs = () => {
-    nextBtn.disabled = true;
-    submitBtn.disabled = true;
-    nextBtn.classList.remove("active");
-    submitBtn.classList.remove("active");
+	nextBtn.disabled = true;
+	submitBtn.disabled = true;
+	nextBtn.classList.remove("active");
+	submitBtn.classList.remove("active");
 
-    if (!asistente.checked && !orador.checked) return;
+	if (!asistente.checked && !orador.checked) return;
 
-    if (orador.checked) {
-        const inputsPersonales = document.querySelectorAll(
-            "#persona-info input[type='text']"
-        );
-        const completos = [...inputsPersonales].every(input => 
-            input.value.trim() !== "") && (femInput.checked || mascInput.checked);
-        
-        nextBtn.disabled = !completos;
-        nextBtn.classList.toggle("active", completos);
-    } else if (asistente.checked) {
-        const completos = [...inputs].every(input => 
-            input.value.trim() !== "") && (femInput.checked || mascInput.checked);
-        
-        submitBtn.disabled = !completos;
-        submitBtn.classList.toggle("active", completos);
-    }
+	// Validación para orador
+	if (orador.checked) {
+		// Primera pantalla (información personal)
+		if (personaInfo.style.display !== "none") {
+			const inputsPersonales = document.querySelectorAll(
+				"#persona-info input[type='text']"
+			);
+			const completos =
+				[...inputsPersonales].every(
+					(input) => input.value.trim() !== ""
+				) &&
+				(femInput.checked || mascInput.checked);
+
+			nextBtn.disabled = !completos;
+			nextBtn.classList.toggle("active", completos);
+		}
+		// Segunda pantalla (información de orador)
+		else if (oradorInfo.style.display === "block") {
+			let completos =
+				pregunta.value.trim() !== "" &&
+				(personal.checked || organizacion.checked);
+
+			// Si es representante de organización, validar campos adicionales
+			if (organizacion.checked) {
+				completos =
+					completos &&
+					rucInput.value.trim().length === 11 &&
+					nombreOrg.value.trim() !== "";
+			}
+
+			submitBtn.disabled = !completos;
+			submitBtn.classList.toggle("active", completos);
+		}
+	}
+	// Validación para asistente
+	else if (asistente.checked) {
+		const completos =
+			[...inputs].every((input) => input.value.trim() !== "") &&
+			(femInput.checked || mascInput.checked);
+
+		submitBtn.disabled = !completos;
+		submitBtn.classList.toggle("active", completos);
+	}
 };
 
 const buscarPersona = async () => {
@@ -105,14 +132,17 @@ const buscarOrg = async () => {
 
 	if (ruc.length === 0) {
 		rucError.innerHTML = "";
+		validarInputs();
 		return;
 	}
 	if (ruc.length < 11) {
 		rucError.innerHTML = "El RUC debe tener 11 dígitos";
+		validarInputs();
 		return;
 	}
 	if (!regex.test(ruc)) {
 		rucError.innerHTML = "El RUC debe contener solo números";
+		validarInputs();
 		return;
 	}
 	try {
@@ -126,13 +156,16 @@ const buscarOrg = async () => {
 
 		if (data && data.nombre_o_razon_social) {
 			nombreOrg.value = data.nombre_o_razon_social;
+			validarInputs();
 		} else {
 			rucError.innerHTML =
 				"No se encontró ninguna organización con ese RUC";
+			validarInputs();
 		}
 	} catch (e) {
 		console.error("Error fetching JSON:", e);
 		rucError.innerHTML = "Error al buscar la organización";
+		validarInputs();
 	}
 };
 
@@ -149,9 +182,11 @@ asistente.addEventListener("change", () => {
 });
 organizacion.addEventListener("change", () => {
 	organizacionInfo.style.display = "block";
+	validarInputs();
 });
 personal.addEventListener("change", () => {
 	organizacionInfo.style.display = "none";
+	validarInputs();
 });
 
 // Events for buttons
@@ -195,13 +230,19 @@ orador.addEventListener("change", () => {
 	submitBtn.style.display = "none";
 	validarInputs();
 });
-rucInput.addEventListener("input", buscarOrg);
+rucInput.addEventListener("input", () => {
+	buscarOrg();
+	validarInputs();
+});
+pregunta.addEventListener("input", validarInputs);
+personal.addEventListener("change", validarInputs);
+nombreOrg.addEventListener("input", validarInputs);
 
 document.addEventListener("DOMContentLoaded", function () {
 	nextBtn.disabled = true;
-    submitBtn.disabled = true;
-    inputs.forEach((input) => input.addEventListener("input", validarInputs));
-    femInput.addEventListener("change", validarInputs);
-    mascInput.addEventListener("change", validarInputs);
-    validarInputs();
+	submitBtn.disabled = true;
+	inputs.forEach((input) => input.addEventListener("input", validarInputs));
+	femInput.addEventListener("change", validarInputs);
+	mascInput.addEventListener("change", validarInputs);
+	validarInputs();
 });
