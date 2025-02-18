@@ -16,7 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
 </head>
 
 <body>
@@ -32,19 +32,19 @@
             hola
         </h2>
         <p class="animate__animated animate__fadeInUp header-date">
-            mundo
+            Fecha: <?= formatear_fecha_esp(esc($fecha)) ?>
         </p>
     </section>
     <main class="container main my-5">
         <div class="row">
             <div class="col-12">
-                <form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container" id="form-registro">
-                    <div id="persona-info">
+                <form action="<?= base_url('/procesar_asistencia') ?>" method="post" class="form-container mb-4" id="form-asistencia">
+                    <div id="">
                         <div class="form-group text">
                             <input
-                                type="text"
-                                class="form-part"
-                                id="dni"
+                            type="text"
+                            class="form-part"
+                            id="dni-asistencia"
                                 name="dni"
                                 pattern="\d{8}"
                                 title="Por favor, ingresar bien su DNI"
@@ -52,17 +52,30 @@
                                 placeholder=" " />
                             <label for="dni">DNI*</label>
                         </div>
+                        <div class="error" id="error"></div>
                         <button
                             type="submit"
                             class="btn-form"
-                            id="submit-button"
+                            id="submit-asistencia"
                             style="display: block">
                             Marcar Asistencia
                         </button>
                 </form>
             </div>
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('success') ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+            <?php endif; ?>
         </div>
     </main>
+    <script src="<?= base_url('js/asistencia.js') ?>"></script>
 </body>
 
 </html>
