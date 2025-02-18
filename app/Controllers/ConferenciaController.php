@@ -4,12 +4,10 @@ namespace App\Controllers;
 
 class ConferenciaController extends BaseController
 {
-    public function index()
+    public function show($id)
     {
-        return view('conferencia');
-    }
-    public function show(){
         
+        return view('conferencia', ['id' => $id]);
     }
 }
 

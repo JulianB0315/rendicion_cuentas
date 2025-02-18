@@ -165,9 +165,17 @@
 						<ul
 							class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center"
 						>
-							<!-- 
-							-->
+							<?php foreach ($rendiciones as $rendicion): ?>
 							<li
+								class="text-center d-flex justify-content-around align-items-center"
+							>
+								<span><?= date('d \d\e F', strtotime(esc($rendicion['fecha'])))?></span>
+								<a class="btn rounded-pill btn-conference" href="<?=base_url('conferencias/'.$rendicion['id_rendicion'])?>" >
+									<i class="fa-solid fa-arrow-right"></i>
+								</a>
+							</li>
+							<?php endforeach; ?>
+							<!-- <li
 								class="text-center d-flex justify-content-around align-items-center"
 							>
 								<span>15 de Mayo</span>
@@ -182,7 +190,7 @@
 								<a class="btn rounded-pill btn-conference">
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
