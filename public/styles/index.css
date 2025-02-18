@@ -28,6 +28,11 @@ body {
     font-size: clamp(1.6rem, 3vw, 2.4rem);
     font-family: var(--titles);
 }
+.header-date{
+    color: var(--secondary-color);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-family: var(--font);
+}
 
 .form-container {
     width: 100%;
@@ -121,6 +126,7 @@ body {
     cursor: pointer;
     transition: all .3s ease;
     width: 100%;
+    outline: none;
 }
 
 .btn-form[disabled] {

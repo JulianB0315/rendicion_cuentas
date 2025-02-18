@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/asistencia.css") ?>" />
 </head>
 
 <body>
@@ -55,7 +56,7 @@
                         <div class="error" id="error"></div>
                         <button
                             type="submit"
-                            class="btn-form"
+                            class="btn btn-form"
                             id="submit-asistencia"
                             style="display: block">
                             Marcar Asistencia
