@@ -10,28 +10,63 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/admin.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/conferencias.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/sort.css") ?>" />
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Sorteo de Preguntas - <?= $eje['tematica'] ?></h1>
-        <form action="<?= base_url('questions/sorteo_preguntas/' . $id_eje_seleccionado) ?>" method="post" class="mt-4">
-            <div class="form-group">
-                <label for="cantidad_preguntas">Cantidad de Preguntas:</label>
-                <input type="number" class="form-control" id="cantidad_preguntas" name="cantidad_preguntas" required>
+    <header class="">
+        <nav class="nav-header w-100 p-3">
+            <div class="d-flex align-items-center logo-container">
+                <img
+                    src="<?= base_url('img/escudo.webp') ?>"
+                    alt="Logo"
+                    class="nav-logo img-fluid" />
             </div>
-            <button type="submit" class="btn btn-primary">Sortear</button>
-        </form>
+        </nav>
+    </header>
+    <div class="container mt-5">
+        <h1 class="animate__animated animate__fadeInDown header-title text-center">Sorteo de Preguntas - <?= $eje['tematica'] ?></h1>
+        <!-- aqui iba el formulario innecesario xd -->
 
         <?php if (isset($preguntas) && !empty($preguntas)): ?>
             <div class="mt-5">
-                <h2>Preguntas</h2>
-                <ul class="list-group">
-                    <?php foreach ($preguntas as $pregunta): ?>
-                        <li class="list-group-item"><?= $pregunta['contenido'] ?></li>
-                    <?php endforeach; ?>
-                </ul>
+                <h2 class="header-subtitle">Preguntas</h2>
+                <form action="<?= base_url('procesar_seleccion') ?>" method="post" id="form-preguntas">
+                    <input type="hidden" name="id_eje_seleccionado" value="<?= $id_eje_seleccionado ?>">
+                    <table class="table text-center table-ejes">
+                        <thead>
+                            <tr>
+                                <th>Pregunta</th>
+                                <th class="text-center">Selección</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- TODO: ARREGLAR QUE LOS CHECKBOX NO SE PUEDEN MARCAR COMO CHECK LOL -->
+                            <?php foreach ($preguntas as $pregunta): ?>
+                                <tr>
+                                    <td><?= $pregunta['contenido'] ?></td>
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input"
+                                                type="checkbox"
+                                                name="preguntas_seleccionadas[]"
+                                                value="<?= $pregunta['id_pregunta'] ?>"
+                                                id="pregunta_<?= $pregunta['id_pregunta'] ?>">
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-form">
+                            Guardar Selección
+                        </button>
+                    </div>
+                </form>
             </div>
         <?php else: ?>
             <div class="alert alert-warning mt-5">

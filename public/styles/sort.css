@@ -1,0 +1,22 @@
+.header-subtitle {
+    color: var(--secondary-color);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-family: var(--titles);
+}
+.table-ejes {
+    width: 100%;
+    margin: 1rem 0;
+}
+.table-ejes tr:nth-child(even) {
+    background-color: var(--white);
+    color: var(--secondary-color);
+}
+.table-ejes tr:hover {
+    background-color: var(--white);
+    color: var(--secondary-color);
+}
+@media (max-width: 768px) {
+    .header-subtitle {
+        text-align: center;
+    }
+}
