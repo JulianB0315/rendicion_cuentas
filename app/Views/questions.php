@@ -5,52 +5,92 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sorteo de Preguntas</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+    <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+    <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/questions.css') ?>" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/admin.css") ?>" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Sorteo de preguntas</h1>
-        <form action="<?= base_url('questions/buscar_rendecion_admin') ?>" method="post" class="mt-4">
-            <div class="form-group">
-                <label for="id_rendicion">Fecha de la Rendición:</label>
-                <select class="form-control" id="id_rendicion" name="id_rendicion" required>
-                    <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                        <?php foreach ($rendiciones as $rendicion): ?>
-                            <option value="<?= $rendicion['id_rendicion'] ?>"><?= $rendicion['fecha'] ?></option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">No hay rendiciones disponibles</option>
-                    <?php endif; ?>
-                </select>
+    <header class="header">
+        <nav class="nav-header w-100 p-3">
+            <div class="d-flex align-items-center logo-container">
+                <img
+                    src="<?= base_url('img/escudo.webp') ?>"
+                    alt="Logo"
+                    class="nav-logo img-fluid" />
             </div>
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </form>
+        </nav>
+    </header>
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+            <h1 class="animate__animated animate__fadeInDown header-title text-center">Sorteo de preguntas</h1>
+            <div class="col-md-6 col-sm-12 p-4">
+                <form action="<?= base_url('questions/buscar_rendecion_admin') ?>" method="post" class="mt-2">
+                    <div class="form-group">
+                        <label for="id_rendicion">Fecha de la Rendición:</label>
+                        <select class="form-select" id="id_rendicion" name="id_rendicion" required>
+                            <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
+                                <?php foreach ($rendiciones as $rendicion): ?>
+                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?= $rendicion['fecha'] ?></option>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="">No hay rendiciones disponibles</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-form">Buscar</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <?php if (isset($ejes) && !empty($ejes)): ?>
-        <div class="mt-5">
-            <h2>Ejes de la Rendición</h2>
-            <ul class="list-group">
-                <?php foreach ($ejes as $eje): ?>
-                    <li class="list-group-item">
-                        <form action="" method="post">
-                            <?= $eje['tematica'] ?> - <?= $eje['cantidad_preguntas'] ?> preguntas
-                            <input type="hidden" name="id_eje_seleccionado" value="<?= $eje['id_eje_seleccionado'] ?>" />
-                            <input type="number" name="cantidad_preguntas" value="1" />
-                            <button type="submit" class="btn btn-primary">Sortear preguntas</button>
-                        </form>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-    </div>
+        <div class="container my-5">
+            <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+                <h3 class="header-title text-center">Ejes de la Rendición</h3>
+                <div class="col-md-6 col-sm-12 p-4">
+                    <ul class="list-group">
+                        <?php foreach ($ejes as $eje): ?>
+                            <li class="list-group-item">
+                                <form action="" method="post">
+                                    <span class="eje-info">
+                                        <?= $eje['tematica'] ?>
+                                        <small class="text-muted">
+                                            (<?= $eje['cantidad_preguntas'] ?> preguntas)
+                                        </small>
+                                    </span>
+                                    <div class="form-controls">
+                                        <input type="hidden" name="id_eje_seleccionado"
+                                            value="<?= $eje['id_eje_seleccionado'] ?>" />
+                                        <input type="number" name="cantidad_preguntas"
+                                            value="1" min="1" max="<?= $eje['cantidad_preguntas'] ?>" />
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-random me-2"></i>Sortear
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            </div>
 </body>
 
 </html>
