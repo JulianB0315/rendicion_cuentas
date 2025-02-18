@@ -42,7 +42,7 @@ class FormController extends BaseController
     }
     public function buscar_rendicion()
     {
-        $fecha = date('Y-m-d');
+        $fecha = date('Y-m-d', strtotime('now -5 hours'));
         $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
             ->where('fecha >=', $fecha)
             ->orderBy('fecha', 'ASC')
@@ -67,22 +67,31 @@ class FormController extends BaseController
             return view('form', ['ejes' => $ejes, 'id_rendicion' => $rendicion['id_rendicion'], 'fecha_rendicion' => $fecha_rendicion]);
         } else {
             echo "No se encontró la rendición";
+            echo $fecha;
         }
     }
 
     public function procesar_formulario()
     {
+        $id_rendicion = $this->request->getPost('id_rendicion');
+        $rendicion = $this->RendicionModel->find($id_rendicion);
+        $fecha_conferencia = $rendicion['fecha'];
+        $fecha_hoy = date('Y-m-d', strtotime('now -5 hours'));
+
+        $asistencia = ($fecha_conferencia == $fecha_hoy) ? 'si' : 'no';
+        $data_user['asistencia'] = $asistencia;
         $id_usuario = $this->crear_id_usuario();
         $data_user = [
             'id_usuario' => $id_usuario,
             'nombres' => $this->request->getPost('nombre'),
-            'sexo' => "M",
+            'sexo' => $this->request->getPost('sexo'),
             'tipo_participacion' => $this->request->getPost('participacion'),
             'titulo' => $this->request->getPost('titular') ?? null,
             'ruc_empresa' => $this->request->getPost('ruc') ?? null,
             'nombre_empresa' => $this->request->getPost('nombre_organizacion') ?? null,
             'DNI' => $this->request->getPost('dni'),
             'id_rendicion' => $this->request->getPost('id_rendicion'),
+            'asistencia' => $asistencia
         ];
 
         if (!$this->UsuarioModel->insert($data_user)) {
@@ -98,7 +107,7 @@ class FormController extends BaseController
                 'contenido' => $pregunta,
                 'id_usuario' => $id_usuario,
                 'id_eje' => $this->request->getPost('id_eje'),
-                'fecha_registro' => date('Y-m-d')
+                'fecha_registro' => $fecha_hoy
             ];
             $data_user['id_pregunta'] = $data_quiz['id_pregunta'];
 
