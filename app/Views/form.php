@@ -31,10 +31,10 @@
 		</header>
 		<section class="text-center my-4">
 			<h2 class="animate__animated animate__fadeInDown header-title">
-				Rendición de Cuentas - <?= date('Y',strtotime(esc($fecha_rendicion))) ?>
+				Rendición de Cuentas - <?= formatear_fecha_esp(esc($fecha_rendicion), 'Y')  ?>
 			</h2>
 			<p class="animate__animated animate__fadeInUp header-date">
-				Fecha: <?= date('d \d\e F \d\e\l Y', strtotime(esc($fecha_rendicion))) ?>
+				Fecha: <?=formatear_fecha_esp(esc($fecha_rendicion)) ?>
 			</p>
 		</section>
 		<main class="container main my-5">
@@ -223,15 +223,6 @@
 									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
 									maxlength="200"
 								></textarea>
-								<!-- <input
-									type="text"
-									class="form-part pregunta-textarea"
-									name="pregunta"
-									pattern="[A-Za-z\s]{1,200}"
-									title="Por favor, ingresar solo letras (máximo 200 caracteres)"
-									id = "pregunta"
-									placeholder=" "
-								/> -->
 								<label for="pregunta">Pregunta</label>
 							</div>
 						</div>

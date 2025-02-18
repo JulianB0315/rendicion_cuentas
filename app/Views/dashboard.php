@@ -159,8 +159,6 @@
 					<p class="fs-4 text-center">
 						Las fechas de nuestras conferencias este año:
 					</p>
-					<!-- recorrer las fechas de la DB y mostrarlas con un boton  -->
-					<!-- Placeholder: -->
 					<div class="container mt-4">
 						<ul
 							class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center"
@@ -169,28 +167,12 @@
 							<li
 								class="text-center d-flex justify-content-around align-items-center"
 							>
-								<span><?= formatear_fecha_esp(esc($rendicion['fecha']))?></span>
+								<span><?= formatear_fecha_esp(esc($rendicion['fecha']), 'dashboard')?></span>
 								<a class="btn rounded-pill btn-conference" href="<?=base_url('conferencias/'.$rendicion['id_rendicion'])?>" >
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
 							</li>
 							<?php endforeach; ?>
-							<!-- <li
-								class="text-center d-flex justify-content-around align-items-center"
-							>
-								<span>15 de Mayo</span>
-								<a class="btn rounded-pill btn-conference" href="<?=base_url('conferencias')?>" >
-									<i class="fa-solid fa-arrow-right"></i>
-								</a>
-							</li>
-							<li
-								class="text-center d-flex justify-content-around align-items-center"
-							>
-								<span>15 de Septiembre</span>
-								<a class="btn rounded-pill btn-conference">
-									<i class="fa-solid fa-arrow-right"></i>
-								</a>
-							</li> -->
 						</ul>
 					</div>
 				</div>
