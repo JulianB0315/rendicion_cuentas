@@ -1,3 +1,6 @@
+:root{
+    --hover-color: #1a5a7a;
+}
 .header-subtitle{
     color: var(--gray);
     font-size: clamp(1rem, 2vw, 1.3rem);
