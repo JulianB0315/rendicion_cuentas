@@ -21,3 +21,4 @@ $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
 // Rutas de conferencias detalle
 $routes->get('conferencias/(:alphanum)', 'ConferenciaController::show/$1');
+$routes->get('asistencia', 'AsistenciaController::index');
