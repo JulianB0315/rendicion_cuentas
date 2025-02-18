@@ -165,7 +165,8 @@
 						<ul
 							class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center"
 						>
-							<!-- aqui se debe recorrer el array de conferencias y mostrar la informacion -->
+							<!-- 
+							-->
 							<li
 								class="text-center d-flex justify-content-around align-items-center"
 							>

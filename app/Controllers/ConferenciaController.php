@@ -8,6 +8,9 @@ class ConferenciaController extends BaseController
     {
         return view('conferencia');
     }
+    public function show(){
+        
+    }
 }
 
 ?>
