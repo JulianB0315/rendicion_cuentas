@@ -20,7 +20,5 @@ $routes->post('questions/sort', 'QuestionsController::sort');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
-// TODO: Agregar la ruta para la vista de conferencias mediante la ID
-// debería quedar como conferencias/1, conferencias/2, etc.
-// $routes->get('conferencias', 'ConferenciaController::index');
+// Rutas de conferencias detalle
 $routes->get('conferencias/(:alphanum)', 'ConferenciaController::show/$1');

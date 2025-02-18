@@ -40,11 +40,11 @@
     <section class="text-center mt-3">
 		<h1 class="animate__animated animate__fadeInDown header-title mb-4">
 			<!-- TODO: esto debe obtenerse de la DB -->
-            Conferencia I 2025
+            Conferencia <?=$number?> <?=$year?>
 		</h1>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             <!-- Traer de la DB -->
-            Fecha: 2025-01-01
+            Fecha: <?=$fecha?>
         </h5>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             Hora: xx:xx
@@ -65,42 +65,17 @@
             </thead>
             <tbody>
                 <!-- Traer de la DB -->
-                <tr>
-                    <td>Nombre del Eje</td>
-                    <td>Descripción del Eje</td>
-                    <td>
-                        <button class="btn-preguntas" id="btn-preguntas">
-                            Preguntas <i class="fas fa-question"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre del Eje</td>
-                    <td>Descripción del Eje</td>
-                    <td>
-                        <button class="btn-preguntas">
-                            Preguntas <i class="fas fa-question"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre del Eje</td>
-                    <td>Descripción del Eje</td>
-                    <td>
-                        <button class="btn-preguntas">
-                            Preguntas <i class="fas fa-question"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nombre del Eje</td>
-                    <td>Descripción del Eje</td>
-                    <td>
-                        <button class="btn-preguntas">
-                            Preguntas <i class="fas fa-question"></i>
-                        </button>
-                    </td>
-                </tr>
+                <?php foreach ($ejes as $eje): ?>
+                    <tr>
+                        <td><?=$eje['tematica']?></td>
+                        <td>Descripción del eje <?=$eje['tematica']?></td>
+                        <td>
+                            <button class="btn btn-primary btn-preguntas" data-id="<?=$eje['id_eje']?>">
+                                Ver Preguntas
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <div class="modal-pregunta" id="modal-pregunta">
