@@ -72,6 +72,39 @@
 							<div class="info" id="nombres-info"></div>
 							<div class="form-group">
 								<label class="d-block mb-3"
+									>Sexo</label
+								>
+								<div class="form-check form-check-inline">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="masculino"
+										name="sexo"
+										value="M"
+										required
+									/>
+									<label
+										class="form-check-label"
+										for="masculino"
+										>Masculino</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="fem"
+										name="sexo"
+										value="F"
+										required
+									/>
+									<label class="form-check-label" for="fem"
+										>Femenino</label
+									>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="d-block mb-3"
 									>Participación</label
 								>
 								<div class="form-check form-check-inline">
