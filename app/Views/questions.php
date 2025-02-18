@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <header class="header">
+    <header class="">
         <nav class="nav-header w-100 p-3">
             <div class="d-flex align-items-center logo-container">
                 <img
@@ -78,8 +78,6 @@
                                     <div class="form-controls">
                                         <input type="hidden" name="id_eje_seleccionado"
                                             value="<?= $eje['id_eje_seleccionado'] ?>" />
-                                        <input type="number" name="cantidad_preguntas"
-                                            value="1" min="1" max="<?= $eje['cantidad_preguntas'] ?>" />
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fas fa-random me-2"></i>Sortear
                                         </button>
