@@ -169,7 +169,7 @@
 							<li
 								class="text-center d-flex justify-content-around align-items-center"
 							>
-								<span><?= date('d \d\e F', strtotime(esc($rendicion['fecha'])))?></span>
+								<span><?= formatear_fecha_esp(esc($rendicion['fecha']))?></span>
 								<a class="btn rounded-pill btn-conference" href="<?=base_url('conferencias/'.$rendicion['id_rendicion'])?>" >
 									<i class="fa-solid fa-arrow-right"></i>
 								</a>
