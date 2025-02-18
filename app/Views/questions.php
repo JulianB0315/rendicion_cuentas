@@ -68,7 +68,7 @@
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
-                                <form action="" method="post">
+                                <form action="<?=base_url('sorteo_preguntas/'.$eje['id_eje_seleccionado']) ?>" method="post">
                                     <span class="eje-info">
                                         <?= $eje['tematica'] ?>
                                         <small class="text-muted">

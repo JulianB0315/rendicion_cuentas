@@ -16,7 +16,7 @@ $routes->post('crear_rendicion', 'adminController::crear_rendicion');
 //Rutas Question
 $routes->get('questions', 'QuestionsController::cargar_fechas');
 $routes->post('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
-$routes->get('questions/sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
+$routes->post('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
