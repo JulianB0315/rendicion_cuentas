@@ -15,6 +15,7 @@
 	<link
 		rel="stylesheet"
 		href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+	<link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
 	<link
 		rel="stylesheet"
