@@ -13,9 +13,10 @@ class Home extends BaseController
     }
     public function index()
     {
-        $fecha = date('Y-m-d');
-        $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
-            ->where('fecha >=', $fecha)
+        $year = date('Y');
+        $rendicion = $this->RendicionModel
+            ->select('id_rendicion, fecha')
+            ->where('YEAR(fecha)', $year)
             ->orderBy('fecha', 'ASC');
         return view('dashboard', ['rendiciones' => $rendicion->findAll()]);
     }
