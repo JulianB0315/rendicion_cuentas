@@ -37,13 +37,24 @@
 					class="nav-logo img-fluid" />
 				<div class="links-container">
 					<ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
-						<li class="link-item-nav">
-							<a href="<?= base_url('questions') ?>" target="_blank">Seleccionar Preguntas</a>
+						<li>
+							<div class="dropdown">
+								<button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Acciones
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="<?= base_url('questions') ?>" target="_blank" class="dropdown-item">Seleccionar Preguntas</a>
+									</li>
+									<li>
+										<a href="<?= base_url('viewQuestions') ?>" target="_blank" class="dropdown-item">Ver preguntas</a>
+									</li>
+									<li>
+										<a href="<?= base_url('') ?>" target="_blank" class="dropdown-item">Reportes</a>
+									</li>
+								</ul>
+							</div>
 						</li>
-						<li class="link-item-nav">
-							<a href="<?= base_url('') ?>" target="_blank">Reportes</a>
-						</li>
-						
 					</ul>
 				</div>
 			</div>
