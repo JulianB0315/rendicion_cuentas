@@ -66,6 +66,7 @@
         <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte de Usuarios</h1>
         <div class="row">
             <div class="col-12 mb-4">
+                <?php if (isset($usuarios) && !empty($usuarios)): ?>
                 <table class="table text-center table-ejes">
                     <thead>
                         <tr>
@@ -80,7 +81,6 @@
                             <th>Pregunta</th>
                         </tr>
                     </thead>
-                    <?php if (isset($usuarios) && !empty($usuarios)): ?>
                         <?php foreach ($usuarios as $usuario): ?>
                             <tbody>
                                 <tr>
@@ -106,7 +106,7 @@
                 </table>
             </div>
         <?php else: ?>
-            <div class="col-12">
+            <div class="col-12 my-4">
                 <div class="alert alert-warning text-center">
                     No se encontraron usuarios.
                 </div>
