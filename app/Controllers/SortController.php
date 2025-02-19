@@ -26,7 +26,6 @@ class SortController extends BaseController
     public function procesar_seleccion()
     {
         $id_eje_seleccionado = $this->request->getPost('id_eje_seleccionado');
-        $id_rendicion        = $this->request->getPost('id_rendicion');
         $preguntas_seleccionadas = $this->request->getPost('preguntas_seleccionadas'); 
 
         if (empty($preguntas_seleccionadas)) {

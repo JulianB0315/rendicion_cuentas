@@ -50,7 +50,7 @@
 										<a href="<?= base_url('viewQuestions') ?>" target="_blank" class="dropdown-item">Ver preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('') ?>" target="_blank" class="dropdown-item">Reportes</a>
+										<a href="<?= base_url('report') ?>" target="_blank" class="dropdown-item">Reportes</a>
 									</li>
 								</ul>
 							</div>
