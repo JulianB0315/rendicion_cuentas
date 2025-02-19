@@ -52,66 +52,32 @@ class QuestionsController extends BaseController
         return view('questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
 
-    // public function sorteo_preguntas()
-    // {
-    //     $id_rendicion = $this->request->getPost('id_rendicion');
-    //     $cantidad_preguntas = (int) $this->request->getPost('cantidad_preguntas');
-
-    //     $usuarios = $this->UsuarioModel
-    //         ->where('id_rendicion', $id_rendicion)
-    //         ->where('id_pregunta IS NOT NULL', null, false)
-    //         ->findAll();
-
-    //     $preguntas_sorteadas = [];
-    //     foreach ($usuarios as $usuario) {
-    //         // Obtener todas las preguntas del usuario
-    //         $preguntas_usuario = $this->PreguntaModel
-    //             ->where('id_usuario', $usuario['id_usuario'])
-    //             ->findAll();
-
-    //         $ejes = [];
-    //         foreach ($preguntas_usuario as $pregunta) {
-    //             $eje_id = $pregunta['id_eje'];
-    //             if (!isset($ejes[$eje_id])) {
-    //                 $ejeData = $this->EjeModel->find($eje_id);
-    //                 $ejes[$eje_id] = [
-    //                     'id_eje'    => $eje_id,
-    //                     'nombre'    => isset($ejeData['tematica']) ? $ejeData['tematica'] : '',
-    //                     'preguntas' => []
-    //                 ];
-    //             }
-    //             $ejes[$eje_id]['preguntas'][] = $pregunta;
-    //         }
-
-    //         foreach ($ejes as &$eje) {
-    //             shuffle($eje['preguntas']); // Mezclar preguntas para mayor aleatoriedad
-    //             $eje['preguntas'] = array_slice($eje['preguntas'], 0, $cantidad_preguntas); // Limitar a la cantidad seleccionada
-    //         }
-
-    //         $preguntas_sorteadas[] = [
-    //             'usuario'   => $usuario,
-    //             'ejes'      => $ejes
-    //         ];
-    //     }
-
-    //     $rendiciones = $this->RendicionModel->findAll();
-
-    //     return view('questions', [
-    //         'preguntas_sorteadas' => $preguntas_sorteadas,
-    //         'rendiciones'         => $rendiciones,
-    //         'cantidad_preguntas'  => $cantidad_preguntas
-    //     ]);
-    // }
     public function sorteo_preguntas($id_eje_seleccionado)
     {
         $eje_seleccionado = $this->Ejes_SeleccionadosModel->find($id_eje_seleccionado);
+        if (!$eje_seleccionado) {
+            throw new \Exception("Eje seleccionado no encontrado.");
+        }
+
         $eje = $this->EjeModel->find($eje_seleccionado['id_eje']);
-        $preguntas = $this->PreguntaModel->where('id_eje', $eje_seleccionado['id_eje'])->findAll();
+        if (!$eje) {
+            throw new \Exception("Eje no encontrado.");
+        }
+
+        $preguntas = $this->PreguntaModel
+            ->select('pregunta.*, usuario.nombres, usuario.DNI, usuario.ruc_empresa, usuario.nombre_empresa')
+            ->join('usuario', 'usuario.id_usuario = pregunta.id_usuario')
+            ->where('pregunta.id_eje', $eje_seleccionado['id_eje'])
+            ->where('usuario.id_rendicion', $eje_seleccionado['id_rendicion'])
+            ->findAll();
+
+        $id_rendicion = $eje_seleccionado['id_rendicion'];
 
         return view('sort', [
-            'eje' => $eje,
-            'preguntas' => $preguntas,
-            'id_eje_seleccionado' => $id_eje_seleccionado
+            'eje'                 => $eje,
+            'preguntas'           => $preguntas,
+            'id_eje_seleccionado' => $id_eje_seleccionado,
+            'id_rendicion'        => $id_rendicion
         ]);
     }
 }
