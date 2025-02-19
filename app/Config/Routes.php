@@ -23,6 +23,13 @@ $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
 $routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
 $routes->post('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
 $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
+//Rutas de seleccion
+$routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');
+//Rutas de report
+$routes->get('report', 'ReportController::mostrar_rendiciones');
+$routes->post('mostrar_reporte/(:alphanum)', 'ReportController::mostrar_reporte/$1');
+//Rutas de viewReport
+
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
