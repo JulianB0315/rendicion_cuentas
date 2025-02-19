@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Preguntas_seleccionadas extends \CodeIgniter\Model
+class Preguntas_seleccionadasModel extends \CodeIgniter\Model
 {
     protected $table = 'preguntas_seleccionadas';
     protected $primaryKey = 'id_pregunta_seleccionada';
