@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
     <link rel="stylesheet" href="<?= base_url("styles/conferencias.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
     <link rel="stylesheet" href="<?= base_url("styles/sort.css") ?>" />
 </head>
 
@@ -27,25 +26,31 @@
             </div>
         </nav>
     </header>
-    <div class="container mt-5">
-        <h1 class="text-center">Preguntas Seleccionadas - <?= esc($eje['tematica']) ?></h1>
+    <div class="container">
+        <h1 class="animate__animated animate__fadeInDown header-title mb-5 text-center">Preguntas Seleccionadas - <?= esc($eje['tematica']) ?></h1>
         <?php if (!empty($preguntas)): ?>
-            <div class="d-flex font-weight-bold border-bottom pb-2">
-                <div class="col">Usuario</div>
-                <div class="col">DNI</div>
-                <div class="col">RUC</div>
-                <div class="col">Organización</div>
-                <div class="col">Pregunta</div>
-            </div>
-            <?php foreach ($preguntas as $pregunta): ?>
-                <div class="d-flex align-items-center border-bottom py-2">
-                    <div class="col"><?= esc($pregunta['nombres']) ?></div>
-                    <div class="col"><?= esc($pregunta['DNI']) ?></div>
-                    <div class="col"><?= esc($pregunta['ruc_empresa']) ?></div>
-                    <div class="col"><?= esc($pregunta['nombre_empresa']) ?></div>
-                    <div class="col"><?= esc($pregunta['contenido']) ?></div>
-                </div>
-            <?php endforeach; ?>
+            <table class="table text-center table-ejes">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>DNI</th>
+                        <th>RUC</th>
+                        <th>Organización</th>
+                        <th>Pregunta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($preguntas as $pregunta): ?>
+                        <tr>
+                            <td><?= esc($pregunta['nombres']) ?></td>
+                            <td><?= esc($pregunta['DNI']) ?></td>
+                            <td><?= esc($pregunta['ruc_empresa']) ?></td>
+                            <td><?= esc($pregunta['nombre_empresa']) ?></td>
+                            <td><?= esc($pregunta['contenido']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php else: ?>
             <div class="alert alert-warning">No se encontraron preguntas seleccionadas para este eje y rendición.</div>
         <?php endif; ?>
