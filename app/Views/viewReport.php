@@ -5,26 +5,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reporte de Usuarios</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous" />
+    <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+    <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/report.css") ?>" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Reporte de Usuarios</h1>
+    <header class="container-fluid header p-3 mb-5">
+        <nav class="nav-header container">
+            <div class="d-flex align-items-center logo-container w-100 justify-content-between">
+                <img
+                    src="<?= base_url('img/escudo.webp') ?>"
+                    alt="Logo"
+                    class="nav-logo img-fluid" />
+                <div class="links-container">
+                    <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Asistencia
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <p class="dropdown-item"><strong class="me-3">Asistieron:</strong> <?= $asistencia_si ?></p>
+                                    </li>
+                                    <li>
+                                        <p class="dropdown-item"><strong class="me-3">No asistieron:</strong> <?= $asistencia_no ?></p>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('viewReportController/generar_excel/' . $id_rendicion) ?>" class="btn btn-success text-center w-100">
+                                            Descargar Excel <i class="fa-solid fa-file-excel" style="margin-left: .6rem;"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container my-4">
+        <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte de Usuarios</h1>
         <div class="row">
             <div class="col-12 mb-4">
-                <h3>Asistencia</h3>
-                <p><strong>Asistieron:</strong> <?= $asistencia_si ?></p>
-                <p><strong>No asistieron:</strong> <?= $asistencia_no ?></p>
-                <a href="<?= base_url('viewReportController/generar_excel/' . $id_rendicion) ?>" class="btn btn-success">Descargar Excel</a>
-            </div>
-            <div class="col-12 mb-4">
-                <table class="table table-bordered">
+                <table class="table text-center table-ejes">
                     <thead>
                         <tr>
                             <th>DNI</th>
@@ -72,6 +114,7 @@
         <?php endif; ?>
         </div>
     </div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
