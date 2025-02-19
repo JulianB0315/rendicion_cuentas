@@ -6,6 +6,12 @@ use App\Models\UsuarioModel;
 use App\Models\PreguntaModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
+use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
+use PhpOffice\PhpSpreadsheet\Chart\Chart;
+use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
+use PhpOffice\PhpSpreadsheet\Chart\Title;
 
 class viewReportController extends BaseController
 {
@@ -23,24 +29,24 @@ class viewReportController extends BaseController
     }
     public function generar_excel($id_rendicion)
     {
-        // Obtener usuarios y estadísticas usando condiciones compuestas
+        set_time_limit(0);
+        ini_set('memory_limit', '512M');
+
+        // Obtener usuarios y estadísticas
         $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->findAll();
         $asistencia_si = $this->UsuarioModel->where(['id_rendicion' => $id_rendicion, 'asistencia' => 'si'])->countAllResults();
         $asistencia_no = $this->UsuarioModel->where(['id_rendicion' => $id_rendicion, 'asistencia' => 'no'])->countAllResults();
         $sexo_m = $this->UsuarioModel->where(['id_rendicion' => $id_rendicion, 'sexo' => 'm'])->countAllResults();
         $sexo_f = $this->UsuarioModel->where(['id_rendicion' => $id_rendicion, 'sexo' => 'f'])->countAllResults();
 
-        // Agregar preguntas a cada usuario (sin modificar por referencia)
         foreach ($usuarios as $key => $usuario) {
             $usuarios[$key]['preguntas'] = $this->PreguntaModel->where('id_usuario', $usuario['id_usuario'])->findAll();
         }
 
-        // Inicializar la hoja de cálculo
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setTitle('Reporte de Usuarios');
 
-        // Encabezados de la tabla
         $headers = [
             'A1' => 'DNI',
             'B1' => 'Nombre',
@@ -57,17 +63,18 @@ class viewReportController extends BaseController
             $sheet->setCellValue($cell, $text);
         }
 
-        // Aplicar estilo a los encabezados
         $headerStyle = [
-            'font' => ['bold' => true, 'color' => ['argb' => 'FFFFFFFF']],
+            'font' => [
+                'bold'  => true,
+                'color' => ['argb' => 'FFFFFFFF'],
+            ],
             'fill' => [
-                'fillType'   => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'startColor' => ['argb' => 'FF4CAF50']
+                'fillType'   => Fill::FILL_SOLID,
+                'startColor' => ['argb' => 'FF4CAF50'],
             ],
         ];
         $sheet->getStyle('A1:I1')->applyFromArray($headerStyle);
 
-        // Rellenar datos de los usuarios
         $row = 2;
         foreach ($usuarios as $usuario) {
             $sheet->setCellValue('A' . $row, $usuario['DNI']);
@@ -79,7 +86,7 @@ class viewReportController extends BaseController
             $sheet->setCellValue('G' . $row, $usuario['nombre_empresa']);
             $sheet->setCellValue('H' . $row, $usuario['asistencia']);
 
-            // Concatenar preguntas, usando salto de línea y activando el ajuste de texto
+            // Concatenar las preguntas del usuario
             $preguntas = '';
             if (!empty($usuario['preguntas'])) {
                 foreach ($usuario['preguntas'] as $pregunta) {
@@ -89,16 +96,17 @@ class viewReportController extends BaseController
                 $preguntas = 'No hay preguntas para este usuario.';
             }
             $sheet->setCellValue('I' . $row, $preguntas);
+            // Activar ajuste de texto para visualizar correctamente los saltos de línea
             $sheet->getStyle('I' . $row)->getAlignment()->setWrapText(true);
             $row++;
         }
 
-        // Autoajustar ancho de columnas
+        // Autoajustar el ancho de las columnas A a I
         foreach (range('A', 'I') as $columnID) {
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
-        // Agregar estadísticas en columnas K y L
+        // Agregar estadísticas en las columnas K y L
         $sheet->setCellValue('K1', 'Estadísticas');
         $sheet->setCellValue('K2', 'Asistencia Sí');
         $sheet->setCellValue('L2', $asistencia_si);
@@ -109,73 +117,73 @@ class viewReportController extends BaseController
         $sheet->setCellValue('K5', 'Sexo Femenino');
         $sheet->setCellValue('L5', $sexo_f);
 
-        // Crear gráfico de asistencia (gráfico circular)
+        /* ----- GRÁFICO DE ASISTENCIA ----- */
         $dataSeriesLabels = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$2', null, 1),
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$3', null, 1),
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$2", null, 1),
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$3", null, 1),
         ];
         $xAxisTickValues = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$2:$K$3', null, 2),
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$2:\$K\$3", null, 2),
         ];
         $dataSeriesValues = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('Number', 'Reporte de Usuarios!$L$2:$L$3', null, 2),
+            new DataSeriesValues('Number', "'Reporte de Usuarios'!\$L\$2:\$L\$3", null, 2),
         ];
-
-        $series = new \PhpOffice\PhpSpreadsheet\Chart\DataSeries(
-            \PhpOffice\PhpSpreadsheet\Chart\DataSeries::TYPE_PIECHART,
+        $series = new DataSeries(
+            DataSeries::TYPE_PIECHART,
             null,
             range(0, count($dataSeriesValues) - 1),
             $dataSeriesLabels,
             $xAxisTickValues,
             $dataSeriesValues
         );
-
-        $chart1 = new \PhpOffice\PhpSpreadsheet\Chart\Chart(
+        $plotArea = new PlotArea(null, [$series]);
+        $chartTitle = new Title('Asistencia');
+        $chart1 = new Chart(
             'chart1',
-            new \PhpOffice\PhpSpreadsheet\Chart\Title('Asistencia'),
+            $chartTitle,
             null,
-            new \PhpOffice\PhpSpreadsheet\Chart\PlotArea(null, [$series])
+            $plotArea
         );
         $chart1->setTopLeftPosition('K7');
         $chart1->setBottomRightPosition('P20');
         $sheet->addChart($chart1);
 
-        // Crear gráfico de sexo (gráfico circular)
-        $dataSeriesLabels = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$4', null, 1),
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$5', null, 1),
+        /* ----- GRÁFICO DE SEXO ----- */
+        $dataSeriesLabels2 = [
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$4", null, 1),
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$5", null, 1),
         ];
-        $xAxisTickValues = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('String', 'Reporte de Usuarios!$K$4:$K$5', null, 2),
+        $xAxisTickValues2 = [
+            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$4:\$K\$5", null, 2),
         ];
-        $dataSeriesValues = [
-            new \PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues('Number', 'Reporte de Usuarios!$L$4:$L$5', null, 2),
+        $dataSeriesValues2 = [
+            new DataSeriesValues('Number', "'Reporte de Usuarios'!\$L\$4:\$L\$5", null, 2),
         ];
-
-        $series = new \PhpOffice\PhpSpreadsheet\Chart\DataSeries(
-            \PhpOffice\PhpSpreadsheet\Chart\DataSeries::TYPE_PIECHART,
+        $series2 = new DataSeries(
+            DataSeries::TYPE_PIECHART,
             null,
-            range(0, count($dataSeriesValues) - 1),
-            $dataSeriesLabels,
-            $xAxisTickValues,
-            $dataSeriesValues
+            range(0, count($dataSeriesValues2) - 1),
+            $dataSeriesLabels2,
+            $xAxisTickValues2,
+            $dataSeriesValues2
         );
-
-        $chart2 = new \PhpOffice\PhpSpreadsheet\Chart\Chart(
+        $plotArea2 = new PlotArea(null, [$series2]);
+        $chartTitle2 = new Title('Sexo');
+        $chart2 = new Chart(
             'chart2',
-            new \PhpOffice\PhpSpreadsheet\Chart\Title('Sexo'),
+            $chartTitle2,
             null,
-            new \PhpOffice\PhpSpreadsheet\Chart\PlotArea(null, [$series])
+            $plotArea2
         );
         $chart2->setTopLeftPosition('K21');
         $chart2->setBottomRightPosition('P34');
         $sheet->addChart($chart2);
 
-        // Preparar y enviar el archivo Excel con gráficos
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        // Preparar y enviar el archivo Excel con gráficos incluidos
+        $writer = new Xlsx($spreadsheet);
         $writer->setIncludeCharts(true);
 
-        // Generar nombre de archivo único usando fecha y hora
+        // Generar un nombre de archivo único usando fecha y hora
         $filename = 'reporte_usuarios_' . $id_rendicion . '_' . date('Ymd_His') . '.xlsx';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
