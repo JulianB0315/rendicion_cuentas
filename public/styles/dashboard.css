@@ -88,7 +88,7 @@
 .conferences-list > li:hover {
 	transform: scale(1.1);
 }
-.conferences-list > li > a {
+.btn-conference {
 	color: var(--white);
 	text-decoration: none;
 	background-color: var(--tertiary-color);
@@ -96,7 +96,7 @@
 	padding: .8rem 1.2rem;
 	font-size: 1.5rem;
 }
-.conferences-list > li > a:hover {
+.btn-conference:hover {
 	background-color: var(--primary-color);
 	transform: scale(1.1);
 }
