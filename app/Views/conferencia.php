@@ -72,7 +72,11 @@
                         <td><?=$eje['tematica']?></td>
                         <td>Descripción del eje <?=$eje['tematica']?></td>
                         <td>
-                            <button class="btn btn-primary btn-preguntas" data-id="<?=$eje['id_eje']?>">
+                            <button class="btn btn-primary btn-preguntas" 
+                            data-id-eje="<?=$eje['id_eje']?>"
+                            data-id-rendicion="<?=$id_rendicion ?>"
+                            data-tematica="<?=$eje['tematica']?>"
+                            >
                                 Ver Preguntas
                             </button>
                         </td>
@@ -83,30 +87,13 @@
         <div class="modal-pregunta" id="modal-pregunta">
             <div class="modal-content" id="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Preguntas Eje xxxx</h5>
+                    <h5 class="modal-title">Preguntas Eje: <span id="eje-titulo"></span></h5>
                     <button class=" close" id="btn-close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul class="modal-list">
-                        <!-- Traer de la DB -->
-                        <li>
-                            <h6>Pregunta 1</h6>
-                            <p>Descripción de la pregunta 1</p>
-                        </li>
-                        <li>
-                            <h6>Pregunta 2</h6>
-                            <p>Descripción de la pregunta 2</p>
-                        </li>
-                        <li>
-                            <h6>Pregunta 3</h6>
-                            <p>Descripción de la pregunta 3</p>
-                        </li>
-                        <li>
-                            <h6>Pregunta 4</h6>
-                            <p>Descripción de la pregunta 4</p>
-                        </li>
+                    <ul class="modal-list" id="preguntas-list">
                     </ul>
                 </div>
             </div>
