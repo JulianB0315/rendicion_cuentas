@@ -29,7 +29,7 @@ $routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');
 $routes->get('report', 'ReportController::mostrar_rendiciones');
 $routes->post('mostrar_reporte/(:alphanum)', 'ReportController::mostrar_reporte/$1');
 //Rutas de viewReport
-
+$routes->get('viewReportController/generar_excel/(:alphanum)', 'viewReportController::generar_excel/$1');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');

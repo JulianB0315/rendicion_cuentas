@@ -21,6 +21,7 @@
                 <h3>Asistencia</h3>
                 <p><strong>Asistieron:</strong> <?= $asistencia_si ?></p>
                 <p><strong>No asistieron:</strong> <?= $asistencia_no ?></p>
+                <a href="<?= base_url('viewReportController/generar_excel/' . $id_rendicion) ?>" class="btn btn-success">Descargar Excel</a>
             </div>
             <div class="col-12 mb-4">
                 <table class="table table-bordered">
