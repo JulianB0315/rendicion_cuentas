@@ -43,7 +43,8 @@ class ReportController extends BaseController
         return view('viewReport', [
             'usuarios' => $usuarios,
             'asistencia_si' => $asistencia_si,
-            'asistencia_no' => $asistencia_no
+            'asistencia_no' => $asistencia_no,
+            'id_rendicion' => $id_rendicion
         ]);
     }
 }
