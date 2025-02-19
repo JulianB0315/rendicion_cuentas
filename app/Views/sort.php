@@ -28,52 +28,47 @@
         </nav>
     </header>
     <div class="container mt-5">
-        <h1 class="animate__animated animate__fadeInDown header-title text-center">Sorteo de Preguntas - <?= $eje['tematica'] ?></h1>
-        <!-- aqui iba el formulario innecesario xd -->
+        <h1 class="text-center">Sorteo de Preguntas - <?= esc($eje['tematica']) ?></h1>
 
-        <?php if (isset($preguntas) && !empty($preguntas)): ?>
-            <div class="mt-5">
-                <h2 class="header-subtitle">Preguntas</h2>
-                <form action="<?= base_url('procesar_seleccion') ?>" method="post" id="form-preguntas">
-                    <input type="hidden" name="id_eje_seleccionado" value="<?= $id_eje_seleccionado ?>">
-                    <table class="table text-center table-ejes">
-                        <thead>
-                            <tr>
-                                <th>Pregunta</th>
-                                <th class="text-center">Selección</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- TODO: ARREGLAR QUE LOS CHECKBOX NO SE PUEDEN MARCAR COMO CHECK LOL -->
-                            <?php foreach ($preguntas as $pregunta): ?>
-                                <tr>
-                                    <td><?= $pregunta['contenido'] ?></td>
-                                    <td class="text-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input"
-                                                type="checkbox"
-                                                name="preguntas_seleccionadas[]"
-                                                value="<?= $pregunta['id_pregunta'] ?>"
-                                                id="pregunta_<?= $pregunta['id_pregunta'] ?>">
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-form">
-                            Guardar Selección
-                        </button>
+        <?php if (!empty($preguntas)): ?>
+            <form action="<?= base_url('procesar_seleccion') ?>" method="post" id="form-preguntas">
+                <input type="hidden" name="id_eje_seleccionado" value="<?= esc($id_eje_seleccionado) ?>">
+                <input type="hidden" name="id_rendicion" value="<?= esc($id_rendicion) ?>">
+
+                <div class="d-flex font-weight-bold border-bottom pb-2">
+                    <div class="col">Nombre</div>
+                    <div class="col">DNI</div>
+                    <div class="col">RUC</div>
+                    <div class="col">Organización</div>
+                    <div class="col">Pregunta</div>
+                    <div class="col">Seleccionar</div>
+                </div>
+
+                <?php foreach ($preguntas as $pregunta): ?>
+                    <div class="d-flex align-items-center border-bottom py-2">
+                        <div class="col"><?= esc($pregunta['nombres']) ?></div>
+                        <div class="col"><?= esc($pregunta['DNI']) ?></div>
+                        <div class="col"><?= esc($pregunta['ruc_empresa']) ?></div>
+                        <div class="col"><?= esc($pregunta['nombre_empresa']) ?></div>
+                        <div class="col"><?= esc($pregunta['contenido']) ?></div>
+                        <div class="col">
+                            <input type="checkbox"
+                                name="preguntas_seleccionadas[]"
+                                value="<?= esc($pregunta['id_pregunta']) ?>"
+                                id="pregunta_<?= esc($pregunta['id_pregunta']) ?>">
+                        </div>
                     </div>
-                </form>
-            </div>
+                <?php endforeach; ?>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Guardar Selección</button>
+                </div>
+            </form>
         <?php else: ?>
-            <div class="alert alert-warning mt-5">
-                No se encontraron preguntas para este eje.
-            </div>
+            <div class="alert alert-warning">No se encontraron preguntas para este eje y rendición.</div>
         <?php endif; ?>
     </div>
+
 </body>
 
 </html>
