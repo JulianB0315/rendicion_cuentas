@@ -32,7 +32,7 @@ label{
 }
 .form-select option {
     padding: 1em;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     color: var(--gray);
     background-color: var(--white);
 }
@@ -52,6 +52,14 @@ label{
 .form-select option[value=""][disabled] {
     color: var(--gray-light);
 }
+.form-select optgroup {
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: #f8f9fa;
+    font-size: clamp(1.1rem, 2.1vw, 1.3rem);
+}
+
+
 .list-group {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border-radius: 8px;

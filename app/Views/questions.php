@@ -39,7 +39,7 @@
     </header>
     <div class="container my-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
-            <h1 class="animate__animated animate__fadeInDown header-title text-center">Sorteo de preguntas</h1>
+            <h1 class="animate__animated animate__fadeInDown header-title text-center">Seleccionar preguntas</h1>
             <div class="col-md-6 col-sm-12 p-4">
                 <form action="<?= base_url('questions/buscar_rendecion_admin') ?>" method="post" class="mt-2">
                     <div class="form-group">
@@ -49,9 +49,20 @@
                                 Seleccione una fecha de rendición
                             </option>
                             <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                                <?php foreach ($rendiciones as $rendicion): ?>
-                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?=formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
-                                <?php endforeach; ?>
+                                <?php 
+                                    $rendicionesPerYear = [];
+                                    foreach ($rendiciones as $rendicion) {
+                                        $year = date('Y', strtotime($rendicion['fecha']));
+                                        $rendicionesPerYear[$year][] = $rendicion;
+                                    }
+                                    krsort($rendicionesPerYear);
+                                    foreach ($rendicionesPerYear as $year => $rendiciones): ?>
+                                        <optgroup label="<?= $year ?>">
+                                            <?php foreach ($rendiciones as $rendicion): ?>
+                                                <option value="<?= $rendicion['id_rendicion'] ?>"><?=formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                            <?php endforeach; ?>
+                                        </optgroup>
+                                    <?php endforeach?>
                             <?php else: ?>
                                 <option value="">No hay rendiciones disponibles</option>
                             <?php endif; ?>
