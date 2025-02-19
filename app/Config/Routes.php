@@ -17,6 +17,12 @@ $routes->post('crear_rendicion', 'adminController::crear_rendicion');
 $routes->get('questions', 'QuestionsController::cargar_fechas');
 $routes->post('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
 $routes->post('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
+//Rutas Sort
+$routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
+//Rutas de mostrar preguntas seleccionadas
+$routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
+$routes->post('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
+$routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
