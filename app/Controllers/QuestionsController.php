@@ -7,6 +7,7 @@ use App\Models\PreguntaModel;
 use App\Models\RendicionModel;
 use App\Models\EjeModel;
 use App\Models\UsuarioModel;
+use App\Models\Preguntas_seleccionadasModel;
 
 class QuestionsController extends BaseController
 {
@@ -15,6 +16,7 @@ class QuestionsController extends BaseController
     private $RendicionModel;
     private $EjeModel;
     private $UsuarioModel;
+    private $Preguntas_seleccionadasModel;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class QuestionsController extends BaseController
         $this->RendicionModel = new RendicionModel();
         $this->EjeModel = new EjeModel();
         $this->UsuarioModel = new UsuarioModel();
+        $this->Preguntas_seleccionadasModel = new Preguntas_seleccionadasModel();
     }
 
     public function cargar_fechas()
@@ -73,11 +76,18 @@ class QuestionsController extends BaseController
 
         $id_rendicion = $eje_seleccionado['id_rendicion'];
 
+        // 
+        $preguntas_seleccionadas = $this->Preguntas_seleccionadasModel
+            ->where('id_eje_seleccionado', $id_eje_seleccionado)
+            ->findAll();
+        $ids_seleccionados = array_column($preguntas_seleccionadas, 'id_pregunta');
+
         return view('sort', [
             'eje'                 => $eje,
             'preguntas'           => $preguntas,
             'id_eje_seleccionado' => $id_eje_seleccionado,
-            'id_rendicion'        => $id_rendicion
+            'id_rendicion'        => $id_rendicion,
+            'ids_seleccionados'   => $ids_seleccionados
         ]);
     }
 }

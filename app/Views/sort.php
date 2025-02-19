@@ -64,10 +64,9 @@
                                             type="checkbox"
                                             name="preguntas_seleccionadas[]"
                                             value="<?= esc($pregunta['id_pregunta']) ?>"
-                                            id="pregunta_<?= esc($pregunta['id_pregunta']) ?>">
-                                        <label class="form-check-label"
-                                            for="pregunta_<?= esc($pregunta['id_pregunta']) ?>">
-                                        </label>
+                                            id="pregunta_<?= esc($pregunta['id_pregunta']) ?>"
+                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>
+                                        >
                                     </div>
                                 </td>
                             </tr>
