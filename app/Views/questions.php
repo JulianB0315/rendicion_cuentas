@@ -45,9 +45,12 @@
                     <div class="form-group">
                         <label for="id_rendicion">Fecha de la Rendición:</label>
                         <select class="form-select" id="id_rendicion" name="id_rendicion" required>
+                            <option value="" disabled selected>
+                                Seleccione una fecha de rendición
+                            </option>
                             <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
                                 <?php foreach ($rendiciones as $rendicion): ?>
-                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?= $rendicion['fecha'] ?></option>
+                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?=formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <option value="">No hay rendiciones disponibles</option>
@@ -68,7 +71,7 @@
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
-                                <form action="<?=base_url('sorteo_preguntas/'.$eje['id_eje_seleccionado']) ?>" method="post">
+                                <form action="<?= base_url('sorteo_preguntas/' . $eje['id_eje_seleccionado']) ?>" method="post">
                                     <span class="eje-info">
                                         <?= $eje['tematica'] ?>
                                         <small class="text-muted">

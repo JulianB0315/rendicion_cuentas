@@ -208,7 +208,7 @@
 									class="form-part form-select"
 								>
 									<option value="" disabled selected>
-										Seleccione un EJE Tematico
+										Seleccione un Eje Tematico
 									</option>
 									<?php foreach ($ejes as $eje): ?>
 										<option value="<?= $eje['id_eje'] ?>"><?= $eje['tematica'] ?></option>
