@@ -38,8 +38,6 @@ class ConferenciaController extends BaseController
                 ->where('YEAR(fecha)', $year)
                 ->orderBy('fecha', 'ASC')
                 ->findAll();
-
-            // Si hay rendiciones, determinar si es la primera o segunda
             if (!empty($rendiciones_del_año)) {
                 $number = ($rendiciones_del_año[0]['id_rendicion'] == $id) ? 'I' : 'II';
             }
