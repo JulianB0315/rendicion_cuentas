@@ -94,6 +94,7 @@
                                     <td><?= esc($usuario['asistencia']) ?></td>
                                     <td><?php if (!empty($usuario['preguntas'])): ?>
                                             <?php foreach ($usuario['preguntas'] as $pregunta): ?>
+                                                <!-- TODO: hacer que esto sea un boton que despliegue la pregunta en un modal o un div -->
                                                 <li><?= esc($pregunta['contenido']) ?></li>
                                             <?php endforeach; ?>
                                         <?php else: ?>
