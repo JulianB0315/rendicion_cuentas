@@ -49,9 +49,20 @@
                                 Seleccione una fecha de rendición
                             </option>
                             <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                                <?php foreach ($rendiciones as $rendicion): ?>
-                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?=formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
-                                <?php endforeach; ?>
+                                <?php
+                                $rendicionesPerYear = [];
+                                foreach ($rendiciones as $rendicion) {
+                                    $year = date('Y', strtotime($rendicion['fecha']));
+                                    $rendicionesPerYear[$year][] = $rendicion;
+                                }
+                                krsort($rendicionesPerYear);
+                                foreach ($rendicionesPerYear as $year => $rendiciones): ?>
+                                    <optgroup label="<?= $year ?>">
+                                        <?php foreach ($rendiciones as $rendicion): ?>
+                                            <option value="<?= $rendicion['id_rendicion'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
+                                <?php endforeach ?>
                             <?php else: ?>
                                 <option value="">No hay rendiciones disponibles</option>
                             <?php endif; ?>
