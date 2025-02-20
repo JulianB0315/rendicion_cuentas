@@ -48,7 +48,7 @@ class adminController extends BaseController
         } while ($existe);
         return $id;
     }
-    
+
     public function buscar_eje()
     {
         $data['ejes'] = $this->EjeModel->findAll();
@@ -72,6 +72,7 @@ class adminController extends BaseController
             ];
             $this->Ejes_SeleccionadosModel->insert($data_ejes_seleccionados);
         }
+        session()->setFlashdata('success', 'Rendición creada correctamente');
         return redirect()->to('/admin');
     }
     public function crear_eje()
@@ -82,6 +83,7 @@ class adminController extends BaseController
         ];
 
         $this->EjeModel->insert($data_eje);
+        session()->setFlashdata('success', 'Eje creado correctamente');
         return redirect()->to('/admin');
     }
 }
