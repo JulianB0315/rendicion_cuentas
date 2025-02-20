@@ -73,6 +73,16 @@ class FormController extends BaseController
 
     public function procesar_formulario()
     {
+        $dni = $this->request->getPost('dni');
+        $id_rendicion = $this->request->getPost('id_rendicion');
+        $usuario_existente = $this->UsuarioModel
+            ->where('DNI', $dni)
+            ->where('id_rendicion', $id_rendicion)
+            ->first();
+
+        if ($usuario_existente) {
+            return redirect()->back()->with('error', 'El usuario con este DNI ya está registrado en la rendición actual');
+        }
         $id_rendicion = $this->request->getPost('id_rendicion');
         $rendicion = $this->RendicionModel->find($id_rendicion);
         $fecha_conferencia = $rendicion['fecha'];
@@ -126,11 +136,15 @@ class FormController extends BaseController
             ->where('id_rendicion', $id_rendicion)
             ->first();
 
-        if ($eje_seleccionado) {
-            $this->Ejes_SeleccionadosModel->update($eje_seleccionado['id_eje_seleccionado'], ['cantidad_preguntas' => $eje_seleccionado['cantidad_preguntas'] + 1]);
-            return redirect()->to('/form')->with('success', 'Registro completado correctamente');
+        if ($this->request->getPost('id_eje')) {
+            if ($eje_seleccionado) {
+                $this->Ejes_SeleccionadosModel->update($eje_seleccionado['id_eje_seleccionado'], ['cantidad_preguntas' => $eje_seleccionado['cantidad_preguntas'] + 1]);
+                return redirect()->to('/form')->with('success', 'Registro completado correctamente');
+            } else {
+                echo "No se encontró el eje seleccionado para actualizar la cantidad";
+            }
         } else {
-            echo "No se encontró el eje seleccionado para actualizar la cantidad";
+            return redirect()->to('/form')->with('success', 'Registro completado correctamente');
         }
     }
 }
