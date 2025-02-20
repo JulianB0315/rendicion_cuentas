@@ -21,7 +21,6 @@
 .table-ejes th, .table-ejes td {
     border: 1px solid var(--gray-light);
     padding: 1em;
-    text-align: left;
 }
 
 .table-ejes th {
@@ -40,6 +39,9 @@
 .table-ejes tr:hover {
     background-color: var(--hover-color);
     color: var(--white);
+}
+.table-ejes tr:hover .pregunta-content {
+    color: var(--secondary-color);
 }
 .table-ejes tr td{
     font-family: var(--font);

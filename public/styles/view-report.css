@@ -1,0 +1,31 @@
+.table td.pregunta-container {
+    position: relative;
+    text-align: center;
+}
+.pregunta-content {
+    display: none;
+    position: absolute;
+    left: 50%;
+    /* top: 120%; */
+    transform: translateX(-50%);
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: max-content; /* Se ajusta al contenido */
+    min-width: 200px;
+    max-width: min(300px, 90vw); /* El menor entre 300px o 90% del viewport */
+    white-space: normal;
+    word-wrap: break-word;
+}
+.pregunta-content::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-bottom-color: var(--white);
+}
+

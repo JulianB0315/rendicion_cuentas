@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/view-report.css') ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -92,10 +93,15 @@
                                     <td><?= esc($usuario['ruc_empresa']) ?></td>
                                     <td><?= esc($usuario['nombre_empresa']) ?></td>
                                     <td><?= esc($usuario['asistencia']) ?></td>
-                                    <td><?php if (!empty($usuario['preguntas'])): ?>
+                                    <td class="pregunta-container"><?php if (!empty($usuario['preguntas'])): ?>
                                             <?php foreach ($usuario['preguntas'] as $pregunta): ?>
                                                 <!-- TODO: hacer que esto sea un boton que despliegue la pregunta en un modal o un div -->
-                                                <li><?= esc($pregunta['contenido']) ?></li>
+                                                <button class="btn btn-form btn-pregunta" data-pregunta="<?=esc($pregunta['contenido'])?>">
+                                                    Ver Pregunta
+                                                </button>
+                                                <div class="pregunta-content">
+                                                    <?= esc($pregunta['contenido']) ?>
+                                                </div>
                                             <?php endforeach; ?>
                                         <?php else: ?>
                                             <li>No hay preguntas para este usuario.</li>
@@ -116,6 +122,7 @@
         </div>
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="<?= base_url('js/viewReport.js') ?>"></script>
 </body>
 
 </html>
