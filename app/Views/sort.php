@@ -32,7 +32,7 @@
         </nav>
     </header>
     <div class="container">
-        <h1 class="animate__animated animate__fadeInDown header-title mb-5 text-center">Sorteo de Preguntas - <?= esc($eje['tematica']) ?></h1>
+        <h1 class="animate__animated animate__fadeInDown header-title mb-5 text-center">Selección de Preguntas - <?= esc($eje['tematica']) ?></h1>
 
         <?php if (!empty($preguntas)): ?>
             <form action="<?= base_url('procesar_seleccion') ?>" method="post" id="form-preguntas">
