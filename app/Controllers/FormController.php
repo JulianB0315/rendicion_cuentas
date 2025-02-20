@@ -95,9 +95,7 @@ class FormController extends BaseController
         ];
 
         if (!$this->UsuarioModel->insert($data_user)) {
-            echo "Error en la inserción del usuario";
-            print_r($this->UsuarioModel->errors());
-            return;
+            return redirect()->back()->with('error', 'Error al registrar al usuario');
         }
 
         $pregunta = $this->request->getPost('pregunta');
@@ -130,9 +128,9 @@ class FormController extends BaseController
 
         if ($eje_seleccionado) {
             $this->Ejes_SeleccionadosModel->update($eje_seleccionado['id_eje_seleccionado'], ['cantidad_preguntas' => $eje_seleccionado['cantidad_preguntas'] + 1]);
+            return redirect()->to('/form')->with('success', 'Registro completado correctamente');
         } else {
             echo "No se encontró el eje seleccionado para actualizar la cantidad";
         }
-        return redirect()->to('/form')->with('message', 'Formulario procesado correctamente');
     }
 }

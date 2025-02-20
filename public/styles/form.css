@@ -97,13 +97,29 @@ label{
 .form-select option[value=""][disabled] {
     color: var(--gray-light);
 }
+.alert{
+    position: absolute;
+    width: 400px;
+    height: 70px;
+    bottom: 0;
+    right: 1rem;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
 
 
 @media (max-width: 768px) {
-	.logo-container{
+    .logo-container{
         justify-content: center;
     }
     .main{
         width: 80%;
+    }
+    .alert{
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+        right: 0;
+        margin: 1rem 0;
     }
 }
