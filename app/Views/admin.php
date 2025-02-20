@@ -69,7 +69,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-12 mb-4">
 				<form action="<?= base_url('/crear_rendicion') ?>" method="post" class="form-container">
-					<h4>Registrar conferencia</h4>
+					<h4>Registrar rendición</h4>
 					<div class="mb-3 form-group text">
 						<input
 							type="date"
@@ -81,7 +81,7 @@
 						<label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
 					</div>
 					<div class="" id="select-eje-container">
-						<h4 class="mt-4 mb-3">Seleccionar ejes para la conferencia</h4>
+						<h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
 						<div id="ejes">
 							<?php foreach ($ejes as $eje): ?>
 								<div class="form-check">
@@ -100,7 +100,7 @@
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<button type="submit" class="btn-form" id="btn-crear-rendicion">Registrar conferencia</button>
+					<button type="submit" class="btn-form" id="btn-crear-rendicion">Registrar rendición</button>
 				</form>
 			</div>
 			<div class="col-md-6 col-sm-12">

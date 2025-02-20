@@ -41,8 +41,7 @@
     </header>
     <section class="text-center mt-3">
 		<h1 class="animate__animated animate__fadeInDown header-title mb-4">
-			<!-- TODO: esto debe obtenerse de la DB -->
-            Conferencia <?=$number?> <?=$year?>
+            Rendición <?=$number?> <?=$year?>
 		</h1>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             <!-- Traer de la DB -->

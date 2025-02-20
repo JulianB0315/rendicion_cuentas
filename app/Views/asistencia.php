@@ -30,7 +30,7 @@
     </header>
     <section class="text-center my-4">
         <h2 class="animate__animated animate__fadeInDown header-title">
-            Conferencia <?= $number ?> <?= $year ?>
+            Rendición <?= $number ?> <?= $year ?>
         </h2>
         <p class="animate__animated animate__fadeInUp header-date">
             Fecha: <?= formatear_fecha_esp(esc($fecha)) ?>

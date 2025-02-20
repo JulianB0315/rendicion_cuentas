@@ -156,9 +156,9 @@
 					</div>
 				</div>
 				<div class="col-12 py-3 px-5 conferences-section mt-3">
-					<h2 class="text-center my-2 fs-1 titles">Conferencias</h2>
+					<h2 class="text-center my-2 fs-1 titles">Rendiciones de Cuentas</h2>
 					<p class="fs-4 text-center">
-						Las fechas de nuestras conferencias este año:
+						Las fechas de nuestras rendiciones de cuentas este año:
 					</p>
 					<div class="container mt-4">
 						<ul
