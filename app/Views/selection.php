@@ -67,13 +67,14 @@
                     </tbody>
                 </table>
                 <div class="text-center my-4">
-                    <button type="submit" class="btn btn-form">Borrar preguntas seleccionadas</button>
+                    <button type="submit" class="btn btn-form" id="submit-btn">Borrar preguntas seleccionadas</button>
                 </div>
         </form>
     <?php else: ?>
         <div class="alert alert-warning">No se encontraron preguntas seleccionadas para este eje y rendición.</div>
     <?php endif; ?>
     </div>
+    <script src="<?=base_url('js/deleteQuestions.js') ?>"></script>
 </body>
 
 </html>
