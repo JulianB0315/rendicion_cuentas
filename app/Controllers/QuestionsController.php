@@ -36,7 +36,7 @@ class QuestionsController extends BaseController
 
     public function buscar_rendecion_admin()
     {
-        $id_rendicion = $this->request->getPost('id_rendicion');
+        $id_rendicion = $this->request->getGet('id_rendicion');
 
         $ejes_seleccionados = $this->Ejes_SeleccionadosModel
             ->where('id_rendicion', $id_rendicion)

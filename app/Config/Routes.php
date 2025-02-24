@@ -15,7 +15,7 @@ $routes->post('crear_eje', 'adminController::crear_eje');
 $routes->post('crear_rendicion', 'adminController::crear_rendicion');
 //Rutas Question
 $routes->get('questions', 'QuestionsController::cargar_fechas');
-$routes->post('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
+$routes->get('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
 $routes->post('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
 //Rutas Sort
 $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
@@ -27,7 +27,7 @@ $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsContr
 $routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');
 //Rutas de report
 $routes->get('report', 'ReportController::mostrar_rendiciones');
-$routes->post('mostrar_reporte/(:alphanum)', 'ReportController::mostrar_reporte/$1');
+$routes->get('mostrar_reporte/(:alphanum)', 'ReportController::mostrar_reporte/$1');
 //Rutas de viewReport
 $routes->get('viewReportController/generar_excel/(:alphanum)', 'viewReportController::generar_excel/$1');
 //Rutas de api
