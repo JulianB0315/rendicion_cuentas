@@ -32,7 +32,7 @@
 		</header>
 		<section class="text-center my-4">
 			<h2 class="animate__animated animate__fadeInDown header-title">
-				Rendición de Cuentas - <?= formatear_fecha_esp(esc($fecha_rendicion), 'Y')  ?>
+				Rendición de Cuentas <?=$number?> - <?= formatear_fecha_esp(esc($fecha_rendicion), 'Y')  ?>
 			</h2>
 			<p class="animate__animated animate__fadeInUp header-date">
 				Fecha: <?=formatear_fecha_esp(esc($fecha_rendicion)) ?>

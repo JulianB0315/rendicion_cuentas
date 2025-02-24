@@ -42,11 +42,23 @@ class FormController extends BaseController
     }
     public function buscar_rendicion()
     {
+        $number = '';
+        $year = date('Y');
         $fecha = date('Y-m-d', strtotime('now -5 hours'));
         $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
             ->where('fecha >=', $fecha)
             ->orderBy('fecha', 'ASC')
             ->first();
+        if (date('Y', strtotime($rendicion['fecha'])) == $year) {
+            $rendiciones_del_año = $this->RendicionModel
+                ->select('id_rendicion, fecha')
+                ->where('YEAR(fecha)', $year)
+                ->orderBy('fecha', 'ASC')
+                ->findAll();
+            if (!empty($rendiciones_del_año)) {
+                $number = ($rendiciones_del_año[0]['id_rendicion'] == $rendicion['id_rendicion']) ? 'I' : 'II';
+            }
+        }
 
         if ($rendicion) {
             $fecha_rendicion = $rendicion['fecha'];
@@ -64,7 +76,12 @@ class FormController extends BaseController
                     $ejes[] = $eje_data;
                 }
             }
-            return view('form', ['ejes' => $ejes, 'id_rendicion' => $rendicion['id_rendicion'], 'fecha_rendicion' => $fecha_rendicion]);
+            return view('form', [
+                'ejes' => $ejes, 
+                'id_rendicion' => $rendicion['id_rendicion'], 
+                'fecha_rendicion' => $fecha_rendicion,
+                'number' => $number
+            ]);
         } else {
             echo "No se encontró la rendición";
             echo $fecha;
