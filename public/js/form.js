@@ -105,7 +105,18 @@ const buscarPersona = async () => {
 		const data = await response.json();
 
 		if (response.ok) {
-			const nombre = `${data.nombre_completo}`;
+			const persona = Array.isArray(data) ? data[0] : data;
+            if (!persona || !persona.nombres) {
+                errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
+                document.getElementById("nombre").value = "";
+                return;
+            }
+			const nombre = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
+			if (nombre === "undefined") {
+				errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
+				document.getElementById("nombre").value = "";
+				return;
+			}
 			document.getElementById("nombre").value = nombre;
 			nombresInfo.innerHTML =
 				"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
