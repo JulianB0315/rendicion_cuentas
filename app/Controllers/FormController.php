@@ -156,12 +156,12 @@ class FormController extends BaseController
         if ($this->request->getPost('id_eje')) {
             if ($eje_seleccionado) {
                 $this->Ejes_SeleccionadosModel->update($eje_seleccionado['id_eje_seleccionado'], ['cantidad_preguntas' => $eje_seleccionado['cantidad_preguntas'] + 1]);
-                return redirect()->to('/form')->with('success', 'Registro completado correctamente');
+                return redirect()->to('/')->with('success', 'Registro completado correctamente');
             } else {
                 echo "No se encontró el eje seleccionado para actualizar la cantidad";
             }
         } else {
-            return redirect()->to('/form')->with('success', 'Registro completado correctamente');
+            return redirect()->to('/')->with('success', 'Registro completado correctamente');
         }
     }
 }

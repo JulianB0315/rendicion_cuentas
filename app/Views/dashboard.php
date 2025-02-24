@@ -18,6 +18,8 @@
 		/>
 		<link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
 		<link rel="stylesheet" href="<?= base_url('styles/dashboard.css') ?>" />
+		<link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
+
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -202,6 +204,17 @@
 					</div>
 				</div>
 			</section>
+			<?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success">
+                    <?= session()->getFlashdata('success') ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+			<?php endif; ?>
 		</main>
 		<footer
 			class="container-fluid text-white"
@@ -288,6 +301,7 @@
 			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 			crossorigin="anonymous"
 		></script>
+		<script src="<?= base_url('js/dashboard.js') ?>"></script>
 		<!-- -->
 	</body>
 </html>
