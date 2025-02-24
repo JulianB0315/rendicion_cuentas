@@ -79,6 +79,29 @@
             <div class="row d-flex justify-content-center align-items-center flex-direction-column">
                 <h3 class="header-title text-center">Ejes de la Rendición</h3>
                 <div class="col-md-6 col-sm-12 p-4">
+                    <div class="accordion">
+                        <?php foreach ($ejes as $eje): ?>
+                            <div class="accordion-item" id="eje<?= $eje['id_eje_seleccionado'] ?>">
+                                <h2 class="accordion-header" id="heading<?= $eje['id_eje_seleccionado'] ?>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse<?= $eje['id_eje_seleccionado'] ?>"
+                                        aria-expanded="false" aria-controls="collapse<?= $eje['id_eje_seleccionado'] ?>">
+                                        <?= $eje['tematica'] ?>
+                                    </button>
+                                </h2>
+                                <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse"
+                                    aria-labelledby="heading<?= $eje['id_eje_seleccionado'] ?>" data-bs-parent="#eje<?= $eje['id_eje_seleccionado'] ?>">
+                                    <div class="accordion-body">
+                                        <strong>
+                                            Preguntas seleccionadas
+                                        </strong><br>
+                                        <!-- Aqui iran las preguntas -->
+                                         hola
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
@@ -98,8 +121,11 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
-            <?php endif; ?>
-            </div>
+    <?php endif; ?>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
