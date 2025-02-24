@@ -93,7 +93,7 @@
                                         <input type="hidden" name="id_eje_seleccionado"
                                             value="<?= $eje['id_eje_seleccionado'] ?>" />
                                         <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-random me-2"></i>Sortear
+                                            <i class="fas fa-random me-2"></i>Seleccionar
                                         </button>
                                     </div>
                                 </form>
