@@ -111,6 +111,10 @@ label{
     background-color: var(--secondary-color);
     transform: translateY(-2px);
 }
+.accordion-button:not(.collapsed){
+    background-color: var(--primary-color);
+    color: var(--white);
+}
 @media (max-width: 768px) {
 	.nav-logo {
 		height: 70px;

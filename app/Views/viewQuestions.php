@@ -96,13 +96,13 @@
                                             Preguntas seleccionadas
                                         </strong><br>
                                         <!-- Aqui iran las preguntas -->
-                                         hola
+                                        
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <ul class="list-group">
+                    <!-- <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
                                 <form action="<?= base_url('mostrar_preguntas_seleccionadas/' . $eje['id_eje_seleccionado']) ?>" method="post">
@@ -119,13 +119,13 @@
                                 </form>
                             </li>
                         <?php endforeach; ?>
-                    </ul>
+                    </ul> -->
                 </div>
-    <?php endif; ?>
-        </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <?php endif; ?>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
