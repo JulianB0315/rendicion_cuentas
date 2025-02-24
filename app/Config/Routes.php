@@ -16,7 +16,7 @@ $routes->post('crear_rendicion', 'adminController::crear_rendicion');
 //Rutas Question
 $routes->get('questions', 'QuestionsController::cargar_fechas');
 $routes->get('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
-$routes->post('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
+$routes->get('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
 //Rutas Sort
 $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
 //Rutas de mostrar preguntas seleccionadas
