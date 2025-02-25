@@ -52,7 +52,7 @@
             Fecha: <?= $fecha ?>
         </h5>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
-            Hora: xx:xx
+            Hora: <?= $hora_rendicion ?>
         </h5>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             Lugar: Auditorio Municipal MDJLO

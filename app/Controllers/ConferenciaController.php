@@ -29,7 +29,7 @@ class ConferenciaController extends BaseController
     {
         $year = date('Y');
         $number = '';
-        $rendicion = $this->RendicionModel->select('fecha')
+        $rendicion = $this->RendicionModel->select('fecha, hora_rendicion')
             ->where('id_rendicion', $id)
             ->first();
         if (date('Y', strtotime($rendicion['fecha'])) == $year) {
@@ -57,9 +57,10 @@ class ConferenciaController extends BaseController
                 $ejes[] = $eje_data;
             }
         }
-
+        $hora_formateada = date('h:i A', strtotime($rendicion['hora_rendicion']));
         return view('conferencia', [
             'fecha' => $rendicion['fecha'],
+            'hora_rendicion' => $hora_formateada,
             'number' => $number,
             'year' => $year,
             'ejes' => $ejes,
