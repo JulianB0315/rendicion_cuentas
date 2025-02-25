@@ -92,34 +92,33 @@
                                 <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse"
                                     aria-labelledby="heading<?= $eje['id_eje_seleccionado'] ?>" data-bs-parent="#eje<?= $eje['id_eje_seleccionado'] ?>">
                                     <div class="accordion-body">
-                                        <strong>
-                                            Preguntas seleccionadas
-                                        </strong><br>
-                                        <!-- Aqui iran las preguntas -->
-                                        
+                                        <?php if (!empty($eje['preguntas'])): ?>
+                                            <ul class="list-group">
+                                                <?php foreach($eje['preguntas'] as $pregunta): ?>
+                                                    <li class="list-group-item justify-content-between">
+                                                        <div class="pregunta-item">
+                                                            <strong class="nombre-usuario"><?= esc($pregunta['nombres']) ?></strong>
+                                                            <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
+                                                        </div>
+                                                        <div>
+                                                            <form action="">
+                                                                <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id_pregunta_seleccionada']) ?>">
+                                                                <button type="submit" class="btn btn-danger">Borrar</button>
+                                                            </form>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php else: ?>
+                                            <p class="text-muted">
+                                                No se encontraron preguntas seleccionadas para este eje.
+                                            </p>
+                                        <?php endif;?>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <!-- <ul class="list-group">
-                        <?php foreach ($ejes as $eje): ?>
-                            <li class="list-group-item">
-                                <form action="<?= base_url('mostrar_preguntas_seleccionadas/' . $eje['id_eje_seleccionado']) ?>" method="post">
-                                    <span class="eje-info">
-                                        <?= $eje['tematica'] ?>
-                                    </span>
-                                    <div class="form-controls">
-                                        <input type="hidden" name="id_eje_seleccionado"
-                                            value="<?= $eje['id_eje_seleccionado'] ?>" />
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-question-circle me-2"></i>Mostrar preguntas seleccionadas
-                                        </button>
-                                    </div>
-                                </form>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul> -->
                 </div>
             <?php endif; ?>
             </div>

@@ -37,11 +37,20 @@ class viewQuestionsController extends BaseController
             ->where('id_rendicion', $id_rendicion)
             ->findAll();
 
-        $ejes = array_map(function ($eje) {
+        $ejes = array_map(function ($eje) use ($id_rendicion) {
             $ejeData = $this->EjeModel->find($eje['id_eje']);
+            $db = \Config\Database::connect();
+            $builder = $db->table('preguntas_seleccionadas ps');
+            $builder->select('ps.id_pregunta_seleccionada, ps.id_pregunta, p.contenido, p.fecha_registro, u.nombres');
+            $builder->join('pregunta p', 'p.id_pregunta = ps.id_pregunta');
+            $builder->join('usuario u', 'u.id_usuario = p.id_usuario');
+            $builder->where('ps.id_eje_seleccionado', $eje['id_eje_seleccionado']);
+            $builder->where('u.id_rendicion', $id_rendicion);
+            $query = $builder->get()->getResultArray();
             return [
-                'tematica'          => isset($ejeData['tematica']) ? $ejeData['tematica'] : 'Sin tematica',
-                'id_eje_seleccionado' => $eje['id_eje_seleccionado']
+                'tematica'=> isset($ejeData['tematica']) ? $ejeData['tematica'] : 'Sin tematica',
+                'id_eje_seleccionado' => $eje['id_eje_seleccionado'],
+                'preguntas' => $query
             ];
         }, $ejes_seleccionados);
 
