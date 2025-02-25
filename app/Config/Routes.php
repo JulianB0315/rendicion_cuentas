@@ -39,3 +39,6 @@ $routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'Conferenc
 // Rutas de asistencia
 $routes->get('asistencia', 'AsistenciaController::index');
 $routes->post('procesar_asistencia', 'AsistenciaController::procesar_asistencia');
+// Rutas de usuarioQuestions
+$routes->get('usuarioQuestions', 'usuarioQuestionsController::index');
+$routes->get('usuarioQuestions/buscar_rendecion_admin', 'usuarioQuestionsController::buscar_rendecion_admin');
