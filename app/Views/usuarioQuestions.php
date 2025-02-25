@@ -39,10 +39,9 @@
             </div>
         </nav>
     </header>
-    ...
     <div class="container my-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
-            <h1 class="animate__animated animate__fadeInDown header-title text-center">Mostrar preguntas</h1>
+            <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte Público</h1>
             <div class="col-md-6 col-sm-12 p-4">
                 <form action="<?= base_url('usuarioQuestions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
                     <div class="form-group">

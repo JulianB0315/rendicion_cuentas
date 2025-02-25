@@ -34,7 +34,7 @@ class usuarioQuestionsController extends BaseController
     public function buscar_rendecion_admin()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
-        $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->findAll();
+        $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'si')->findAll();
         foreach ($usuarios as &$usuario) {
             if (empty($usuario['id_pregunta'])) {
                 $usuario['pregunta_contenido'] = 'Solo asistió a la rendición';
