@@ -21,7 +21,7 @@ $routes->get('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_pregun
 $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
 //Rutas de mostrar preguntas seleccionadas
 $routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
-$routes->post('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
+$routes->get('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
 $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
 $routes->post('viewQuestions/borrar_pregunta', 'viewQuestionsController::borrar_pregunta');
 //Rutas de seleccion

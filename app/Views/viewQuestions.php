@@ -41,7 +41,7 @@
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Mostrar preguntas seleccionadas</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= base_url('viewQuestions/buscar_rendecion_admin') ?>" method="post" class="mt-2">
+                <form action="<?= base_url('viewQuestions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
                     <div class="form-group">
                         <label for="id_rendicion">Fecha de la Rendición:</label>
                         <select class="form-select" id="id_rendicion" name="id_rendicion" required>
