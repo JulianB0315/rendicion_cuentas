@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/questions.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/sort.css') ?>" />
     <link
         rel="stylesheet"
@@ -29,13 +30,38 @@
 </head>
 
 <body>
-    <header class="">
-        <nav class="nav-header w-100 p-3">
-            <div class="d-flex align-items-center logo-container">
+    <header class="container-fluid header p-3 mb-5">
+        <nav class="nav-header container">
+            <div class="d-flex align-items-center logo-container w-100 justify-content-between">
                 <img
                     src="<?= base_url('img/escudo.webp') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
+                <div class="links-container">
+                    <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Asistencia
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <p class="dropdown-item">Asistentes Totales: </p>
+                                    </li>
+                                    <li>
+                                        <p class="dropdown-item">Oradores Totales: </p>
+                                    </li>
+                                    <li>
+                                        <p class="dropdown-item">Asistentes Femeninos: </p>
+                                    </li>
+                                    <li>
+                                        <p class="dropdown-item">Asistentes Masculinos: </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
