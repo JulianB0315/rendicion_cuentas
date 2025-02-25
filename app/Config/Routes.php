@@ -23,6 +23,7 @@ $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
 $routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
 $routes->post('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
 $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
+$routes->post('viewQuestions/borrar_pregunta', 'viewQuestionsController::borrar_pregunta');
 //Rutas de seleccion
 $routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');
 //Rutas de report

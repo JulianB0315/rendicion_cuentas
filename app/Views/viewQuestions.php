@@ -101,7 +101,7 @@
                                                             <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
                                                         </div>
                                                         <div>
-                                                            <form action="">
+                                                            <form action="<?=base_url('viewQuestions/borrar_pregunta')?>" method="post">
                                                                 <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id_pregunta_seleccionada']) ?>">
                                                                 <button type="submit" class="btn btn-danger">Borrar</button>
                                                             </form>
@@ -110,7 +110,7 @@
                                                 <?php endforeach; ?>
                                             </ul>
                                         <?php else: ?>
-                                            <p class="text-muted">
+                                            <p class="text-muted text-center my-2">
                                                 No se encontraron preguntas seleccionadas para este eje.
                                             </p>
                                         <?php endif;?>
