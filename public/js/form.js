@@ -20,6 +20,7 @@ const formRegistro = document.getElementById("form-registro");
 const pregunta = document.getElementById("pregunta");
 const femInput = document.getElementById("fem");
 const mascInput = document.getElementById("masculino");
+const ejeSelect = document.getElementById("eje-select");
 
 const validarInputs = () => {
 	nextBtn.disabled = true;
@@ -31,7 +32,6 @@ const validarInputs = () => {
 
 	// Validación para orador
 	if (orador.checked) {
-		// Primera pantalla (información personal)
 		if (personaInfo.style.display !== "none") {
 			const inputsPersonales = document.querySelectorAll(
 				"#persona-info input[type='text']"
@@ -44,14 +44,11 @@ const validarInputs = () => {
 
 			nextBtn.disabled = !completos;
 			nextBtn.classList.toggle("active", completos);
-		}
-		// Segunda pantalla (información de orador)
-		else if (oradorInfo.style.display === "block") {
+		} else if (oradorInfo.style.display === "block") {
 			let completos =
 				pregunta.value.trim() !== "" &&
-				(personal.checked || organizacion.checked);
-
-			// Si es representante de organización, validar campos adicionales
+				(personal.checked || organizacion.checked) &&
+				ejeSelect.value !== "";
 			if (organizacion.checked) {
 				completos =
 					completos &&
@@ -61,6 +58,11 @@ const validarInputs = () => {
 
 			submitBtn.disabled = !completos;
 			submitBtn.classList.toggle("active", completos);
+			if (!ejeSelect.value) {
+				errorForm.innerHTML = "Debe seleccionar un eje temático";
+			} else {
+				errorForm.innerHTML = "";
+			}
 		}
 	}
 	// Validación para asistente
@@ -106,14 +108,16 @@ const buscarPersona = async () => {
 
 		if (response.ok) {
 			const persona = Array.isArray(data) ? data[0] : data;
-            if (!persona || !persona.nombres) {
-                errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
-                document.getElementById("nombre").value = "";
-                return;
-            }
+			if (!persona || !persona.nombres) {
+				errorDniMsg.innerHTML =
+					"No se encontró ninguna persona con ese DNI";
+				document.getElementById("nombre").value = "";
+				return;
+			}
 			const nombre = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
 			if (nombre === "undefined") {
-				errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
+				errorDniMsg.innerHTML =
+					"No se encontró ninguna persona con ese DNI";
 				document.getElementById("nombre").value = "";
 				return;
 			}
@@ -248,6 +252,7 @@ rucInput.addEventListener("input", () => {
 pregunta.addEventListener("input", validarInputs);
 personal.addEventListener("change", validarInputs);
 nombreOrg.addEventListener("input", validarInputs);
+ejeSelect.addEventListener('change', validarInputs);
 
 document.addEventListener("DOMContentLoaded", function () {
 	nextBtn.disabled = true;
@@ -265,6 +270,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			}, 500);
 		}, 3000);
 	});
-	
+
 	validarInputs();
 });

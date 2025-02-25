@@ -206,6 +206,7 @@
 								<select
 									name="id_eje"
 									class="form-part form-select"
+									id="eje-select"
 								>
 									<option value="" disabled selected>
 										Seleccione un Eje Tematico
