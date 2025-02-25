@@ -26,9 +26,18 @@ class usuarioQuestionsController extends BaseController
     }
     public function index()
     {
+        $contador_masculino = 0;
+        $contador_femenino = 0;
+        $contador_asistencia = 0;
+        $contador_oradores = 0;
+
         $rendiciones = $this->RendicionModel->findAll();
         return view('usuarioQuestions', [
             'rendiciones' => $rendiciones,
+            'contador_masculino' => $contador_masculino,
+            'contador_femenino' => $contador_femenino,
+            'contador_asistencia' => $contador_asistencia,
+            'contador_oradores' => $contador_oradores,
         ]);
     }
     public function buscar_rendecion_admin()
