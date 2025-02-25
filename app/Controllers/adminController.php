@@ -58,7 +58,8 @@ class adminController extends BaseController
     {
         $data_rendicion = [
             'id_rendicion' => $this->crear_id_rendicion(),
-            'fecha' => $this->request->getPost('fechaRendicion')
+            'fecha' => $this->request->getPost('fechaRendicion'),
+            'hora_rendicion' => $this->request->getPost('horaRendicion')
         ];
         $this->RendicionModel->insert($data_rendicion);
 

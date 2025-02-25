@@ -80,6 +80,16 @@
 							required />
 						<label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
 					</div>
+					<div class="mb-3 form-group text">
+						<input
+							type="time"
+							class="form-part"
+							id="horaRendicion"
+							name="horaRendicion"
+							value=""
+							required />
+						<label for="horaRendicion" class="form-label">Hora de Rendición</label>
+					</div>
 					<div class="" id="select-eje-container">
 						<h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
 						<div id="ejes">
