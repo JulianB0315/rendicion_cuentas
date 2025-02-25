@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conferencia del dia <?=date('d-m', strtotime(esc($fecha)))?></title>
+    <title>Conferencia del dia <?= date('d-m', strtotime(esc($fecha))) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link
@@ -16,8 +16,9 @@
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/dashboard.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
-        
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -29,23 +30,26 @@
 </head>
 
 <body>
-    <header>
-        <nav class="nav-header w-100 p-3">
-            <div class="d-flex align-items-center logo-container">
+    <header class="container-fluid header p-3 mb-5">
+        <nav class="nav-header container">
+            <div class="d-flex align-items-center logo-container w-100 justify-content-between">
                 <img
                     src="<?= base_url('img/escudo.webp') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
+                <a href="<?= base_url('usuarioQuestions') ?>" class="text-white register-btn btn py-md-3 px-4 py-sm-2 btn-header-register">
+                    Ver Reporte
+                </a>
             </div>
         </nav>
     </header>
     <section class="text-center mt-3">
-		<h1 class="animate__animated animate__fadeInDown header-title mb-4">
-            Rendición <?=$number?> <?=$year?>
-		</h1>
+        <h1 class="animate__animated animate__fadeInDown header-title mb-4">
+            Rendición <?= $number ?> <?= $year ?>
+        </h1>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             <!-- Traer de la DB -->
-            Fecha: <?=$fecha?>
+            Fecha: <?= $fecha ?>
         </h5>
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             Hora: xx:xx
@@ -53,7 +57,7 @@
         <h5 class="animate__animated animate__fadeInDown header-subtitle">
             Lugar: Auditorio Municipal MDJLO
         </h5>
-	</section>
+    </section>
     <main class="container mt-5">
         <h3 class="mx-5 main-title mb-4">Ejes Seleccionados:</h3>
         <table class="table text-center table-ejes">
@@ -68,14 +72,13 @@
                 <!-- Traer de la DB -->
                 <?php foreach ($ejes as $eje): ?>
                     <tr>
-                        <td><?=$eje['tematica']?></td>
-                        <td>Descripción del eje <?=$eje['tematica']?></td>
+                        <td><?= $eje['tematica'] ?></td>
+                        <td>Descripción del eje <?= $eje['tematica'] ?></td>
                         <td>
-                            <button class="btn btn-primary btn-preguntas" 
-                            data-id-eje="<?=$eje['id_eje']?>"
-                            data-id-rendicion="<?=$id_rendicion ?>"
-                            data-tematica="<?=$eje['tematica']?>"
-                            >
+                            <button class="btn btn-primary btn-preguntas"
+                                data-id-eje="<?= $eje['id_eje'] ?>"
+                                data-id-rendicion="<?= $id_rendicion ?>"
+                                data-tematica="<?= $eje['tematica'] ?>">
                                 Ver Preguntas
                             </button>
                         </td>
