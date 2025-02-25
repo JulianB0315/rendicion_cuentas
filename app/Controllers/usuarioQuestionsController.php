@@ -35,7 +35,27 @@ class usuarioQuestionsController extends BaseController
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
         $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'si')->findAll();
+
+        $contador_masculino = 0;
+        $contador_femenino = 0;
+        $contador_asistencia = 0;
+        $contador_oradores = 0;
+
         foreach ($usuarios as &$usuario) {
+            if ($usuario['sexo'] == 'M') {
+                $contador_masculino++;
+            } elseif ($usuario['sexo'] == 'F') {
+                $contador_femenino++;
+            }
+
+            if ($usuario['asistencia'] == 'si') {
+                $contador_asistencia++;
+            }
+
+            if ($usuario['tipo_participacion'] == 'orador') {
+                $contador_oradores++;
+            }
+
             if (empty($usuario['id_pregunta'])) {
                 $usuario['pregunta_contenido'] = 'Solo asistió a la rendición';
                 $usuario['eje_tema'] = '';
@@ -57,6 +77,10 @@ class usuarioQuestionsController extends BaseController
         return view('usuarioQuestions', [
             'usuarios' => $usuarios,
             'rendiciones' => $rendiciones,
+            'contador_masculino' => $contador_masculino,
+            'contador_femenino' => $contador_femenino,
+            'contador_asistencia' => $contador_asistencia,
+            'contador_oradores' => $contador_oradores,
         ]);
     }
 }

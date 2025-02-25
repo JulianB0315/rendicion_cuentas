@@ -46,16 +46,16 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <p class="dropdown-item">Asistentes Totales: </p>
+                                        <p class="dropdown-item">Asistentes Totales: <?=$contador_asistencia?></p>
                                     </li>
                                     <li>
-                                        <p class="dropdown-item">Oradores Totales: </p>
+                                        <p class="dropdown-item">Oradores Totales: <?=$contador_oradores?></p>
                                     </li>
                                     <li>
-                                        <p class="dropdown-item">Asistentes Femeninos: </p>
+                                        <p class="dropdown-item">Asistentes Femeninos: <?=$contador_femenino?></p>
                                     </li>
                                     <li>
-                                        <p class="dropdown-item">Asistentes Masculinos: </p>
+                                        <p class="dropdown-item">Asistentes Masculinos: <?=$contador_masculino?></p>
                                     </li>
                                 </ul>
                             </div>
