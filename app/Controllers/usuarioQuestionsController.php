@@ -37,18 +37,18 @@ class usuarioQuestionsController extends BaseController
         $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->findAll();
         foreach ($usuarios as &$usuario) {
             if (empty($usuario['id_pregunta'])) {
-            $usuario['pregunta_contenido'] = 'No definido';
-            $usuario['eje_tema'] = 'No definido';
+                $usuario['pregunta_contenido'] = 'Solo asistió a la rendición';
+                $usuario['eje_tema'] = '';
             } else {
-            $pregunta = $this->PreguntaModel->find($usuario['id_pregunta']);
-            if ($pregunta) {
-                $eje = $this->EjeModel->find($pregunta['id_eje']);
-                $usuario['pregunta_contenido'] = $pregunta['contenido'];
-                $usuario['eje_tema'] = $eje ? $eje['tematica'] : 'No definido';
-            } else {
-                $usuario['pregunta_contenido'] = 'No definido';
-                $usuario['eje_tema'] = 'No definido';
-            }
+                $pregunta = $this->PreguntaModel->find($usuario['id_pregunta']);
+                if ($pregunta) {
+                    $eje = $this->EjeModel->find($pregunta['id_eje']);
+                    $usuario['pregunta_contenido'] = $pregunta['contenido'];
+                    $usuario['eje_tema'] = $eje ? $eje['tematica'] : 'No definido';
+                } else {
+                    $usuario['pregunta_contenido'] = 'No definido';
+                    $usuario['eje_tema'] = 'No definido';
+                }
             }
             $usuario['organizacion'] = $usuario['nombre_empresa'] ?? 'No tiene';
         }
