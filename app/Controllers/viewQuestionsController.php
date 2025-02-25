@@ -57,6 +57,17 @@ class viewQuestionsController extends BaseController
         $rendiciones = $this->RendicionModel->findAll();
         return view('viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
+    public function borrar_pregunta(){
+        $id_pregunta_seleccionada = $this->request->getPost('id_pregunta_seleccionada');
+        $pregunta_seleccionada = $this->Preguntas_seleccionadasModel->find($id_pregunta_seleccionada);
+        if (!$pregunta_seleccionada) {
+            return redirect()->back()->with('error', 'Pregunta no encontrada.');
+        }
+        if ($this->Preguntas_seleccionadasModel->delete($id_pregunta_seleccionada)) {
+            return redirect()->to(base_url('viewQuestions/'));
+        }
+        return redirect()->back()->with('error', 'No se pudo borrar la pregunta.');
+    }
     public function mostrar_preguntas_seleccionadas($id_eje_seleccionado)
     {
         $eje_seleccionado = $this->Ejes_SeleccionadosModel->find($id_eje_seleccionado);
