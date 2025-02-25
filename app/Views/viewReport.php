@@ -68,60 +68,73 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <?php if (isset($usuarios) && !empty($usuarios)): ?>
-                <table class="table text-center table-ejes">
-                    <thead>
-                        <tr>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Sexo</th>
-                            <th>Tipo de Participación</th>
-                            <th>Título</th>
-                            <th>RUC</th>
-                            <th>Nombre de la Organización</th>
-                            <th>Asistencia</th>
-                            <th>Pregunta</th>
-                        </tr>
-                    </thead>
+                    <table class="table text-center table-ejes">
+                        <thead>
+                            <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Sexo</th>
+                                <th>Tipo de Participación</th>
+                                <th>Título</th>
+                                <th>RUC</th>
+                                <th>Nombre de la Organización</th>
+                                <th>Asistencia</th>
+                                <th>Eje</th>
+                                <th>Pregunta</th>
+                            </tr>
+                        </thead>
                         <?php foreach ($usuarios as $usuario): ?>
                             <tbody>
-                                <tr>
-                                    <td><?= esc($usuario['DNI']) ?></td>
-                                    <td><?= esc($usuario['nombres']) ?></td>
-                                    <td><?= esc($usuario['sexo']) ?></td>
-                                    <td><?= esc($usuario['tipo_participacion']) ?></td>
-                                    <td><?= esc($usuario['titulo']) ?></td>
-                                    <td><?= esc($usuario['ruc_empresa']) ?></td>
-                                    <td><?= esc($usuario['nombre_empresa']) ?></td>
-                                    <td><?= esc($usuario['asistencia']) ?></td>
-                                    <td class="pregunta-container"><?php if (!empty($usuario['preguntas'])): ?>
-                                            <?php foreach ($usuario['preguntas'] as $pregunta): ?>
-                                                <!-- TODO: hacer que esto sea un boton que despliegue la pregunta en un modal o un div -->
-                                                <button class="btn btn-form btn-pregunta" data-pregunta="<?=esc($pregunta['contenido'])?>">
+                                <?php if (!empty($usuario['preguntas'])): ?>
+                                    <?php foreach ($usuario['preguntas'] as $pregunta): ?>
+                                        <tr>
+                                            <td><?= esc($usuario['DNI']) ?></td>
+                                            <td><?= esc($usuario['nombres']) ?></td>
+                                            <td><?= esc($usuario['sexo']) ?></td>
+                                            <td><?= esc($usuario['tipo_participacion']) ?></td>
+                                            <td><?= esc($usuario['titulo']) ?></td>
+                                            <td><?= esc($usuario['ruc_empresa']) ?></td>
+                                            <td><?= esc($usuario['nombre_empresa']) ?></td>
+                                            <td><?= esc($usuario['asistencia']) ?></td>
+                                            <td><?= esc($pregunta['tematica']) ?></td>
+                                            <td class="pregunta-container">
+                                                <button class="btn btn-form btn-pregunta" data-pregunta="<?= esc($pregunta['contenido']) ?>">
                                                     Ver Pregunta
                                                 </button>
                                                 <div class="pregunta-content">
                                                     <?= esc($pregunta['contenido']) ?>
                                                 </div>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <li>No hay preguntas para este usuario.</li>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td><?= esc($usuario['DNI']) ?></td>
+                                        <td><?= esc($usuario['nombres']) ?></td>
+                                        <td><?= esc($usuario['sexo']) ?></td>
+                                        <td><?= esc($usuario['tipo_participacion']) ?></td>
+                                        <td><?= esc($usuario['titulo']) ?></td>
+                                        <td><?= esc($usuario['ruc_empresa']) ?></td>
+                                        <td><?= esc($usuario['nombre_empresa']) ?></td>
+                                        <td><?= esc($usuario['asistencia']) ?></td>
+                                        <td><span class="text-muted">Sin eje asignado</span></td>
+                                        <td><span class="text-muted">Sin preguntas</span></td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         <?php endforeach; ?>
-                </table>
+                    </table>
+                <?php else: ?>
+                    <div class="col-12 my-4">
+                        <div class="alert alert-warning text-center">
+                            No se encontraron usuarios.
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
-        <?php else: ?>
-            <div class="col-12 my-4">
-                <div class="alert alert-warning text-center">
-                    No se encontraron usuarios.
-                </div>
-            </div>
-        <?php endif; ?>
         </div>
     </div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="<?= base_url('js/viewReport.js') ?>"></script>
 </body>
 
