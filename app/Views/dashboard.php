@@ -38,7 +38,7 @@
 					class="d-flex align-items-center justify-content-center">
 					<img
 						class="navbar-brand img-fluid nav-logo"
-						src="<?= base_url('img/escudo.webp') ?>" />
+						src="<?= base_url('img/logo2.jpg') ?>" />
 					<h3
 						class="animate__animated animate__jackInTheBox titles nav-title d-flex flex-column">
 						<span> Municipalidad Distrital de </span>
@@ -60,7 +60,7 @@
 				class="col-12 d-flex justify-content-center align-items-center">
 				<img
 					class="img-fluid w-70 w-xl-50"
-					src="<?= base_url('img/logo.webp') ?>"
+					src="<?= base_url('img/bannerstatic.jpg') ?>"
 					alt="Rendición de Cuentas Banner" />
 			</div>
 		</div>
