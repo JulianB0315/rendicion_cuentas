@@ -34,7 +34,7 @@
         <nav class="nav-header container">
             <div class="d-flex align-items-center logo-container w-100 justify-content-between">
                 <img
-                    src="<?= base_url('img/escudo.webp') ?>"
+                    src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
                 <a href="<?= base_url('usuarioQuestions') ?>" class="text-white register-btn btn py-md-3 px-4 py-sm-2 btn-header-register">

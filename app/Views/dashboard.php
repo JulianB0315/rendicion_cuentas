@@ -38,7 +38,7 @@
 					class="d-flex align-items-center justify-content-center">
 					<img
 						class="navbar-brand img-fluid nav-logo"
-						src="<?= base_url('img/logo2.jpg') ?>" />
+						src="<?= base_url('img/logo.jpg') ?>" />
 					<h3
 						class="animate__animated animate__jackInTheBox titles nav-title d-flex flex-column">
 						<span> Municipalidad Distrital de </span>

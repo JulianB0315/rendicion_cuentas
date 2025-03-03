@@ -32,7 +32,7 @@
 		<nav class="nav-header container">
 			<div class="d-flex align-items-center logo-container w-100 justify-content-between">
 				<img
-					src="<?= base_url('img/escudo.webp') ?>"
+					src="<?= base_url('img/logo.jpg') ?>"
 					alt="Logo"
 					class="nav-logo img-fluid" />
 				<div class="links-container">
