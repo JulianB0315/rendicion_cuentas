@@ -90,6 +90,16 @@
 							required />
 						<label for="horaRendicion" class="form-label">Hora de Rendición</label>
 					</div>
+					<div class="mb-3 form-group text">
+						<input 
+							type="file"
+							class="form-part"
+							id="bannerRendicion"
+							name="bannerRendicion"
+							accept="image/*"
+							required />
+						<label for="bannerRendicion" class="form-label">Banner de la rendición</label>
+					</div>
 					<div class="" id="select-eje-container">
 						<h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
 						<div id="ejes">
