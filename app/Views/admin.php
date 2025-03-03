@@ -68,7 +68,7 @@
 	<main class="container my-5">
 		<div class="row">
 			<div class="col-md-6 col-sm-12 mb-4">
-				<form action="<?= base_url('/crear_rendicion') ?>" method="post" class="form-container">
+				<form action="<?= base_url('/crear_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
 					<h4>Registrar rendición</h4>
 					<div class="mb-3 form-group text">
 						<input
@@ -91,7 +91,7 @@
 						<label for="horaRendicion" class="form-label">Hora de Rendición</label>
 					</div>
 					<div class="mb-3 form-group text">
-						<input 
+						<input
 							type="file"
 							class="form-part"
 							id="bannerRendicion"
