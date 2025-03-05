@@ -15,9 +15,16 @@ class Home extends BaseController
     {
         $year = date('Y');
         $rendicion = $this->RendicionModel
-            ->select('id_rendicion, fecha')
+            ->select('id_rendicion, fecha, banner_rendicion')
             ->where('YEAR(fecha)', $year)
-            ->orderBy('fecha', 'ASC');
-        return view('dashboard', ['rendiciones' => $rendicion->findAll()]);
+            ->orderBy('fecha', 'ASC')
+            ->findAll();
+        
+        $firstBanner = !empty($rendicion) ? $rendicion[0]['banner_rendicion'] : null;
+
+        return view('dashboard', [
+            'rendiciones' => $rendicion,
+            'firstBanner' => $firstBanner
+        ]);
     }
 }

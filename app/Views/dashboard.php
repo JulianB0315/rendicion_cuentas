@@ -60,7 +60,7 @@
 				class="col-12 d-flex justify-content-center align-items-center">
 				<img
 					class="img-fluid w-70 w-xl-50"
-					src="<?= base_url('img/bannerstatic.jpg') ?>"
+					src="<?= !empty($firstBanner) ? base_url('img/'.$firstBanner) : base_url('img/bannerstatic.jpg') ?>"
 					alt="Rendición de Cuentas Banner" />
 			</div>
 		</div>

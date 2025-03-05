@@ -9,7 +9,7 @@ class RendicionModel extends \CodeIgniter\Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id_rendicion', 'fecha','hora_rendicion'];
+    protected $allowedFields = ['id_rendicion', 'fecha','hora_rendicion','banner_rendicion'];
 
     protected $useTimestamps = false;
     protected $updatedField  = false;

@@ -18,6 +18,7 @@ class adminController extends BaseController
         $this->Ejes_SeleccionadosModel = new Ejes_SeleccionadosModel();
         $this->EjeModel = new EjeModel();
     }
+
     public function crear_id_rendicion()
     {
         $fecha = $this->request->getPost('fechaRendicion');
@@ -40,6 +41,7 @@ class adminController extends BaseController
         } while ($existe);
         return $id;
     }
+
     public function crear_id_ejes()
     {
         do {
@@ -54,17 +56,30 @@ class adminController extends BaseController
         $data['ejes'] = $this->EjeModel->findAll();
         return view('admin', $data);
     }
+
     public function crear_rendicion()
     {
-        $data_rendicion = [
+        $banner = $this->request->getFile('bannerRendicion');
+        if ($banner && $banner->isValid() && !$banner->hasMoved()) {
+            $uploadPath = FCPATH . 'img';
+            if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+            }
+            $newName = rand(1000000000, 9999999999) . '.' . $banner->getClientExtension();
+            $banner->move($uploadPath, $newName);
+            $data_rendicion = [
             'id_rendicion' => $this->crear_id_rendicion(),
             'fecha' => $this->request->getPost('fechaRendicion'),
-            'hora_rendicion' => $this->request->getPost('horaRendicion')
-        ];
+            'hora_rendicion' => $this->request->getPost('horaRendicion'),
+            'banner_rendicion' => $newName
+            ];
+        } else {
+            session()->setFlashdata('error', 'Error uploading banner');
+            return redirect()->to('/admin');
+        }
         $this->RendicionModel->insert($data_rendicion);
 
         $ejes_seleccionados = $this->request->getPost('ejes');
-
         foreach ($ejes_seleccionados as $eje) {
             $data_ejes_seleccionados = [
                 'id_eje_seleccionado' => $this->crear_id_selecionados(),
@@ -76,6 +91,7 @@ class adminController extends BaseController
         session()->setFlashdata('success', 'Rendición creada correctamente');
         return redirect()->to('/admin');
     }
+
     public function crear_eje()
     {
         $data_eje = [
