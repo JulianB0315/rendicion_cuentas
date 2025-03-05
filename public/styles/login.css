@@ -1,0 +1,25 @@
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--primary-color);
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s ease-in-out; 
+}
+.toggle-password:hover{
+    color: var(--secondary-color);
+}
+.toggle-password i {
+    font-size: 1.3em;
+}
+.toggle-password:focus{
+    outline: none;
+}
