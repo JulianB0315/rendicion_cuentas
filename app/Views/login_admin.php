@@ -37,7 +37,7 @@
     <main class="container main my-5">
         <div class="row">
             <div class="col-12">
-                <form action="<?= base_url('session') ?>" method="post" class="form-container" id="form-registro">
+                <form action="<?= base_url('session') ?>" method="get" class="form-container" id="form-registro">
                     <div id="admin-info">
                         <div class="form-group text">
                             <input
