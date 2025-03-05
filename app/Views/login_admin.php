@@ -20,18 +20,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" /> -->
-    <link rel="stylesheet" href="../../public/styles/index.css" />
-    <link rel="stylesheet" href="../../public/styles/form.css" />
-    <link rel="stylesheet" href="../../public/styles/login.css" />
+    <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/login.css") ?>" />
 </head>
 
 <body>
     <header>
         <nav class="nav-header w-100 p-3">
             <div class="d-flex align-items-center logo-container">
-                <!-- <img src="<?= base_url("img/logo.jpg") ?>" alt="Logo" class="nav-logo img-fluid"> -->
+                <img src="<?= base_url("img/logo.jpg") ?>" alt="Logo" class="nav-logo img-fluid">
             </div>
         </nav>
     </header>
@@ -86,6 +84,13 @@
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
+                        <button
+							type="submit"
+							class="btn btn-form"
+							id="submit-button"
+						>
+							Enviar
+						</button>
                 </form>
             </div>
         </div>
@@ -100,8 +105,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- <script src="<?= base_url("js/login.js") ?>"></script> -->
-    <script src="../../public/js/login.js"></script>
+    <script src="<?= base_url("js/login.js") ?>"></script>
 </body>
 
 </html>
