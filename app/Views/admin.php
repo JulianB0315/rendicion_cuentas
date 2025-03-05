@@ -52,6 +52,9 @@
 									<li>
 										<a href="<?= base_url('admin/report') ?>" target="_blank" class="dropdown-item">Reportes</a>
 									</li>
+									<li>
+										<a href="<?= base_url('logout') ?>" class="dropdown-item">Cerrar Sessión</a>
+									</li>
 								</ul>
 							</div>
 						</li>

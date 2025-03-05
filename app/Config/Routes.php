@@ -11,10 +11,11 @@ $routes->get('form', 'FormController::buscar_rendicion');
 $routes->post('procesar_formulario', 'FormController::procesar_formulario');
 //Rutas de login
 $routes->get('login', 'Admin_loginController::index');
-$routes->post('session', 'Admin_loginController::login');
+$routes->get('session', 'Admin_loginController::login');
+$routes->get('insertarAdmin', 'Admin_loginController::insertarAdmin');
+$routes->get('logout', 'Admin_loginController::logout');
 // Agrupar rutas de admin
 $routes->group('/admin', function ($routes) {
-
     $routes->get('inicio', 'adminController::buscar_eje');
     $routes->post('crear_eje', 'adminController::crear_eje');
     $routes->post('crear_rendicion', 'adminController::crear_rendicion');

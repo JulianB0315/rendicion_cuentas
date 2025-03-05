@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AdministradoresModel;
+
 class Admin_loginController extends BaseController
 {
     private $AdministradoresModel;
@@ -16,19 +17,48 @@ class Admin_loginController extends BaseController
     }
     public function login()
     {
-        $dni = $this->request->getPost('dni');
-        $password = $this->request->getPost('password');
-        $admin = $this->AdministradoresModel->where('dni_admin', $dni)->first();
-        if ($admin) {
-            if (password_verify($password, $admin['password'])) {
-                $this->session->set('admin', $admin);
-                $this->session->set('categoria', $admin['categoria_admin']);
-                return redirect()->to(base_url('admin'));
-            } else {
-                return redirect()->to(base_url('login'))->with('mensaje', 'Contraseña incorrecta');
-            }
+        $dni = $this->request->getGet('dni');
+        $password = $this->request->getGet('password');
+
+        $admin = $this->AdministradoresModel
+            ->select('dni_admin, nombres_admin, categoria_admin, password')
+            ->where('dni_admin', $dni)->first();
+
+        if ($admin && password_verify($password, $admin['password'])) {
+            $session = session();
+            $session->set([
+                'dni_admin' => $admin['dni_admin'],
+                'nombres_admin' => $admin['nombres_admin'],
+                'categoria_admin' => $admin['categoria_admin'],
+                'isLoggedIn' => true,
+            ]);
+            return redirect()->to(base_url('admin/inicio'));
         } else {
-            return redirect()->to(base_url('login'))->with('mensaje', 'Usuario no encontrado');
+            return redirect()->back()->with('error', 'DNI o contraseña incorrectos');
         }
+    }
+    public function insertarAdmin()
+    {
+        $dni = "40346175";
+        $nombres = "MARTHA LUZ TUÑOQUE JULCAS";
+        $categoria = "super_admin";
+        $password = "12345678"; 
+
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        $data = [
+            'dni_admin' => $dni,
+            'nombres_admin' => $nombres,
+            'password' => $hashedPassword, 
+            'categoria_admin' => $categoria,
+        ];
+
+        $this->AdministradoresModel->insert($data);
+        echo "Admin insertado";
+    }
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to(base_url('login'));
     }
 }
