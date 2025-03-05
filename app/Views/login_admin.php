@@ -33,18 +33,11 @@
             </div>
         </nav>
     </header>
-    <section class="text-center my-4">
-        <h2 class="animate__animated animate__fadeInDown header-title">
-            Rendición de Cuentas <?= $number ?> - <?= formatear_fecha_esp(esc($fecha_rendicion), 'Y')  ?>
-        </h2>
-        <p class="animate__animated animate__fadeInUp header-date">
-            Fecha: <?= formatear_fecha_esp(esc($fecha_rendicion)) ?>
-        </p>
-    </section>
+    <!--  -->
     <main class="container main my-5">
         <div class="row">
             <div class="col-12">
-                <form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container" id="form-registro">
+                <form action="<?= base_url('session') ?>" method="post" class="form-container" id="form-registro">
                     <div id="admin-info">
                         <div class="form-group text">
                             <input

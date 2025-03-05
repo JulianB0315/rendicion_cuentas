@@ -44,13 +44,13 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="<?= base_url('questions') ?>" target="_blank" class="dropdown-item">Seleccionar Preguntas</a>
+										<a href="<?= base_url('admin/questions') ?>" target="_blank" class="dropdown-item">Seleccionar Preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('viewQuestions') ?>" target="_blank" class="dropdown-item">Ver preguntas</a>
+										<a href="<?= base_url('admin/viewQuestions') ?>" target="_blank" class="dropdown-item">Ver preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('report') ?>" target="_blank" class="dropdown-item">Reportes</a>
+										<a href="<?= base_url('admin/report') ?>" target="_blank" class="dropdown-item">Reportes</a>
 									</li>
 								</ul>
 							</div>
@@ -68,7 +68,7 @@
 	<main class="container my-5">
 		<div class="row">
 			<div class="col-md-6 col-sm-12 mb-4">
-				<form action="<?= base_url('/crear_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
+				<form action="<?= base_url('admin/crear_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
 					<h4>Registrar rendición</h4>
 					<div class="mb-3 form-group text">
 						<input
@@ -125,7 +125,7 @@
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<h4>Crear Nuevo Eje</h4>
-				<form action="<?= base_url('/crear_eje') ?>" method="post" class="form-container">
+				<form action="<?= base_url('admin/crear_eje') ?>" method="post" class="form-container">
 					<div class="form-group text">
 						<input
 							type="text"
