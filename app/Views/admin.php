@@ -54,7 +54,7 @@
 									</li>
 									<?php if( $categoria == 'super_admin'): ?>
 										<li>
-											<a href="<?= base_url('admin/') ?>" target="_blank" class="dropdown-item"></a>
+											<a href="<?= base_url('admin/admin_users') ?>" target="_blank" class="dropdown-item">Administrar Usuarios</a>
 										</li>
 									<?php endif; ?>
 									<li>
