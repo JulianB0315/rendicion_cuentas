@@ -33,7 +33,11 @@
             </div>
         </nav>
     </header>
-    <!--  -->
+    <section class="text-center my-4">
+        <h2 class="animate__animated animate__fadeInDown header-title">
+            Iniciar sesión como administrador
+        </h2>
+    </section>
     <main class="container main my-5">
         <div class="row">
             <div class="col-12">
