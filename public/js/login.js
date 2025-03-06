@@ -55,6 +55,8 @@ searchPerson = async () => {
 	}
 };
 
+dniInput.addEventListener("input", searchPerson);
+
 btnToggle.addEventListener("click", () => {
 	const icon = btnToggle.querySelector("i");
 	if (passwordInput.type === "password") {
