@@ -66,6 +66,9 @@
     color: var(--white);
     transform: scale(1.05);
 }
+.dropdown-item.logout:hover{
+    background-color: var(--errors);
+}
 
 
 label{
