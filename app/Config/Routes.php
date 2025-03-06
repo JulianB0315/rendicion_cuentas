@@ -22,6 +22,7 @@ $routes->group('/admin', function ($routes) {
     $routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
     $routes->get('questions', 'QuestionsController::cargar_fechas');
     $routes->get('report', 'ReportController::mostrar_rendiciones');
+    $routes->get('admin_users', 'Admin_usersController::index');
 });
 //Rutas Question
 $routes->get('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
