@@ -54,7 +54,7 @@ class adminController extends BaseController
     public function buscar_eje()
     {
         $data['ejes'] = $this->EjeModel->findAll();
-        $data['categoria'] = session()->get('categoria'); 
+        $data['categoria'] = session()->get('categoria_admin'); 
         return view('admin', $data);
     }
 

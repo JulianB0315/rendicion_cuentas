@@ -52,6 +52,11 @@
 									<li>
 										<a href="<?= base_url('admin/report') ?>" target="_blank" class="dropdown-item">Reportes</a>
 									</li>
+									<?php if( $categoria == 'super_admin'): ?>
+										<li>
+											<a href="<?= base_url('admin/') ?>" target="_blank" class="dropdown-item"></a>
+										</li>
+									<?php endif; ?>
 									<li>
 										<a href="<?= base_url('logout') ?>" class="dropdown-item logout">Cerrar Sessión</a>
 									</li>
