@@ -45,7 +45,8 @@ searchPerson = async () => {
 				nombreInput.value = "";
 				return;
 			}
-			asistenciaBtn.disabled = false;
+            nombreInput.value = nombre;
+			submitBtn.disabled = false;
 		} else {
 			error.innerHTML = "No se encontró ninguna persona con ese DNI";
 		}
