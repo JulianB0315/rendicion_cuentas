@@ -1,5 +1,6 @@
-btnToggle = document.getElementById('togglePassword');
-passwordInput = document.getElementById('password');
+const btnToggle = document.getElementById('togglePassword');
+const passwordInput = document.getElementById('password');
+
 btnToggle.addEventListener('click', () => {
     const icon = btnToggle.querySelector('i');
     if (passwordInput.type === 'password') {
