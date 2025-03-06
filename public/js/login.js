@@ -1,5 +1,9 @@
 const btnToggle = document.getElementById('togglePassword');
 const passwordInput = document.getElementById('password');
+const dniInput = document.getElementById('dni');
+const error = document.getElementById('dni-error');
+const nombreInput = document.getElementById('nombre');
+const submitBtn = document.getElementById('submit-button');
 
 btnToggle.addEventListener('click', () => {
     const icon = btnToggle.querySelector('i');
