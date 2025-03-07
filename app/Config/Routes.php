@@ -23,6 +23,7 @@ $routes->group('/admin', function ($routes) {
     $routes->get('questions', 'QuestionsController::cargar_fechas');
     $routes->get('report', 'ReportController::mostrar_rendiciones');
     $routes->get('admin_users', 'Admin_usersController::index');
+    $routes->get('crear_admin', 'Admin_usersController::crear_admin');
 });
 //Rutas Question
 $routes->get('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
