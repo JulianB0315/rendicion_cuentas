@@ -23,3 +23,31 @@
 .toggle-password:focus{
     outline: none;
 }
+
+/* Esto es para el manejo de admins para no crear otro archivo */
+.btn-action-admin{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.btn-action-admin.update{
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-action-admin.update:hover{
+    background: var(--primary-color);
+    color: white;
+}
+.btn-action-admin.delete{
+    border: 2px solid var(--errors);
+    color: var(--errors);
+}
+.btn-action-admin.delete:hover{
+    background: var(--errors);
+    color: white;
+}
