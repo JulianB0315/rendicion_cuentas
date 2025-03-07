@@ -104,7 +104,7 @@
                                     <th scope="col">DNI</th>
                                     <th scope="col">Nombres</th>
                                     <th scope="col">Categoría</th>
-                                    <th>Acciones</th>
+                                    <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
