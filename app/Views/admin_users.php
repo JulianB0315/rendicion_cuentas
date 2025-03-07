@@ -96,9 +96,28 @@
             <div class="col-md-6 col-sm-12">
                 <h4>Administradores Actuales</h4>
                 <div class="table-responsive">
+                    <?php if(isset($admins)): ?>
                     <table class="table">
-                        foreach de usuarios:v
+                        <thead>
+                            <tr>
+                                <th scope="col">DNI</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Categoría</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($admins as $admin): ?>
+                            <tr>
+                                <td><?= $admin['dni_admin'] ?></td>
+                                <td><?= $admin['nombres_admin'] ?></td>
+                                <td><?= $admin['categoria_admin'] ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
+                    <?php else:?>
+                        <p>No hay administradores registrados</p>
+                        <?php endif; ?>
                 </div>
             </div>
         </div>
