@@ -113,17 +113,18 @@
                                         <td><?= esc($admin['dni_admin']) ?></td>
                                         <td><?= esc($admin['nombres_admin']) ?></td>
                                         <td><?= esc($admin['categoria_admin']) ?></td>
-                                        <td class="d-flex justify-content-around">
+                                        <td class="d-flex justify-content-around align-items-center flex-wrap">
                                             <a
                                                 href="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>"
-                                                class="btn-action-admin update">
+                                                class="btn-action-admin update m-1">
                                                 <i class="fa-light fa-user-pen"></i>
                                             </a>
                                             <a
                                                 href="<?= base_url('admin/eliminar_admin/' . $admin['dni_admin']) ?>"
-                                                class="btn-action-admin delete">
+                                                class="btn-action-admin delete m-1">
                                                 <i class="fa-light fa-user-times"></i>
                                             </a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
