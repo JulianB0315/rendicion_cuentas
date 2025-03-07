@@ -49,23 +49,24 @@
     <main class="container my-5">
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-4">
-                <form action="<?= base_url('admin/crear_admin') ?>" method="post" class="form-container">
+                <form action="<?= base_url('admin/crear_admin') ?>" method="get" class="form-container">
                     <h4>Registrar Nuevo Administrador</h4>
                     <div class="mb-3 form-group text">
                         <input
                             type="text"
                             class="form-part"
-                            id="dni-admin"
+                            id="dni"
                             name="dni-admin"
                             placeholder=" "
                             required />
                         <label for="dni-admin" class="form-label">DNI</label>
                     </div>
+                    <div class="error" id="dni-error"></div>
                     <div class="mb-3 form-group text">
                         <input
                             type="text"
                             class="form-part"
-                            id="name-admin"
+                            id="nombre"
                             name="name-admin"
                             placeholder=" "
                             readonly
@@ -123,7 +124,7 @@
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('scripts/sudoadm.js') ?>"></script>
+    <script src="<?= base_url('js/login.js') ?>"></script>
 </body>
 
 </html>

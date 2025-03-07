@@ -17,9 +17,9 @@ class Admin_UsersController extends BaseController
         return view('admin_users', ['admins' => $admins]);
     }
     public function crear_admin(){
-        $dni = $this->request->getPost('dni-admin');
-        $nombres = $this->request->getPost('name-admin');
-        $password = $this->request->getPost('password');
+        $dni = $this->request->getGet('dni-admin');
+        $nombres = $this->request->getGet('name-admin');
+        $password = $this->request->getGet('password');
         $categoria = 'admin';
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
