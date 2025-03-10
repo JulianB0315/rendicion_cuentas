@@ -145,7 +145,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr id="update-password-<?= esc($admin['dni_admin']) ?>">
+                                    <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none">
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">Actualizar contraseña:</span>
