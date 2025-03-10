@@ -51,7 +51,7 @@
                                         <p class="dropdown-item"><strong class="me-3">No asistieron:</strong> <?= $asistencia_no ?></p>
                                     </li>
                                     <li>
-                                        <a href="<?= base_url('viewReportController/generar_excel/' . $id_rendicion) ?>" class="btn btn-success text-center w-100">
+                                        <a href="<?= base_url('admin/viewReportController/generar_excel/' . $id_rendicion) ?>" class="btn btn-success text-center w-100">
                                             Descargar Excel <i class="fa-solid fa-file-excel" style="margin-left: .6rem;"></i>
                                         </a>
                                     </li>

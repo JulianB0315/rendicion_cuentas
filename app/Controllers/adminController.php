@@ -76,7 +76,7 @@ class adminController extends BaseController
             ];
         } else {
             session()->setFlashdata('error', 'Error uploading banner');
-            return redirect()->to('/admin');
+            return redirect()->to('/admin/inicio');
         }
         $this->RendicionModel->insert($data_rendicion);
 
@@ -90,7 +90,7 @@ class adminController extends BaseController
             $this->Ejes_SeleccionadosModel->insert($data_ejes_seleccionados);
         }
         session()->setFlashdata('success', 'Rendición creada correctamente');
-        return redirect()->to('/admin');
+        return redirect()->to('/admin/inicio');
     }
 
     public function crear_eje()
@@ -102,6 +102,6 @@ class adminController extends BaseController
 
         $this->EjeModel->insert($data_eje);
         session()->setFlashdata('success', 'Eje creado correctamente');
-        return redirect()->to('/admin');
+        return redirect()->to('/admin/inicio');
     }
 }

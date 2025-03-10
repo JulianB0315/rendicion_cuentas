@@ -49,7 +49,7 @@
                     <ul class="list-unstyled conferences-list d-flex flex-column justify-content-center align-items-center">
                         <?php foreach ($rendiciones as $rendicion): ?>
                             <li class="text-center d-flex justify-content-around align-items-center">
-                                <form action="<?= base_url('mostrar_reporte/' . $rendicion['id_rendicion']) ?>" class="text-center d-flex justify-content-around align-items-center w-100" method="get">
+                                <form action="<?= base_url('admin/mostrar_reporte/' . $rendicion['id_rendicion']) ?>" class="text-center d-flex justify-content-around align-items-center w-100" method="get">
                                     <input type="text" value="<?= $rendicion['id_rendicion'] ?>" hidden />
                                     <span><?= formatear_fecha_esp(esc($rendicion['fecha']), 'dashboard') ?></span>
                                     <button type="submit" class="btn rounded-pill btn-conference">

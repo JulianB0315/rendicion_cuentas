@@ -41,7 +41,7 @@
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Seleccionar preguntas</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= base_url('questions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
+                <form action="<?= base_url('admin/questions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
                     <div class="form-group">
                         <label for="id_rendicion">Fecha de la Rendición:</label>
                         <select class="form-select" id="id_rendicion" name="id_rendicion" required>
@@ -82,7 +82,7 @@
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
-                                <form action="<?= base_url('sorteo_preguntas/' . $eje['id_eje_seleccionado']) ?>" method="get">
+                                <form action="<?= base_url('admin/sorteo_preguntas/' . $eje['id_eje_seleccionado']) ?>" method="get">
                                     <span class="eje-info">
                                         <?= $eje['tematica'] ?>
                                         <small class="text-muted">

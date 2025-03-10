@@ -21,7 +21,11 @@ class SortController extends BaseController
     }
     private function crear_id_pregunta_seleccionada()
     {
-        return 'PS' . substr(uniqid(), -8);
+        do {
+            $id = 'PS' . substr(uniqid(), -8);
+            $existe = $this->Preguntas_seleccionadasModel->find($id);
+        } while ($existe);
+        return $id;
     }
     public function procesar_seleccion()
     {

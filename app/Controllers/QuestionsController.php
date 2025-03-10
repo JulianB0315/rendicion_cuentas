@@ -75,8 +75,6 @@ class QuestionsController extends BaseController
             ->findAll();
 
         $id_rendicion = $eje_seleccionado['id_rendicion'];
-
-        // 
         $preguntas_seleccionadas = $this->Preguntas_seleccionadasModel
             ->where('id_eje_seleccionado', $id_eje_seleccionado)
             ->findAll();

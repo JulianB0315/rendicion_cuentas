@@ -8,6 +8,7 @@ class ConsultaApi extends ResourceController
     private $apiUrlDNI = "http://161.132.51.161/mdjlo/api/open/dni";
     private $apiUrlRUC = "http://161.132.51.161/mdjlo/api/open/ruc";
     private $token = "dUr\"*Z!3ZqS4Xri"; 
+
     public function buscarDNI($dni)
     {
         $response = $this->consultarApi($this->apiUrlDNI, $dni);

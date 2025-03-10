@@ -115,7 +115,7 @@
                                         <td><?= esc($admin['categoria_admin']) ?></td>
                                         <td class="d-flex justify-content-around align-items-center flex-wrap">
                                             <a
-                                                href="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>"
+                                                href="<?= base_url('admin/editar_admin/' . $admin['dni_admin'])?>"
                                                 class="btn-action-admin update m-1">
                                                 <i class="fa-light fa-user-pen"></i>
                                             </a>

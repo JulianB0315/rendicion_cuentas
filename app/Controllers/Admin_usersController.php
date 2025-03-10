@@ -34,4 +34,8 @@ class Admin_UsersController extends BaseController
         $this->AdministradoresModel->insert($data);
         return redirect()->to(base_url('admin/admin_users'));
     }
+    public function borrar_admin($admin){
+        $this->AdministradoresModel->where('dni_admin', $admin)->delete();
+        return redirect()->to(base_url('admin/admin_users'));
+    }
 }

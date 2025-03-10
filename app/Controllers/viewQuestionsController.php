@@ -64,40 +64,40 @@ class viewQuestionsController extends BaseController
             return redirect()->back()->with('error', 'Pregunta no encontrada.');
         }
         if ($this->Preguntas_seleccionadasModel->delete($id_pregunta_seleccionada)) {
-            return redirect()->to(base_url('viewQuestions/'));
+            return redirect()->to(base_url('admin/viewQuestions/'));
         }
         return redirect()->back()->with('error', 'No se pudo borrar la pregunta.');
     }
-    public function mostrar_preguntas_seleccionadas($id_eje_seleccionado)
-    {
-        $eje_seleccionado = $this->Ejes_SeleccionadosModel->find($id_eje_seleccionado);
-        if (!$eje_seleccionado) {
-            throw new \Exception("Eje seleccionado no encontrado.");
-        }
+    // public function mostrar_preguntas_seleccionadas($id_eje_seleccionado)
+    // {
+    //     $eje_seleccionado = $this->Ejes_SeleccionadosModel->find($id_eje_seleccionado);
+    //     if (!$eje_seleccionado) {
+    //         throw new \Exception("Eje seleccionado no encontrado.");
+    //     }
 
-        $id_rendicion = $eje_seleccionado['id_rendicion'];
-        $id_eje = $eje_seleccionado['id_eje'];
+    //     $id_rendicion = $eje_seleccionado['id_rendicion'];
+    //     $id_eje = $eje_seleccionado['id_eje'];
 
-        $eje = $this->EjeModel->find($id_eje);
-        if (!$eje) {
-            throw new \Exception("Eje no encontrado.");
-        }
+    //     $eje = $this->EjeModel->find($id_eje);
+    //     if (!$eje) {
+    //         throw new \Exception("Eje no encontrado.");
+    //     }
 
-        $db = \Config\Database::connect();
-        $builder = $db->table('preguntas_seleccionadas ps');
-        $builder->select('ps.id_pregunta_seleccionada, ps.id_pregunta, p.contenido, p.fecha_registro, u.nombres, u.DNI, u.ruc_empresa, u.nombre_empresa');
-        $builder->join('pregunta p', 'p.id_pregunta = ps.id_pregunta');
-        $builder->join('usuario u', 'u.id_usuario = p.id_usuario');
-        $builder->where('ps.id_eje_seleccionado', $id_eje_seleccionado);
-        $builder->where('u.id_rendicion', $id_rendicion);
-        $query = $builder->get();
-        $preguntas = $query->getResultArray();
+    //     $db = \Config\Database::connect();
+    //     $builder = $db->table('preguntas_seleccionadas ps');
+    //     $builder->select('ps.id_pregunta_seleccionada, ps.id_pregunta, p.contenido, p.fecha_registro, u.nombres, u.DNI, u.ruc_empresa, u.nombre_empresa');
+    //     $builder->join('pregunta p', 'p.id_pregunta = ps.id_pregunta');
+    //     $builder->join('usuario u', 'u.id_usuario = p.id_usuario');
+    //     $builder->where('ps.id_eje_seleccionado', $id_eje_seleccionado);
+    //     $builder->where('u.id_rendicion', $id_rendicion);
+    //     $query = $builder->get();
+    //     $preguntas = $query->getResultArray();
 
-        return view('selection', [
-            'eje'                 => $eje,
-            'preguntas'           => $preguntas,
-            'id_eje_seleccionado' => $id_eje_seleccionado,
-            'id_rendicion'        => $id_rendicion
-        ]);
-    }
+    //     return view('selection', [
+    //         'eje'                 => $eje,
+    //         'preguntas'           => $preguntas,
+    //         'id_eje_seleccionado' => $id_eje_seleccionado,
+    //         'id_rendicion'        => $id_rendicion
+    //     ]);
+    // }
 }
