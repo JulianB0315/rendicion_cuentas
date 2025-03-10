@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+    # Habilitar el motor de reescritura
+    RewriteEngine On
+    
+    # No redirigir si el archivo o directorio existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redirigir todo a public
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Proteger directorios sensibles
+    RedirectMatch 403 ^/app/.*$
+    RedirectMatch 403 ^/system/.*$
+    RedirectMatch 403 ^/writable/.*$
+    RedirectMatch 403 ^/vendor/.*$
+    
+    # Denegar acceso a archivos ocultos
+    <FilesMatch "^\.">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# Denegar listado de directorios
+Options -Indexes
