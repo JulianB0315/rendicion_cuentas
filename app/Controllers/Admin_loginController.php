@@ -37,28 +37,28 @@ class Admin_loginController extends BaseController
             return redirect()->back()->with('error', 'DNI o contraseña incorrectos');
         }
     }
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to(base_url('login'));
+    }
     // public function insertarAdmin()
     // {
     //     $dni = "40346175";
     //     $nombres = "MARTHA LUZ TUÑOQUE JULCAS";
     //     $categoria = "super_admin";
     //     $password = "12345678"; 
-
+    
     //     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
+    
     //     $data = [
     //         'dni_admin' => $dni,
     //         'nombres_admin' => $nombres,
     //         'password' => $hashedPassword, 
     //         'categoria_admin' => $categoria,
     //     ];
-
+    
     //     $this->AdministradoresModel->insert($data);
     //     echo "Admin insertado";
     // }
-    public function logout()
-    {
-        session()->destroy();
-        return redirect()->to(base_url('login'));
-    }
 }
