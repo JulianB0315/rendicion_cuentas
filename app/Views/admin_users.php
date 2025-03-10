@@ -37,7 +37,7 @@
                     src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
-                    <h4>Bienvenid@, <?= esc($nombre) ?></h4>
+                <h4>Bienvenid@, <?= esc($nombre) ?></h4>
             </div>
         </nav>
     </header>
@@ -143,6 +143,23 @@
                                                 class="btn-action-admin delete m-1">
                                                 <i class="fa-light fa-user-times"></i>
                                             </a>
+                                        </td>
+                                    </tr>
+                                    <tr id="update-password-<?= esc($admin['dni_admin']) ?>">
+                                        <td colspan="4">
+                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                                <span class="me-3">Actualizar contraseña:</span>
+                                                <form action="" class="d-flex flex-grow-1">
+                                                    <input type="hidden" name="dni" value="<?= esc($admin['dni_admin']) ?>">
+                                                    <input type="password"
+                                                        name="password"
+                                                        class="form-control me-2"
+                                                        placeholder="Nueva contraseña">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
