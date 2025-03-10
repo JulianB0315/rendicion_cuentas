@@ -35,11 +35,14 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
     //Generacion de excel(Dentro de reportes)
     $routes->get('viewReportController/generar_excel/(:alphanum)', 'viewReportController::generar_excel/$1');
     //Rutas de Super admin
-    $routes->get('admin_users', 'Admin_usersController::index');
-    $routes->get('crear_admin', 'Admin_usersController::crear_admin');
-    //Rutas de Borrar y Editar admin(Dentro de Super admin)
-    $routes->get('eliminar_admin/(:alphanum)', 'Admin_usersController::borrar_admin/$1');
-    // $routes->post('editar_admin', 'Admin_usersController::editar_admin');
+    $routes->group('', ['filter' => 'super_admin'], function ($routes) {
+        //Rutas de administrar usuarios
+        $routes->get('admin_users', 'Admin_usersController::index');
+        $routes->get('crear_admin', 'Admin_usersController::crear_admin');
+        //Rutas de Borrar y Editar admin(Dentro de Super admin)
+        $routes->get('eliminar_admin/(:alphanum)', 'Admin_usersController::borrar_admin/$1');
+        // $routes->post('editar_admin', 'Admin_usersController::editar_admin');
+    });
 });
 //Rutas del usuario(Formulario)
 $routes->group('form', function ($routes) {
