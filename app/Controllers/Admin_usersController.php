@@ -23,7 +23,7 @@ class Admin_UsersController extends BaseController
         ->select('dni_admin, nombres_admin, categoria_admin')
         ->where('dni_admin !=', $dni_admin)
         ->findAll();
-        foreach ($admins as $admin) {
+        foreach ($admins as &$admin) {
             if ($admin['categoria_admin'] == 'super_admin') {
                 $admin['categoria_admin'] = 'S. Admin';
             } elseif ($admin['categoria_admin'] == 'admin') {
@@ -51,7 +51,20 @@ class Admin_UsersController extends BaseController
         return redirect()->to(base_url('admin/admin_users'));
     }
     public function borrar_admin($admin){
-        $this->AdministradoresModel->where('dni_admin', $admin)->delete();
+        $this->AdministradoresModel
+        ->where('dni_admin', $admin)
+        ->delete();
+        return redirect()->to(base_url('admin/admin_users'));
+    }
+    public function editar_admin($admin,$password){
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $data = [
+            'password' => $hashedPassword,
+        ];
+        $this->AdministradoresModel
+        ->where('dni_admin', $admin)
+        ->set('password',$data)
+        ->update();
         return redirect()->to(base_url('admin/admin_users'));
     }
 }
