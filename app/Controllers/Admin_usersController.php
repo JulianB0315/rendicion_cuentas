@@ -17,18 +17,20 @@ class Admin_UsersController extends BaseController
     public function index()
     {
         $dni_admin =$this->admin->get('dni_admin');
+        $nombres = $this->admin->get('nombres_admin');
+        $primer_nombre = explode(' ', $nombres)[0];
         $admins = $this->AdministradoresModel
         ->select('dni_admin, nombres_admin, categoria_admin')
         ->where('dni_admin !=', $dni_admin)
         ->findAll();
-        foreach ($admins as &$admin) {
+        foreach ($admins as $admin) {
             if ($admin['categoria_admin'] == 'super_admin') {
                 $admin['categoria_admin'] = 'S. Admin';
             } elseif ($admin['categoria_admin'] == 'admin') {
                 $admin['categoria_admin'] = 'Admin';
             }
         }
-        return view('admin_users', ['admins' => $admins]);
+        return view('admin_users', ['admins' => $admins,'nombre' => $primer_nombre]);
     }
     public function crear_admin(){
         $dni = $this->request->getGet('dni-admin');

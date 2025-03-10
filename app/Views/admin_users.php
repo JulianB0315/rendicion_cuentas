@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/login.css') ?>" />
-	<link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" /> 
+    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -37,6 +37,7 @@
                     src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
+                    <h4>Bienvenid@, <?= esc($nombre) ?></h4>
             </div>
         </nav>
     </header>
@@ -88,23 +89,22 @@
                         </button>
                     </div>
                     <div class="form-group">
-								<label for="eje">Categoria</label>
-								<select
-									name="categoria"
-									class="form-part form-select"
-									id="eje-select"
-								>
-									<option value="" disabled selected>
-										Categoria de Admin
-									</option>
-                                    <option value="admin">
-                                        Admin
-                                    </option>
-                                    <option value="super_admin">
-                                        Super Admin
-                                    </option>
-								</select>
-							</div>
+                        <label for="eje">Categoria</label>
+                        <select
+                            name="categoria"
+                            class="form-part form-select"
+                            id="eje-select">
+                            <option value="" disabled selected>
+                                Categoria de Admin
+                            </option>
+                            <option value="admin">
+                                Admin
+                            </option>
+                            <option value="super_admin">
+                                Super Admin
+                            </option>
+                        </select>
+                    </div>
                     <button
                         type="submit"
                         class="btn btn-form"
@@ -134,7 +134,7 @@
                                         <td><?= esc($admin['categoria_admin']) ?></td>
                                         <td class="d-flex justify-content-around align-items-center flex-wrap">
                                             <a
-                                                href="<?= base_url('admin/editar_admin/' . $admin['dni_admin'])?>"
+                                                href="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>"
                                                 class="btn-action-admin update m-1">
                                                 <i class="fa-light fa-user-pen"></i>
                                             </a>
