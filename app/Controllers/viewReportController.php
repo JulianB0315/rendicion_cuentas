@@ -40,7 +40,9 @@ class viewReportController extends BaseController
         $sexo_f = $this->UsuarioModel->where(['id_rendicion' => $id_rendicion, 'sexo' => 'f'])->countAllResults();
 
         foreach ($usuarios as $key => $usuario) {
-            $usuarios[$key]['preguntas'] = $this->PreguntaModel->where('id_usuario', $usuario['id_usuario'])->findAll();
+            $usuarios[$key]['preguntas'] = $this->PreguntaModel
+            ->where('id_usuario', $usuario['id_usuario'])
+            ->findAll();
         }
 
         $spreadsheet = new Spreadsheet();
