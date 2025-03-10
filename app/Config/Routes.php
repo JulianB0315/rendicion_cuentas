@@ -41,7 +41,7 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
         $routes->get('crear_admin', 'Admin_usersController::crear_admin');
         //Rutas de Borrar y Editar admin(Dentro de Super admin)
         $routes->get('eliminar_admin/(:alphanum)', 'Admin_usersController::borrar_admin/$1');
-        // $routes->post('editar_admin', 'Admin_usersController::editar_admin');
+        $routes->post('editar_admin/(:alphanum)', 'Admin_usersController::editar_admin/$1');
     });
 });
 //Rutas del usuario(Formulario)
