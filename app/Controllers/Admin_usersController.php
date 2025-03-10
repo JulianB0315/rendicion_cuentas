@@ -56,14 +56,12 @@ class Admin_UsersController extends BaseController
         ->delete();
         return redirect()->to(base_url('admin/admin_users'));
     }
-    public function editar_admin($admin,$password){
+    public function editar_admin($admin){
+        $password = $this->request->getPost('password');
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $data = [
-            'password' => $hashedPassword,
-        ];
         $this->AdministradoresModel
+        ->set('password', $hashedPassword)
         ->where('dni_admin', $admin)
-        ->set('password',$data)
         ->update();
         return redirect()->to(base_url('admin/admin_users'));
     }
