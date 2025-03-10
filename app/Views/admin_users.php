@@ -149,13 +149,12 @@
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">Actualizar contraseña:</span>
-                                                <form action="" class="d-flex flex-grow-1">
-                                                    <input type="hidden" name="dni" value="<?= esc($admin['dni_admin']) ?>">
+                                                <form action="<?=base_url('admin/editar_admin/'.$admin['dni_admin'])?>" method="post" class="d-flex flex-grow-1">
                                                     <input type="password"
                                                         name="password"
                                                         class="form-control me-2"
                                                         placeholder="Nueva contraseña">
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="submit" class="btn btn-primary" >
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </form>
