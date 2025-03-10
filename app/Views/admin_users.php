@@ -152,9 +152,9 @@
                                                 <form action="<?=base_url('admin/editar_admin/'.$admin['dni_admin'])?>" method="post" class="d-flex flex-grow-1">
                                                     <input type="password"
                                                         name="password"
-                                                        class="form-control me-2"
+                                                        class="form-control me-2 password-input"
                                                         placeholder="Nueva contraseña">
-                                                    <button type="submit" class="btn btn-primary" >
+                                                    <button type="submit" class="btn btn-primary btn-update" >
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </form>
