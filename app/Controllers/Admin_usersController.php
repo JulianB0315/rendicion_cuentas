@@ -7,20 +7,34 @@ use App\Models\AdministradoresModel;
 class Admin_UsersController extends BaseController
 {
     private $AdministradoresModel;
+    private $admin;
+
     function __construct()
     {
         $this->AdministradoresModel = new AdministradoresModel();
+        $this->admin = \Config\Services::session();
     }
     public function index()
     {
-        $admins = $this->AdministradoresModel->select('dni_admin, nombres_admin, categoria_admin')->where('categoria_admin', 'admin')->findAll();
+        $dni_admin =$this->admin->get('dni_admin');
+        $admins = $this->AdministradoresModel
+        ->select('dni_admin, nombres_admin, categoria_admin')
+        ->where('dni_admin !=', $dni_admin)
+        ->findAll();
+        foreach ($admins as &$admin) {
+            if ($admin['categoria_admin'] == 'super_admin') {
+                $admin['categoria_admin'] = 'S. Admin';
+            } elseif ($admin['categoria_admin'] == 'admin') {
+                $admin['categoria_admin'] = 'Admin';
+            }
+        }
         return view('admin_users', ['admins' => $admins]);
     }
     public function crear_admin(){
         $dni = $this->request->getGet('dni-admin');
         $nombres = $this->request->getGet('name-admin');
         $password = $this->request->getGet('password');
-        $categoria = 'admin';
+        $categoria = $this->request->getGet('categoria');
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 

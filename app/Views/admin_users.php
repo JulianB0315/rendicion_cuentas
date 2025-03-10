@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/login.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" /> 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -86,6 +87,24 @@
                             <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
+                    <div class="form-group">
+								<label for="eje">Categoria</label>
+								<select
+									name="categoria"
+									class="form-part form-select"
+									id="eje-select"
+								>
+									<option value="" disabled selected>
+										Categoria de Admin
+									</option>
+                                    <option value="admin">
+                                        Admin
+                                    </option>
+                                    <option value="super_admin">
+                                        Super Admin
+                                    </option>
+								</select>
+							</div>
                     <button
                         type="submit"
                         class="btn btn-form"

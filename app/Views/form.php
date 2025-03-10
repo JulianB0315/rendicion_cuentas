@@ -41,7 +41,7 @@
 		<main class="container main my-5">
 			<div class="row">
 				<div class="col-12">
-					<form action="<?= base_url('/procesar_formulario') ?>" method="post" class="form-container" id="form-registro">
+					<form action="<?= base_url('form/procesar_formulario') ?>" method="post" class="form-container" id="form-registro">
 						<div id="persona-info">
 							<div class="form-group text">
 								<input

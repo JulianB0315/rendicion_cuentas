@@ -41,9 +41,11 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
     $routes->get('eliminar_admin/(:alphanum)', 'Admin_usersController::borrar_admin/$1');
     // $routes->post('editar_admin', 'Admin_usersController::editar_admin');
 });
-//Rutas de form
-$routes->get('form', 'FormController::buscar_rendicion');
-$routes->post('procesar_formulario', 'FormController::procesar_formulario');
+//Rutas del usuario(Formulario)
+$routes->group('form', function ($routes) {
+    $routes->get('/', 'FormController::buscar_rendicion');
+    $routes->post('procesar_formulario', 'FormController::procesar_formulario');
+});
 // Rutas de conferencias detalle
 $routes->get('conferencias/(:alphanum)', 'ConferenciaController::show/$1');
 $routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'ConferenciaController::obtenerPreguntas/$1/$2');
