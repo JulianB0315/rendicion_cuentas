@@ -115,73 +115,89 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <h4>Administradores Actuales</h4>
-                <div class="table-responsive">
-                    <?php if (isset($admins) && !empty($admins)): ?>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">Nombres</th>
-                                    <th scope="col">Categoría</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($admins as $admin): ?>
-                                    <tr>
-                                        <td><?= esc($admin['dni_admin']) ?></td>
-                                        <td><?= esc($admin['nombres_admin']) ?></td>
-                                        <td><?= esc($admin['categoria_admin']) ?></td>
-                                        <td class="d-flex justify-content-around align-items-center flex-wrap">
-                                            <btn
-                                                onclick="toggleUpdatePassword('<?= esc($admin['dni_admin']) ?>')"
-                                                class="btn-action-admin update m-1">
-                                                <i class="fa-light fa-user-pen"></i>
-                                            </btn>
-                                            <btn
-                                                onclick="toggleDeleteAdmin('<?= esc($admin['dni_admin']) ?>')"
-                                                class="btn-action-admin delete m-1">
-                                                <i class="fa-light fa-user-times"></i>
-                                            </btn>
-                                        </td>
-                                    </tr>
-                                    <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none update-password-row">
-                                        <td colspan="4">
-                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                                                <span class="me-3">Actualizar contraseña:</span>
-                                                <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex flex-grow-1">
-                                                    <input type="password"
-                                                        name="password"
-                                                        class="form-control me-2 password-input"
-                                                        placeholder="Nueva contraseña">
-                                                    <button type="submit" class="btn btn-update">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
-                                        <td colspan="4">
-                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                                                <span class="me-3">¿Estás seguro de realizar esta acción?</span>
-                                                <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="d-flex gap-3">
-                                                    <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
-                                                        <i class="fa-solid fa-xmark-large"></i>
-                                                    </button>
-                                                    <button type="submit" class="btn btn-outline-danger btn-delete">
-                                                        <i class="fa-solid fa-badge-check"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <p class="mt-3">No hay administradores registrados</p>
-                    <?php endif; ?>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <?php if (isset($admins) && !empty($admins)): ?>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">DNI</th>
+                                            <th scope="col">Nombres</th>
+                                            <th scope="col">Categoría</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($admins as $admin): ?>
+                                            <tr>
+                                                <td><?= esc($admin['dni_admin']) ?></td>
+                                                <td><?= esc($admin['nombres_admin']) ?></td>
+                                                <td><?= esc($admin['categoria_admin']) ?></td>
+                                                <td class="d-flex justify-content-around align-items-center flex-wrap">
+                                                    <btn
+                                                        onclick="toggleUpdatePassword('<?= esc($admin['dni_admin']) ?>')"
+                                                        class="btn-action-admin update m-1">
+                                                        <i class="fa-light fa-user-pen"></i>
+                                                    </btn>
+                                                    <btn
+                                                        onclick="toggleDeleteAdmin('<?= esc($admin['dni_admin']) ?>')"
+                                                        class="btn-action-admin delete m-1">
+                                                        <i class="fa-light fa-user-times"></i>
+                                                    </btn>
+                                                </td>
+                                            </tr>
+                                            <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none update-password-row">
+                                                <td colspan="4">
+                                                    <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                                        <span class="me-3">Actualizar contraseña:</span>
+                                                        <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex flex-grow-1">
+                                                            <input type="password"
+                                                                name="password"
+                                                                class="form-control me-2 password-input"
+                                                                placeholder="Nueva contraseña">
+                                                            <button type="submit" class="btn btn-update">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
+                                                <td colspan="4">
+                                                    <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                                        <span class="me-3">¿Estás seguro de realizar esta acción?</span>
+                                                        <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="d-flex gap-3">
+                                                            <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
+                                                                <i class="fa-solid fa-xmark-large"></i>
+                                                            </button>
+                                                            <button type="submit" class="btn btn-outline-danger btn-delete">
+                                                                <i class="fa-solid fa-badge-check"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php else: ?>
+                                <p class="mt-3">No hay administradores registrados</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h4>Buscar Administradores</h4>
+                        <form action="" class="form-container">
+                            <input type="text"
+                                name="text"
+                                class="form-control me-2 dni-input"
+                                placeholder="Ingresar DNI">
+                            <button type="submit" class="btn btn-search">
+                                <i class="fa-solid fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
