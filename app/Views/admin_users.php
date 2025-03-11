@@ -194,7 +194,7 @@
                                     name="text"
                                     class="form-control me-2 dni-input"
                                     placeholder="Ingresar DNI"
-                                    id="dni-input-search"
+                                    id="dni-search"
                                     required
                                 >
                                 <button type="submit" class="btn btn-search" id="btn-search">

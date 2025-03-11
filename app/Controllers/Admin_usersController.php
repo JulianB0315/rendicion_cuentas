@@ -64,7 +64,7 @@ class Admin_UsersController extends BaseController
             ->select('dni_admin, nombres_admin, categoria_admin, estado')
             ->where('dni_admin', $admin)
             ->first();
-        return json_encode($admin);
+        return $admin;
     }
     public function deshabilitar_admin($admin)
     {

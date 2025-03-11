@@ -2,6 +2,8 @@ const passwordInputs = document.querySelectorAll('.password-input');
 const btnsUpdate = document.querySelectorAll('.btn-update');
 const btnsCancel = document.querySelectorAll('.btn-cancel');
 const btnsDelete = document.querySelectorAll('.btn-delete');
+const dniInputSearch = document.getElementById('dni-search');
+const btnSearch = document.getElementById('btn-search');
 
 btnsUpdate.forEach((btn) => {
     btn.disabled = true;
@@ -45,4 +47,13 @@ btnsCancel.forEach((btn) => {
         const row = document.getElementById(`delete-${dni}`);
         row.classList.add('d-none');
     })
+})
+
+btnSearch.disabled = true;
+dniInputSearch.addEventListener('input', () => {
+    if (dniInputSearch.value.length > 0) {
+        btnSearch.disabled = false;
+    } else {
+        btnSearch.disabled = true;
+    }
 })
