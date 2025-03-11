@@ -16,6 +16,7 @@ class Admin_UsersController extends BaseController
     }
     public function index()
     {
+        // TODO: Verificar que no se pueda registrar un usuario con el mismo DNI
         $dni_admin =$this->admin->get('dni_admin');
         $nombres = $this->admin->get('nombres_admin');
         $primer_nombre = explode(' ', $nombres)[0];
