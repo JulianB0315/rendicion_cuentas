@@ -79,7 +79,7 @@ const searchAdmin = async (dni) => {
 				</div>
 				<button 
 					type='button' 
-					class='btn btn-close-enable position-absolute top-0 end-0 m-2'
+					class='btn btn-close-enable position-absolute top-0 start-100 m-2 translate-middle'
 					onclick='document.getElementById("search-result").innerHTML = ""'
 					aria-label='Cerrar resultado de búsqueda de administrador'
 				>
