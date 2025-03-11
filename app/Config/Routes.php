@@ -16,7 +16,6 @@ $routes->get('logout', 'Admin_loginController::logout');
 $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
     //Inicio de admin
     $routes->get('/', 'adminController::buscar_eje');
-    $routes->get('inicio', 'adminController::buscar_eje');
     $routes->post('crear_eje', 'adminController::crear_eje');
     $routes->post('crear_rendicion', 'adminController::crear_rendicion');
     //Rutas Seleccionar preguntas
