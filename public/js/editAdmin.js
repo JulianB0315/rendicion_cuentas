@@ -65,12 +65,13 @@ const searchAdmin = async (dni) => {
 							<tr>
 								<td>${data.data.dni_admin}</td>
 								<td>${data.data.nombres_admin}</td>
-								<td>${data.data.categoria}</td>
+								<td>${data.data.categoria_admin}</td>
 								<td class="d-flex justify-content-around">
-									<button onclick="enableAdmin('${data.data.dni_admin}')" 
-											class="btn-action-admin enable m-1">
-										<i class="fa-solid fa-user-check"></i>
-									</button>
+									<form action="${baseUrl}/admin/habilitar_admin/${data.data.dni_admin}" method="POST">
+										<button type='submit' class="btn-action-admin enable m-1">
+											<i class="fa-solid fa-user-check"></i>
+										</button>
+									</form>
 								</td>
 							</tr>
 						</tbody>
