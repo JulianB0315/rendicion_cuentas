@@ -58,8 +58,9 @@ class Admin_UsersController extends BaseController
         session()->setFlashdata('success', 'Administrador creado exitosamente');
         return redirect()->to(base_url('admin/admin_users'));
     }
-    public function buscar_admin($admin)
+    public function buscar_admin()
     {
+        $admin = $this->request->getGet('dni-admin');
         $admin = $this->AdministradoresModel
             ->select('dni_admin, nombres_admin, categoria_admin, estado')
             ->where('dni_admin', $admin)
