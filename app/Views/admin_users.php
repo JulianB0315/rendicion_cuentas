@@ -145,7 +145,6 @@
                                             </btn>
                                         </td>
                                     </tr>
-                                    <!-- TODO: Fix problems with the extra rows -->
                                     <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none update-password-row">
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
