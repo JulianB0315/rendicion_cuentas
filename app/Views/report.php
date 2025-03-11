@@ -39,36 +39,40 @@
         </nav>
     </header>
     <div class="container my-5">
-        <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte de Rendiciones</h1>
-        <form action="<?= base_url('admin/mostrar_reporte') ?>" method="get" class="mt-2">
-            <div class="form-group">
-                <label for="id_rendicion">Fecha de la Rendición:</label>
-                <select class="form-select" id="id_rendicion" name="id_rendicion" required>
-                    <option value="" disabled selected>
-                        Seleccione una fecha de rendición
-                    </option>
-                    <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                        <?php
-                        $rendicionesPerYear = [];
-                        foreach ($rendiciones as $rendicion) {
-                            $year = date('Y', strtotime($rendicion['fecha']));
-                            $rendicionesPerYear[$year][] = $rendicion;
-                        }
-                        krsort($rendicionesPerYear);
-                        foreach ($rendicionesPerYear as $year => $rendiciones): ?>
-                            <optgroup label="<?= $year ?>">
-                                <?php foreach ($rendiciones as $rendicion): ?>
-                                    <option value="<?= $rendicion['id_rendicion'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                        <?php endforeach ?>
-                    <?php else: ?>
-                        <option value="">No hay rendiciones disponibles</option>
-                    <?php endif; ?>
-                </select>
+        <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+            <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte de Rendiciones</h1>
+            <div class="col-md-6 col-sm-12 p-4">
+                <form action="<?= base_url('admin/mostrar_reporte') ?>" method="get" class="mt-2">
+                    <div class="form-group">
+                        <label for="id_rendicion">Fecha de la Rendición:</label>
+                        <select class="form-select" id="id_rendicion" name="id_rendicion" required>
+                            <option value="" disabled selected>
+                                Seleccione una fecha de rendición
+                            </option>
+                            <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
+                                <?php
+                                $rendicionesPerYear = [];
+                                foreach ($rendiciones as $rendicion) {
+                                    $year = date('Y', strtotime($rendicion['fecha']));
+                                    $rendicionesPerYear[$year][] = $rendicion;
+                                }
+                                krsort($rendicionesPerYear);
+                                foreach ($rendicionesPerYear as $year => $rendiciones): ?>
+                                    <optgroup label="<?= $year ?>">
+                                        <?php foreach ($rendiciones as $rendicion): ?>
+                                            <option value="<?= $rendicion['id_rendicion'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
+                                <?php endforeach ?>
+                            <?php else: ?>
+                                <option value="">No hay rendiciones disponibles</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-form">Buscar</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-form">Buscar</button>
-        </form>
+        </div>
     </div>
 </body>
 
