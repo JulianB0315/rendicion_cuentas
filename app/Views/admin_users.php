@@ -170,6 +170,16 @@
                 </div>
             </div>
         </div>
+        <?php if (session()->getFlashdata('error')): ?>
+			<div class="alert alert-danger">
+				<?= session()->getFlashdata('error') ?>
+			</div>
+		<?php endif; ?>
+		<?php if (session()->getFlashdata('success')): ?>
+			<div class="alert alert-success">
+				<?= session()->getFlashdata('success') ?>
+			</div>
+		<?php endif; ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('js/login.js') ?>"></script>
