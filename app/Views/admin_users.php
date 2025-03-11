@@ -138,12 +138,11 @@
                                                 class="btn-action-admin update m-1">
                                                 <i class="fa-light fa-user-pen"></i>
                                             </btn>
-                                            <a
+                                            <btn
                                                 onclick="toggleDeleteAdmin('<?= esc($admin['dni_admin']) ?>')"
-                                                href="<?= base_url('admin/eliminar_admin/' . $admin['dni_admin']) ?>"
                                                 class="btn-action-admin delete m-1">
                                                 <i class="fa-light fa-user-times"></i>
-                                            </a>
+                                            </btn>
                                         </td>
                                     </tr>
                                     <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none update-password-row">
@@ -166,7 +165,7 @@
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">¿Estás seguro de realizar esta acción?</span>
-                                                <form action="" method="post" class="d-flex gap-3">
+                                                <form action="<?= base_url('admin/eliminar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex gap-3">
                                                     <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
                                                         <i class="fa-solid fa-xmark-large"></i>
                                                     </button>
