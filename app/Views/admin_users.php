@@ -161,6 +161,21 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row">
+                                        <td colspan="4">
+                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                                <span class="me-3">¿Estás seguro de realizar esta acción?</span>
+                                                <form action="" method="post" class="d-flex gap-3">
+                                                    <button type="submit" class="btn btn-cancel" >
+                                                        <i class="fa-solid fa-xmark-large"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-outline btn-delete" >
+                                                        <i class="fa-solid fa-badge-check"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
