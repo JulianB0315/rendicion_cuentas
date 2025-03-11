@@ -33,8 +33,9 @@ class ReportController extends BaseController
         return view('report', ['rendiciones' => $rendiciones]);
     }
 
-    public function mostrar_reporte($id_rendicion)
+    public function mostrar_reporte()
     {
+        $id_rendicion = $this->request->getGet('id_rendicion');
         $usuarios = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->findAll();
         $asistencia_si = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'si')->countAllResults();
         $asistencia_no = $this->UsuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'no')->countAllResults();
