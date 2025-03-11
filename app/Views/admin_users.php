@@ -193,8 +193,11 @@
                                 <input type="text"
                                     name="text"
                                     class="form-control me-2 dni-input"
-                                    placeholder="Ingresar DNI">
-                                <button type="submit" class="btn btn-search">
+                                    placeholder="Ingresar DNI"
+                                    id="dni-input-search"
+                                    required
+                                >
+                                <button type="submit" class="btn btn-search" id="btn-search">
                                     <i class="fa-solid fa-search"></i>
                                 </button>
                             </form>
