@@ -5,6 +5,8 @@ const btnsDelete = document.querySelectorAll(".btn-delete");
 const dniInputSearch = document.getElementById("dni-search");
 const btnSearch = document.getElementById("btn-search");
 const searchForm = document.getElementById("search-form");
+const resultTable = document.getElementById("search-result");
+const btnCloseEnable = document.getElementById("btn-close-enable");
 
 btnsUpdate.forEach((btn) => {
 	btn.disabled = true;
@@ -42,13 +44,13 @@ const toggleDeleteAdmin = (dni) => {
 	});
 	deleteRow.classList.toggle("d-none");
 };
+const cleanSearchResult = () => {
+	resultTable.innerHTML = "";
+};
 const searchAdmin = async (dni) => {
 	try {
-		const response = await fetch(
-			`${baseUrl}/admin/buscar_admin?dni-admin=${dni}`
-		);
+		const response = await fetch(`${baseUrl}/admin/buscar_admin?dni-admin=${dni}`);
 		const data = await response.json();
-		const resultTable = document.getElementById("search-result");
 		if (data.status === "success") {
 			resultTable.innerHTML = `
 				<div class="table-responsive">
@@ -80,7 +82,8 @@ const searchAdmin = async (dni) => {
 				<button 
 					type='button' 
 					class='btn btn-close-enable position-absolute top-0 start-100 m-2 translate-middle'
-					onclick='document.getElementById("search-result").innerHTML = ""'
+					id='btn-close-enable'
+					onclick='cleanSearchResult()'
 					aria-label='Cerrar resultado de búsqueda de administrador'
 				>
 					<i class='fa-solid fa-xmark'></i>
@@ -100,6 +103,7 @@ const searchAdmin = async (dni) => {
 			</div>`;
 	}
 };
+
 
 btnsCancel.forEach((btn) => {
 	btn.addEventListener("click", () => {
