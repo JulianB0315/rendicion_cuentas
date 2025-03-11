@@ -79,14 +79,14 @@ const searchAdmin = async (dni) => {
 								<th>DNI</th>
 								<th>Nombres</th>
 								<th>Categoría</th>
-								<th>Acciones</th>
+								<th>Habilitar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>${data.data.dni_admin}</td>
 								<td>${data.data.nombres_admin}</td>
-								<td>Habilitar</td>
+								<td>${data.data.categoria}</td>
 								<td class="d-flex justify-content-around">
 									<button onclick="enableAdmin('${data.data.dni_admin}')" 
 											class="btn-action-admin enable m-1">
