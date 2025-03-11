@@ -189,9 +189,10 @@
                     <div class="col-12">
                         <h4>Buscar Administradores</h4>
                         <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                            <form action="<?= base_url('admin/buscar_admin/') ?>" method="get" class="d-flex flex-grow-1">
-                                <input type="text"
-                                    name="text"
+                            <form action="<?= base_url('admin/buscar_admin/') ?>" method="get" class="d-flex flex-grow-1" id="search-form">
+                                <input 
+                                    type="text"
+                                    name="dni-search"
                                     class="form-control me-2 dni-input"
                                     placeholder="Ingresar DNI"
                                     id="dni-search"
@@ -202,6 +203,7 @@
                                 </button>
                             </form>
                         </div>
+                        <div id="search-result"></div>
                     </div>
                 </div>
             </div>
@@ -217,6 +219,9 @@
             </div>
         <?php endif; ?>
     </main>
+    <script>
+        const baseUrl = '<?= base_url() ?>';
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('js/login.js') ?>"></script>
     <script src="<?= base_url('js/editAdmin.js') ?>"></script>

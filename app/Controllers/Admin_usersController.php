@@ -64,8 +64,24 @@ class Admin_UsersController extends BaseController
         $admin = $this->AdministradoresModel
             ->select('dni_admin, nombres_admin, categoria_admin, estado')
             ->where('dni_admin', $admin)
+            ->where('estado', 'deshabilitado')
             ->first();
-        return $admin;
+        if ($admin) {
+            if ($admin['categoria_admin'] == 'super_admin') {
+                $admin['categoria_admin'] = 'S. Admin';
+            } elseif ($admin['categoria_admin'] == 'admin') {
+                $admin['categoria_admin'] = 'Admin';
+            }
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data' => $admin
+            ]);
+            
+        }
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'No se encontró el administrador'
+        ]);
     }
     public function deshabilitar_admin($admin)
     {
