@@ -32,7 +32,8 @@ class Admin_loginController extends BaseController
                 'categoria_admin' => $admin['categoria_admin'],
                 'isLoggedIn' => true,
             ]);
-            return redirect()->to(base_url('admin/inicio'));
+            $nombre = ucfirst(strtolower(explode(' ', $admin['nombres_admin'])[0]));
+            return redirect()->to(base_url('admin/inicio'))->with('success', 'Bienvenido, '.$nombre);
         } else {
             return redirect()->back()->with('error', 'DNI o contraseña incorrectos');
         }
