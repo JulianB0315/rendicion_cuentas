@@ -139,6 +139,7 @@
                                                 <i class="fa-light fa-user-pen"></i>
                                             </btn>
                                             <a
+                                                onclick="toggleDeleteAdmin('<?= esc($admin['dni_admin']) ?>')"
                                                 href="<?= base_url('admin/eliminar_admin/' . $admin['dni_admin']) ?>"
                                                 class="btn-action-admin delete m-1">
                                                 <i class="fa-light fa-user-times"></i>
@@ -149,27 +150,27 @@
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">Actualizar contraseña:</span>
-                                                <form action="<?=base_url('admin/editar_admin/'.$admin['dni_admin'])?>" method="post" class="d-flex flex-grow-1">
+                                                <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex flex-grow-1">
                                                     <input type="password"
                                                         name="password"
                                                         class="form-control me-2 password-input"
                                                         placeholder="Nueva contraseña">
-                                                    <button type="submit" class="btn btn-update" >
+                                                    <button type="submit" class="btn btn-update">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </form>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row">
+                                    <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">¿Estás seguro de realizar esta acción?</span>
                                                 <form action="" method="post" class="d-flex gap-3">
-                                                    <button type="submit" class="btn btn-cancel" >
+                                                    <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
                                                         <i class="fa-solid fa-xmark-large"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-danger btn-outline btn-delete" >
+                                                    <button type="submit" class="btn btn-danger btn-outline btn-delete">
                                                         <i class="fa-solid fa-badge-check"></i>
                                                     </button>
                                                 </form>
@@ -186,15 +187,15 @@
             </div>
         </div>
         <?php if (session()->getFlashdata('error')): ?>
-			<div class="alert alert-danger">
-				<?= session()->getFlashdata('error') ?>
-			</div>
-		<?php endif; ?>
-		<?php if (session()->getFlashdata('success')): ?>
-			<div class="alert alert-success">
-				<?= session()->getFlashdata('success') ?>
-			</div>
-		<?php endif; ?>
+            <div class="alert alert-danger">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+        <?php endif; ?>
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success') ?>
+            </div>
+        <?php endif; ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('js/login.js') ?>"></script>
