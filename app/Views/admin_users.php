@@ -147,13 +147,15 @@
                                     </tr>
                                     <tr id="update-password-<?= esc($admin['dni_admin']) ?>" class="d-none update-password-row">
                                         <td colspan="4">
-                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                            <div class="d-flex gap-4 align-items-center w-100 p-2">
                                                 <span class="me-3">Actualizar contraseña:</span>
-                                                <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex flex-grow-1">
-                                                    <input type="password"
-                                                        name="password"
-                                                        class="form-control me-2 password-input"
-                                                        placeholder="Nueva contraseña">
+                                                <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex gap-3 w-100">
+                                                    <div class="form-part w-100">
+                                                        <input type="password"
+                                                            name="password"
+                                                            class="form-control me-2 password-input"
+                                                            placeholder="Nueva contraseña">
+                                                    </div>
                                                     <button type="submit" class="btn btn-update">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
