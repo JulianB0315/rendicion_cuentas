@@ -169,7 +169,7 @@
                                                     <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
                                                         <i class="fa-solid fa-xmark-large"></i>
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger btn-outline btn-delete">
+                                                    <button type="submit" class="btn btn-outline-danger btn-delete">
                                                         <i class="fa-solid fa-badge-check"></i>
                                                     </button>
                                                 </form>
