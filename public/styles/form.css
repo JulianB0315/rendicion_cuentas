@@ -132,7 +132,19 @@ label{
 .btn-update:hover:not([disabled]), .btn-cancel:hover:not([disabled]) {
     background-color: var(--tertiary-color);
 }
-
+.btn-delete{
+    font-size: 1rem;
+    padding: 0.5em .8em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+    border: 3px solid var(--errors);
+    color: var(--errors);
+}
+.btn-delete:hover{
+    background-color: var(--errors);
+    color: var(--white);
+}
 
 @media (max-width: 768px) {
     .logo-container{

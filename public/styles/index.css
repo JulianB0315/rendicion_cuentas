@@ -112,7 +112,7 @@ body {
 }
 
 .error {
-    color: red;
+    color: var(--errors);
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     margin-bottom: 1.5em;
 }
