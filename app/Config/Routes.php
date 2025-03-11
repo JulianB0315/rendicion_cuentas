@@ -41,7 +41,7 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
         $routes->get('deshabilitar_admin/(:alphanum)', 'Admin_usersController::deshabilitar_admin/$1');
         $routes->post('habilitar_admin/(:alphanum)', 'Admin_usersController::habilitar_admin/$1');
         $routes->post('editar_admin/(:alphanum)', 'Admin_usersController::editar_admin/$1');
-        $routes->get('buscar_admin/(:alphanum)', 'Admin_usersController::buscar_admin/$1');
+        $routes->get('buscar_admin', 'Admin_usersController::buscar_admin/$1');
     });
 });
 //Rutas del usuario(Formulario)
