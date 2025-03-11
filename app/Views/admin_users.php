@@ -37,7 +37,7 @@
                     src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
-                <h4>Bienvenid@, <?= esc($nombre) ?></h4>
+                <h4 class="header-welcome">Bienvenid@, <?= esc($nombre) ?></h4>
             </div>
         </nav>
     </header>

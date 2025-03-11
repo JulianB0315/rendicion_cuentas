@@ -34,6 +34,11 @@ body {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-family: var(--font);
 }
+.header-welcome{
+    color: var(--secondary-color);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-family: var(--titles);
+}
 
 .form-container {
     width: 100%;
