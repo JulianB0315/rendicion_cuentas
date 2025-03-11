@@ -76,7 +76,16 @@ const searchAdmin = async (dni) => {
 							</tr>
 						</tbody>
 					</table>
-				</div>`;
+				</div>
+				<button 
+					type='button' 
+					class='btn btn-close-enable position-absolute top-0 end-0 m-2'
+					onclick='document.getElementById("search-result").innerHTML = ""'
+					aria-label='Cerrar resultado de búsqueda de administrador'
+				>
+					<i class='fa-solid fa-xmark'></i>
+				</button>
+				`;
 		} else {
 			resultTable.innerHTML = `
 				<div class="alert alert-info">
