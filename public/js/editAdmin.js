@@ -42,6 +42,25 @@ const toggleDeleteAdmin = (dni) => {
 	});
 	deleteRow.classList.toggle("d-none");
 };
+const enableAdmin = async (dni) => {
+    try {
+        const response = await fetch(`${baseUrl}/admin/habilitar_admin`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ dni_admin: dni }),
+        });
+        const data = await response.json();
+        if (data.status === "success") {
+            location.reload();
+        } else {
+            console.error(data.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 const searchAdmin = async (dni) => {
 	try {
 		const response = await fetch(
@@ -69,7 +88,7 @@ const searchAdmin = async (dni) => {
 								<td>${data.data.nombres_admin}</td>
 								<td>Habilitar</td>
 								<td class="d-flex justify-content-around">
-									<button onclick="toggleUpdatePassword('${data.data.dni_admin}')" 
+									<button onclick="enableAdmin('${data.data.dni_admin}')" 
 											class="btn-action-admin enable m-1">
 										<i class="fa-solid fa-user-check"></i>
 									</button>
