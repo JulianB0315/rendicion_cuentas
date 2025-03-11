@@ -67,15 +67,11 @@ const searchAdmin = async (dni) => {
 							<tr>
 								<td>${data.data.dni_admin}</td>
 								<td>${data.data.nombres_admin}</td>
-								<td>${data.data.categoria_admin}</td>
+								<td>Habilitar</td>
 								<td class="d-flex justify-content-around">
 									<button onclick="toggleUpdatePassword('${data.data.dni_admin}')" 
-											class="btn-action-admin update">
-										<i class="fa-light fa-user-pen"></i>
-									</button>
-									<button onclick="toggleDeleteAdmin('${data.data.dni_admin}')" 
-											class="btn-action-admin delete">
-										<i class="fa-light fa-user-times"></i>
+											class="btn-action-admin enable m-1">
+										<i class="fa-solid fa-user-check"></i>
 									</button>
 								</td>
 							</tr>

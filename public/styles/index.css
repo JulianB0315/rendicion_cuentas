@@ -8,6 +8,7 @@
     --titles: "Encode Sans Semi Expanded", serif;
     --font: "Asap", serif;
     --errors: #ea4949;
+    --success: #60cd64;
 }
 
 body {

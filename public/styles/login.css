@@ -51,3 +51,11 @@
     background: var(--errors);
     color: white;
 }
+.btn-action-admin.enable{
+    border: 2px solid var(--success);
+    color: var(--success);
+}
+.btn-action-admin.enable:hover{
+    background: var(--success);
+    color: white;
+}
