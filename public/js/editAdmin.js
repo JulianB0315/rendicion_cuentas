@@ -42,33 +42,12 @@ const toggleDeleteAdmin = (dni) => {
 	});
 	deleteRow.classList.toggle("d-none");
 };
-const enableAdmin = async (dni) => {
-    try {
-        const response = await fetch(`${baseUrl}/admin/habilitar_admin`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ dni_admin: dni }),
-        });
-        const data = await response.json();
-        if (data.status === "success") {
-            location.reload();
-        } else {
-            console.error(data.message);
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
 const searchAdmin = async (dni) => {
 	try {
 		const response = await fetch(
 			`${baseUrl}/admin/buscar_admin?dni-admin=${dni}`
 		);
 		const data = await response.json();
-		
-		// Mover el renderizado aquí dentro
 		const resultTable = document.getElementById("search-result");
 		if (data.status === "success") {
 			resultTable.innerHTML = `
