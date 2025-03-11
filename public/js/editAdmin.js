@@ -17,21 +17,27 @@ btnsUpdate.forEach((btn) => {
 })
 const toggleUpdatePassword = (dni) => {
     const passwordRow = document.getElementById(`update-password-${dni}`);
-    document.querySelectorAll('[id^="update-password-"]').forEach((row) => {
+    document.querySelectorAll('[id^="delete-"]').forEach(row => {
+        row.classList.add('d-none');
+    });
+    document.querySelectorAll('[id^="update-password-"]').forEach(row => {
         if (row.id !== `update-password-${dni}`) {
             row.classList.add('d-none');
         }
-        passwordRow.classList.toggle('d-none');
-    })
+    });
+    passwordRow.classList.toggle('d-none');
 }
 const toggleDeleteAdmin = (dni) => {
     const deleteRow = document.getElementById(`delete-${dni}`);
-    document.querySelectorAll('[id^="delete-"]').forEach((row) => {
-        if (row.id !== `delete-admin-${dni}`) {
+    document.querySelectorAll('[id^="update-password-"]').forEach(row => {
+        row.classList.add('d-none');
+    });
+    document.querySelectorAll('[id^="delete-"]').forEach(row => {
+        if (row.id !== `delete-${dni}`) {
             row.classList.add('d-none');
         }
-        deleteRow.classList.toggle('d-none');
-    })
+    });
+    deleteRow.classList.toggle('d-none');
 }
 btnsCancel.forEach((btn) => {
     btn.addEventListener('click', () => {
