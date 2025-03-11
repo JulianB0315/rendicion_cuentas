@@ -203,7 +203,7 @@
                                 </button>
                             </form>
                         </div>
-                        <div id="search-result"></div>
+                        <div id="search-result" class="position-relative"></div>
                     </div>
                 </div>
             </div>
