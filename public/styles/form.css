@@ -112,7 +112,7 @@ label{
     right: 0;
     margin: 1rem 0;
 }
-.btn-update {
+.btn-update, .btn-cancel {
     background-color: var(--primary-color);
     color: var(--white);
     font-size: 1rem;
@@ -124,12 +124,12 @@ label{
     outline: none;
 }
 
-.btn-update[disabled] {
+.btn-update[disabled], .btn-cancel[disabled] {
     background-color: var(--gray-light);
     cursor: not-allowed;
 }
 
-.btn-update:hover:not([disabled]) {
+.btn-update:hover:not([disabled]), .btn-cancel:hover:not([disabled]) {
     background-color: var(--tertiary-color);
 }
 
