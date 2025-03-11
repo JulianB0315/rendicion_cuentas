@@ -44,17 +44,17 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="<?= base_url('admin/questions') ?>" target="_blank" class="dropdown-item">Seleccionar Preguntas</a>
+										<a href="<?= base_url('admin/questions') ?>" class="dropdown-item">Seleccionar Preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('admin/viewQuestions') ?>" target="_blank" class="dropdown-item">Ver preguntas</a>
+										<a href="<?= base_url('admin/viewQuestions') ?>" class="dropdown-item">Ver preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('admin/report') ?>" target="_blank" class="dropdown-item">Reportes</a>
+										<a href="<?= base_url('admin/report') ?>" class="dropdown-item">Reportes</a>
 									</li>
 									<?php if( $categoria == 'super_admin'): ?>
 										<li>
-											<a href="<?= base_url('admin/admin_users') ?>" target="_blank" class="dropdown-item">Administrar Usuarios</a>
+											<a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
 										</li>
 									<?php endif; ?>
 									<li>
