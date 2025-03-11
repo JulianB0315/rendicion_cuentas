@@ -39,6 +39,10 @@ class Admin_UsersController extends BaseController
         $password = $this->request->getGet('password');
         $categoria = $this->request->getGet('categoria');
 
+        if ($this->AdministradoresModel->where('dni_admin', $dni)->first()) {
+            return redirect()->back()->with('error', 'El DNI ya está registrado.');
+        }
+        
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         $data = [
