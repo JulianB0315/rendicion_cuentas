@@ -7,6 +7,7 @@ const btnSearch = document.getElementById("btn-search");
 const searchForm = document.getElementById("search-form");
 const resultTable = document.getElementById("search-result");
 const btnCloseEnable = document.getElementById("btn-close-enable");
+const mainElement = document.querySelector("main");
 
 btnsUpdate.forEach((btn) => {
 	btn.disabled = true;
@@ -90,17 +91,33 @@ const searchAdmin = async (dni) => {
 				</button>
 				`;
 		} else {
-			resultTable.innerHTML = `
-				<div class="alert alert-info">
-					${data.message}
-				</div>`;
+			const alert = document.createElement('div');
+            alert.className = 'alert alert-info';
+            alert.textContent = data.message;
+            mainElement.appendChild(alert);
+			cleanSearchResult();
+			setTimeout(() => {
+                alert.style.transition = 'opacity 0.3s ease';
+                alert.style.opacity = '0';
+                setTimeout(() => {
+                    alert.remove();
+                }, 500);
+            }, 3000);
 		}
 	} catch (error) {
 		console.error(error);
-		document.getElementById("search-result").innerHTML = `
-			<div class="alert alert-danger">
-				Error al buscar administrador
-			</div>`;
+		const alert = document.createElement('div');
+        alert.className = 'alert alert-danger';
+        alert.textContent = 'Error al buscar administrador';
+        mainElement.appendChild(alert);
+		cleanSearchResult();
+		setTimeout(() => {
+			alert.style.transition = 'opacity 0.3s ease';
+			alert.style.opacity = '0';
+			setTimeout(() => {
+				alert.remove();
+			}, 500);
+		}, 3000);
 	}
 };
 
