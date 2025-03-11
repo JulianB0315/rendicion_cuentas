@@ -8,8 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 //Rutas de login del admin
 $routes->get('login', 'Admin_loginController::index');
-$routes->get('session', 'Admin_loginController::login');
-$routes->get('insertarAdmin', 'Admin_loginController::insertarAdmin');
+$routes->post('session', 'Admin_loginController::login');
+// $routes->get('insertarAdmin', 'Admin_loginController::insertarAdmin');
 $routes->get('logout', 'Admin_loginController::logout');
 
 //Rutas de admin
@@ -38,9 +38,11 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
         //Rutas de administrar usuarios
         $routes->get('admin_users', 'Admin_usersController::index');
         $routes->get('crear_admin', 'Admin_usersController::crear_admin');
-        //Rutas de Borrar y Editar admin(Dentro de Super admin)
-        $routes->get('eliminar_admin/(:alphanum)', 'Admin_usersController::borrar_admin/$1');
+        //Rutas Editar admin(Dentro de Super admin)
+        $routes->get('deshabilitar_admin/(:alphanum)', 'Admin_usersController::deshabilitar_admin/$1');
+        $routes->post('habilitar_admin/(:alphanum)', 'Admin_usersController::habilitar_admin/$1');
         $routes->post('editar_admin/(:alphanum)', 'Admin_usersController::editar_admin/$1');
+        $routes->get('buscar_admin/(:alphanum)', 'Admin_usersController::buscar_admin/$1');
     });
 });
 //Rutas del usuario(Formulario)

@@ -13,17 +13,20 @@ class Admin_loginController extends BaseController
     }
     public function index()
     {
+        session()->destroy();
         return view('login_admin');
     }
     public function login()
     {
-        $dni = $this->request->getGet('dni');
-        $password = $this->request->getGet('password');
+        $dni = $this->request->getPost('dni');
+        $password = $this->request->getPost('password');
 
         $admin = $this->AdministradoresModel
-            ->select('dni_admin, nombres_admin, categoria_admin, password')
+            ->select('dni_admin, nombres_admin, categoria_admin, password, estado')
             ->where('dni_admin', $dni)->first();
-
+        if ($admin['estado'] == 'deshabilitado') {
+            return redirect()->back()->with('error', 'Usuario deshabilitado');
+        }
         if ($admin && password_verify($password, $admin['password'])) {
             $session = session();
             $session->set([
@@ -33,7 +36,7 @@ class Admin_loginController extends BaseController
                 'isLoggedIn' => true,
             ]);
             $nombre = ucfirst(strtolower(explode(' ', $admin['nombres_admin'])[0]));
-            return redirect()->to(base_url('admin/'))->with('success', 'Bienvenido, '.$nombre);
+            return redirect()->to(base_url('admin/'))->with('success', 'Bienvenido, ' . $nombre);
         } else {
             return redirect()->back()->with('error', 'DNI o contraseña incorrectos');
         }
@@ -49,16 +52,16 @@ class Admin_loginController extends BaseController
     //     $nombres = "MARTHA LUZ TUÑOQUE JULCAS";
     //     $categoria = "super_admin";
     //     $password = "12345678"; 
-    
+
     //     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-    
+
     //     $data = [
     //         'dni_admin' => $dni,
     //         'nombres_admin' => $nombres,
     //         'password' => $hashedPassword, 
     //         'categoria_admin' => $categoria,
     //     ];
-    
+
     //     $this->AdministradoresModel->insert($data);
     //     echo "Admin insertado";
     // }

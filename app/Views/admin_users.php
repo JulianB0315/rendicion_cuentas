@@ -165,7 +165,7 @@
                                         <td colspan="4">
                                             <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                 <span class="me-3">¿Estás seguro de realizar esta acción?</span>
-                                                <form action="<?= base_url('admin/eliminar_admin/' . $admin['dni_admin']) ?>" method="get" class="d-flex gap-3">
+                                                <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="d-flex gap-3">
                                                     <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
                                                         <i class="fa-solid fa-xmark-large"></i>
                                                     </button>
