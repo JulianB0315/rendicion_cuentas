@@ -9,7 +9,6 @@ $routes->get('/', 'Home::index');
 //Rutas de login del admin
 $routes->get('login', 'Admin_loginController::index');
 $routes->post('session', 'Admin_loginController::login');
-// $routes->get('insertarAdmin', 'Admin_loginController::insertarAdmin');
 $routes->get('logout', 'Admin_loginController::logout');
 
 //Rutas de admin
@@ -65,3 +64,4 @@ $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
 //Rutas de la beta
 // $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
 // $routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');
+// $routes->get('insertarAdmin', 'Admin_loginController::insertarAdmin');
