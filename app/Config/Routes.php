@@ -30,7 +30,7 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
     $routes->post('viewQuestions/borrar_pregunta', 'viewQuestionsController::borrar_pregunta');
     //Rutas de reportes
     $routes->get('report', 'ReportController::mostrar_rendiciones');
-    $routes->get('mostrar_reporte/(:alphanum)', 'ReportController::mostrar_reporte/$1');
+    $routes->get('mostrar_reporte', 'ReportController::mostrar_reporte');
     //Generacion de excel(Dentro de reportes)
     $routes->get('viewReportController/generar_excel/(:alphanum)', 'viewReportController::generar_excel/$1');
     //Rutas de Super admin
