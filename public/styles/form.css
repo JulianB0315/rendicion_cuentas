@@ -112,6 +112,26 @@ label{
     right: 0;
     margin: 1rem 0;
 }
+.btn-update {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+    outline: none;
+}
+
+.btn-update[disabled] {
+    background-color: var(--gray-light);
+    cursor: not-allowed;
+}
+
+.btn-update:hover:not([disabled]) {
+    background-color: var(--tertiary-color);
+}
 
 
 @media (max-width: 768px) {

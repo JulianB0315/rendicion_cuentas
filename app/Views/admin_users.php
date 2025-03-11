@@ -154,7 +154,7 @@
                                                         name="password"
                                                         class="form-control me-2 password-input"
                                                         placeholder="Nueva contraseña">
-                                                    <button type="submit" class="btn btn-primary btn-update" >
+                                                    <button type="submit" class="btn btn-update" >
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </form>
