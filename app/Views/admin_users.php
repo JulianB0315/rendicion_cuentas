@@ -189,7 +189,7 @@
                     <div class="col-12">
                         <h4>Buscar Administradores</h4>
                         <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                            <form action="" class="d-flex flex-grow-1">
+                            <form action="<?= base_url('admin/buscar_admin/') ?>" method="get" class="d-flex flex-grow-1">
                                 <input type="text"
                                     name="text"
                                     class="form-control me-2 dni-input"
