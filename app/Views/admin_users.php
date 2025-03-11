@@ -188,15 +188,17 @@
                     </div>
                     <div class="col-12">
                         <h4>Buscar Administradores</h4>
-                        <form action="" class="form-container">
-                            <input type="text"
-                                name="text"
-                                class="form-control me-2 dni-input"
-                                placeholder="Ingresar DNI">
-                            <button type="submit" class="btn btn-search">
-                                <i class="fa-solid fa-search"></i>
-                            </button>
-                        </form>
+                        <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                            <form action="" class="d-flex flex-grow-1">
+                                <input type="text"
+                                    name="text"
+                                    class="form-control me-2 dni-input"
+                                    placeholder="Ingresar DNI">
+                                <button type="submit" class="btn btn-search">
+                                    <i class="fa-solid fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
