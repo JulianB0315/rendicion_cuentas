@@ -1,7 +1,6 @@
 const passwordInputs = document.querySelectorAll(".password-input");
 const btnsUpdate = document.querySelectorAll(".btn-update");
 const btnsCancel = document.querySelectorAll(".btn-cancel");
-const btnsDelete = document.querySelectorAll(".btn-delete");
 const dniInputSearch = document.getElementById("dni-search");
 const btnSearch = document.getElementById("btn-search");
 const searchForm = document.getElementById("search-form");
@@ -35,6 +34,19 @@ const toggleUpdatePassword = (dni) => {
 };
 const toggleDeleteAdmin = (dni) => {
 	const deleteRow = document.getElementById(`delete-${dni}`);
+	const deleteBtn = deleteRow.querySelector('.btn-delete');
+    const motivoTextarea = deleteRow.querySelector('.motivo');
+
+	deleteBtn.disabled = true;
+
+	motivoTextarea.addEventListener('input', () => {
+		if (motivoTextarea.value.length > 0) {
+			deleteBtn.disabled = false;
+		} else {
+			deleteBtn.disabled = true;
+		}
+	})
+
 	document.querySelectorAll('[id^="update-password-"]').forEach((row) => {
 		row.classList.add("d-none");
 	});
@@ -44,6 +56,11 @@ const toggleDeleteAdmin = (dni) => {
 		}
 	});
 	deleteRow.classList.toggle("d-none");
+
+	if (deleteRow.classList.contains("d-none")) {
+        motivoTextarea.value = '';
+        deleteBtn.disabled = true;
+    }
 };
 const cleanSearchResult = () => {
 	resultTable.innerHTML = "";
