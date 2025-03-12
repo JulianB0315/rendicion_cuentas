@@ -29,7 +29,15 @@
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
 </head>
+
 <body>
-    hola mundooooooooooooooooooo
+    <header>
+        <nav class="nav-header w-100 p-3">
+            <div class="d-flex align-items-center logo-container">
+                <img src="<?= base_url("img/logo.jpg") ?>" alt="Logo" class="nav-logo img-fluid">
+            </div>
+        </nav>
+    </header>
 </body>
+
 </html>
