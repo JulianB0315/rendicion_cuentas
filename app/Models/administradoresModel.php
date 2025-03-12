@@ -19,8 +19,6 @@ class administradoresModel extends \CodeIgniter\Model
         'fecha_deshabilitado'
     ];
 
-    protected $useTimestamps = true;
-    protected $dateFormat = 'datetime';
-    protected $createdField = 'creado_en';
-    protected $updatedField = 'actualizado_en';
+    protected $useTimestamps = false;
+    protected $updatedField  = false;
 }
