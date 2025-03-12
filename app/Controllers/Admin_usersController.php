@@ -104,7 +104,7 @@ class Admin_UsersController extends BaseController
     {
         $this->AdministradoresModel
             ->set([
-                'estado' => 'deshabilitado',
+                'estado' => 'habilitado',
                 'motivo_deshabilitado' => null,
                 'fecha_deshabilitado' => null
             ])
