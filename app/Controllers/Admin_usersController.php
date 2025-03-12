@@ -60,12 +60,9 @@ class Admin_UsersController extends BaseController
         if ($this->AdministradoresModel->where('dni_admin', $dni)->first()) {
             return redirect()->back()->with('error', 'El DNI ya está registrado.');
         }
-        $this->db->transStart();
-        $this->historialModel->registrarAccion($idRegistro, $dni, 'crear');
-        $this->db->transComplete();
-
+        
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
+        
         $data = [
             'dni_admin' => $dni,
             'nombres_admin' => $nombres,
@@ -73,8 +70,11 @@ class Admin_UsersController extends BaseController
             'categoria_admin' => $categoria,
             'estado' => $estado
         ];
-
+        
         $this->AdministradoresModel->insert($data);
+        $this->db->transStart();
+        $this->historialModel->registrarAccion($idRegistro, $dni, 'crear');
+        $this->db->transComplete();
         session()->setFlashdata('success', 'Administrador creado exitosamente');
         return redirect()->to(base_url('admin/admin_users'));
     }
