@@ -103,6 +103,7 @@ class Admin_UsersController extends BaseController
     public function deshabilitar_admin($admin)
     {
         $motivo = $this->request->getGet('motivo');
+        $idRegistro = $this->crear_id_registro();
         if (empty($motivo)) {
             session()->setFlashdata('error', 'El motivo es requerido');
             return redirect()->back();
@@ -112,18 +113,18 @@ class Admin_UsersController extends BaseController
         $this->AdministradoresModel->update($admin, [
             'estado' => 'deshabilitado'
         ]);
-
-        $this->historialModel->registrarAccion($admin, 'deshabilitar', $motivo);
-
+        
+        $this->historialModel->registrarAccion($idRegistro, $admin, 'deshabilitar', $motivo);
+        
         $this->db->transComplete();
         // $this->AdministradoresModel
         //     ->set([
-        //         'estado' => 'deshabilitado',
-        //         'motivo_deshabilitado' => $motivo,
-        //         // TODO: Cambiar a la fecha peruana actual
-        //         'fecha_deshabilitado' => date('Y-m-d H:i:s'),
-        //         'deshabilitado_por' => session()->get('dni_admin'),
-        //         'habilitado_por' => null
+            //         'estado' => 'deshabilitado',
+            //         'motivo_deshabilitado' => $motivo,
+            //         // TODO: Cambiar a la fecha peruana actual
+            //         'fecha_deshabilitado' => date('Y-m-d H:i:s'),
+            //         'deshabilitado_por' => session()->get('dni_admin'),
+            //         'habilitado_por' => null
         //     ])
         //     ->where('dni_admin', $admin)
         //     ->update();
@@ -134,25 +135,27 @@ class Admin_UsersController extends BaseController
     {
         // $this->AdministradoresModel
         //     ->set([
-        //         'estado' => 'habilitado',
-        //         'motivo_deshabilitado' => null,
-        //         'fecha_deshabilitado' => null,
-        //         'deshabilitado_por' => null,
+            //         'estado' => 'habilitado',
+            //         'motivo_deshabilitado' => null,
+            //         'fecha_deshabilitado' => null,
+            //         'deshabilitado_por' => null,
         //         'habilitado_por' => session()->get('dni_admin')
         //     ])
         //     ->where('dni_admin', $admin)
         //     ->update();
+        $idRegistro = $this->crear_id_registro();
         $this->db->transStart();
         $this->AdministradoresModel->update($admin, [
             'estado' => 'habilitado'
         ]);
-        $this->historialModel->registrarAccion($admin, 'habilitar');
+        $this->historialModel->registrarAccion($idRegistro, $admin, 'habilitar');
         $this->db->transComplete();
         session()->setFlashdata('success', 'Administrador habilitado exitosamente');
         return redirect()->to(base_url('admin/admin_users'));
     }
     public function editar_admin($admin)
     {
+        $idRegistro = $this->crear_id_registro();
         $password = $this->request->getPost('password');
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $this->db->transStart();
@@ -163,7 +166,7 @@ class Admin_UsersController extends BaseController
         $this->AdministradoresModel->update($admin, [
             'password' => password_hash($password, PASSWORD_DEFAULT)
         ]);
-        $this->historialModel->registrarAccion($admin, 'editar_password');
+        $this->historialModel->registrarAccion($idRegistro, $admin, 'editar_password');
         $this->db->transComplete();
         session()->setFlashdata('success', 'Contraseña editada correctamente.' );
         return redirect()->to(base_url('admin/admin_users'));
