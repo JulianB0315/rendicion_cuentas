@@ -16,10 +16,7 @@
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
     <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/login.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/dashboard.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -47,11 +44,9 @@
         <div class="row">
             <div class="col-12">
                 <table class="table table-ejes text-center">
-                    <caption>Historial de cambios de los administradores</caption>
                     <thead>
                         <tr>
                             <th scope="col">Administrador</th>
-                            <th scope="col">Categoría</th>
                             <th scope="col">Acción</th>
                             <th scope="col">Motivo</th>
                             <th scope="col">Realizado por</th>
@@ -72,7 +67,7 @@
                                 </td>
                                 <td><?= esc($registro['motivo']) ?? '-' ?></td>
                                 <td><?= esc($registro['realizado_por']) ?></td>
-                                <td><?= formatear_fecha_esp($registro['fecha_modificacion']) ?></td>
+                                <td><?= formatear_fecha_esp($registro['fecha_accion']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
