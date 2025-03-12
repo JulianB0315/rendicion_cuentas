@@ -167,13 +167,12 @@
                                             </tr>
                                             <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
                                                 <td colspan="4">
-                                                    <div class="d-flex w-100 p-2">
+                                                    <div class="d-flex w-100 p-2 disable-form">
                                                         <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="form-container">
                                                             <div class="form-group text">
                                                                 <textarea
                                                                     name="motivo"
-                                                                    id="motivo"
-                                                                    class="form-part pregunta-textarea"
+                                                                    class="form-part pregunta-textarea motivo"
                                                                     placeholder=" "
                                                                     title="Por favor, ingresar solo letras (máximo 200 caracteres)"
                                                                     maxlength="200"></textarea>

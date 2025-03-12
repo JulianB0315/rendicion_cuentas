@@ -172,4 +172,11 @@ label{
         right: 0;
         margin: 1rem 0;
     }
+    .disable-form .form-container{
+        max-width: 100%;
+        width: 100%;
+    }
+    .disable-form .form-container .form-part.pregunta-textarea{
+        resize: vertical;
+    }
 }
