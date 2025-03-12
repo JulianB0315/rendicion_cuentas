@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
     <link rel="stylesheet" href="<?= base_url('styles/login.css') ?>" />
     <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("styles/dashboard.css") ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -37,7 +38,10 @@
                     src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
-                <h4 class="header-welcome">Bienvenid@, <?= esc($nombre) ?></h4>
+                <h4 class="header-welcome text-center">Bienvenid@, <?= esc($nombre) ?></h4>
+                <button class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register">
+                    Tu historial
+                </button>
             </div>
         </nav>
     </header>
