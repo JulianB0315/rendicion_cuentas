@@ -167,15 +167,29 @@
                                             </tr>
                                             <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
                                                 <td colspan="4">
-                                                    <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                                                        <span class="me-3">¿Estás seguro de realizar esta acción?</span>
-                                                        <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="d-flex gap-3">
-                                                            <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
-                                                                <i class="fa-solid fa-xmark-large"></i>
-                                                            </button>
-                                                            <button type="submit" class="btn btn-outline-danger btn-delete">
-                                                                <i class="fa-solid fa-badge-check"></i>
-                                                            </button>
+                                                    <div class="d-flex w-100 p-2">
+                                                        <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="form-container">
+                                                            <div class="form-group text">
+                                                                <textarea
+                                                                    name="motivo"
+                                                                    id="motivo"
+                                                                    class="form-part pregunta-textarea"
+                                                                    placeholder=" "
+                                                                    title="Por favor, ingresar solo letras (máximo 200 caracteres)"
+                                                                    maxlength="200"></textarea>
+                                                                <label for="pregunta">Motivo</label>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between align-items-center w-100 p-2">
+                                                                <span class="me-3">¿Estás seguro de realizar esta acción?</span>
+                                                                <div class="d-flex gap-3">
+                                                                    <button type="button" class="btn btn-cancel" data-dni="<?= esc($admin['dni_admin']) ?>">
+                                                                        <i class="fa-solid fa-xmark-large"></i>
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-outline-danger btn-delete">
+                                                                        <i class="fa-solid fa-badge-check"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </td>
@@ -192,14 +206,13 @@
                         <h4>Buscar Administradores</h4>
                         <div class="d-flex justify-content-between align-items-center w-100 p-2">
                             <form action="<?= base_url('admin/buscar_admin/') ?>" method="get" class="d-flex flex-grow-1" id="search-form">
-                                <input 
+                                <input
                                     type="text"
                                     name="dni-search"
                                     class="form-control me-2 dni-input"
                                     placeholder="Ingresar DNI"
                                     id="dni-search"
-                                    required
-                                >
+                                    required>
                                 <button type="submit" class="btn btn-search" id="btn-search">
                                     <i class="fa-solid fa-search"></i>
                                 </button>
