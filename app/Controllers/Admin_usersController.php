@@ -6,7 +6,6 @@ use App\Models\AdministradoresModel;
 use App\Models\HistorialAdminModel;
 
 /* TODO: Eliminar comentarios o modificar las queries
-    agregar motivos a editar y habilitar, de lo contrario no va la tabla, pero si funciona con la tabla admins normal
     hacer la pagina de historial
 */
 
