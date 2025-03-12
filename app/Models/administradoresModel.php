@@ -15,9 +15,9 @@ class administradoresModel extends \CodeIgniter\Model
         'password',
         'categoria_admin',
         'estado',
-        'motivo_deshabilitado',
-        'fecha_deshabilitado',
-        'deshabilitado_por',
+        // 'motivo_deshabilitado',
+        // 'fecha_deshabilitado',
+        // 'deshabilitado_por',
         'habilitado_por'
     ];
 
