@@ -94,7 +94,9 @@ class Admin_UsersController extends BaseController
                 'estado' => 'deshabilitado',
                 'motivo_deshabilitado' => $motivo,
                 // TODO: Cambiar a la fecha peruana actual
-                'fecha_deshabilitado' => date('Y-m-d H:i:s')
+                'fecha_deshabilitado' => date('Y-m-d H:i:s'),
+                'deshabilitado_por' => session()->get('dni_admin'),
+                'habilitado_por' => null
             ])
             ->where('dni_admin', $admin)
             ->update();
@@ -107,7 +109,9 @@ class Admin_UsersController extends BaseController
             ->set([
                 'estado' => 'habilitado',
                 'motivo_deshabilitado' => null,
-                'fecha_deshabilitado' => null
+                'fecha_deshabilitado' => null,
+                'deshabilitado_por' => null,
+                'habilitado_por' => session()->get('dni_admin')
             ])
             ->where('dni_admin', $admin)
             ->update();
