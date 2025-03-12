@@ -31,7 +31,6 @@ class HistorialAdminModel extends Model
                 a.nombres_admin as admin_afectado,
                 a.categoria_admin as categoria_admin,
                 r.nombres_admin as realizado_por,
-                r.categoria_admin as categoria_realizado_por
             ')
             ->join('administradores a', 'a.dni_admin = h.dni_admin')
             ->join('administradores r', 'r.dni_admin = h.realizado_por')

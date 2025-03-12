@@ -38,6 +38,60 @@
             </div>
         </nav>
     </header>
+    <section class="text-center mt-3">
+        <h1 class="animate__animated animate__fadeInDown header-title">
+            Historial de cambios - Administradores
+        </h1>
+    </section>
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-ejes text-center">
+                    <caption>Historial de cambios de los administradores</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Administrador</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Acción</th>
+                            <th scope="col">Motivo</th>
+                            <th scope="col">Realizado por</th>
+                            <th scope="col">Fecha Modificación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($historial as $registro) : ?>
+                            <tr>
+                                <td>
+                                    <?= esc($registro['admin_afectado']) ?>
+                                    <span class="badge bg-info"><?= $registro['categoria_admin'] ?></span>
+                                </td>
+                                <td>
+                                    <span class="badge <?= getBadgeClass($registro['accion']) ?>">
+                                        <?= ucfirst($registro['accion']) ?>
+                                    </span>
+                                </td>
+                                <td><?= esc($registro['motivo']) ?? '-' ?></td>
+                                <td><?= esc($registro['realizado_por']) ?></td>
+                                <td><?= formatear_fecha_esp($registro['fecha_modificacion']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <?php
+        function getBadgeClass($accion)
+        {
+            return match ($accion) {
+                'deshabilitar' => 'bg-danger',
+                'habilitar' => 'bg-success',
+                'editar_password' => 'bg-warning',
+                'crear' => 'bg-primary',
+                default => 'bg-secondary'
+            };
+        }
+        ?>
+    </main>
 </body>
 
 </html>
