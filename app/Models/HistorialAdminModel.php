@@ -24,7 +24,7 @@ class HistorialAdminModel extends Model
 
     public function getHistorialCompleto()
     {
-        return $this->db->table($this->table . 'h')
+        return $this->db->table($this->table . ' h')
             ->select('
                 h.*,
                 a.nombres_admin as admin_afectado,

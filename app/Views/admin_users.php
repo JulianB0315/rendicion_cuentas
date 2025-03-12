@@ -41,7 +41,7 @@
                 <h4 class="header-welcome text-center">Bienvenid@, <?= esc($nombre) ?></h4>
                 <a 
                     class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register"
-                    href="<?= base_url('#') ?>"
+                    href="<?= base_url('admin/historial') ?>"
                     title="Ver tu historial"
                 >
                     Ver historial
