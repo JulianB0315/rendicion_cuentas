@@ -82,6 +82,7 @@
                             id="password"
                             name="password"
                             placeholder=" "
+                            minlength="8"
                             required />
                         <label for="password">Contraseña</label>
                         <button type="button" class="toggle-password" id="togglePassword">
@@ -155,6 +156,7 @@
                                                             <input type="password"
                                                                 name="password"
                                                                 class="form-control me-2 password-input"
+                                                                minlength="8"
                                                                 placeholder="Nueva contraseña">
                                                             <button type="submit" class="btn btn-update">
                                                                 <i class="fa-solid fa-pen-to-square"></i>

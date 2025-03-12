@@ -75,6 +75,7 @@
                                 id="password"
                                 name="password"
                                 placeholder=" "
+                                minlength="8"
                                 required />
                             <label for="password">Contraseña</label>
                             <button type="button" class="toggle-password" id="togglePassword">
