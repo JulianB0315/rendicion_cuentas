@@ -43,6 +43,14 @@ class Admin_UsersController extends BaseController
         }
         return view('admin_users', ['admins' => $admins, 'nombre' => $primer_nombre]);
     }
+    public function crear_id_registro()
+    {
+        do {
+            $id = 'R' . substr(uniqid(), -8);
+            $existe = $this->historialModel->find($id);
+        } while ($existe);
+        return $id;
+    }
     public function crear_admin()
     {
         $dni = $this->request->getGet('dni-admin');
