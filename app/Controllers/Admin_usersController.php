@@ -157,6 +157,7 @@ class Admin_UsersController extends BaseController
         ]);
         $this->historialModel->registrarAccion($admin, 'editar_password');
         $this->db->transComplete();
+        session()->setFlashdata('success', 'Contraseña editada correctamente.' );
         return redirect()->to(base_url('admin/admin_users'));
     }
 }
