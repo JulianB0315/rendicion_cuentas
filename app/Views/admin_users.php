@@ -33,7 +33,7 @@
 <body>
     <header class="container-fluid header p-3 mb-5">
         <nav class="nav-header container">
-            <div class="d-flex align-items-center logo-container w-100 justify-content-between">
+            <div class="d-flex align-items-center logo-container w-100 justify-content-between gap-3">
                 <img
                     src="<?= base_url('img/logo.jpg') ?>"
                     alt="Logo"
