@@ -76,7 +76,6 @@ class Admin_UsersController extends BaseController
                 'status' => 'success',
                 'data' => $admin
             ]);
-            
         }
         return $this->response->setJSON([
             'status' => 'error',
@@ -85,8 +84,17 @@ class Admin_UsersController extends BaseController
     }
     public function deshabilitar_admin($admin)
     {
+        $motivo = $this->request->getGet('motivo');
+        if (empty($motivo)) {
+            session()->setFlashdata('error', 'El motivo es requerido');
+            return redirect()->back();
+        }
         $this->AdministradoresModel
-            ->set('estado', 'deshabilitado')
+            ->set([
+                'estado' => 'deshabilitado',
+                'motivo_deshabilitado' => $motivo,
+                'fecha_deshabilitado' => date('Y-m-d H:i:s')
+            ])
             ->where('dni_admin', $admin)
             ->update();
         session()->setFlashdata('success', 'Administrador deshabilitado exitosamente');
@@ -95,7 +103,11 @@ class Admin_UsersController extends BaseController
     function habilitar_admin($admin)
     {
         $this->AdministradoresModel
-            ->set('estado', 'habilitado')
+            ->set([
+                'estado' => 'deshabilitado',
+                'motivo_deshabilitado' => null,
+                'fecha_deshabilitado' => null
+            ])
             ->where('dni_admin', $admin)
             ->update();
         session()->setFlashdata('success', 'Administrador habilitado exitosamente');
