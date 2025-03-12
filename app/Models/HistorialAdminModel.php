@@ -12,6 +12,7 @@ class HistorialAdminModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
+        'id',
         'dni_admin',
         'accion',
         'motivo',
