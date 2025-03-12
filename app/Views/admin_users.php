@@ -39,9 +39,13 @@
                     alt="Logo"
                     class="nav-logo img-fluid" />
                 <h4 class="header-welcome text-center">Bienvenid@, <?= esc($nombre) ?></h4>
-                <button class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register">
+                <a 
+                    class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register"
+                    href="<?= base_url('#') ?>"
+                    title="Ver tu historial"
+                >
                     Tu historial
-                </button>
+                </a>
             </div>
         </nav>
     </header>
