@@ -93,6 +93,7 @@ class Admin_UsersController extends BaseController
             ->set([
                 'estado' => 'deshabilitado',
                 'motivo_deshabilitado' => $motivo,
+                // TODO: Cambiar a la fecha peruana actual
                 'fecha_deshabilitado' => date('Y-m-d H:i:s')
             ])
             ->where('dni_admin', $admin)
