@@ -141,6 +141,12 @@ label{
     border: 3px solid var(--errors);
     color: var(--errors);
 }
+.btn-delete[disabled]{
+    color: var(--gray-light);
+    border-color: var(--gray-light);
+    cursor: not-allowed;
+}
+
 .btn-delete:hover{
     background-color: var(--errors);
     color: var(--white);
