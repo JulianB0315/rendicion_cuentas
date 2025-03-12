@@ -3,16 +3,21 @@
 namespace App\Controllers;
 
 use App\Models\AdministradoresModel;
+use App\Models\HistorialAdminModel;
 
 class Admin_UsersController extends BaseController
 {
     private $AdministradoresModel;
     private $admin;
+    private $historialModel;
+    private $db;
 
     function __construct()
     {
         $this->AdministradoresModel = new AdministradoresModel();
         $this->admin = \Config\Services::session();
+        $this->historialModel = new HistorialAdminModel();
+        $this->db = \Config\Database::connect();
     }
     public function index()
     {
@@ -89,32 +94,47 @@ class Admin_UsersController extends BaseController
             session()->setFlashdata('error', 'El motivo es requerido');
             return redirect()->back();
         }
-        $this->AdministradoresModel
-            ->set([
-                'estado' => 'deshabilitado',
-                'motivo_deshabilitado' => $motivo,
-                // TODO: Cambiar a la fecha peruana actual
-                'fecha_deshabilitado' => date('Y-m-d H:i:s'),
-                'deshabilitado_por' => session()->get('dni_admin'),
-                'habilitado_por' => null
-            ])
-            ->where('dni_admin', $admin)
-            ->update();
+        $this->db->transStart();
+
+        $this->AdministradoresModel->update($admin, [
+            'estado' => 'deshabilitado'
+        ]);
+
+        $this->historialModel->registrarAccion($admin, 'deshabilitar', $motivo);
+
+        $this->db->transComplete();
+        // $this->AdministradoresModel
+        //     ->set([
+        //         'estado' => 'deshabilitado',
+        //         'motivo_deshabilitado' => $motivo,
+        //         // TODO: Cambiar a la fecha peruana actual
+        //         'fecha_deshabilitado' => date('Y-m-d H:i:s'),
+        //         'deshabilitado_por' => session()->get('dni_admin'),
+        //         'habilitado_por' => null
+        //     ])
+        //     ->where('dni_admin', $admin)
+        //     ->update();
         session()->setFlashdata('success', 'Administrador deshabilitado exitosamente');
         return redirect()->to(base_url('admin/admin_users'));
     }
     function habilitar_admin($admin)
     {
-        $this->AdministradoresModel
-            ->set([
-                'estado' => 'habilitado',
-                'motivo_deshabilitado' => null,
-                'fecha_deshabilitado' => null,
-                'deshabilitado_por' => null,
-                'habilitado_por' => session()->get('dni_admin')
-            ])
-            ->where('dni_admin', $admin)
-            ->update();
+        // $this->AdministradoresModel
+        //     ->set([
+        //         'estado' => 'habilitado',
+        //         'motivo_deshabilitado' => null,
+        //         'fecha_deshabilitado' => null,
+        //         'deshabilitado_por' => null,
+        //         'habilitado_por' => session()->get('dni_admin')
+        //     ])
+        //     ->where('dni_admin', $admin)
+        //     ->update();
+        $this->db->transStart();
+        $this->AdministradoresModel->update($admin, [
+            'estado' => 'habilitado'
+        ]);
+        $this->historialModel->registrarAccion($admin, 'habilitar');
+        $this->db->transComplete();
         session()->setFlashdata('success', 'Administrador habilitado exitosamente');
         return redirect()->to(base_url('admin/admin_users'));
     }
@@ -122,10 +142,16 @@ class Admin_UsersController extends BaseController
     {
         $password = $this->request->getPost('password');
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $this->AdministradoresModel
-            ->set('password', $hashedPassword)
-            ->where('dni_admin', $admin)
-            ->update();
+        $this->db->transStart();
+        // $this->AdministradoresModel
+        //     ->set('password', $hashedPassword)
+        //     ->where('dni_admin', $admin)
+        //     ->update();
+        $this->AdministradoresModel->update($admin, [
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
+        $this->historialModel->registrarAccion($admin, 'editar_password');
+        $this->db->transComplete();
         return redirect()->to(base_url('admin/admin_users'));
     }
 }

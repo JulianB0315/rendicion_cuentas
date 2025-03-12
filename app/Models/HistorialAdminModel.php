@@ -38,7 +38,7 @@ class HistorialAdminModel extends Model
             ->get()
             ->getResultArray();
     }
-    public function registrarAccion($dniAdmin, $accion, $motivo)
+    public function registrarAccion($dniAdmin, $accion, $motivo=null)
     {
         $data = [
             'dni_admin' => $dniAdmin,
