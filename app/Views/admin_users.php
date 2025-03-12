@@ -44,7 +44,7 @@
                     href="<?= base_url('#') ?>"
                     title="Ver tu historial"
                 >
-                    Tu historial
+                    Ver historial
                 </a>
             </div>
         </nav>
