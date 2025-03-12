@@ -61,7 +61,7 @@
                                     <span class="badge bg-info"><?= $registro['categoria_admin'] ?></span>
                                 </td>
                                 <td>
-                                    <span class="badge <?= getBadgeClass($registro['accion']) ?>">
+                                    <span class="badge <?= get_badge_class($registro['accion']) ?>">
                                         <?= ucfirst($registro['accion']) ?>
                                     </span>
                                 </td>
@@ -74,18 +74,6 @@
                 </table>
             </div>
         </div>
-        <?php
-        function getBadgeClass($accion)
-        {
-            return match ($accion) {
-                'deshabilitar' => 'bg-danger',
-                'habilitar' => 'bg-success',
-                'editar_password' => 'bg-warning',
-                'crear' => 'bg-primary',
-                default => 'bg-secondary'
-            };
-        }
-        ?>
     </main>
 </body>
 
