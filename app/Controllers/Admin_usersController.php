@@ -51,6 +51,7 @@ class Admin_UsersController extends BaseController
     }
     public function crear_admin()
     {
+        $idRegistro = $this->crear_id_registro();
         $dni = $this->request->getGet('dni-admin');
         $nombres = $this->request->getGet('name-admin');
         $password = $this->request->getGet('password');
@@ -59,6 +60,9 @@ class Admin_UsersController extends BaseController
         if ($this->AdministradoresModel->where('dni_admin', $dni)->first()) {
             return redirect()->back()->with('error', 'El DNI ya está registrado.');
         }
+        $this->db->transStart();
+        $this->historialModel->registrarAccion($idRegistro, $dni, 'crear');
+        $this->db->transComplete();
 
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
