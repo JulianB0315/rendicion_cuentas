@@ -16,7 +16,9 @@ class administradoresModel extends \CodeIgniter\Model
         'categoria_admin',
         'estado',
         'motivo_deshabilitado',
-        'fecha_deshabilitado'
+        'fecha_deshabilitado',
+        'deshabilitado_por',
+        'habilitado_por'
     ];
 
     protected $useTimestamps = false;
