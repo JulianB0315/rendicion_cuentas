@@ -76,7 +76,7 @@ class Admin_UsersController extends BaseController
         $this->historialModel->registrarAccion($idRegistro, $dni, 'crear');
         $this->db->transComplete();
         session()->setFlashdata('success', 'Administrador creado exitosamente');
-        return redirect()->to(base_url('admin/admin_users'));
+        return redirect()->back();
     }
     public function buscar_admin()
     {
@@ -121,7 +121,7 @@ class Admin_UsersController extends BaseController
         $this->db->transComplete();
 
         session()->setFlashdata('success', 'Administrador deshabilitado exitosamente');
-        return redirect()->to(base_url('admin/admin_users'));
+        return redirect()->back();
     }
     function habilitar_admin($admin)
     {
@@ -133,7 +133,7 @@ class Admin_UsersController extends BaseController
         $this->historialModel->registrarAccion($idRegistro, $admin, 'habilitar');
         $this->db->transComplete();
         session()->setFlashdata('success', 'Administrador habilitado exitosamente');
-        return redirect()->to(base_url('admin/admin_users'));
+        return redirect()->back();
     }
     public function editar_admin($admin)
     {
@@ -147,6 +147,6 @@ class Admin_UsersController extends BaseController
         $this->historialModel->registrarAccion($idRegistro, $admin, 'editar_password');
         $this->db->transComplete();
         session()->setFlashdata('success', 'Contraseña editada correctamente.');
-        return redirect()->to(base_url('admin/admin_users'));
+        return redirect()->back();
     }
 }
