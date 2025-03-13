@@ -160,8 +160,7 @@ label{
     box-shadow: 0 0 5px .25rem #b1b1b140;
 }
 .btn-close-enable:hover{
-    color: var(--white);
-    background-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
