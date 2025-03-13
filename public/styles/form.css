@@ -152,12 +152,12 @@ label{
     color: var(--white);
 }
 .btn-close-enable{
-    font-size: 1.2rem;
+    font-size: .8rem;
     border-radius: 50%;
     cursor: pointer;
     transition: all .5s ease-in-out;
     color: var(--gray);
-    box-shadow: 0 0 5px .25rem rgba(46, 138, 203, 0.25);
+    box-shadow: 0 0 5px .25rem #b1b1b140;
 }
 .btn-close-enable:hover{
     color: var(--white);
