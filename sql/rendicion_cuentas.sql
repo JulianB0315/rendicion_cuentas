@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2025 a las 21:41:33
+-- Tiempo de generación: 26-03-2025 a las 14:05:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,10 +42,7 @@ CREATE TABLE `administradores` (
 --
 
 INSERT INTO `administradores` (`dni_admin`, `nombres_admin`, `password`, `categoria_admin`, `estado`, `creado_en`, `actualizado_en`) VALUES
-('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'super_admin', 'habilitado', '2025-03-12 16:06:51', '2025-03-12 16:09:07'),
-('73444069', 'JIMMY ANDERSON DE LA CRUZ VEGA', '$2y$10$y084WT9092eG42oWzLDaTeY4bhsWsG6gIb2OdesTX7S8FfCTr92vm', 'super_admin', 'deshabilitado', '2025-03-12 16:06:51', '2025-03-17 15:53:58'),
-('74887540', 'DIEGO ALBERTO CASTRO PASTOR', '$2y$10$MpQzFdrX6m4V6ilPSxKukekBN2h9LRquAaDnpf8/2OQ8ilBxteMi.', 'super_admin', 'habilitado', '2025-03-12 16:06:51', '2025-03-17 15:54:27'),
-('76628500', 'JULIAN BURGA BRACAMONTE', '$2y$10$G6o2XJRyTV1IXBkSfWWnpO9TlB6ZqUuK0qE8o3miGn/0DXSd4.bO6', 'admin', 'deshabilitado', '2025-03-12 16:06:51', '2025-03-13 13:09:53');
+('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'super_admin', 'habilitado', '2025-03-12 16:06:51', '2025-03-12 16:09:07');
 
 -- --------------------------------------------------------
 
@@ -57,13 +54,6 @@ CREATE TABLE `eje` (
   `id_eje` varchar(8) NOT NULL,
   `tematica` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `eje`
---
-
-INSERT INTO `eje` (`id_eje`, `tematica`) VALUES
-('E29c25ae', 'Limpieza Pública');
 
 -- --------------------------------------------------------
 
@@ -77,13 +67,6 @@ CREATE TABLE `ejes_seleccionados` (
   `id_eje` varchar(8) DEFAULT NULL,
   `cantidad_preguntas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ejes_seleccionados`
---
-
-INSERT INTO `ejes_seleccionados` (`id_eje_seleccionado`, `id_rendicion`, `id_eje`, `cantidad_preguntas`) VALUES
-('SE312b49', 'RE250321', 'E29c25ae', 0);
 
 -- --------------------------------------------------------
 
@@ -99,25 +82,6 @@ CREATE TABLE `historial_admin` (
   `realizado_por` varchar(8) NOT NULL,
   `fecha_accion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `historial_admin`
---
-
-INSERT INTO `historial_admin` (`id`, `dni_admin`, `accion`, `motivo`, `realizado_por`, `fecha_accion`) VALUES
-('R258e8e1', '76628500', 'habilitar', NULL, '40346175', '2025-03-13 02:53:28'),
-('R26b7cd4', '76628500', 'editar_password', NULL, '40346175', '2025-03-13 02:53:47'),
-('R305b788', '74887540', 'habilitar', NULL, '40346175', '2025-03-13 18:52:05'),
-('R42bc4f2', '74887540', 'editar_password', NULL, '40346175', '2025-03-13 18:57:00'),
-('R5910e85', '74887540', 'deshabilitar', 'pq si', '40346175', '2025-03-17 20:53:53'),
-('R59670dd', '73444069', 'deshabilitar', 'pq si', '40346175', '2025-03-17 20:53:58'),
-('R59fd91d', '74887540', 'habilitar', NULL, '40346175', '2025-03-17 20:54:07'),
-('R5b39177', '74887540', 'editar_password', NULL, '40346175', '2025-03-17 20:54:27'),
-('R9215fec', '76628500', 'deshabilitar', 'pq es kchero de david', '40346175', '2025-03-13 18:09:53'),
-('R9643dc8', '74887540', 'deshabilitar', 'Se fue de vacaciones hasta el dia 27/07/25', '40346175', '2025-03-13 18:11:00'),
-('Rf33bcaf', '74887540', 'editar_password', NULL, '40346175', '2025-03-13 03:48:19'),
-('Rf4a041e', '74887540', 'deshabilitar', 'porque es muy pro', '40346175', '2025-03-13 03:48:42'),
-('Rf5d3c0e', '74887540', 'habilitar', NULL, '40346175', '2025-03-13 03:49:01');
 
 -- --------------------------------------------------------
 
@@ -157,13 +121,6 @@ CREATE TABLE `rendición` (
   `hora_rendicion` time NOT NULL,
   `banner_rendicion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `rendición`
---
-
-INSERT INTO `rendición` (`id_rendicion`, `fecha`, `hora_rendicion`, `banner_rendicion`) VALUES
-('RE250321', '2025-03-21', '14:10:00', '8951765758.jpg');
 
 -- --------------------------------------------------------
 
