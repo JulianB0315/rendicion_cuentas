@@ -1,60 +1,58 @@
-# CodeIgniter 4 Framework
+# Rendición de Cuentas
 
-## What is CodeIgniter?
+## Descripción del Proyecto
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+El proyecto **Rendición de Cuentas** es una plataforma web desarrollada en PHP utilizando el framework **CodeIgniter 4**. Su objetivo es facilitar la gestión y transparencia de las audiencias públicas de rendición de cuentas, permitiendo a los ciudadanos registrar su asistencia, realizar preguntas y consultar información relevante sobre las actividades municipales.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Características Principales
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- **Gestión de Audiencias:** Registro de fechas, horarios y banners de las audiencias públicas.
+- **Registro de Asistencia:** Los ciudadanos pueden registrarse como asistentes u oradores.
+- **Participación Ciudadana:** Los oradores pueden enviar preguntas relacionadas con ejes temáticos específicos.
+- **Portal de Transparencia:** Consulta de informes y estadísticas de las audiencias realizadas.
+- **Panel de Administración:** Gestión de usuarios, audiencias y ejes temáticos.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Requisitos del Servidor
 
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Contributing
-
-We welcome contributions from the community.
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
+El proyecto requiere **PHP 8.1 o superior** con las siguientes extensiones habilitadas:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- [json](http://php.net/manual/en/json.installation.php) (habilitada por defecto)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) (para usar MySQL)
+- [libcurl](http://php.net/manual/en/curl.requirements.php) (para la biblioteca HTTP\CURLRequest)
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+> **Nota:** Se recomienda actualizar a PHP 8.1 o superior, ya que las versiones anteriores han alcanzado su fin de vida útil.
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## Instalación
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/rendicion_cuentas.git
+   ```
+2. Configura el entorno:
+   - Copia el archivo `.env.example` a `.env` y ajusta las configuraciones según tu entorno.
+   - Configura la base de datos en el archivo `.env`.
+
+3. Instala las dependencias:
+   ```bash
+   composer install
+   ```
+
+4. Ejecuta las migraciones:
+   ```bash
+   php spark migrate
+   ```
+
+5. Inicia el servidor de desarrollo:
+   ```bash
+   php spark serve
+   ```
+
+## Colaboradores
+
+Agradecimientos especiales a los colaboradores de este proyecto:
+
+- [JulianB0315](https://github.com/JulianB0315)
+- [Diego17cp](https://github.com/Diego17cp)
+- [JimmyDelaCruzvg](https://github.com/JimmyDelaCruzvg)
