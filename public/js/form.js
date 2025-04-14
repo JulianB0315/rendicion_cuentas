@@ -273,16 +273,5 @@ document.addEventListener("DOMContentLoaded", function () {
 	inputs.forEach((input) => input.addEventListener("input", validarInputs));
 	femInput.addEventListener("change", validarInputs);
 	mascInput.addEventListener("change", validarInputs);
-	const alerts = document.querySelectorAll(".alert");
-	alerts.forEach((alert) => {
-		setTimeout(() => {
-			alert.style.transition = "opacity 0.3s ease";
-			alert.style.opacity = "0";
-			setTimeout(() => {
-				alert.remove();
-			}, 500);
-		}, 3000);
-	});
-
 	validarInputs();
 });
