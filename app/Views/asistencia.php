@@ -14,10 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+    <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/asistencia.css") ?>" />
 </head>
 
 <body>
@@ -80,7 +82,7 @@
             <?php if (session()->getFlashdata('error')): ?>
                 <div class="alert alert-danger" id="error-alert">
                     <div class="alert-icon">
-                        <i class="fa-solid fa-circle-xmark"></i>
+                        <i class="fa-solid fa-circle-x"></i>
                     </div>
                     <div class="alert-content">
                         <?= session()->getFlashdata('error') ?>
@@ -107,7 +109,7 @@
         </div>
     </main>
     <script src="<?= base_url('js/asistencia.js') ?>"></script>
-	<script src="<?= base_url('js/alerts.js') ?>"></script>
+    <script src="<?= base_url('js/alerts.js') ?>"></script>
 </body>
 
 </html>

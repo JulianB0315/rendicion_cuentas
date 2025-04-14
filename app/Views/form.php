@@ -244,7 +244,7 @@
 		<?php if (session()->getFlashdata('error')): ?>
 			<div class="alert alert-danger" id="error-alert">
 				<div class="alert-icon">
-					<i class="fa-solid fa-circle-xmark"></i>
+					<i class="fa-solid fa-circle-x"></i>
 				</div>
 				<div class="alert-content">
 					<?= session()->getFlashdata('error') ?>
