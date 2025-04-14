@@ -71,10 +71,17 @@
                 </div>
         </form>
     <?php else: ?>
-        <div class="alert alert-warning">No se encontraron preguntas seleccionadas para este eje y rendición.</div>
+        <div class="alert alert-warning" id="warning-alert">
+            <div class="alert-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="alert-content">
+                No se encontraron preguntas seleccionadas para este eje y rendición.
+            </div>
+        </div>
     <?php endif; ?>
     </div>
-    <script src="<?=base_url('js/deleteQuestions.js') ?>"></script>
+    <script src="<?= base_url('js/deleteQuestions.js') ?>"></script>
 </body>
 
 </html>

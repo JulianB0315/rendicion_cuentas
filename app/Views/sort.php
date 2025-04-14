@@ -65,8 +65,7 @@
                                             name="preguntas_seleccionadas[]"
                                             value="<?= esc($pregunta['id_pregunta']) ?>"
                                             id="pregunta_<?= esc($pregunta['id_pregunta']) ?>"
-                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>
-                                        >
+                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>>
                                     </div>
                                 </td>
                             </tr>
@@ -79,7 +78,14 @@
                 </div>
             </form>
         <?php else: ?>
-            <div class="alert alert-warning">No se encontraron preguntas para este eje y rendición.</div>
+            <div class="alert alert-warning" id="warning-alert">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                    No se encontraron preguntas para este eje y rendición.
+                </div>
+            </div>
         <?php endif; ?>
     </div>
 
