@@ -1,6 +1,7 @@
 const asistenciaBtn = document.getElementById('submit-asistencia');
 const dniInput = document.getElementById('dni-asistencia');
 const error = document.getElementById('error');
+const dniLoader = document.getElementById("dni-loading");
 
 asistenciaBtn.disabled = true;
 
@@ -8,15 +9,18 @@ const buscarPersona = async () => {
 	const dni = dniInput.value;
 	const regex = /^\d{8}$/;
 	error.innerHTML = "";
+	if (!regex.test(dni)) {
+		error.innerHTML = "El DNI debe contener solo números";
+		return;
+	}
 	if (dni.length < 8) {
 		error.innerHTML = "El DNI debe tener 8 dígitos";
 		return;
 	}
 
-	if (!regex.test(dni)) {
-		error.innerHTML = "El DNI debe contener solo números";
-		return;
-	}
+
+	dniLoader.classList.remove('d-none')
+	dniLoader.classList.add('d-flex')
 
 	try {
 		const response = await fetch(
@@ -26,7 +30,8 @@ const buscarPersona = async () => {
 
 		if (response.ok && dni.length === 8) {
             asistenciaBtn.disabled = false;
-			console.log(data);
+			dniLoader.classList.add('d-none')
+			dniLoader.classList.remove('d-flex')
 		} else {
 			error.innerHTML =
 				"No se encontró ninguna persona con ese DNI";

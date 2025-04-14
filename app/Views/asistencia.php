@@ -49,12 +49,18 @@
                                 class="form-part"
                                 id="dni-asistencia"
                                 name="dni"
-                                pattern="\d{8}"
+                                maxlength="8"
+                                minlength="8"
                                 title="Por favor, ingresar bien su DNI"
                                 required
                                 placeholder=" " />
                             <label for="dni">DNI*</label>
                         </div>
+                        <div id="dni-loading" class="spinner-container d-none">
+							<div class="spinner-border text-primary spinner-sm" role="status">
+							</div>
+							<span class="ms-5">Consultando DNI...</span>
+						</div>
                         <div class="error" id="error"></div>
                         <button
                             type="submit"
