@@ -25,253 +25,203 @@ const dniLoader = document.getElementById("dni-loading");
 const rucLoader = document.getElementById("ruc-loading");
 
 const validarInputs = () => {
-	nextBtn.disabled = true;
-	submitBtn.disabled = true;
-	nextBtn.classList.remove("active");
-	submitBtn.classList.remove("active");
+    nextBtn.disabled = true;
+    submitBtn.disabled = true;
+    nextBtn.classList.remove("active");
+    submitBtn.classList.remove("active");
 
-	if (!asistente.checked && !orador.checked) return;
+    if (!asistente.checked && !orador.checked) return;
 
-	// Validación para orador
-	if (orador.checked) {
-		if (personaInfo.style.display !== "none") {
-			const inputsPersonales = document.querySelectorAll(
-				"#persona-info input[type='text']"
-			);
-			const completos =
-				[...inputsPersonales].every(
-					(input) => input.value.trim() !== ""
-				) &&
-				(femInput.checked || mascInput.checked);
+    // Validación para orador
+    if (orador.checked) {
+        if (personaInfo.style.display !== "none") {
+            const inputsPersonales = document.querySelectorAll(
+                "#persona-info input[type='text']"
+            );
+            const completos =
+                [...inputsPersonales].every(
+                    (input) => input.value.trim() !== ""
+                ) &&
+                (femInput.checked || mascInput.checked);
 
-			nextBtn.disabled = !completos;
-			nextBtn.classList.toggle("active", completos);
-		} else if (oradorInfo.style.display === "block") {
-			let completos =
-				pregunta.value.trim() !== "" &&
-				(personal.checked || organizacion.checked) &&
-				ejeSelect.value !== "";
-			if (organizacion.checked) {
-				completos =
-					completos &&
-					rucInput.value.trim().length === 11 &&
-					nombreOrg.value.trim() !== "";
-			}
+            nextBtn.disabled = !completos;
+            nextBtn.classList.toggle("active", completos);
+        } else if (oradorInfo.style.display === "block") {
+            let completos =
+                pregunta.value.trim() !== "" &&
+                (personal.checked || organizacion.checked) &&
+                ejeSelect.value !== "";
+            if (organizacion.checked) {
+                completos =
+                    completos &&
+                    rucInput.value.trim().length === 11 &&
+                    nombreOrg.value.trim() !== "";
+            }
 
-			submitBtn.disabled = !completos;
-			submitBtn.classList.toggle("active", completos);
-			if (!ejeSelect.value) {
-				errorForm.innerHTML = "Debe seleccionar un eje temático";
-			} else {
-				errorForm.innerHTML = "";
-			}
-		}
-	}
-	// Validación para asistente
-	else if (asistente.checked) {
-		const completos =
-			[...inputs].every((input) => input.value.trim() !== "") &&
-			(femInput.checked || mascInput.checked);
+            submitBtn.disabled = !completos;
+            submitBtn.classList.toggle("active", completos);
+            if (!ejeSelect.value) {
+                errorForm.innerHTML = "Debe seleccionar un eje temático";
+            } else {
+                errorForm.innerHTML = "";
+            }
+        }
+    }
+    // Validación para asistente
+    else if (asistente.checked) {
+        const completos =
+            [...inputs].every((input) => input.value.trim() !== "") &&
+            (femInput.checked || mascInput.checked);
 
-		submitBtn.disabled = !completos;
-		submitBtn.classList.toggle("active", completos);
-	}
+        submitBtn.disabled = !completos;
+        submitBtn.classList.toggle("active", completos);
+    }
 };
 
-const buscarPersona = async () => {
-	const dni = document.getElementById("dni").value;
-	const regex = /^\d{8}$/;
-	errorDniMsg.innerHTML = "";
-	nombresInfo.innerHTML = "";
-	document.getElementById("nombre").value = "";
+const buscarPersona = () => {
+    const dniValue = dni.value;
+    
+    // Reiniciar campos
+    errorDniMsg.innerHTML = "";
+    nombresInfo.innerHTML = "";
+    nombre.value = "";
 
-	if (!regex.test(dni)) {
-		errorDniMsg.innerHTML = "El DNI debe contener solo números";
-		document.getElementById("nombre").value = "";
-		return;
-	}
-	if (dni.length < 8) {
-		errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
-		document.getElementById("nombre").value = "";
-		return;
-	}
-
-
-	if (dni.length === 0) {
-		errorDniMsg.innerHTML = "";
-		return;
-	}
-	
-	dniLoader.classList.remove('d-none')
-	dniLoader.classList.add('d-flex')
-
-	try {
-		const response = await fetch(
-			`http://localhost/rendicion_cuentas/public/api/dni/${dni}`
-		);
-		const data = await response.json();
-
-		if (response.ok) {
-			dniLoader.classList.add('d-none')
-			dniLoader.classList.remove('d-flex')
-			const persona = Array.isArray(data) ? data[0] : data;
-			if (!persona || !persona.nombres) {
-				errorDniMsg.innerHTML =
-					"No se encontró ninguna persona con ese DNI";
-				document.getElementById("nombre").value = "";
-				return;
-			}
-			const nombre = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
-			if (nombre === "undefined") {
-				errorDniMsg.innerHTML =
-					"No se encontró ninguna persona con ese DNI";
-				document.getElementById("nombre").value = "";
-				return;
-			}
-			document.getElementById("nombre").value = nombre;
-			nombresInfo.innerHTML =
-				"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
-			validarInputs();
-		} else {
-			document.getElementById("nombre").value = "";
-			errorDniMsg.innerHTML =
-				"No se encontró ninguna persona con ese DNI";
-			validarInputs();
-		}
-	} catch (error) {
-		console.error("Error fetching JSON:", error);
-		errorDniMsg.innerHTML = "Error al buscar la persona";
-		validarInputs();
-	}
+    // Validar formato básico
+    if (!/^\d+$/.test(dniValue)) {
+        errorDniMsg.innerHTML = "El DNI debe contener solo números";
+        return;
+    }
+    
+    // No consultar API si no tiene 8 dígitos
+    if (dniValue.length !== 8) {
+        if (dniValue.length > 0) {
+            errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
+        }
+        return;
+    }
+    
+    // Usar el helper para consultar DNI
+    fetchDocData(
+        "dni",
+        dniValue,
+        dniLoader,
+        (data) => {
+            const persona = Array.isArray(data) ? data[0] : data;
+            if (!persona || !persona.nombres) {
+                errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
+                return;
+            }
+            
+            const nombreCompleto = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
+            if (nombreCompleto === "undefined") {
+                errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
+                return;
+            }
+            
+            nombre.value = nombreCompleto;
+            nombresInfo.innerHTML = "Si el nombre es incorrecto, por favor, revise el DNI ingresado";
+            validarInputs();
+        },
+        (errorMsg) => {
+            errorDniMsg.innerHTML = errorMsg;
+            validarInputs();
+        }
+    );
 };
 
-//Funcion de busqueda de organizacion
-const buscarOrg = async () => {
-	const ruc = rucInput.value;
-	const regex = /^\d{11}$/;
-	rucError.innerHTML = "";
-	nombreOrg.value = "";
+const buscarOrg = () => {
+    const ruc = rucInput.value;
+    
+    // Reiniciar campos
+    rucError.innerHTML = "";
+    nombreOrg.value = "";
 
-	if (ruc.length === 0) {
-		rucError.innerHTML = "";
-		validarInputs();
-		return;
-	}
-	if (!regex.test(ruc)) {
-		rucError.innerHTML = "El RUC debe contener solo números";
-		validarInputs();
-		return;
-	}
-	if (ruc.length < 11) {
-		rucError.innerHTML = "El RUC debe tener 11 dígitos";
-		validarInputs();
-		return;
-	}
+    // Validar formato básico
+    if (!/^\d+$/.test(ruc)) {
+        if (ruc.length > 0) {
+            rucError.innerHTML = "El RUC debe contener solo números";
+        }
+        validarInputs();
+        return;
+    }
+    
+    // No consultar API si no tiene 11 dígitos
+    if (ruc.length !== 11) {
+        if (ruc.length > 0) {
+            rucError.innerHTML = "El RUC debe tener 11 dígitos";
+        }
+        validarInputs();
+        return;
+    }
 
-	rucLoader.classList.remove('d-none')
-	rucLoader.classList.add('d-flex')
-
-	try {
-		const response = await fetch(
-			`http://localhost/rendicion_cuentas/public/api/ruc/${ruc}`
-		);
-		if (!response.ok) {
-			throw new Error("Error al buscar la organización");
-		}
-		rucLoader.classList.add('d-none')
-		rucLoader.classList.remove('d-flex ')
-		const data = await response.json();
-
-		if (data && data.nombre_o_razon_social) {
-			nombreOrg.value = data.nombre_o_razon_social;
-			validarInputs();
-		} else {
-			rucError.innerHTML =
-				"No se encontró ninguna organización con ese RUC";
-			validarInputs();
-		}
-	} catch (e) {
-		console.error("Error fetching JSON:", e);
-		rucError.innerHTML = "Error al buscar la organización";
-		validarInputs();
-	}
+    // Usar el helper para consultar RUC
+    fetchDocData(
+        "ruc",
+        ruc,
+        rucLoader,
+        (data) => {
+            if (!data || !data.nombre_o_razon_social) {
+                rucError.innerHTML = "No se encontró ninguna organización con ese RUC";
+                validarInputs();
+                return;
+            }
+            
+            nombreOrg.value = data.nombre_o_razon_social;
+            validarInputs();
+        },
+        (errorMsg) => {
+            rucError.innerHTML = errorMsg;
+            validarInputs();
+        }
+    );
 };
 
-document.getElementById("dni").addEventListener("input", () => {
-	buscarPersona();
-	validarInputs();
-});
 // Events for inputs
+dni.addEventListener("input", buscarPersona);
+rucInput.addEventListener("input", buscarOrg);
+
 asistente.addEventListener("change", () => {
-	oradorInfo.style.display = "none";
-	personaInfo.style.display = "block";
-	nextBtn.style.display = "none";
-	submitBtn.style.display = "block";
+    oradorInfo.style.display = "none";
+    personaInfo.style.display = "block";
+    nextBtn.style.display = "none";
+    submitBtn.style.display = "block";
+    validarInputs();
 });
+
 organizacion.addEventListener("change", () => {
-	organizacionInfo.style.display = "block";
-	validarInputs();
+    organizacionInfo.style.display = "block";
+    validarInputs();
 });
+
 personal.addEventListener("change", () => {
-	organizacionInfo.style.display = "none";
-	validarInputs();
+    organizacionInfo.style.display = "none";
+    validarInputs();
 });
 
 // Events for buttons
 nextBtn.addEventListener("click", () => {
-	personaInfo.style.display = "none";
-	oradorInfo.style.display = "block";
-	nextBtn.style.display = "none";
-	submitBtn.style.display = "block";
+    personaInfo.style.display = "none";
+    oradorInfo.style.display = "block";
+    nextBtn.style.display = "none";
+    submitBtn.style.display = "block";
 });
-// formRegistro.addEventListener("submit", (e) => {
-// 	e.preventDefault();
-// 	if (asistente.checked && dni.value.length === 8 && nombre.value !== "") {
-// 		alert("Registro exitoso");
-// 	}
-// 	if (
-// 		orador.checked &&
-// 		dni.value.length === 8 &&
-// 		nombre.value !== "" &&
-// 		pregunta.value !== "" &&
-// 		personal.checked
-// 	) {
-// 		alert("Registro exitoso");
-// 	}
-// 	if (
-// 		orador.checked &&
-// 		dni.value.length === 8 &&
-// 		nombre.value !== "" &&
-// 		pregunta.value !== "" &&
-// 		organizacion.checked &&
-// 		rucInput.value.length === 11 &&
-// 		nombreOrg.value !== ""
-// 	) {
-// 		alert("Registro exitoso");
-// 	} else {
-// 		errorForm.innerHTML = "Por favor, complete los campos";
-// 	}
-// });
 
 orador.addEventListener("change", () => {
-	nextBtn.style.display = "block";
-	submitBtn.style.display = "none";
-	validarInputs();
+    nextBtn.style.display = "block";
+    submitBtn.style.display = "none";
+    validarInputs();
 });
-rucInput.addEventListener("input", () => {
-	buscarOrg();
-	validarInputs();
-});
+
 pregunta.addEventListener("input", validarInputs);
 personal.addEventListener("change", validarInputs);
 nombreOrg.addEventListener("input", validarInputs);
 ejeSelect.addEventListener('change', validarInputs);
 
 document.addEventListener("DOMContentLoaded", function () {
-	nextBtn.disabled = true;
-	submitBtn.disabled = true;
-	inputs.forEach((input) => input.addEventListener("input", validarInputs));
-	femInput.addEventListener("change", validarInputs);
-	mascInput.addEventListener("change", validarInputs);
-	validarInputs();
+    nextBtn.disabled = true;
+    submitBtn.disabled = true;
+    inputs.forEach((input) => input.addEventListener("input", validarInputs));
+    femInput.addEventListener("change", validarInputs);
+    mascInput.addEventListener("change", validarInputs);
+    validarInputs();
 });
