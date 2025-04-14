@@ -76,4 +76,62 @@ defined('EXIT_UNKNOWN_METHOD') || define('EXIT_UNKNOWN_METHOD', 6); // unknown c
 defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7);     // invalid user input
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8);       // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9);      // lowest automatically-assigned error code
-defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125);    // highest automatically-assigned error code
+defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); 
+
+// Define la URL base de la aplicación
+define('BASE_URL', 'http://localhost/rendicion_cuentas/');
+
+define('RUTA_HOME', BASE_URL);
+define('RUTA_LOGIN', BASE_URL . 'login');
+define('RUTA_SESSION', BASE_URL . 'session');
+define('RUTA_LOGOUT', BASE_URL . 'logout');
+
+// Rutas del Admin
+define('RUTA_ADMIN_HOME', BASE_URL . 'admin');
+define('RUTA_ADMIN_CREAR_EJE', BASE_URL . 'admin/crear_eje');
+define('RUTA_ADMIN_CREAR_RENDICION', BASE_URL . 'admin/crear_rendicion');
+
+// Preguntas (Admin)
+define('RUTA_ADMIN_QUESTIONS', BASE_URL . 'admin/questions');
+define('RUTA_ADMIN_BUSCAR_RENDICION_Q', BASE_URL . 'admin/questions/buscar_rendecion_admin');
+define('RUTA_ADMIN_SORTEO_PREGUNTAS', BASE_URL . 'admin/sorteo_preguntas/'); // agregar ID
+define('RUTA_ADMIN_PROCESAR_SELECCION', BASE_URL . 'admin/procesar_seleccion');
+
+// Preguntas seleccionadas (Admin)
+define('RUTA_ADMIN_VIEW_QUESTIONS', BASE_URL . 'admin/viewQuestions');
+define('RUTA_ADMIN_BUSCAR_RENDICION_VQ', BASE_URL . 'admin/viewQuestions/buscar_rendecion_admin');
+define('RUTA_ADMIN_BORRAR_PREGUNTA', BASE_URL . 'admin/viewQuestions/borrar_pregunta');
+
+// Reportes
+define('RUTA_ADMIN_REPORT', BASE_URL . 'admin/report');
+define('RUTA_ADMIN_MOSTRAR_REPORTE', BASE_URL . 'admin/mostrar_reporte');
+define('RUTA_GENERAR_EXCEL', BASE_URL . 'admin/viewReportController/generar_excel/'); // agregar ID
+
+// Super Admin
+define('RUTA_ADMIN_USERS', BASE_URL . 'admin/admin_users');
+define('RUTA_ADMIN_CREAR_ADMIN', BASE_URL . 'admin/crear_admin');
+define('RUTA_ADMIN_DESHABILITAR', BASE_URL . 'admin/deshabilitar_admin/'); // agregar ID
+define('RUTA_ADMIN_HABILITAR', BASE_URL . 'admin/habilitar_admin/');       // agregar ID
+define('RUTA_ADMIN_EDITAR', BASE_URL . 'admin/editar_admin/');             // agregar ID
+define('RUTA_ADMIN_BUSCAR_ADMIN', BASE_URL . 'admin/buscar_admin/');       // agregar ID
+define('RUTA_ADMIN_HISTORIAL', BASE_URL . 'admin/historial');
+
+// Usuario (Formulario)
+define('RUTA_FORM', BASE_URL . 'form');
+define('RUTA_PROCESAR_FORM', BASE_URL . 'form/procesar_formulario');
+
+// Conferencias
+define('RUTA_CONFERENCIA_DETALLE', BASE_URL . 'conferencias/'); // agregar ID
+define('RUTA_CONFERENCIA_PREGUNTAS', BASE_URL . 'conferencias/obtenerPreguntas/'); // agregar ID + RENDICION
+
+// Asistencia
+define('RUTA_ASISTENCIA', BASE_URL . 'asistencia');
+define('RUTA_PROCESAR_ASISTENCIA', BASE_URL . 'procesar_asistencia');
+
+// Usuario Questions
+define('RUTA_USUARIO_QUESTIONS', BASE_URL . 'usuarioQuestions');
+define('RUTA_BUSCAR_RENDICION_UQ', BASE_URL . 'usuarioQuestions/buscar_rendecion_admin');
+
+// API
+define('RUTA_API_DNI', BASE_URL . 'api/dni/'); // agregar número
+define('RUTA_API_RUC', BASE_URL . 'api/ruc/'); // agregar número
