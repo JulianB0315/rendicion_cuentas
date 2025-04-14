@@ -7,9 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 //Rutas de login del admin
-$routes->get('login', 'Admin_loginController::index');
-$routes->post('session', 'Admin_loginController::login');
-$routes->get('logout', 'Admin_loginController::logout');
+$routes->get('login', 'Admin\VerificarAdminController::index');
+$routes->post('session', 'Admin\VerificarAdminController::login');
+$routes->get('logout', 'Admin\VerificarAdminController::logout');
 
 //Rutas de admin
 $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
