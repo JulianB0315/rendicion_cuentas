@@ -45,6 +45,7 @@ body {
     align-items: center;
     margin-top: 0.5rem;
     font-size: 0.875rem;
+    gap: 1rem;
 }
 
 .spinner-sm {
