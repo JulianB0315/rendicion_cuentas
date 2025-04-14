@@ -21,6 +21,8 @@ const pregunta = document.getElementById("pregunta");
 const femInput = document.getElementById("fem");
 const mascInput = document.getElementById("masculino");
 const ejeSelect = document.getElementById("eje-select");
+const dniLoader = document.getElementById("dni-loading");
+const rucLoader = document.getElementById("ruc-loading");
 
 const validarInputs = () => {
 	nextBtn.disabled = true;
@@ -83,22 +85,25 @@ const buscarPersona = async () => {
 	nombresInfo.innerHTML = "";
 	document.getElementById("nombre").value = "";
 
+	if (!regex.test(dni)) {
+		errorDniMsg.innerHTML = "El DNI debe contener solo números";
+		document.getElementById("nombre").value = "";
+		return;
+	}
 	if (dni.length < 8) {
 		errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
 		document.getElementById("nombre").value = "";
 		return;
 	}
 
-	if (!regex.test(dni)) {
-		errorDniMsg.innerHTML = "El DNI debe contener solo números";
-		document.getElementById("nombre").value = "";
-		return;
-	}
 
 	if (dni.length === 0) {
 		errorDniMsg.innerHTML = "";
 		return;
 	}
+	
+	dniLoader.classList.remove('d-none')
+	dniLoader.classList.add('d-flex')
 
 	try {
 		const response = await fetch(
@@ -107,6 +112,8 @@ const buscarPersona = async () => {
 		const data = await response.json();
 
 		if (response.ok) {
+			dniLoader.classList.add('d-none')
+			dniLoader.classList.remove('d-flex')
 			const persona = Array.isArray(data) ? data[0] : data;
 			if (!persona || !persona.nombres) {
 				errorDniMsg.innerHTML =
@@ -150,16 +157,20 @@ const buscarOrg = async () => {
 		validarInputs();
 		return;
 	}
-	if (ruc.length < 11) {
-		rucError.innerHTML = "El RUC debe tener 11 dígitos";
-		validarInputs();
-		return;
-	}
 	if (!regex.test(ruc)) {
 		rucError.innerHTML = "El RUC debe contener solo números";
 		validarInputs();
 		return;
 	}
+	if (ruc.length < 11) {
+		rucError.innerHTML = "El RUC debe tener 11 dígitos";
+		validarInputs();
+		return;
+	}
+
+	rucLoader.classList.remove('d-none')
+	rucLoader.classList.add('d-flex')
+
 	try {
 		const response = await fetch(
 			`http://localhost/rendicion_cuentas/public/api/ruc/${ruc}`
@@ -167,6 +178,8 @@ const buscarOrg = async () => {
 		if (!response.ok) {
 			throw new Error("Error al buscar la organización");
 		}
+		rucLoader.classList.add('d-none')
+		rucLoader.classList.remove('d-flex ')
 		const data = await response.json();
 
 		if (data && data.nombre_o_razon_social) {
