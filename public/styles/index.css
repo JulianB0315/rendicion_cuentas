@@ -158,15 +158,36 @@ body {
     background-color: var(--tertiary-color);
 }
 
+/* Estilos base compartidos */
 .alert {
     display: flex;
     align-items: center;
-    animation: slide-in 0.4s ease-out;
     border-left-width: 5px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
 }
 
+/* Estilos específicos para alertas flotantes (success, error, danger) */
+.alert-success, .alert-danger, .alert-error {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 350px;
+    width: calc(100% - 40px);
+    z-index: 9999;
+    animation: slide-up 0.4s ease-out;
+}
+
+/* Estilos específicos para alertas warning (no flotantes) */
+.alert-warning {
+    width: 100%;
+    margin-bottom: 20px;
+    animation: none;
+    position: relative;
+}
+
+/* Colores para cada tipo de alerta */
 .alert-success {
     background-color: #d4edda;
     border-color: #28a745;
@@ -185,6 +206,7 @@ body {
     color: #856404;
 }
 
+/* Estilos de íconos y contenido comunes */
 .alert-icon {
     margin-right: 15px;
     font-size: 1.5rem;
@@ -210,37 +232,69 @@ body {
     opacity: 1;
 }
 
-@keyframes slide-in {
+/* Animaciones solo para alertas flotantes */
+@keyframes slide-up {
     from {
-        transform: translateX(100%);
+        transform: translateY(100%);
         opacity: 0;
     }
     to {
-        transform: translateX(0);
+        transform: translateY(0);
         opacity: 1;
     }
 }
 
 @keyframes fade-out {
     from {
+        transform: translateY(0);
         opacity: 1;
     }
     to {
+        transform: translateY(100%);
         opacity: 0;
     }
 }
 
+/* Media queries */
 @media (max-width: 768px) {
-	.nav-logo {
-		height: 70px;
-	}
-	
-	.main {
-		width: 80%;
-	}
-	
-	.logo-container {
-		justify-content: center;
-	}
+    .nav-logo {
+        height: 70px;
+    }
+    
+    .main {
+        width: 80%;
+    }
+    
+    .logo-container {
+        justify-content: center;
+    }
+    
+    .alert-success, .alert-danger, .alert-error {
+        right: 50%;
+        transform: translateX(50%);
+        max-width: 90%;
+    }
+    
+    @keyframes slide-up {
+        from {
+            transform: translate(50%, 100%);
+            opacity: 0;
+        }
+        to {
+            transform: translate(50%, 0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fade-out {
+        from {
+            transform: translate(50%, 0);
+            opacity: 1;
+        }
+        to {
+            transform: translate(50%, 100%);
+            opacity: 0;
+        }
+    }
 }
 
