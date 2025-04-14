@@ -5,19 +5,19 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\AdministradoresModel;
 
-Class VerificarAdminController extends BaseController
+class VerificarAdminController extends BaseController
 {
     private $AdministradoresModel;
     public function __construct()
     {
         $this->AdministradoresModel = new AdministradoresModel();
     }
-
+//Funciones de login
     public function index()
     {
         $session = session();
         if ($session->get('isLoggedIn')) {
-            return redirect()->to(base_url('admin'));
+            return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Ya has iniciado sesión');
         }
         return view('login_admin');
     }
@@ -51,11 +51,11 @@ Class VerificarAdminController extends BaseController
             'isLoggedIn' => true,
         ]);
         $nombre = ucfirst(strtolower(explode(' ', trim($admin['nombres_admin']))[0]));
-        return redirect(RUTA_LOGIN)->with('success', 'Bienvenido, ' . $nombre);
+        return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Bienvenido, ' . $nombre);
     }
     public function logout()
     {
         session()->destroy();
-        return redirect()->to(RUTA_LOGIN);
+        return redirect()->to(RUTA_LOGIN)->with('success', 'Sesión cerrada correctamente');
     }
 }
