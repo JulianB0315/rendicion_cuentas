@@ -51,7 +51,7 @@ INSERT INTO `administradores` (`dni_admin`, `nombres_admin`, `password`, `catego
 --
 
 CREATE TABLE `eje` (
-  `id_eje` varchar(8) NOT NULL,
+  `id` varchar(8) NOT NULL,
   `tematica` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,7 +62,7 @@ CREATE TABLE `eje` (
 --
 
 CREATE TABLE `ejes_seleccionados` (
-  `id_eje_seleccionado` varchar(8) NOT NULL,
+  `id` varchar(8) NOT NULL,
   `id_rendicion` varchar(8) DEFAULT NULL,
   `id_eje` varchar(8) DEFAULT NULL,
   `cantidad_preguntas` int(11) NOT NULL
@@ -90,7 +90,7 @@ CREATE TABLE `historial_admin` (
 --
 
 CREATE TABLE `pregunta` (
-  `id_pregunta` varchar(8) NOT NULL,
+  `id` varchar(8) NOT NULL,
   `contenido` text NOT NULL,
   `id_usuario` varchar(8) DEFAULT NULL,
   `id_eje` varchar(8) DEFAULT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE `pregunta` (
 --
 
 CREATE TABLE `preguntas_seleccionadas` (
-  `id_pregunta_seleccionada` varchar(8) NOT NULL,
+  `id` varchar(8) NOT NULL,
   `id_eje_seleccionado` varchar(8) DEFAULT NULL,
   `id_pregunta` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -112,11 +112,11 @@ CREATE TABLE `preguntas_seleccionadas` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rendición`
+-- Estructura de tabla para la tabla `rendicion`
 --
 
-CREATE TABLE `rendición` (
-  `id_rendicion` varchar(8) NOT NULL,
+CREATE TABLE `rendicion` (
+  `id` varchar(8) NOT NULL,
   `fecha` date NOT NULL,
   `hora_rendicion` time NOT NULL,
   `banner_rendicion` varchar(255) NOT NULL
@@ -129,7 +129,7 @@ CREATE TABLE `rendición` (
 --
 
 CREATE TABLE `usuario` (
-  `id_usuario` varchar(8) NOT NULL,
+  `id` varchar(8) NOT NULL,
   `nombres` varchar(60) NOT NULL,
   `sexo` enum('M','F') NOT NULL,
   `tipo_participacion` enum('asistente','orador') NOT NULL,
@@ -156,13 +156,13 @@ ALTER TABLE `administradores`
 -- Indices de la tabla `eje`
 --
 ALTER TABLE `eje`
-  ADD PRIMARY KEY (`id_eje`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ejes_seleccionados`
 --
 ALTER TABLE `ejes_seleccionados`
-  ADD PRIMARY KEY (`id_eje_seleccionado`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_rendicion` (`id_rendicion`),
   ADD KEY `id_eje` (`id_eje`);
 
@@ -178,7 +178,7 @@ ALTER TABLE `historial_admin`
 -- Indices de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  ADD PRIMARY KEY (`id_pregunta`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `dni_usuario` (`id_usuario`),
   ADD KEY `id_eje` (`id_eje`);
 
@@ -186,21 +186,21 @@ ALTER TABLE `pregunta`
 -- Indices de la tabla `preguntas_seleccionadas`
 --
 ALTER TABLE `preguntas_seleccionadas`
-  ADD PRIMARY KEY (`id_pregunta_seleccionada`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_eje_seleccionado` (`id_eje_seleccionado`),
   ADD KEY `id_pregunta` (`id_pregunta`);
 
 --
--- Indices de la tabla `rendición`
+-- Indices de la tabla `rendicion`
 --
-ALTER TABLE `rendición`
-  ADD PRIMARY KEY (`id_rendicion`);
+ALTER TABLE `rendicion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`) USING BTREE,
+  ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `id_rendicion` (`id_rendicion`) USING BTREE;
 
 --
@@ -211,8 +211,8 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `ejes_seleccionados`
 --
 ALTER TABLE `ejes_seleccionados`
-  ADD CONSTRAINT `ejes_seleccionados_ibfk_1` FOREIGN KEY (`id_rendicion`) REFERENCES `rendición` (`id_rendicion`),
-  ADD CONSTRAINT `ejes_seleccionados_ibfk_2` FOREIGN KEY (`id_eje`) REFERENCES `eje` (`id_eje`);
+  ADD CONSTRAINT `ejes_seleccionados_ibfk_1` FOREIGN KEY (`id_rendicion`) REFERENCES `rendicion` (`id`),
+  ADD CONSTRAINT `ejes_seleccionados_ibfk_2` FOREIGN KEY (`id_eje`) REFERENCES `eje` (`id`);
 
 --
 -- Filtros para la tabla `historial_admin`
@@ -225,21 +225,21 @@ ALTER TABLE `historial_admin`
 -- Filtros para la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
-  ADD CONSTRAINT `pregunta_ibfk_2` FOREIGN KEY (`id_eje`) REFERENCES `eje` (`id_eje`);
+  ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `pregunta_ibfk_2` FOREIGN KEY (`id_eje`) REFERENCES `eje` (`id`);
 
 --
 -- Filtros para la tabla `preguntas_seleccionadas`
 --
 ALTER TABLE `preguntas_seleccionadas`
-  ADD CONSTRAINT `preguntas_seleccionadas_ibfk_1` FOREIGN KEY (`id_eje_seleccionado`) REFERENCES `ejes_seleccionados` (`id_eje_seleccionado`),
-  ADD CONSTRAINT `preguntas_seleccionadas_ibfk_2` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id_pregunta`);
+  ADD CONSTRAINT `preguntas_seleccionadas_ibfk_1` FOREIGN KEY (`id_eje_seleccionado`) REFERENCES `ejes_seleccionados` (`id`),
+  ADD CONSTRAINT `preguntas_seleccionadas_ibfk_2` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id`);
 
 --
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_rendicion`) REFERENCES `rendición` (`id_rendicion`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_rendicion`) REFERENCES `rendicion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
