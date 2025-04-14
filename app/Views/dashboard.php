@@ -60,7 +60,7 @@
 				class="col-12 d-flex justify-content-center align-items-center">
 				<img
 					class="img-fluid w-70 w-xl-50"
-					src="<?= !empty($firstBanner) ? base_url('img/'.$firstBanner) : base_url('img/bannerstatic.jpg') ?>"
+					src="<?= !empty($firstBanner) ? base_url('img/' . $firstBanner) : base_url('img/bannerstatic.jpg') ?>"
 					alt="Rendición de Cuentas Banner" />
 			</div>
 		</div>
@@ -163,9 +163,9 @@
 						</ul>
 					<?php else: ?>
 						<h3 class="text-center">
-							No hay conferencias programadas
-							</h5>
-						<?php endif; ?>
+							No hay rendiciones programadas
+						</h3>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -184,7 +184,7 @@
 						</p>
 						<a
 							href="<?= !empty($rendiciones) ? base_url('form') : '#' ?>"
-							class="btn text-white btn-lg px-4 rounded-pill register-btn <?= empty($rendiciones) ? 'disabled' : '' ?>">
+							class="btn text-white btn-lg px-4 rounded-pill register-btn <?= empty($rendiciones) ? 'disabled' : '' ?> ">
 							<i class="fa-solid fa-user-plus me-2"></i>
 							Registrarme
 						</a>
