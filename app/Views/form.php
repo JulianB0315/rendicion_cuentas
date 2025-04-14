@@ -12,7 +12,10 @@
 		rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link
+		rel="stylesheet"
+		href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+	
 	<link
 		href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
 		rel="stylesheet" />
