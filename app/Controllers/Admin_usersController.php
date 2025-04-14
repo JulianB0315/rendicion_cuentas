@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Models\AdministradoresModel;
 use App\Models\HistorialAdminModel;
 
-/* TODO: hacer que las horas se guarden en hora peruana
-*/
 
 class Admin_UsersController extends BaseController
 {
