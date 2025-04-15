@@ -92,28 +92,26 @@ define('RUTA_ADMIN_CREAR_EJE', BASE_URL . 'admin/crear_eje');
 define('RUTA_ADMIN_CREAR_RENDICION', BASE_URL . 'admin/crear_rendicion');
 
 // Preguntas (Admin)
-define('RUTA_ADMIN_QUESTIONS', BASE_URL . 'admin/questions');
+define('RUTA_ADMIN_QUESTIONS', BASE_URL . 'admin/questions/'); // agregar ID
 define('RUTA_ADMIN_BUSCAR_RENDICION_Q', BASE_URL . 'admin/questions/buscar_rendecion_admin');
 define('RUTA_ADMIN_SORTEO_PREGUNTAS', BASE_URL . 'admin/sorteo_preguntas/'); // agregar ID
 define('RUTA_ADMIN_PROCESAR_SELECCION', BASE_URL . 'admin/procesar_seleccion');
 
 // Preguntas seleccionadas (Admin)
-define('RUTA_ADMIN_VIEW_QUESTIONS', BASE_URL . 'admin/viewQuestions');
+define('RUTA_ADMIN_VIEW_QUESTIONS', BASE_URL . 'admin/viewQuestions'); // agregar ID
 define('RUTA_ADMIN_BUSCAR_RENDICION_VQ', BASE_URL . 'admin/viewQuestions/buscar_rendecion_admin');
 define('RUTA_ADMIN_BORRAR_PREGUNTA', BASE_URL . 'admin/viewQuestions/borrar_pregunta');
 
 // Reportes
-define('RUTA_ADMIN_REPORT', BASE_URL . 'admin/report');
+define('RUTA_ADMIN_REPORT', BASE_URL . 'admin/report/'); // agregar ID
 define('RUTA_ADMIN_MOSTRAR_REPORTE', BASE_URL . 'admin/mostrar_reporte');
 define('RUTA_GENERAR_EXCEL', BASE_URL . 'admin/viewReportController/generar_excel/'); // agregar ID
 
 // Super Admin
 define('RUTA_ADMIN_USERS', BASE_URL . 'admin/admin_users');
 define('RUTA_ADMIN_CREAR_ADMIN', BASE_URL . 'admin/crear_admin');
-define('RUTA_ADMIN_DESHABILITAR', BASE_URL . 'admin/deshabilitar_admin/'); // agregar ID
-define('RUTA_ADMIN_HABILITAR', BASE_URL . 'admin/habilitar_admin/');       // agregar ID
-define('RUTA_ADMIN_EDITAR', BASE_URL . 'admin/editar_admin/');             // agregar ID
-define('RUTA_ADMIN_BUSCAR_ADMIN', BASE_URL . 'admin/buscar_admin/');       // agregar ID
+define('RUTA_ADMIN_EDITAR', BASE_URL . 'admin/UpdateAdmin/'); // agregar ID
+define('RUTA_ADMIN_BUSCAR_ADMIN', BASE_URL . 'admin/buscar_admin');
 define('RUTA_ADMIN_HISTORIAL', BASE_URL . 'admin/historial');
 
 // Usuario (Formulario)
