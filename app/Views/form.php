@@ -193,7 +193,7 @@
 									Seleccione un Eje Tematico
 								</option>
 								<?php foreach ($ejes as $eje): ?>
-									<option value="<?= $eje['id_eje'] ?>"><?= $eje['tematica'] ?></option>
+									<option value="<?= $eje['id'] ?>"><?= $eje['tematica'] ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>
