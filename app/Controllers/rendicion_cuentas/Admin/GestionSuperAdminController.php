@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\rendicion_cuentas\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\AdministradoresModel;

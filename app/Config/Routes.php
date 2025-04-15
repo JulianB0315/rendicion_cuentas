@@ -5,61 +5,61 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Client\DasboardUserController::index');
+$routes->get('/', 'rendicion_cuentas\Client\DasboardUserController::index');
 //Rutas de login del admin
-$routes->get('login', 'Admin\VerificarAdminController::index');
-$routes->post('session', 'Admin\VerificarAdminController::login');
-$routes->get('logout', 'Admin\VerificarAdminController::logout');
+$routes->get('login', 'rendicion_cuentas\Admin\VerificarAdminController::index');
+$routes->post('session', 'rendicion_cuentas\Admin\VerificarAdminController::login');
+$routes->get('logout', 'rendicion_cuentas\Admin\VerificarAdminController::logout');
 
 //Rutas de admin
 $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Inicio de admin
-    $routes->get('/', 'Admin\GestionAdminController::buscarEjes');
-    $routes->post('crear_eje', 'Admin\GestionAdminController::CrearEje');
-    $routes->post('crear_rendicion', 'Admin\GestionAdminController::CrearRendicion');
+    $routes->get('/', 'rendicion_cuentas\Admin\GestionAdminController::buscarEjes');
+    $routes->post('crear_eje', 'rendicion_cuentas\Admin\GestionAdminController::CrearEje');
+    $routes->post('crear_rendicion', 'rendicion_cuentas\Admin\GestionAdminController::CrearRendicion');
+    //Rutas buscar rendicion
+    $routes->get('buscar/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::cargarFechas/$1');
     //Rutas Seleccionar preguntas
-    $routes->get('questions/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
-    $routes->get('questions/buscar_rendecion_admin', 'Admin\GestionAdminController::BuscarRendicion');
+    $routes->get('questions/buscar_rendecion_admin', 'rendicion_cuentas\Admin\GestionAdminController::BuscarRendicion');
     //Rutas Sorteo preguntas (Dentro de selecionar preguntas)
-    $routes->get('sorteo_preguntas/(:alphanum)', 'Admin\GestionAdminController::BuscarPreguntas/$1');
-    $routes->post('procesar_seleccion', 'Admin\GestionAdminController::SeleccionarPreguntas');
+    $routes->get('sorteo_preguntas/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::BuscarPreguntas/$1');
+    $routes->post('procesar_seleccion', 'rendicion_cuentas\Admin\GestionAdminController::SeleccionarPreguntas');
     //Rutas Preguntas seleccionadas
-    $routes->get('viewQuestions/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
-    $routes->get('viewQuestions/buscar_rendecion_admin', 'Admin\GestionAdminController::preguntasSeleccionadas');
-    $routes->post('viewQuestions/borrar_pregunta', 'Admin\GestionAdminController::QuitarPregunta');
+    $routes->get('viewQuestions/buscar_rendecion_admin', 'rendicion_cuentas\Admin\GestionAdminController::preguntasSeleccionadas');
+    $routes->post('viewQuestions/borrar_pregunta', 'rendicion_cuentas\Admin\GestionAdminController::QuitarPregunta');
     //Rutas de reportes
-    $routes->get('report/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
-    $routes->get('mostrar_reporte', 'Admin\GestionAdminController::MostrarReporte');
+    
+    $routes->get('mostrar_reporte', 'rendicion_cuentas\Admin\GestionAdminController::MostrarReporte');
     //Generacion de excel(Dentro de reportes)
-    $routes->get('viewReportController/generar_excel/(:alphanum)', 'Admin\GestionAdminController::GenerarExcel/$1');
+    $routes->get('viewReportController/generar_excel/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::GenerarExcel/$1');
     //Rutas de Super admin
     $routes->group('', ['filter' => 'superAdmin'], function ($routes) {
         //Rutas de administrar usuarios
-        $routes->get('admin_users', 'Admin\GestionSuperAdminController::ValidarAdmin');
-        $routes->get('crear_admin', 'Admin\GestionSuperAdminController::CrearAdmin');
+        $routes->get('admin_users', 'rendicion_cuentas\Admin\GestionSuperAdminController::ValidarAdmin');
+        $routes->get('crear_admin', 'rendicion_cuentas\Admin\GestionSuperAdminController::CrearAdmin');
         //Rutas Editar admin(Dentro de Super admin)
-        $routes->get('buscar_admin', 'Admin\GestionSuperAdminController::BuscarAdmin');
-        $routes->get('UpdateAdmin/(:alphanum)', 'Admin\GestionSuperAdminController::UpdateAdmin/$1');
-        $routes->get('historial', 'Admin\GestionSuperAdminController::History');
+        $routes->get('buscar_admin', 'rendicion_cuentas\Admin\GestionSuperAdminController::BuscarAdmin');
+        $routes->get('UpdateAdmin/(:alphanum)', 'rendicion_cuentas\Admin\GestionSuperAdminController::UpdateAdmin/$1');
+        $routes->get('historial', 'rendicion_cuentas\Admin\GestionSuperAdminController::History');
     });
 });
 //Rutas del usuario(Formulario)
 $routes->group('form', function ($routes) {
     $routes->get('/', 'Client\FormularioUserController::BuscarRendicion');
-    $routes->post('procesar_formulario', 'Client\FormularioUserController::ProcesarFormulario');
+    $routes->post('procesar_formulario', 'rendicion_cuentas\Client\FormularioUserController::ProcesarFormulario');
 });
 // Rutas de conferencias detalle
-$routes->get('conferencias/(:alphanum)', 'Client\DasboardUserController::Conferencia/$1');
-$routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'Client\DasboardUserController::obtenerPreguntas/$1/$2');
+$routes->get('conferencias/(:alphanum)', 'rendicion_cuentas\Client\DasboardUserController::Conferencia/$1');
+$routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'rendicion_cuentas\Client\DasboardUserController::obtenerPreguntas/$1/$2');
 // Rutas de asistencia
 $routes->get('asistencia', 'Client\::');
-$routes->post('procesar_asistencia', 'AsistenciaController::procesar_asistencia');
+$routes->post('procesar_asistencia', 'rendicion_cuentas\Client\AsistenciaController::procesar_asistencia');
 // Rutas de usuarioQuestions
-$routes->get('usuarioQuestions', 'Client\DasboardUserController::Report');
-$routes->get('usuarioQuestions/buscar_rendecion_admin', 'Client\DasboardUserController::DatosRendicion');
+$routes->get('usuarioQuestions', 'rendicion_cuentas\Client\DasboardUserController::Report');
+$routes->get('usuarioQuestions/buscar_rendecion_admin', 'rendicion_cuentas\Client\DasboardUserController::DatosRendicion');
 //Rutas de api
-$routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
-$routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
+$routes->get('api/dni/(:num)', 'rendicion_cuentas\ConsultaApi::buscarDNI/$1');
+$routes->get('api/ruc/(:num)', 'rendicion_cuentas\ConsultaApi::buscarRUC/$1');
 //Rutas de la beta
 // $routes->post('mostrar_preguntas_seleccionadas/(:alphanum)', 'viewQuestionsController::mostrar_preguntas_seleccionadas/$1');
 // $routes->post('borrar_seleccion', 'SelectionController::borrar_seleccion');

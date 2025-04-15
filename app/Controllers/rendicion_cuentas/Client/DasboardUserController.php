@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Client;
+namespace App\Controllers\rendicion_cuentas\Client;
 
 use App\Controllers\BaseController;
 use App\Models\RendicionModel;

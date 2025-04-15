@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\rendicion_cuentas;
 use CodeIgniter\RESTful\ResourceController;
 
 class ConsultaApi extends ResourceController
