@@ -63,7 +63,7 @@ class GestionAdminController extends BaseController
     {
         $data['ejes'] = $this->ejeModel->findAll();
         $data['categoria'] = session()->get('categoria_admin');
-        return view('admin', $data);
+        return view('rendicion_cuentas/Admin/admin', $data);
     }
 
     public function CrearEje()
