@@ -86,7 +86,7 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapse<?= $eje['id_eje_seleccionado'] ?>"
                                         aria-expanded="false" aria-controls="collapse<?= $eje['id_eje_seleccionado'] ?>">
-                                        <?= $eje['tematica'] ?>
+                                        <?= esc($eje['tematica']) ?>
                                     </button>
                                 </h2>
                                 <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse"
@@ -101,8 +101,8 @@
                                                             <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
                                                         </div>
                                                         <div>
-                                                            <form action="<?=base_url('admin/viewQuestions/borrar_pregunta')?>" method="post">
-                                                                <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id_pregunta_seleccionada']) ?>">
+                                                            <form action="<?= base_url('admin/viewQuestions/borrar_pregunta') ?>" method="post">
+                                                                <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id']) ?>">
                                                                 <button type="submit" class="btn btn-danger">Borrar</button>
                                                             </form>
                                                         </div>
@@ -113,18 +113,19 @@
                                             <p class="text-muted text-center my-2">
                                                 No se encontraron preguntas seleccionadas para este eje.
                                             </p>
-                                        <?php endif;?>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endif; ?>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>
+    <?php endif; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
