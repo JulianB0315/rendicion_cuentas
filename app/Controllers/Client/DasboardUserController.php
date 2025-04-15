@@ -27,6 +27,7 @@ class DasboardUserController extends BaseController
         $this->preguntasSeleccionadasModel = new Preguntas_seleccionadasModel();
         $this->usuarioModel = new UsuarioModel();
     }
+    //Funciones de dashaboard
     public function index()
     {
         $year = date('Y');
@@ -86,6 +87,8 @@ class DasboardUserController extends BaseController
             'id_rendicion' => $id
         ]);
     }
+
+    //Funciones de preguntas del dashboard
     public function obtenerPreguntas($id_eje, $id_rendicion)
     {
         $eje_seleccionado = $this->ejesSeleccionadosModel
@@ -113,6 +116,62 @@ class DasboardUserController extends BaseController
                 'id_eje_seleccionado' => $eje_seleccionado['id_eje_seleccionado'],
                 'id_rendicion' => $id_rendicion
             ]
+        ]);
+    }
+
+    //Funciones de reportes de preguntas
+    public function Report()
+    {
+        $contador_masculino = 0;
+        $contador_femenino = 0;
+        $contador_asistencia = 0;
+        $contador_oradores = 0;
+
+        $rendiciones = $this->rendicionModel
+            ->findAll();
+        return view('usuarioQuestions', [
+            'rendiciones' => $rendiciones,
+            'contador_masculino' => $contador_masculino,
+            'contador_femenino' => $contador_femenino,
+            'contador_asistencia' => $contador_asistencia,
+            'contador_oradores' => $contador_oradores,
+        ]);
+    }
+
+    public function DatosRendicion()
+    {
+        $id_rendicion = $this->request->getGet('id_rendicion');
+        $usuarios = $this->usuarioModel
+            ->where('id_rendicion', $id_rendicion)
+            ->where('asistencia', 'si')
+            ->findAll();
+        $contador_masculino = 0;
+        $contador_femenino = 0;
+        $contador_asistencia = count($usuarios);
+        $contador_oradores = 0;
+        foreach ($usuarios as &$usuario) {
+            $usuario['sexo'] === 'M' ? $contador_masculino++ : ($usuario['sexo'] === 'F' ? $contador_femenino++ : null);
+            $usuario['tipo_participacion'] === 'orador' && $contador_oradores++;
+            if (!empty($usuario['id_pregunta'])) {
+                $pregunta = $this->preguntaModel->find($usuario['id_pregunta']);
+                $eje = $pregunta ? $this->ejeModel->find($pregunta['id_eje']) : null;
+                $usuario['pregunta_contenido'] = $pregunta['contenido'] ?? 'No definido';
+                $usuario['eje_tema'] = $eje['tematica'] ?? 'No definido';
+            } else {
+                $usuario['pregunta_contenido'] = 'Solo asistió a la rendición';
+                $usuario['eje_tema'] = '';
+            }
+
+            $usuario['organizacion'] = $usuario['nombre_empresa'] ?? 'No tiene';
+        }
+
+        return view('usuarioQuestions', [
+            'usuarios' => $usuarios,
+            'rendiciones' => $this->rendicionModel->findAll(),
+            'contador_masculino' => $contador_masculino,
+            'contador_femenino' => $contador_femenino,
+            'contador_asistencia' => $contador_asistencia,
+            'contador_oradores' => $contador_oradores,
         ]);
     }
 }
