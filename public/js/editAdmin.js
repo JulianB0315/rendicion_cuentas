@@ -35,7 +35,7 @@ const toggleUpdatePassword = (dni) => {
 const toggleDeleteAdmin = (dni) => {
 	const deleteRow = document.getElementById(`delete-${dni}`);
 	const deleteBtn = deleteRow.querySelector('.btn-delete');
-    const motivoTextarea = deleteRow.querySelector('.motivo');
+	const motivoTextarea = deleteRow.querySelector('.motivo');
 
 	deleteBtn.disabled = true;
 
@@ -58,9 +58,9 @@ const toggleDeleteAdmin = (dni) => {
 	deleteRow.classList.toggle("d-none");
 
 	if (deleteRow.classList.contains("d-none")) {
-        motivoTextarea.value = '';
-        deleteBtn.disabled = true;
-    }
+		motivoTextarea.value = '';
+		deleteBtn.disabled = true;
+	}
 };
 const cleanSearchResult = () => {
 	resultTable.innerHTML = "";
@@ -88,7 +88,8 @@ const searchAdmin = async (dni) => {
 								<td>${data.data.categoria_admin}</td>
 								<td class="d-flex justify-content-around">
 									<form action="${baseUrl}/admin/UpdateAdmin/habilitar" method="GET">
-										<input type="hidden" name="dni_admin" value="${data.data.dni_admin}">
+										<input type="hidden" name="dni-admin" value="${data.data.dni_admin}">
+										<input type="hidden" name="motivo" value="Volvió a trabajar en el área">
 										<button type='submit' class="btn-action-admin enable m-1">
 											<i class="fa-solid fa-user-check"></i>
 										</button>
@@ -110,24 +111,24 @@ const searchAdmin = async (dni) => {
 				`;
 		} else {
 			const alert = document.createElement('div');
-            alert.className = 'alert alert-info';
-            alert.textContent = data.message;
-            mainElement.appendChild(alert);
+			alert.className = 'alert alert-info';
+			alert.textContent = data.message;
+			mainElement.appendChild(alert);
 			cleanSearchResult();
 			setTimeout(() => {
-                alert.style.transition = 'opacity 0.3s ease';
-                alert.style.opacity = '0';
-                setTimeout(() => {
-                    alert.remove();
-                }, 500);
-            }, 3000);
+				alert.style.transition = 'opacity 0.3s ease';
+				alert.style.opacity = '0';
+				setTimeout(() => {
+					alert.remove();
+				}, 500);
+			}, 3000);
 		}
 	} catch (error) {
 		console.error(error);
 		const alert = document.createElement('div');
-        alert.className = 'alert alert-danger';
-        alert.textContent = 'Error al buscar administrador';
-        mainElement.appendChild(alert);
+		alert.className = 'alert alert-danger';
+		alert.textContent = 'Error al buscar administrador';
+		mainElement.appendChild(alert);
 		cleanSearchResult();
 		setTimeout(() => {
 			alert.style.transition = 'opacity 0.3s ease';
