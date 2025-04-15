@@ -3,8 +3,8 @@
 namespace App\Controllers\rendicion_cuentas\Client;
 
 use App\Controllers\BaseController;
-use App\Models\RendicionModel;
-use App\Models\UsuarioModel;
+use App\Models\rendicion_cuentas\RendicionModel;
+use App\Models\rendicion_cuentas\UsuarioModel;
 
 
 class AsistenciaController extends BaseController

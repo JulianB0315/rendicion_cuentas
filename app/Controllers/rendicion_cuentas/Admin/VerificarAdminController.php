@@ -3,7 +3,7 @@
 namespace App\Controllers\rendicion_cuentas\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\AdministradoresModel;
+use App\Models\rendicion_cuentas\AdministradoresModel;
 
 class VerificarAdminController extends BaseController
 {

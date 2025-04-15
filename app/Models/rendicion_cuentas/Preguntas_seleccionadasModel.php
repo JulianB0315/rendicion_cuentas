@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\rendicion_cuentas;
 
 class Preguntas_seleccionadasModel extends \CodeIgniter\Model
 {

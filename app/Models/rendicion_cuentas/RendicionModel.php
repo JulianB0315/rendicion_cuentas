@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\rendicion_cuentas;
 
 class RendicionModel extends \CodeIgniter\Model
 {

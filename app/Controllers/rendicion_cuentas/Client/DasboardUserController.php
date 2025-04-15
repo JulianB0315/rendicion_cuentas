@@ -3,12 +3,12 @@
 namespace App\Controllers\rendicion_cuentas\Client;
 
 use App\Controllers\BaseController;
-use App\Models\RendicionModel;
-use App\Models\EjeModel;
-use App\Models\Ejes_SeleccionadosModel;
-use App\Models\PreguntaModel;
-use App\Models\Preguntas_seleccionadasModel;
-use App\Models\UsuarioModel;
+use App\Models\rendicion_cuentas\RendicionModel;
+use App\Models\rendicion_cuentas\EjeModel;
+use App\Models\rendicion_cuentas\Ejes_SeleccionadosModel;
+use App\Models\rendicion_cuentas\PreguntaModel;
+use App\Models\rendicion_cuentas\Preguntas_seleccionadasModel;
+use App\Models\rendicion_cuentas\UsuarioModel;
 
 class DasboardUserController extends BaseController
 {
