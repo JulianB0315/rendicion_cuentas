@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Client\DasboardUserController::index');
 //Rutas de login del admin
 $routes->get('login', 'Admin\VerificarAdminController::index');
 $routes->post('session', 'Admin\VerificarAdminController::login');
@@ -49,7 +49,7 @@ $routes->group('form', function ($routes) {
     $routes->post('procesar_formulario', 'FormController::procesar_formulario');
 });
 // Rutas de conferencias detalle
-$routes->get('conferencias/(:alphanum)', 'ConferenciaController::show/$1');
+$routes->get('conferencias/(:alphanum)', 'Client\DasboardUserController::Conferencia/$1');
 $routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'ConferenciaController::obtenerPreguntas/$1/$2');
 // Rutas de asistencia
 $routes->get('asistencia', 'AsistenciaController::index');
