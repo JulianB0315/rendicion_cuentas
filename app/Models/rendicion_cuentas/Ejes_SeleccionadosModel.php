@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\rendicion_cuentas;
 
 class Ejes_SeleccionadosModel extends \CodeIgniter\Model
 {
