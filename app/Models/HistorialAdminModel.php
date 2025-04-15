@@ -19,35 +19,28 @@ class HistorialAdminModel extends Model
         'realizado_por',
         'fecha_accion'
     ];
-
+    // Dates
     protected $useTimestamps = false;
-    protected $updatedField  = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
-    public function getHistorialCompleto()
-    {
-        return $this->db->table($this->table . ' h')
-            ->select('
-                h.*,
-                a.nombres_admin as admin_afectado,
-                a.categoria_admin as categoria_admin,
-                r.nombres_admin as realizado_por,
-            ')
-            ->join('administradores a', 'a.dni_admin = h.dni_admin')
-            ->join('administradores r', 'r.dni_admin = h.realizado_por')
-            ->orderBy('h.fecha_accion', 'DESC')
-            ->get()
-            ->getResultArray();
-    }
-    public function registrarAccion($idRegistro,$dniAdmin, $accion, $motivo=null)
-    {
-        $data = [
-            'id' => $idRegistro,
-            'dni_admin' => $dniAdmin,
-            'accion' => $accion,
-            'motivo' => $motivo,
-            'realizado_por' => session()->get('dni_admin'),
-            'fecha_accion' => date('Y-m-d H:i:s')
-        ];
-        $this->insert($data);
-    }
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
+
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
 }

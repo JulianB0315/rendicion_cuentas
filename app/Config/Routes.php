@@ -7,36 +7,36 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 //Rutas de login del admin
-$routes->get('login', 'Admin_loginController::index');
-$routes->post('session', 'Admin_loginController::login');
-$routes->get('logout', 'Admin_loginController::logout');
+$routes->get('login', 'Admin\VerificarAdminController::index');
+$routes->post('session', 'Admin\VerificarAdminController::login');
+$routes->get('logout', 'Admin\VerificarAdminController::logout');
 
 //Rutas de admin
 $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
     //Inicio de admin
-    $routes->get('/', 'adminController::buscar_eje');
-    $routes->post('crear_eje', 'adminController::crear_eje');
-    $routes->post('crear_rendicion', 'adminController::crear_rendicion');
+    $routes->get('/', 'Admin\GestionAdminController::buscarEjes');
+    $routes->post('crear_eje', 'Admin\GestionAdminController::CrearEje');
+    $routes->post('crear_rendicion', 'Admin\GestionAdminController::CrearRendicion');
     //Rutas Seleccionar preguntas
-    $routes->get('questions', 'QuestionsController::cargar_fechas');
-    $routes->get('questions/buscar_rendecion_admin', 'QuestionsController::buscar_rendecion_admin');
+    $routes->get('questions/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
+    $routes->get('questions/buscar_rendecion_admin', 'Admin\GestionAdminController::BuscarRendicion');
     //Rutas Sorteo preguntas (Dentro de selecionar preguntas)
-    $routes->get('sorteo_preguntas/(:alphanum)', 'QuestionsController::sorteo_preguntas/$1');
+    $routes->get('sorteo_preguntas/(:alphanum)', 'Admin\GestionAdminController::BuscarPreguntas/$1');
     $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
     //Rutas Preguntas seleccionadas
-    $routes->get('viewQuestions', 'viewQuestionsController::cargar_fechas');
-    $routes->get('viewQuestions/buscar_rendecion_admin', 'viewQuestionsController::buscar_rendecion_admin');
-    $routes->post('viewQuestions/borrar_pregunta', 'viewQuestionsController::borrar_pregunta');
+    $routes->get('viewQuestions/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
+    $routes->get('viewQuestions/buscar_rendecion_admin', 'Admin\GestionAdminController::preguntasSeleccionadas');
+    $routes->post('viewQuestions/borrar_pregunta', 'Admin\GestionAdminController::QuitarPregunta');
     //Rutas de reportes
-    $routes->get('report', 'ReportController::mostrar_rendiciones');
-    $routes->get('mostrar_reporte', 'ReportController::mostrar_reporte');
+    $routes->get('report/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
+    $routes->get('mostrar_reporte', 'Admin\GestionAdminController::MostrarReporte');
     //Generacion de excel(Dentro de reportes)
-    $routes->get('viewReportController/generar_excel/(:alphanum)', 'viewReportController::generar_excel/$1');
+    $routes->get('viewReportController/generar_excel/(:alphanum)', 'Admin\GestionAdminController::GenerarExcel/$1');
     //Rutas de Super admin
     $routes->group('', ['filter' => 'superAdmin'], function ($routes) {
         //Rutas de administrar usuarios
-        $routes->get('admin_users', 'Admin_usersController::index');
-        $routes->get('crear_admin', 'Admin_usersController::crear_admin');
+        $routes->get('admin_users', 'Admin\GestionSuperAdminController::ValidarAdmin');
+        $routes->get('crear_admin', 'Admin\GestionSuperAdminController::CrearAdmin');
         //Rutas Editar admin(Dentro de Super admin)
         $routes->get('deshabilitar_admin/(:alphanum)', 'Admin_usersController::deshabilitar_admin/$1');
         $routes->post('habilitar_admin/(:alphanum)', 'Admin_usersController::habilitar_admin/$1');

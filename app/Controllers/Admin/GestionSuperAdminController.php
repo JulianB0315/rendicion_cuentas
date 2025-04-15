@@ -1,26 +1,39 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
+use App\Controllers\BaseController;
 use App\Models\AdministradoresModel;
 use App\Models\HistorialAdminModel;
 
-
-class Admin_UsersController extends BaseController
+class GestionSuperAdminController extends BaseController
 {
     private $AdministradoresModel;
-    private $admin;
     private $historialModel;
-    private $db;
-
-    function __construct()
+    private $admin;
+    public function __construct()
     {
         $this->AdministradoresModel = new AdministradoresModel();
-        $this->admin = \Config\Services::session();
         $this->historialModel = new HistorialAdminModel();
-        $this->db = \Config\Database::connect();
+        $this->admin = \Config\Services::session();
     }
-    public function index()
+    public function CreateID($table)
+    {
+        $prefixes = [
+            'historial' => 'ha'
+        ];
+        if (!isset($prefixes[$table])) {
+            throw new \InvalidArgumentException("Invalid table name: $table");
+        }
+        $model = $this->{$table . 'Model'};
+        $prefix = $prefixes[$table];
+        do {
+            $uuid = $prefix . strtoupper(substr(bin2hex(random_bytes(3)), 0, 6));
+        } while ($model->where('id', $uuid)->first());
+        return $uuid;
+    }
+    //Funciones para el super admin
+    public function ValidarAdmin()
     {
         $dni_admin = $this->admin->get('dni_admin');
         $nombres = $this->admin->get('nombres_admin');
@@ -39,17 +52,9 @@ class Admin_UsersController extends BaseController
         }
         return view('admin_users', ['admins' => $admins, 'nombre' => $primer_nombre]);
     }
-    public function crear_id_registro()
+
+    public function CrearAdmin()
     {
-        do {
-            $id = 'R' . substr(uniqid(), -8);
-            $existe = $this->historialModel->find($id);
-        } while ($existe);
-        return $id;
-    }
-    public function crear_admin()
-    {
-        $idRegistro = $this->crear_id_registro();
         $dni = $this->request->getGet('dni-admin');
         $nombres = $this->request->getGet('name-admin');
         $password = $this->request->getGet('password');
@@ -58,9 +63,9 @@ class Admin_UsersController extends BaseController
         if ($this->AdministradoresModel->where('dni_admin', $dni)->first()) {
             return redirect()->back()->with('error', 'El DNI ya está registrado.');
         }
-        
+
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        
+
         $data = [
             'dni_admin' => $dni,
             'nombres_admin' => $nombres,
@@ -68,14 +73,20 @@ class Admin_UsersController extends BaseController
             'categoria_admin' => $categoria,
             'estado' => $estado
         ];
-        
         $this->AdministradoresModel->insert($data);
-        $this->db->transStart();
-        $this->historialModel->registrarAccion($idRegistro, $dni, 'crear');
-        $this->db->transComplete();
+        $historialData = [
+            'id' => $this->CreateID('historial'),
+            'dni_admin' => $dni,
+            'accion' => 'Creación de administrador',
+            'motivo' => 'Nuevo administrador registrado',
+            'realizado_por' => $this->admin->get('dni_admin'),
+            'fecha_accion' => date('Y-m-d H:i:s', strtotime('-5 hours'))
+        ];
+        $this->historialModel->insert($historialData);
         session()->setFlashdata('success', 'Administrador creado exitosamente');
         return redirect()->back();
     }
+
     public function buscar_admin()
     {
         $admin = $this->request->getGet('dni-admin');
@@ -95,56 +106,5 @@ class Admin_UsersController extends BaseController
                 'data' => $admin
             ]);
         }
-        return $this->response->setJSON([
-            'status' => 'error',
-            'message' => 'No se encontró el administrador'
-        ]);
-    }
-    public function deshabilitar_admin($admin)
-    {
-        $motivo = $this->request->getGet('motivo');
-        $idRegistro = $this->crear_id_registro();
-        if (empty($motivo)) {
-            session()->setFlashdata('error', 'El motivo es requerido');
-            return redirect()->back();
-        }
-        $this->db->transStart();
-
-        $this->AdministradoresModel->update($admin, [
-            'estado' => 'deshabilitado'
-        ]);
-
-        $this->historialModel->registrarAccion($idRegistro, $admin, 'deshabilitar', $motivo);
-
-        $this->db->transComplete();
-
-        session()->setFlashdata('success', 'Administrador deshabilitado exitosamente');
-        return redirect()->back();
-    }
-    function habilitar_admin($admin)
-    {
-        $idRegistro = $this->crear_id_registro();
-        $this->db->transStart();
-        $this->AdministradoresModel->update($admin, [
-            'estado' => 'habilitado'
-        ]);
-        $this->historialModel->registrarAccion($idRegistro, $admin, 'habilitar');
-        $this->db->transComplete();
-        session()->setFlashdata('success', 'Administrador habilitado exitosamente');
-        return redirect()->back();
-    }
-    public function editar_admin($admin)
-    {
-        $idRegistro = $this->crear_id_registro();
-        $password = $this->request->getPost('password');
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $this->db->transStart();
-        $this->AdministradoresModel->update($admin, [
-            'password' => password_hash($password, PASSWORD_DEFAULT)
-        ]);
-        $this->historialModel->registrarAccion($idRegistro, $admin, 'editar_password');
-        $this->db->transComplete();
-        session()->setFlashdata('success', 'Contraseña editada correctamente.');
-        return redirect()->back();
     }
 }

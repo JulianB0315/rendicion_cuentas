@@ -43,26 +43,26 @@
             <div class="col-md-6 col-sm-12 p-4">
                 <form action="<?= base_url('admin/questions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
                     <div class="form-group">
-                        <label for="id_rendicion">Fecha de la Rendición:</label>
-                        <select class="form-select" id="id_rendicion" name="id_rendicion" required>
+                        <label for="id">Fecha de la Rendición:</label>
+                        <select class="form-select" id="id" name="id" required>
                             <option value="" disabled selected>
                                 Seleccione una fecha de rendición
                             </option>
                             <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                                <?php 
-                                    $rendicionesPerYear = [];
-                                    foreach ($rendiciones as $rendicion) {
-                                        $year = date('Y', strtotime($rendicion['fecha']));
-                                        $rendicionesPerYear[$year][] = $rendicion;
-                                    }
-                                    krsort($rendicionesPerYear);
-                                    foreach ($rendicionesPerYear as $year => $rendiciones): ?>
-                                        <optgroup label="<?= $year ?>">
-                                            <?php foreach ($rendiciones as $rendicion): ?>
-                                                <option value="<?= $rendicion['id_rendicion'] ?>"><?=formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
-                                            <?php endforeach; ?>
-                                        </optgroup>
-                                    <?php endforeach?>
+                                <?php
+                                $rendicionesPerYear = [];
+                                foreach ($rendiciones as $rendicion) {
+                                    $year = date('Y', strtotime($rendicion['fecha']));
+                                    $rendicionesPerYear[$year][] = $rendicion;
+                                }
+                                krsort($rendicionesPerYear);
+                                foreach ($rendicionesPerYear as $year => $rendiciones): ?>
+                                    <optgroup label="<?= $year ?>">
+                                        <?php foreach ($rendiciones as $rendicion): ?>
+                                            <option value="<?= $rendicion['id'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
+                                <?php endforeach ?>
                             <?php else: ?>
                                 <option value="">No hay rendiciones disponibles</option>
                             <?php endif; ?>
@@ -82,7 +82,7 @@
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
-                                <form action="<?= base_url('admin/sorteo_preguntas/' . $eje['id_eje_seleccionado']) ?>" method="get">
+                                <form action="<?= base_url('admin/sorteo_preguntas/' . $eje['id']) ?>" method="get">
                                     <span class="eje-info">
                                         <?= $eje['tematica'] ?>
                                         <small class="text-muted">
@@ -91,7 +91,7 @@
                                     </span>
                                     <div class="form-controls">
                                         <input type="hidden" name="id_eje_seleccionado"
-                                            value="<?= $eje['id_eje_seleccionado'] ?>" />
+                                            value="<?= $eje['id'] ?>" />
                                         <button type="submit" class="btn btn-primary">
                                             <i class="fas fa-random me-2"></i>Seleccionar
                                         </button>

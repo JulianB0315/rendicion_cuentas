@@ -44,13 +44,13 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li>
-										<a href="<?= base_url('admin/questions') ?>" class="dropdown-item">Seleccionar Preguntas</a>
+										<a href="<?= base_url('admin/questions/'.$ruta='questions') ?>" class="dropdown-item">Seleccionar Preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('admin/viewQuestions') ?>" class="dropdown-item">Ver preguntas</a>
+										<a href="<?= base_url('admin/viewQuestions/'.$ruta='viewQuestions') ?>" class="dropdown-item">Ver preguntas</a>
 									</li>
 									<li>
-										<a href="<?= base_url('admin/report') ?>" class="dropdown-item">Reportes</a>
+										<a href="<?= base_url('admin/report/'.$ruta='report') ?>" class="dropdown-item">Reportes</a>
 									</li>
 									<?php if ($categoria == 'super_admin'): ?>
 										<li>
@@ -116,12 +116,12 @@
 									<input
 										class="form-check-input"
 										type="checkbox"
-										id="eje_<?= esc($eje['id_eje']) ?>"
+										id="eje_<?= esc($eje['id']) ?>"
 										name="ejes[]"
-										value="<?= esc($eje['id_eje']) ?>" />
+										value="<?= esc($eje['id']) ?>" />
 									<label
 										class="form-check-label"
-										for="eje_<?= esc($eje['id_eje']) ?>">
+										for="eje_<?= esc($eje['id']) ?>">
 										<?= esc($eje['tematica']) ?>
 									</label>
 								</div>
