@@ -19,7 +19,7 @@ class VerificarAdminController extends BaseController
         if ($session->get('isLoggedIn')) {
             return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Ya has iniciado sesión');
         }
-        return view('login_admin');
+        return view('rendicion_cuentas/Admin/login_admin');
     }
     public function login()
     {

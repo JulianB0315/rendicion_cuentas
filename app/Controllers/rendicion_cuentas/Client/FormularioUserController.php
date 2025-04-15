@@ -78,7 +78,7 @@ class FormularioUserController extends BaseController
                     $ejes[] = $eje_data;
                 }
             }
-            return view('form', [
+            return view('rendicion_cuentas/Client/form', [
                 'ejes' => $ejes,
                 'id_rendicion' => $rendicion['id'],
                 'fecha_rendicion' => $fecha_rendicion,

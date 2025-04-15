@@ -50,7 +50,7 @@ class GestionSuperAdminController extends BaseController
                 $admin['categoria_admin'] = 'Admin';
             }
         }
-        return view('admin_users', ['admins' => $admins, 'nombre' => $primer_nombre]);
+        return view('rendicion_cuentas/Admin/admin_users', ['admins' => $admins, 'nombre' => $primer_nombre]);
     }
 
     public function CrearAdmin()
@@ -179,7 +179,7 @@ class GestionSuperAdminController extends BaseController
             $registro['realizado_por_nombre'] = $realizadoPor ? $realizadoPor['nombres_admin'] : 'Desconocido';
         }
 
-        return view('historial_admins', [
+        return view('rendicion_cuentas/Admin/historial_admins', [
             'nombre' => $this->admin->get('nombres_admin'),
             'historial' => $historial
         ]);

@@ -151,7 +151,7 @@ class GestionAdminController extends BaseController
             ];
         }, $ejes_seleccionados);
         $rendiciones = $this->rendicionModel->findAll();
-        return view('questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
 
     public function BuscarPreguntas($id_eje_seleccionado)
@@ -185,7 +185,7 @@ class GestionAdminController extends BaseController
 
         $preguntas = $preguntasQuery->findAll();
 
-        return view('sort', [
+        return view('rendicion_cuentas/Admin/sort', [
             'eje'                 => $eje,
             'preguntas'           => $preguntas,
             'id_eje_seleccionado' => $id_eje_seleccionado,
@@ -238,7 +238,7 @@ class GestionAdminController extends BaseController
         }, $ejes_seleccionados);
 
         $rendiciones = $this->rendicionModel->findAll();
-        return view('viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
 
     public function QuitarPregunta()
@@ -273,7 +273,7 @@ class GestionAdminController extends BaseController
                 ->findAll();
         }
 
-        return view('viewReport', [
+        return view('rendicion_cuentas/Admin/viewReport', [
             'usuarios' => $usuarios,
             'asistencia_si' => $asistencia_si,
             'asistencia_no' => $asistencia_no,

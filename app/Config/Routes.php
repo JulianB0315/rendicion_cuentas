@@ -45,7 +45,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
 });
 //Rutas del usuario(Formulario)
 $routes->group('form', function ($routes) {
-    $routes->get('/', 'Client\FormularioUserController::BuscarRendicion');
+    $routes->get('/', 'rendicion_cuentas\Client\FormularioUserController::BuscarRendicion');
     $routes->post('procesar_formulario', 'rendicion_cuentas\Client\FormularioUserController::ProcesarFormulario');
 });
 // Rutas de conferencias detalle

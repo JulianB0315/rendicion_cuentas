@@ -39,7 +39,7 @@ class DasboardUserController extends BaseController
 
         $firstBanner = !empty($rendicion) ? $rendicion[0]['banner_rendicion'] : null;
 
-        return view('dashboard', [
+        return view('rendicion_cuentas/Client/dashboard', [
             'rendiciones' => $rendicion,
             'firstBanner' => $firstBanner
         ]);
@@ -78,7 +78,7 @@ class DasboardUserController extends BaseController
             }
         }
         $hora_formateada = date('h:i A', strtotime($rendicion['hora_rendicion']));
-        return view('conferencia', [
+        return view('rendicion_cuentas/Client/conferencia', [
             'fecha' => $rendicion['fecha'],
             'hora_rendicion' => $hora_formateada,
             'number' => $number,
@@ -126,7 +126,7 @@ class DasboardUserController extends BaseController
 
         $rendiciones = $this->rendicionModel
             ->findAll();
-        return view('usuarioQuestions', [
+        return view('rendicion_cuentas/Client/usuarioQuestions', [
             'rendiciones' => $rendiciones,
             'contador_masculino' => $contador_masculino,
             'contador_femenino' => $contador_femenino,
@@ -162,7 +162,7 @@ class DasboardUserController extends BaseController
             $usuario['organizacion'] = $usuario['nombre_empresa'] ?? 'No tiene';
         }
 
-        return view('usuarioQuestions', [
+        return view('rendicion_cuentas/Client/usuarioQuestions', [
             'usuarios' => $usuarios,
             'rendiciones' => $this->rendicionModel->findAll(),
             'contador_masculino' => $contador_masculino,

@@ -37,7 +37,7 @@ class AsistenciaController extends BaseController
                 $number = ($rendiciones_del_año[0]['id_rendicion'] == $rendicion['id_rendicion']) ? 'I' : 'II';
             }
         }
-        return view('asistencia', [
+        return view('rendicion_cuentas/Client/asistencia', [
             'fecha' => $rendicion['fecha'],
             'number' => $number,
             'year' => $year
