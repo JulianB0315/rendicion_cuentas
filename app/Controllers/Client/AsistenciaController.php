@@ -77,13 +77,13 @@ class AsistenciaController extends BaseController
                 ->update();
 
             if ($updated) {
-                return redirect()->to('/asistencia')->with('success', 'Asistencia registrada correctamente');
+                return redirect()->to(RUTA_ASISTENCIA)->with('success', 'Asistencia registrada correctamente');
             } else {
-                return redirect()->to('/asistencia')->with('error', 'Error al registrar asistencia');
+                return redirect()->to(RUTA_ASISTENCIA)->with('error', 'Error al registrar asistencia');
             }
         } catch (\Exception $e) {
             log_message('error', $e->getMessage());
-            return redirect()->to('/asistencia')->with('error', 'Error al procesar la asistencia');
+            return redirect()->to(RUTA_ASISTENCIA)->with('error', 'Error al procesar la asistencia');
         }
     }
 }
