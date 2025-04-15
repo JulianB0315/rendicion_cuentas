@@ -9,7 +9,7 @@ use App\Models\Ejes_SeleccionadosModel;
 use App\Models\PreguntaModel;
 use App\Models\UsuarioModel;
 
-class FormularioUser extends BaseController
+class FormularioUserController extends BaseController
 {
     private $rendicionModel;
     private $ejeModel;
