@@ -133,7 +133,7 @@ class GestionAdminController extends BaseController
     public function cargarFechas($Vista)
     {
         $rendiciones = $this->rendicionModel->findAll();
-        return view($Vista, ['rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/'.$Vista, ['rendiciones' => $rendiciones]);
     }
 
     public function BuscarRendicion()
