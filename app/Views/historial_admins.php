@@ -32,7 +32,7 @@
     <header>
         <nav class="nav-header w-100 p-3">
             <div class="d-flex align-items-center logo-container">
-                <img src="<?= base_url("img/logo.jpg") ?>" alt="Logo" class="nav-logo img-fluid">
+                <img src="<?= base_url("img/logo.png") ?>" alt="Logo" class="nav-logo img-fluid">
             </div>
         </nav>
     </header>
