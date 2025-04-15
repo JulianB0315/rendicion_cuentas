@@ -211,8 +211,7 @@ class GestionAdminController extends BaseController
             $this->preguntasSeleccionadasModel->insert($data);
         }
 
-        $rendiciones = $this->rendicionModel->findAll();
-        return view('questions', ['rendiciones' => $rendiciones]);
+        return $this->BuscarPreguntas($id_eje_seleccionado);
     }
 
     public function preguntasSeleccionadas()
@@ -250,7 +249,7 @@ class GestionAdminController extends BaseController
             return redirect()->back()->with('error', 'Pregunta no encontrada.');
         }
         if ($this->preguntasSeleccionadasModel->delete($id_pregunta_seleccionada)) {
-            return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Pregunta borrada correctamente.');
+            return redirect()->back()->with('success', 'Pregunta borrada correctamente.');
         }
         return redirect()->back()->with('error', 'No se pudo borrar la pregunta.');
     }
