@@ -22,7 +22,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('questions/buscar_rendecion_admin', 'Admin\GestionAdminController::BuscarRendicion');
     //Rutas Sorteo preguntas (Dentro de selecionar preguntas)
     $routes->get('sorteo_preguntas/(:alphanum)', 'Admin\GestionAdminController::BuscarPreguntas/$1');
-    $routes->post('procesar_seleccion', 'SortController::procesar_seleccion');
+    $routes->post('procesar_seleccion', 'Admin\GestionAdminController::SeleccionarPreguntas');
     //Rutas Preguntas seleccionadas
     $routes->get('viewQuestions/(:alphanum)', 'Admin\GestionAdminController::cargarFechas/$1');
     $routes->get('viewQuestions/buscar_rendecion_admin', 'Admin\GestionAdminController::preguntasSeleccionadas');
@@ -45,18 +45,18 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
 });
 //Rutas del usuario(Formulario)
 $routes->group('form', function ($routes) {
-    $routes->get('/', 'FormController::buscar_rendicion');
-    $routes->post('procesar_formulario', 'FormController::procesar_formulario');
+    $routes->get('/', 'Client\FormularioUser::BuscarRendicion');
+    $routes->post('procesar_formulario', 'Client\FormularioUser::ProcesarFormulario');
 });
 // Rutas de conferencias detalle
 $routes->get('conferencias/(:alphanum)', 'Client\DasboardUserController::Conferencia/$1');
-$routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'ConferenciaController::obtenerPreguntas/$1/$2');
+$routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'Client\DasboardUserController::obtenerPreguntas/$1/$2');
 // Rutas de asistencia
-$routes->get('asistencia', 'AsistenciaController::index');
+$routes->get('asistencia', 'Client\::');
 $routes->post('procesar_asistencia', 'AsistenciaController::procesar_asistencia');
 // Rutas de usuarioQuestions
-$routes->get('usuarioQuestions', 'usuarioQuestionsController::index');
-$routes->get('usuarioQuestions/buscar_rendecion_admin', 'usuarioQuestionsController::buscar_rendecion_admin');
+$routes->get('usuarioQuestions', 'Client\DasboardUserController::Report');
+$routes->get('usuarioQuestions/buscar_rendecion_admin', 'Client\DasboardUserController::DatosRendicion');
 //Rutas de api
 $routes->get('api/dni/(:num)', 'ConsultaApi::buscarDNI/$1');
 $routes->get('api/ruc/(:num)', 'ConsultaApi::buscarRUC/$1');
