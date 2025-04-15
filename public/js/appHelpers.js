@@ -78,3 +78,15 @@ const fetchDocData = async (
 		return null;
 	}
 };
+const togglePasswordVisibility = (passwordInput, toggleBtn) => {
+	const icon = toggleBtn.querySelector("i");
+	if (passwordInput.type === "password") {
+		passwordInput.type = "text";
+		icon.classList.add("fa-eye");
+		icon.classList.remove("fa-eye-slash");
+	} else {
+		passwordInput.type = "password";
+		icon.classList.add("fa-eye-slash");
+		icon.classList.remove("fa-eye");
+	}
+}
