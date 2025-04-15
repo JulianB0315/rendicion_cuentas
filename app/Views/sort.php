@@ -40,7 +40,7 @@
         <?php if (!empty($preguntas)): ?>
             <form action="<?= base_url('admin/procesar_seleccion') ?>" method="post" id="form-preguntas">
                 <input type="hidden" name="id_eje_seleccionado" value="<?= esc($id_eje_seleccionado) ?>">
-                <input type="hidden" name="id_rendicion" value="<?= esc($id_rendicion) ?>">
+                <input type="hidden" name="id_rendicion" value="<?= esc($eje['id']) ?>">
 
                 <table class="table text-center table-ejes">
                     <thead>
@@ -66,9 +66,9 @@
                                         <input class="form-check-input"
                                             type="checkbox"
                                             name="preguntas_seleccionadas[]"
-                                            value="<?= esc($pregunta['id_pregunta']) ?>"
-                                            id="pregunta_<?= esc($pregunta['id_pregunta']) ?>"
-                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>>
+                                            value="<?= esc($pregunta['id']) ?>"
+                                            id="pregunta_<?= esc($pregunta['id']) ?>"
+                                            <?= in_array($pregunta['id'], $ids_seleccionados) ? 'checked' : '' ?>>
                                     </div>
                                 </td>
                             </tr>
