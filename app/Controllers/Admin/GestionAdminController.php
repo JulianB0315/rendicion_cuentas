@@ -80,37 +80,52 @@ class GestionAdminController extends BaseController
     public function CrearRendicion()
     {
         $banner = $this->request->getFile('bannerRendicion');
-        if ($banner && $banner->isValid() && !$banner->hasMoved()) {
-            $uploadPath = FCPATH . 'img';
-            if (!is_dir($uploadPath)) {
-                mkdir($uploadPath, 0777, true);
-            }
-            $bannerPath = rand(1000000000, 9999999999) . '.' . $banner->getClientExtension();
-            $banner->move($uploadPath, $bannerPath);
-            $data = [
-                'id' => $this->CreateID('rendicion'),
-                'fecha' => $this->request->getPost('fechaRendicion'),
-                'hora' => $this->request->getPost('horaRendicion'),
-                'banner' => $bannerPath
-            ];
-        } else {
+        if (!$banner || !$banner->isValid() || $banner->hasMoved()) {
             session()->setFlashdata('error', 'Error uploading banner');
             return redirect()->to(RUTA_ADMIN_HOME);
         }
+
+        $uploadPath = FCPATH . 'img';
+        if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
+            session()->setFlashdata('error', 'Failed to create upload directory');
+            return redirect()->to(RUTA_ADMIN_HOME);
+        }
+
+        $bannerPath = uniqid() . '.' . $banner->getClientExtension();
+        if (!$banner->move($uploadPath, $bannerPath)) {
+            session()->setFlashdata('error', 'Failed to move uploaded file');
+            return redirect()->to(RUTA_ADMIN_HOME);
+        }
+
+        $horaRendicion = $this->request->getPost('horaRendicion');
+        if (empty($horaRendicion)) {
+            session()->setFlashdata('error', 'Hora de rendición no proporcionada');
+            return redirect()->to(RUTA_ADMIN_HOME);
+        }
+
+        $data = [
+            'id' => $this->CreateID('rendicion'),
+            'fecha' => $this->request->getPost('fechaRendicion'),
+            'hora_rendicion' => $horaRendicion,
+            'banner_rendicion' => $bannerPath
+        ];
+
         $this->rendicionModel->insert($data);
-        if (empty($this->request->getPost('ejes'))) {
+
+        $ejes_seleccionados = $this->request->getPost('ejes');
+        if (empty($ejes_seleccionados)) {
             session()->setFlashdata('error', 'Debe seleccionar al menos un eje');
             return redirect()->to(RUTA_ADMIN_HOME);
         }
-        $ejes_seleccionados = $this->request->getPost('ejes');
+
         foreach ($ejes_seleccionados as $eje) {
-            $data_ejes_seleccionados = [
+            $this->ejesSeleccionadosModel->insert([
                 'id' => $this->CreateID('ejesSeleccionados'),
                 'id_rendicion' => $data['id'],
                 'id_eje' => $eje
-            ];
-            $this->ejesSeleccionadosModel->insert($data_ejes_seleccionados);
+            ]);
         }
+
         session()->setFlashdata('success', 'Rendición creada correctamente');
         return redirect()->to(RUTA_ADMIN_HOME);
     }
@@ -150,24 +165,47 @@ class GestionAdminController extends BaseController
         if (!$eje) {
             throw new \Exception("Eje no encontrado.");
         }
+
         $preguntas = $this->preguntaModel
             ->select('pregunta.*, usuario.nombres, usuario.DNI, usuario.ruc_empresa, usuario.nombre_empresa')
-            ->join('usuario', 'usuario.id = pregunta.id')
+            ->join('usuario', 'usuario.id = pregunta.id_usuario')
             ->where('pregunta.id_eje', $eje_seleccionado['id_eje'])
             ->where('usuario.id_rendicion', $eje_seleccionado['id_rendicion'])
             ->findAll();
-        $id = $eje_seleccionado['id'];
+
         $preguntas_seleccionadas = $this->preguntasSeleccionadasModel
             ->where('id_eje_seleccionado', $id_eje_seleccionado)
             ->findAll();
+
         $ids_seleccionados = array_column($preguntas_seleccionadas, 'id_pregunta');
         return view('sort', [
             'eje'                 => $eje,
             'preguntas'           => $preguntas,
             'id_eje_seleccionado' => $id_eje_seleccionado,
-            'id'        => $id,
             'ids_seleccionados'   => $ids_seleccionados
         ]);
+    }
+
+    public function SeleccionarPreguntas()
+    {
+        $id_eje_seleccionado = $this->request->getPost('id_eje_seleccionado');
+        $preguntas_seleccionadas = $this->request->getPost('preguntas_seleccionadas');
+
+        if (empty($preguntas_seleccionadas)) {
+            return redirect()->back()->with('error', 'No se seleccionaron preguntas.');
+        }
+
+        foreach ($preguntas_seleccionadas as $id_pregunta) {
+            $data = [
+                'id' => $this->CreateID('preguntasSeleccionadas'),
+                'id_eje_seleccionado'      => $id_eje_seleccionado,
+                'id_pregunta'              => $id_pregunta
+            ];
+            $this->preguntasSeleccionadasModel->insert($data);
+        }
+
+        $rendiciones = $this->rendicionModel->findAll();
+        return view('questions', ['rendiciones' => $rendiciones]);
     }
     public function preguntasSeleccionadas()
     {
@@ -175,21 +213,23 @@ class GestionAdminController extends BaseController
         $ejes_seleccionados = $this->ejesSeleccionadosModel
             ->where('id_rendicion', $id_rendicion)
             ->findAll();
-        $ejes = array_map(function ($eje) use ($id_rendicion) {
+
+        $ejes = array_map(function ($eje) {
             $ejeData = $this->ejeModel->find($eje['id_eje']);
-            $query = $this->preguntasSeleccionadasModel
-                ->select('preguntas_seleccionadas.id, preguntas_seleccionadas.id, pregunta.contenido, pregunta.fecha_registro, usuario.nombres')
+            $preguntas = $this->preguntasSeleccionadasModel
+                ->select('preguntas_seleccionadas.id, pregunta.contenido, pregunta.fecha_registro, usuario.nombres')
                 ->join('pregunta', 'pregunta.id = preguntas_seleccionadas.id_pregunta')
                 ->join('usuario', 'usuario.id = pregunta.id_usuario')
-                ->where('preguntas_seleccionadas.id', $eje['id'])
-                ->where('usuario.id_rendicion', $id_rendicion)
+                ->where('preguntas_seleccionadas.id_eje_seleccionado', $eje['id'])
                 ->findAll();
+
             return [
                 'tematica' => $ejeData['tematica'],
                 'id_eje_seleccionado' => $eje['id'],
-                'preguntas' => $query
+                'preguntas' => $preguntas
             ];
         }, $ejes_seleccionados);
+
         $rendiciones = $this->rendicionModel->findAll();
         return view('viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
@@ -202,7 +242,7 @@ class GestionAdminController extends BaseController
             return redirect()->back()->with('error', 'Pregunta no encontrada.');
         }
         if ($this->preguntasSeleccionadasModel->delete($id_pregunta_seleccionada)) {
-            return redirect()->to(base_url('admin/viewQuestions/'));
+            return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Pregunta borrada correctamente.');
         }
         return redirect()->back()->with('error', 'No se pudo borrar la pregunta.');
     }
