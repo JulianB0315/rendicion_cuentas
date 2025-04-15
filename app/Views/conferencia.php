@@ -76,7 +76,7 @@
                         <td>Descripción del eje <?= $eje['tematica'] ?></td>
                         <td>
                             <button class="btn btn-primary btn-preguntas"
-                                data-id-eje="<?= $eje['id_eje'] ?>"
+                                data-id-eje="<?= $eje['id'] ?>"
                                 data-id-rendicion="<?= $id_rendicion ?>"
                                 data-tematica="<?= $eje['tematica'] ?>">
                                 Ver Preguntas

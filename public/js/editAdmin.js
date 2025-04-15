@@ -87,7 +87,8 @@ const searchAdmin = async (dni) => {
 								<td>${data.data.nombres_admin}</td>
 								<td>${data.data.categoria_admin}</td>
 								<td class="d-flex justify-content-around">
-									<form action="${baseUrl}/admin/habilitar_admin/${data.data.dni_admin}" method="POST">
+									<form action="${baseUrl}/admin/UpdateAdmin/habilitar" method="GET">
+										<input type="hidden" name="dni_admin" value="${data.data.dni_admin}">
 										<button type='submit' class="btn-action-admin enable m-1">
 											<i class="fa-solid fa-user-check"></i>
 										</button>

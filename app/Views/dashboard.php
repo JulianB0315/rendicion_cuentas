@@ -156,7 +156,7 @@
 									<span>
 										<?= formatear_fecha_esp(esc($rendicion['fecha']), 'dashboard') ?>
 									</span>
-									<a class="btn rounded-pill btn-conference" href="<?= base_url('conferencias/' . $rendicion['id_rendicion']) ?>">
+									<a class="btn rounded-pill btn-conference" href="<?= base_url('conferencias/' . $rendicion['id']) ?>">
 										<i class="fa-solid fa-arrow-right"></i>
 									</a>
 								</li>

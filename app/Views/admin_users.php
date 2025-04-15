@@ -159,7 +159,8 @@
                                                 <td colspan="4">
                                                     <div class="d-flex justify-content-between align-items-center w-100 p-2">
                                                         <span class="me-3">Actualizar contraseña:</span>
-                                                        <form action="<?= base_url('admin/editar_admin/' . $admin['dni_admin']) ?>" method="post" class="d-flex flex-grow-1">
+                                                        <form action="<?= base_url('admin/UpdateAdmin/password') ?>" method="get" class="d-flex flex-grow-1">
+                                                            <input type="hidden" name="dni-admin" value="<?= esc($admin['dni_admin']) ?>">
                                                             <input type="password"
                                                                 name="password"
                                                                 class="form-control me-2 password-input"
@@ -175,8 +176,9 @@
                                             <tr id="delete-<?= esc($admin['dni_admin']) ?>" class="delete-admin-row d-none">
                                                 <td colspan="4">
                                                     <div class="d-flex w-100 p-2 disable-form">
-                                                        <form action="<?= base_url('admin/deshabilitar_admin/' . $admin['dni_admin']) ?>" method="get" class="form-container">
+                                                        <form action="<?= base_url('admin/UpdateAdmin/deshabilitar') ?>" method="get" class="form-container">
                                                             <div class="form-group text">
+                                                                <input type="hidden" name="dni-admin" value="<?= esc($admin['dni_admin']) ?>">
                                                                 <textarea
                                                                     name="motivo"
                                                                     class="form-part pregunta-textarea motivo"
@@ -211,10 +213,10 @@
                     <div class="col-12">
                         <h4>Buscar Administradores</h4>
                         <div class="d-flex justify-content-between align-items-center w-100 p-2">
-                            <form action="<?= base_url('admin/buscar_admin/') ?>" method="get" class="d-flex flex-grow-1" id="search-form">
+                            <form action="<?= base_url('admin/buscar_admin') ?>" method="get" class="d-flex flex-grow-1" id="search-form">
                                 <input
                                     type="text"
-                                    name="dni-search"
+                                    name="dni-admin"
                                     class="form-control me-2 dni-input"
                                     placeholder="Ingresar DNI"
                                     id="dni-search"

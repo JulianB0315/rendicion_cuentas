@@ -5,14 +5,14 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Client\DasboardUserController::index');
 //Rutas de login del admin
 $routes->get('login', 'Admin\VerificarAdminController::index');
 $routes->post('session', 'Admin\VerificarAdminController::login');
 $routes->get('logout', 'Admin\VerificarAdminController::logout');
 
 //Rutas de admin
-$routes->group('/admin', ['filter' => 'auth'],function ($routes) {
+$routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Inicio de admin
     $routes->get('/', 'Admin\GestionAdminController::buscarEjes');
     $routes->post('crear_eje', 'Admin\GestionAdminController::CrearEje');
@@ -38,11 +38,9 @@ $routes->group('/admin', ['filter' => 'auth'],function ($routes) {
         $routes->get('admin_users', 'Admin\GestionSuperAdminController::ValidarAdmin');
         $routes->get('crear_admin', 'Admin\GestionSuperAdminController::CrearAdmin');
         //Rutas Editar admin(Dentro de Super admin)
-        $routes->get('deshabilitar_admin/(:alphanum)', 'Admin_usersController::deshabilitar_admin/$1');
-        $routes->post('habilitar_admin/(:alphanum)', 'Admin_usersController::habilitar_admin/$1');
-        $routes->post('editar_admin/(:alphanum)', 'Admin_usersController::editar_admin/$1');
-        $routes->get('buscar_admin', 'Admin_usersController::buscar_admin/$1');
-        $routes->get('historial', 'AdminHistorialController::index');
+        $routes->get('buscar_admin', 'Admin\GestionSuperAdminController::BuscarAdmin');
+        $routes->get('UpdateAdmin/(:alphanum)', 'Admin\GestionSuperAdminController::UpdateAdmin/$1');
+        $routes->get('historial', 'Admin\GestionSuperAdminController::History');
     });
 });
 //Rutas del usuario(Formulario)
@@ -51,7 +49,7 @@ $routes->group('form', function ($routes) {
     $routes->post('procesar_formulario', 'FormController::procesar_formulario');
 });
 // Rutas de conferencias detalle
-$routes->get('conferencias/(:alphanum)', 'ConferenciaController::show/$1');
+$routes->get('conferencias/(:alphanum)', 'Client\DasboardUserController::Conferencia/$1');
 $routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'ConferenciaController::obtenerPreguntas/$1/$2');
 // Rutas de asistencia
 $routes->get('asistencia', 'AsistenciaController::index');
