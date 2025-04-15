@@ -58,16 +58,16 @@
                         <?php foreach ($historial as $registro) : ?>
                             <tr>
                                 <td>
-                                    <?= esc($registro['admin_afectado']) ?>
-                                    <span class="badge bg-info"><?= $registro['categoria_admin'] ?></span>
+                                    <?= esc($registro['nombres_admin']) ?>
+                                    <span class="badge bg-info"><?= esc($registro['categoria_admin']) ?></span>
                                 </td>
                                 <td>
                                     <span class="badge <?= get_badge_class($registro['accion']) ?>">
-                                        <?= ucfirst($registro['accion']) ?>
+                                        <?= ucfirst(esc($registro['accion'])) ?>
                                     </span>
                                 </td>
                                 <td><?= esc($registro['motivo']) ?? '-' ?></td>
-                                <td><?= esc($registro['realizado_por']) ?></td>
+                                <td><?= esc($registro['realizado_por_nombre']) ?></td>
                                 <td><?= formatear_fecha_esp($registro['fecha_accion']) ?></td>
                             </tr>
                         <?php endforeach; ?>
