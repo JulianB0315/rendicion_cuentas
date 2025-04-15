@@ -87,7 +87,7 @@
                                 foreach ($rendicionesPerYear as $year => $rendiciones): ?>
                                     <optgroup label="<?= $year ?>">
                                         <?php foreach ($rendiciones as $rendicion): ?>
-                                            <option value="<?= $rendicion['id_rendicion'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                            <option value="<?= $rendicion['id'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
                                         <?php endforeach; ?>
                                     </optgroup>
                                 <?php endforeach ?>
