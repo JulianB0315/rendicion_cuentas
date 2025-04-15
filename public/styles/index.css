@@ -40,6 +40,19 @@ body {
     font-size: clamp(1.2rem, 2.5vw, 2rem);
     font-family: var(--titles);
 }
+.spinner-container {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    gap: 1rem;
+}
+
+.spinner-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
 
 .form-container {
     width: 100%;
@@ -145,17 +158,143 @@ body {
     background-color: var(--tertiary-color);
 }
 
+/* Estilos base compartidos */
+.alert {
+    display: flex;
+    align-items: center;
+    border-left-width: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
+}
+
+/* Estilos específicos para alertas flotantes (success, error, danger) */
+.alert-success, .alert-danger, .alert-error {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 350px;
+    width: calc(100% - 40px);
+    z-index: 9999;
+    animation: slide-up 0.4s ease-out;
+}
+
+/* Estilos específicos para alertas warning (no flotantes) */
+.alert-warning {
+    width: 100%;
+    margin-bottom: 20px;
+    animation: none;
+    position: relative;
+}
+
+/* Colores para cada tipo de alerta */
+.alert-success {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-danger, .alert-error {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+/* Estilos de íconos y contenido comunes */
+.alert-icon {
+    margin-right: 15px;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.close-alert {
+    background: none;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    font-size: 1.1rem;
+}
+
+.close-alert:hover {
+    opacity: 1;
+}
+
+/* Animaciones solo para alertas flotantes */
+@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Media queries */
 @media (max-width: 768px) {
-	.nav-logo {
-		height: 70px;
-	}
-	
-	.main {
-		width: 80%;
-	}
-	
-	.logo-container {
-		justify-content: center;
-	}
+    .nav-logo {
+        height: 70px;
+    }
+    
+    .main {
+        width: 80%;
+    }
+    
+    .logo-container {
+        justify-content: center;
+    }
+    
+    .alert-success, .alert-danger, .alert-error {
+        right: 50%;
+        transform: translateX(50%);
+        max-width: 90%;
+    }
+    
+    @keyframes slide-up {
+        from {
+            transform: translate(50%, 100%);
+            opacity: 0;
+        }
+        to {
+            transform: translate(50%, 0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fade-out {
+        from {
+            transform: translate(50%, 0);
+            opacity: 1;
+        }
+        to {
+            transform: translate(50%, 100%);
+            opacity: 0;
+        }
+    }
 }
 

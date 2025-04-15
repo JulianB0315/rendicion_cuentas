@@ -231,14 +231,45 @@
                 </div>
             </div>
         </div>
-        <?php if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger">
-                <?= session()->getFlashdata('error') ?>
+        <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success" id="success-alert">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="alert-content">
+                    <?= session()->getFlashdata('success') ?>
+                </div>
+                <button type="button" class="close-alert">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
         <?php endif; ?>
-        <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success">
-                <?= session()->getFlashdata('success') ?>
+
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger" id="error-alert">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-circle-x"></i>
+                </div>
+                <div class="alert-content">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+                <button type="button" class="close-alert">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('warning')): ?>
+            <div class="alert alert-warning" id="warning-alert">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                    <?= session()->getFlashdata('warning') ?>
+                </div>
+                <button type="button" class="close-alert">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
         <?php endif; ?>
     </main>
@@ -248,6 +279,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('js/login.js') ?>"></script>
     <script src="<?= base_url('js/editAdmin.js') ?>"></script>
+	<script src="<?= base_url('js/alerts.js') ?>"></script>
 </body>
 
 </html>

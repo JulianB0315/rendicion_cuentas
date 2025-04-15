@@ -97,21 +97,7 @@ label{
 .form-select option[value=""][disabled] {
     color: var(--gray-light);
 }
-.alert{
-    position: absolute;
-    width: 400px;
-    height: 60px;
-    bottom: 0;
-    right: 1rem;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-.alert.alert-warning{
-    position: relative;
-    width: 100%;
-    right: 0;
-    margin: 1rem 0;
-}
+
 .btn-update, .btn-cancel, .btn-search {
     background-color: var(--primary-color);
     color: var(--white);
@@ -169,13 +155,6 @@ label{
     }
     .main{
         width: 80%;
-    }
-    .alert{
-        position: relative;
-        margin: 0 auto;
-        width: 100%;
-        right: 0;
-        margin: 1rem 0;
     }
     .disable-form .form-container{
         max-width: 100%;

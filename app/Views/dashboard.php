@@ -59,8 +59,9 @@
 			<div
 				class="col-12 d-flex justify-content-center align-items-center">
 				<img
+					style="border-radius: 1rem;"
 					class="img-fluid w-70 w-xl-50"
-					src="<?= !empty($firstBanner) ? base_url('img/'.$firstBanner) : base_url('img/bannerstatic.jpg') ?>"
+					src="<?= !empty($firstBanner) ? base_url('img/' . $firstBanner) : base_url('img/bannerstatic.jpg') ?>"
 					alt="Rendición de Cuentas Banner" />
 			</div>
 		</div>
@@ -163,9 +164,9 @@
 						</ul>
 					<?php else: ?>
 						<h3 class="text-center">
-							No hay conferencias programadas
-							</h5>
-						<?php endif; ?>
+							No hay rendiciones programadas
+						</h3>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
@@ -184,7 +185,7 @@
 						</p>
 						<a
 							href="<?= !empty($rendiciones) ? base_url('form') : '#' ?>"
-							class="btn text-white btn-lg px-4 rounded-pill register-btn <?= empty($rendiciones) ? 'disabled' : '' ?>">
+							class="btn text-white btn-lg px-4 rounded-pill register-btn <?= empty($rendiciones) ? 'disabled' : '' ?> ">
 							<i class="fa-solid fa-user-plus me-2"></i>
 							Registrarme
 						</a>
@@ -193,14 +194,44 @@
 			</div>
 		</section>
 		<?php if (session()->getFlashdata('success')): ?>
-			<div class="alert alert-success">
-				<?= session()->getFlashdata('success') ?>
+			<div class="alert alert-success" id="success-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-circle-check"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('success') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
 		<?php endif; ?>
 
 		<?php if (session()->getFlashdata('error')): ?>
-			<div class="alert alert-danger">
-				<?= session()->getFlashdata('error') ?>
+			<div class="alert alert-danger" id="error-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-circle-x"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('error') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('warning')): ?>
+			<div class="alert alert-warning" id="warning-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-triangle-exclamation"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('warning') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
 		<?php endif; ?>
 	</main>
@@ -285,6 +316,7 @@
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
 	<script src="<?= base_url('js/dashboard.js') ?>"></script>
+	<script src="<?= base_url('js/alerts.js') ?>"></script>
 	<!-- -->
 </body>
 

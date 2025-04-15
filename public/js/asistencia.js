@@ -1,53 +1,78 @@
-const asistenciaBtn = document.getElementById('submit-asistencia');
-const dniInput = document.getElementById('dni-asistencia');
-const error = document.getElementById('error');
+const asistenciaBtn = document.getElementById("submit-asistencia");
+const dniInput = document.getElementById("dni-asistencia");
+const error = document.getElementById("error");
+const dniLoader = document.getElementById("dni-loading");
 
+// Deshabilitar botón inicialmente
 asistenciaBtn.disabled = true;
 
-const buscarPersona = async () => {
-	const dni = dniInput.value;
-	const regex = /^\d{8}$/;
-	error.innerHTML = "";
-	if (dni.length < 8) {
-		error.innerHTML = "El DNI debe tener 8 dígitos";
-		return;
-	}
+// Función para validar y verificar DNI
+const verificarDNI = (dni) => {
+	// No hacer nada si está vacío
+	if (!dni) return;
 
-	if (!regex.test(dni)) {
+	// Reiniciar error
+	error.innerHTML = "";
+	asistenciaBtn.disabled = true;
+
+	// Validar formato básico
+	if (!/^\d+$/.test(dni)) {
 		error.innerHTML = "El DNI debe contener solo números";
 		return;
 	}
 
-	try {
-		const response = await fetch(
-			`http://localhost/rendicion_cuentas/public/api/dni/${dni}`
-		);
-		const data = await response.json();
-
-		if (response.ok && dni.length === 8) {
-            asistenciaBtn.disabled = false;
-			console.log(data);
-		} else {
-			error.innerHTML =
-				"No se encontró ninguna persona con ese DNI";
-		}
-	} catch (error) {
-		console.error("Error fetching JSON:", error);
-		error.innerHTML = "Error al buscar la persona";
+	// No consultar API si no tiene 8 dígitos
+	if (dni.length !== 8) {
+		error.innerHTML = "El DNI debe tener 8 dígitos";
+		return;
 	}
+
+	// Usar el helper para consultar DNI
+	fetchDocData(
+		"dni",
+		dni,
+		dniLoader,
+		(data) => {
+			// Éxito - habilitar botón
+			asistenciaBtn.disabled = false;
+		},
+		(errorMsg) => {
+			// Error - mostrar mensaje y mantener botón deshabilitado
+			error.innerHTML = errorMsg;
+			asistenciaBtn.disabled = true;
+		}
+	);
 };
 
-dniInput.addEventListener('input', buscarPersona);
-document.addEventListener('DOMContentLoaded', function() {
-    const alerts = document.querySelectorAll('.alert');
-    
-    alerts.forEach(alert => {
-        setTimeout(() => {
-            alert.style.transition = 'opacity 0.3s ease';
-            alert.style.opacity = '0';
-            setTimeout(() => {
-                alert.remove();
-            }, 500);
-        }, 3000);
-    });
+// Detectar cambios en el input
+dniInput.addEventListener("input", () => {
+	const dni = dniInput.value;
+
+	// Limpiamos errores y deshabilitamos botón
+	error.innerHTML = "";
+	asistenciaBtn.disabled = true;
+
+	// Si el DNI llegó a 8 dígitos, verificar automáticamente
+	if (dni.length === 8) {
+		verificarDNI(dni);
+	}
+});
+
+// Validar al enviar el formulario
+document.getElementById("form-asistencia").addEventListener("submit", (e) => {
+	const dni = dniInput.value;
+
+	if (dni.length !== 8 || !/^\d+$/.test(dni)) {
+		e.preventDefault();
+		error.innerHTML = "El DNI debe tener 8 dígitos numéricos";
+		return false;
+	}
+
+	if (asistenciaBtn.disabled) {
+		e.preventDefault();
+		error.innerHTML = "Por favor, verifique que el DNI sea válido";
+		return false;
+	}
+
+	return true;
 });

@@ -10,6 +10,9 @@
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous" />
+        <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,8 +68,7 @@
                                             name="preguntas_seleccionadas[]"
                                             value="<?= esc($pregunta['id_pregunta']) ?>"
                                             id="pregunta_<?= esc($pregunta['id_pregunta']) ?>"
-                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>
-                                        >
+                                            <?= in_array($pregunta['id_pregunta'], $ids_seleccionados) ? 'checked' : '' ?>>
                                     </div>
                                 </td>
                             </tr>
@@ -79,7 +81,14 @@
                 </div>
             </form>
         <?php else: ?>
-            <div class="alert alert-warning">No se encontraron preguntas para este eje y rendición.</div>
+            <div class="alert alert-warning" id="warning-alert">
+                <div class="alert-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="alert-content">
+                    No se encontraron preguntas para este eje y rendición.
+                </div>
+            </div>
         <?php endif; ?>
     </div>
 

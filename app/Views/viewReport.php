@@ -126,8 +126,13 @@
                     </table>
                 <?php else: ?>
                     <div class="col-12 my-4">
-                        <div class="alert alert-warning text-center">
-                            No se encontraron usuarios.
+                        <div class="alert alert-warning" id="warning-alert">
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="alert-content">
+                                No se encontraron usuarios.
+                            </div>
                         </div>
                     </div>
                 <?php endif; ?>

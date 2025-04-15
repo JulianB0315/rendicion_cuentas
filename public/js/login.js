@@ -4,83 +4,78 @@ const dniInput = document.getElementById("dni");
 const error = document.getElementById("dni-error");
 const nombreInput = document.getElementById("nombre");
 const submitBtn = document.getElementById("submit-button");
+const dniLoader = document.getElementById("dni-loading");
 
+// Deshabilitar botón inicialmente
 submitBtn.disabled = true;
 
-searchPerson = async () => {
-	const dni = dniInput.value;
-	const regex = /^\d{8}$/;
-	nombreInput.value = "";
-	error.innerHTML = "";
+// Función para validar y verificar DNI
+const verificarDNI = (dni) => {
+    // No hacer nada si está vacío
+    if (!dni) return;
 
-	if (dni.length < 8) {
-		error.innerHTML = "El DNI debe tener 8 dígitos";
-		nombreInput.value = "";
-		return;
-	}
+    // Reiniciar campos
+    error.innerHTML = "";
+    nombreInput.value = "";
+    submitBtn.disabled = true;
 
-	if (!regex.test(dni)) {
-		error.innerHTML = "El DNI debe contener solo números";
-		nombreInput.value = "";
-		return;
-	}
+    // Validar formato básico
+    if (!/^\d+$/.test(dni)) {
+        error.innerHTML = "El DNI debe contener solo números";
+        return;
+    }
 
-	try {
-		const response = await fetch(
-			`http://localhost/rendicion_cuentas/public/api/dni/${dni}`
-		);
-		const data = await response.json();
+    // No consultar API si no tiene 8 dígitos
+    if (dni.length !== 8) {
+        error.innerHTML = "El DNI debe tener 8 dígitos";
+        return;
+    }
 
-		if (response.ok && dni.length === 8) {
-			const persona = Array.isArray(data) ? data[0] : data;
-            console.log(persona);
-			if (!persona || !persona.nombres) {
-				error.innerHTML = "No se encontró ninguna persona con ese DNI";
-				nombreInput.value = "";
-				return;
-			}
-			const nombre = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
-			if (nombre === undefined) {
-				errorDniMsg.innerHTML = "No se encontró ninguna persona con ese DNI";
-				nombreInput.value = "";
-				return;
-			}
+    // Usar el helper para consultar DNI
+    fetchDocData(
+        "dni",
+        dni,
+        dniLoader,
+        (data) => {
+            const persona = Array.isArray(data) ? data[0] : data;
+            if (!persona || !persona.nombres) {
+                error.innerHTML = "No se encontró ninguna persona con ese DNI";
+                return;
+            }
+            const nombre = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
+            if (nombre === "undefined undefined undefined") {
+                error.innerHTML = "No se encontró ninguna persona con ese DNI";
+                return;
+            }
             nombreInput.value = nombre;
-			submitBtn.disabled = false;
-		} else {
-			error.innerHTML = "No se encontró ninguna persona con ese DNI";
-		}
-	} catch (error) {
-		console.error("Error fetching JSON:", error);
-		error.innerHTML = "Error al buscar la persona";
-	}
+            submitBtn.disabled = false;
+        },
+        (errorMsg) => {
+            error.innerHTML = errorMsg;
+            submitBtn.disabled = true;
+        }
+    );
 };
 
-dniInput.addEventListener("input", searchPerson);
-
-btnToggle.addEventListener("click", () => {
-	const icon = btnToggle.querySelector("i");
-	if (passwordInput.type === "password") {
-		passwordInput.type = "text";
-		icon.classList.add("fa-eye");
-		icon.classList.remove("fa-eye-slash");
-	} else {
-		passwordInput.type = "password";
-		icon.classList.add("fa-eye-slash");
-		icon.classList.remove("fa-eye");
-	}
+// Detectar cambios en el input
+dniInput.addEventListener("input", () => {
+    const dni = dniInput.value;
+    
+    // Siempre deshabilitar botón al cambiar el valor
+    submitBtn.disabled = true;
+    
+    // Limpiamos errores
+    error.innerHTML = "";
+    
+    // Si el DNI llegó a 8 dígitos, verificar automáticamente
+    if (dni.length === 8) {
+        verificarDNI(dni);
+    } else {
+        nombreInput.value = "";
+    }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const alerts = document.querySelectorAll('.alert');
-    
-    alerts.forEach(alert => {
-        setTimeout(() => {
-            alert.style.transition = 'opacity 0.3s ease';
-            alert.style.opacity = '0';
-            setTimeout(() => {
-                alert.remove();
-            }, 500);
-        }, 3000);
-    });
+// Mostrar/ocultar contraseña
+btnToggle.addEventListener("click", () => {
+    togglePasswordVisibility(passwordInput, btnToggle);
 });

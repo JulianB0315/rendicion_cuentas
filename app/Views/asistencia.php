@@ -14,10 +14,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
+    <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/asistencia.css") ?>" />
 </head>
 
 <body>
@@ -47,11 +49,17 @@
                                 class="form-part"
                                 id="dni-asistencia"
                                 name="dni"
-                                pattern="\d{8}"
+                                maxlength="8"
+                                minlength="8"
                                 title="Por favor, ingresar bien su DNI"
                                 required
                                 placeholder=" " />
                             <label for="dni">DNI*</label>
+                        </div>
+                        <div id="dni-loading" class="spinner-container d-none">
+                            <div class="spinner-border text-primary spinner-sm" role="status">
+                            </div>
+                            <span class="ms-5">Consultando DNI...</span>
                         </div>
                         <div class="error" id="error"></div>
                         <button
@@ -64,19 +72,51 @@
                 </form>
             </div>
             <?php if (session()->getFlashdata('success')): ?>
-                <div class="alert alert-success">
-                    <?= session()->getFlashdata('success') ?>
+                <div class="alert alert-success" id="success-alert">
+                    <div class="alert-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="alert-content">
+                        <?= session()->getFlashdata('success') ?>
+                    </div>
+                    <button type="button" class="close-alert">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
             <?php endif; ?>
 
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="alert alert-danger">
-                    <?= session()->getFlashdata('error') ?>
+                <div class="alert alert-danger" id="error-alert">
+                    <div class="alert-icon">
+                        <i class="fa-solid fa-circle-x"></i>
+                    </div>
+                    <div class="alert-content">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                    <button type="button" class="close-alert">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('warning')): ?>
+                <div class="alert alert-warning" id="warning-alert">
+                    <div class="alert-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="alert-content">
+                        <?= session()->getFlashdata('warning') ?>
+                    </div>
+                    <button type="button" class="close-alert">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
             <?php endif; ?>
         </div>
     </main>
+    <script src="<?= base_url('js/appHelpers.js') ?>"></script>
     <script src="<?= base_url('js/asistencia.js') ?>"></script>
+    <script src="<?= base_url('js/alerts.js') ?>"></script>
 </body>
 
 </html>

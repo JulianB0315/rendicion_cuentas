@@ -52,7 +52,7 @@
 									<li>
 										<a href="<?= base_url('admin/report/'.$ruta='report') ?>" class="dropdown-item">Reportes</a>
 									</li>
-									<?php if( $categoria == 'super_admin'): ?>
+									<?php if ($categoria == 'super_admin'): ?>
 										<li>
 											<a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
 										</li>
@@ -150,19 +150,51 @@
 				</form>
 			</div>
 		</div>
-		<?php if (session()->getFlashdata('error')): ?>
-			<div class="alert alert-danger">
-				<?= session()->getFlashdata('error') ?>
+		<?php if (session()->getFlashdata('success')): ?>
+			<div class="alert alert-success" id="success-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-circle-check"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('success') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
 		<?php endif; ?>
-		<?php if (session()->getFlashdata('success')): ?>
-			<div class="alert alert-success">
-				<?= session()->getFlashdata('success') ?>
+
+		<?php if (session()->getFlashdata('error')): ?>
+			<div class="alert alert-danger" id="error-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-circle-x"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('error') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+			</div>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('warning')): ?>
+			<div class="alert alert-warning" id="warning-alert">
+				<div class="alert-icon">
+					<i class="fa-solid fa-triangle-exclamation"></i>
+				</div>
+				<div class="alert-content">
+					<?= session()->getFlashdata('warning') ?>
+				</div>
+				<button type="button" class="close-alert">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
 			</div>
 		<?php endif; ?>
 	</main>
-	<script src="<?= base_url('js/admin.js') ?>"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="<?= base_url('js/admin.js') ?>"></script>
+	<script src="<?= base_url('js/alerts.js') ?>"></script>
 </body>
 
 </html>
