@@ -102,20 +102,17 @@ class DasboardUserController extends BaseController
                 'message' => 'Eje seleccionado no encontrado'
             ]);
         }
+
         $preguntas = $this->preguntasSeleccionadasModel
-            ->select('preguntas_seleccionadas.*, pregunta.contenido, usuario.nombres')
-            ->join('pregunta', 'pregunta.id_pregunta = preguntas_seleccionadas.id_pregunta')
-            ->join('usuario', 'usuario.id_usuario = pregunta.id_usuario')
-            ->where('preguntas_seleccionadas.id_eje_seleccionado', $eje_seleccionado['id_eje_seleccionado'])
-            ->where('usuario.id_rendicion', $id_rendicion)
+            ->select('preguntas_seleccionadas.id, pregunta.contenido, usuario.nombres, usuario.tipo_participacion')
+            ->join('pregunta', 'pregunta.id = preguntas_seleccionadas.id_pregunta')
+            ->join('usuario', 'usuario.id = pregunta.id_usuario')
+            ->where('preguntas_seleccionadas.id_eje_seleccionado', $eje_seleccionado['id'])
             ->findAll();
+
         return $this->response->setJSON([
             'success' => true,
-            'data' => $preguntas,
-            'debug' => [
-                'id_eje_seleccionado' => $eje_seleccionado['id_eje_seleccionado'],
-                'id_rendicion' => $id_rendicion
-            ]
+            'data' => $preguntas
         ]);
     }
 
