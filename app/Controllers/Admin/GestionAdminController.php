@@ -166,18 +166,25 @@ class GestionAdminController extends BaseController
             throw new \Exception("Eje no encontrado.");
         }
 
-        $preguntas = $this->preguntaModel
-            ->select('pregunta.*, usuario.nombres, usuario.DNI, usuario.ruc_empresa, usuario.nombre_empresa')
-            ->join('usuario', 'usuario.id = pregunta.id_usuario')
-            ->where('pregunta.id_eje', $eje_seleccionado['id_eje'])
-            ->where('usuario.id_rendicion', $eje_seleccionado['id_rendicion'])
-            ->findAll();
-
+        // Get IDs of already selected questions
         $preguntas_seleccionadas = $this->preguntasSeleccionadasModel
             ->where('id_eje_seleccionado', $id_eje_seleccionado)
             ->findAll();
-
         $ids_seleccionados = array_column($preguntas_seleccionadas, 'id_pregunta');
+
+        // Exclude selected questions
+        $preguntasQuery = $this->preguntaModel
+            ->select('pregunta.*, usuario.nombres, usuario.DNI, usuario.ruc_empresa, usuario.nombre_empresa')
+            ->join('usuario', 'usuario.id = pregunta.id_usuario')
+            ->where('pregunta.id_eje', $eje_seleccionado['id_eje'])
+            ->where('usuario.id_rendicion', $eje_seleccionado['id_rendicion']);
+
+        if (!empty($ids_seleccionados)) {
+            $preguntasQuery->whereNotIn('pregunta.id', $ids_seleccionados);
+        }
+
+        $preguntas = $preguntasQuery->findAll();
+
         return view('sort', [
             'eje'                 => $eje,
             'preguntas'           => $preguntas,
@@ -207,6 +214,7 @@ class GestionAdminController extends BaseController
         $rendiciones = $this->rendicionModel->findAll();
         return view('questions', ['rendiciones' => $rendiciones]);
     }
+
     public function preguntasSeleccionadas()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
@@ -273,6 +281,7 @@ class GestionAdminController extends BaseController
             'id_rendicion' => $id_rendicion
         ]);
     }
+
     public function GenerarExcel($id_rendicion)
     {
         set_time_limit(0);
