@@ -35,7 +35,7 @@
         <nav class="nav-header container">
             <div class="d-flex align-items-center logo-container w-100 justify-content-between gap-3">
                 <img
-                    src="<?= base_url('img/logo.jpg') ?>"
+                    src="<?= base_url('img/logo.png') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
                 <h4 class="header-welcome text-center">Bienvenid@, <?= esc($nombre) ?></h4>
