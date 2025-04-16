@@ -27,13 +27,37 @@
 </head>
 
 <body>
-    <header class="">
-        <nav class="nav-header w-100 p-3">
-            <div class="d-flex align-items-center logo-container">
+    <header class="container-fluid header p-3 mb-5">
+        <nav class="nav-header container">
+            <div class="d-flex align-items-center logo-container w-100 justify-content-between">
                 <img
                     src="<?= base_url('img/logo.png') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
+                <div class="links-container">
+                    <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Acciones
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>questions" class="dropdown-item">Seleccionar Preguntas</a></li>
+                                    <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
+                                    <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
+                                    <?php if ($categoria == 'super_admin'): ?>
+                                        <li>
+                                            <a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li>
+                                        <a href="<?= base_url('logout') ?>" class="dropdown-item logout">Cerrar Sessión</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -94,7 +118,7 @@
                                     <div class="accordion-body">
                                         <?php if (!empty($eje['preguntas'])): ?>
                                             <ul class="list-group">
-                                                <?php foreach($eje['preguntas'] as $pregunta): ?>
+                                                <?php foreach ($eje['preguntas'] as $pregunta): ?>
                                                     <li class="list-group-item justify-content-between">
                                                         <div class="pregunta-item">
                                                             <strong class="nombre-usuario"><?= esc($pregunta['nombres']) ?></strong>
