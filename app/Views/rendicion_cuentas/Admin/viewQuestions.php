@@ -52,6 +52,15 @@
                                         <li>
                                             <a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
                                         </li>
+                                        <li>
+                                            <a
+                                                class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register"
+                                                href="<?= RUTA_ADMIN_HISTORIAL ?>"
+                                                title="Ver tu historial">
+                                                Ver historial
+                                            </a>
+
+                                        </li>
                                     <?php endif; ?>
                                     <li>
                                         <a href="<?= base_url('logout') ?>" class="dropdown-item logout">Cerrar Sesión</a>
