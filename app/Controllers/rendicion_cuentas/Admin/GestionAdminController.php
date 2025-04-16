@@ -133,7 +133,7 @@ class GestionAdminController extends BaseController
     public function cargarFechas($Vista)
     {
         $session = session();
-        $categoria = $session->get('categoria_admin'); // Obtener la categoría del administrador
+        $categoria = $session->get('categoria_admin'); 
         $rendiciones = $this->rendicionModel->findAll();
 
         return view('rendicion_cuentas/Admin/' . $Vista, [
