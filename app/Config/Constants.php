@@ -90,6 +90,8 @@ define('RUTA_LOGOUT', BASE_URL . 'logout');
 define('RUTA_ADMIN_HOME', BASE_URL . 'admin');
 define('RUTA_ADMIN_CREAR_EJE', BASE_URL . 'admin/crear_eje');
 define('RUTA_ADMIN_CREAR_RENDICION', BASE_URL . 'admin/crear_rendicion');
+define('RUTA_ADMIN_EDITAR_RENDICION', BASE_URL . 'admin/editar_rendicion');
+define('RUTA_ADMIN_BUSCAR_EDIT', BASE_URL . 'admin/buscar_edit');
 
 //Ruta para el menu de admin
 define('RUTA_ADMIN_BUSCAR_RENDICION', BASE_URL . 'admin/buscar/'); // agregar ID
