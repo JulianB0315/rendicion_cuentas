@@ -49,7 +49,7 @@
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>questions" class="dropdown-item">Seleccionar Preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
-                                    
+
                                     <?php if (isset($categoria) && $categoria === 'super_admin'): ?>
                                         <li>
                                             <a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
@@ -76,11 +76,12 @@
             </div>
         </nav>
     </header>
+    <!-- TODO: hacer que se los input se llenen con data de la rendicion seleccionada, manejar la edicion y corregir estilos entre otros -->
     <div class="container my-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
-            <h1 class="animate__animated animate__fadeInDown header-title text-center">Seleccionar preguntas</h1>
+            <h1 class="animate__animated animate__fadeInDown header-title text-center">Editar Rendición</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= base_url('admin/questions/buscar_rendecion_admin') ?>" method="get" class="mt-2">
+                <form action="<?= base_url('#') ?>" method="get" class="mt-2">
                     <div class="form-group">
                         <label for="id">Fecha de la Rendición:</label>
                         <select class="form-select" id="id" name="id" required>
@@ -108,6 +109,67 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-form">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+            <div class="col-md-6 col-sm-12 p-4">
+                <form action="<?= base_url('#') ?>" method="post" class="form-container" enctype="multipart/form-data">
+                    <h4>Registrar rendición</h4>
+                    <div class="mb-3 form-group text">
+                        <input
+                            type="date"
+                            class="form-part"
+                            id="fechaRendicion"
+                            name="fechaRendicion"
+                            value=""
+                            required />
+                        <label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
+                    </div>
+                    <div class="mb-3 form-group text">
+                        <input
+                            type="time"
+                            class="form-part"
+                            id="horaRendicion"
+                            name="horaRendicion"
+                            value=""
+                            required />
+                        <label for="horaRendicion" class="form-label">Hora de Rendición</label>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="bannerRendicion" class="btn-banner">
+                            Seleccionar banner de rendición
+                            <i class="fa-regular fa-image" style="margin-left: 7px; font-size: 1.3rem;"></i>
+                        </label>
+                        <input
+                            type="file"
+                            class="form-part"
+                            id="bannerRendicion"
+                            name="bannerRendicion"
+                            accept="image/*"
+                            hidden
+                            required />
+                    </div>
+                    <div id="preview-container" class="mt-3 mb-3 d-none">
+                        <div class="preview-header d-flex justify-content-between align-items-center mb-2">
+                            <span id="file-name" class="text-muted"></span>
+                            <button type="button" id="cancel-image" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                        <div class="preview-image-container">
+                            <img id="preview-image" src="" alt="Vista previa" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+                        </div>
+                    </div>
+                    <div class="" id="select-eje-container">
+                        <h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
+                        <div id="ejes">
+                        
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-form" id="btn-crear-rendicion">Confirmar edición</button>
                 </form>
             </div>
         </div>
