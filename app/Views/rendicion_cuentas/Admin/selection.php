@@ -81,7 +81,7 @@
         </div>
     <?php endif; ?>
     </div>
-    <script src="<?= base_url('js/deleteQuestions.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/admin/deleteQuestions.js') ?>"></script>
 </body>
 
 </html>

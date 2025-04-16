@@ -101,7 +101,7 @@
             </div>
         </div>
     </main>
-    <script src="<?= base_url('js/conferencias.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/client/conferencias.js') ?>"></script>
 </body>
 
 </html>

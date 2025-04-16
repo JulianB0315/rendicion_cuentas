@@ -277,9 +277,9 @@
         const baseUrl = '<?= base_url() ?>';
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('js/login.js') ?>"></script>
-    <script src="<?= base_url('js/editAdmin.js') ?>"></script>
-    <script src="<?= base_url('js/alerts.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/admin/login.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/admin/editAdmin.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
 </body>
 
 </html>

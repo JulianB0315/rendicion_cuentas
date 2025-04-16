@@ -114,9 +114,9 @@
             <?php endif; ?>
         </div>
     </main>
-    <script src="<?= base_url('js/appHelpers.js') ?>"></script>
-    <script src="<?= base_url('js/asistencia.js') ?>"></script>
-    <script src="<?= base_url('js/alerts.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/helpers/appHelpers.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/client/asistencia.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
 </body>
 
 </html>
