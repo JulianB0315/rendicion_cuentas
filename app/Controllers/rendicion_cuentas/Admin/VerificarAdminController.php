@@ -4,6 +4,7 @@ namespace App\Controllers\rendicion_cuentas\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\rendicion_cuentas\AdministradoresModel;
+use CodeIgniter\I18n\Time;
 
 class VerificarAdminController extends BaseController
 {
@@ -43,13 +44,28 @@ class VerificarAdminController extends BaseController
         if (!password_verify($password, $admin['password'])) {
             return redirect()->back()->with('error', 'DNI o contraseña incorrectos');
         }
+
+        // Generar token único
+        $token = bin2hex(random_bytes(32));
+
         // Guardar sesión
         $session->set([
             'dni_admin' => $admin['dni_admin'],
             'nombres_admin' => $admin['nombres_admin'],
             'categoria_admin' => $admin['categoria_admin'],
+            'estado' => $admin['estado'],
             'isLoggedIn' => true,
         ]);
+
+        // Configurar cookie HttpOnly para el token
+        $response = service('response');
+        $response->setCookie('auth_token', $token, 3600, [
+            'httponly' => true,
+            'secure' => true,
+            'path' => '/',
+            'domain' => '', 
+        ]);
+
         $nombre = ucfirst(strtolower(explode(' ', trim($admin['nombres_admin']))[0]));
         return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Bienvenido, ' . $nombre);
     }
