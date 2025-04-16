@@ -132,8 +132,14 @@ class GestionAdminController extends BaseController
     //Funcion para gestionar preguntas
     public function cargarFechas($Vista)
     {
+        $session = session();
+        $categoria = $session->get('categoria_admin'); // Obtener la categoría del administrador
         $rendiciones = $this->rendicionModel->findAll();
-        return view('rendicion_cuentas/Admin/'.$Vista, ['rendiciones' => $rendiciones]);
+
+        return view('rendicion_cuentas/Admin/' . $Vista, [
+            'rendiciones' => $rendiciones,
+            'categoria' => $categoria, 
+        ]);
     }
 
     public function BuscarRendicion()
