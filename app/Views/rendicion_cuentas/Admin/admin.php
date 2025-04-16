@@ -92,15 +92,30 @@
 							required />
 						<label for="horaRendicion" class="form-label">Hora de Rendición</label>
 					</div>
-					<div class="mb-3 form-group text">
+					<div class="mb-3 form-group">
+						<label for="bannerRendicion" class="btn-banner">
+							Seleccionar banner de rendición
+							<i class="fa-regular fa-image" style="margin-left: 7px; font-size: 1.3rem;"></i>
+						</label>
 						<input
 							type="file"
 							class="form-part"
 							id="bannerRendicion"
 							name="bannerRendicion"
 							accept="image/*"
+							hidden
 							required />
-						<label for="bannerRendicion" class="form-label">Banner de la rendición</label>
+					</div>
+					<div id="preview-container" class="mt-3 mb-3 d-none">
+						<div class="preview-header d-flex justify-content-between align-items-center mb-2">
+							<span id="file-name" class="text-muted"></span>
+							<button type="button" id="cancel-image" class="btn btn-sm btn-danger">
+								<i class="fa-solid fa-xmark"></i> Cancelar
+							</button>
+						</div>
+						<div class="preview-image-container">
+							<img id="preview-image" src="" alt="Vista previa" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+						</div>
 					</div>
 					<div class="" id="select-eje-container">
 						<h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
