@@ -87,6 +87,11 @@
                             required />
                         <label for="dni-admin" class="form-label">DNI</label>
                     </div>
+                    <div id="dni-loading" class="spinner-container d-none">
+                        <div class="spinner-border text-primary spinner-sm" role="status">
+                        </div>
+                        <span>Consultando DNI...</span>
+                    </div>
                     <div class="error" id="dni-error"></div>
                     <div class="mb-3 form-group text">
                         <input
@@ -295,6 +300,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('rendicion_cuentas/js/admin/login.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/helpers/appHelpers.js') ?>"></script>
     <script src="<?= base_url('rendicion_cuentas/js/admin/editAdmin.js') ?>"></script>
     <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
 </body>
