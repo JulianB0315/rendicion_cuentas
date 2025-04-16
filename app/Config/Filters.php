@@ -35,7 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => \App\Filters\Auth::class,
-        'superAdmin'   => \App\Filters\SuperAdmin::class,
+        'superAdmin'    => \App\Filters\SuperAdmin::class, // Add this alias
     ];
 
     /**
@@ -109,5 +109,6 @@ class Filters extends BaseFilters
      */
     public array $filters = [
         'auth' => ['before' => ['admin/*']],
+        'superAdmin' => ['before' => ['admin/admin_users', 'admin/crear_admin', 'admin/buscar_admin', 'admin/UpdateAdmin/*', 'admin/historial']],
     ];
 }
