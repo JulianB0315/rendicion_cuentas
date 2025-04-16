@@ -19,9 +19,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/login.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/admin/login.css") ?>" />
 </head>
 
 <body>

@@ -14,10 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/conferencias.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/sort.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/conferencias.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/admin/sort.css") ?>" />
 </head>
 
 <body>

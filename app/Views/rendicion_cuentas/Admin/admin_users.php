@@ -15,11 +15,11 @@
     <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
-    <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/login.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("styles/dashboard.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/index.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/admin.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/login.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/form.css") ?>" />
+    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/dashboard.css") ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />

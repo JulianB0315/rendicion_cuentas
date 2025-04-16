@@ -14,11 +14,11 @@
     <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
-    <link rel="stylesheet" href="<?= base_url('styles/index.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/questions.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/conferencias.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/admin.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('styles/sort.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/index.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/stylesadmin/questions.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/client/conferencias.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/admin.css') ?>" />
+    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/sort.css') ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
