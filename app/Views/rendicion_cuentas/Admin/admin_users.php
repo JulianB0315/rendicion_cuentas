@@ -34,10 +34,13 @@
     <header class="container-fluid header p-3 mb-5">
         <nav class="nav-header container">
             <div class="d-flex align-items-center logo-container w-100 justify-content-between">
-                <img
-                    src="<?= base_url('img/logo.png') ?>"
-                    alt="Logo"
-                    class="nav-logo img-fluid" />
+                <a href="<?= RUTA_ADMIN_HOME ?>">
+                    <img
+                        src="<?= base_url('img/logo.png') ?>"
+                        alt="Logo"
+                        class="nav-logo img-fluid" />
+                </a>
+                <h4 class="header-welcome text-center">Bienvenid@, <?= esc($nombre) ?></h4>
                 <div class="links-container">
                     <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
                         <li>
@@ -52,6 +55,15 @@
                                     <?php if (isset($categoria) && $categoria === 'super_admin'): ?>
                                         <li>
                                             <a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register"
+                                                href="<?= RUTA_ADMIN_HISTORIAL ?>"
+                                                title="Ver tu historial">
+                                                Ver historial
+                                            </a>
+
                                         </li>
                                     <?php endif; ?>
                                     <li>

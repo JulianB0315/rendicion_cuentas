@@ -10,7 +10,7 @@
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous" />
-        <link
+    <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -27,10 +27,12 @@
     <header class="">
         <nav class="nav-header w-100 p-3">
             <div class="d-flex align-items-center logo-container">
-                <img
-                    src="<?= base_url('img/logo.png') ?>"
-                    alt="Logo"
-                    class="nav-logo img-fluid" />
+                <a href="<?= RUTA_ADMIN_HOME ?>">
+                    <img
+                        src="<?= base_url('img/logo.png') ?>"
+                        alt="Logo"
+                        class="nav-logo img-fluid" />
+                </a>
             </div>
         </nav>
     </header>

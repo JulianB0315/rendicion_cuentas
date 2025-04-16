@@ -24,10 +24,12 @@
     <header class="">
         <nav class="nav-header w-100 p-3">
             <div class="d-flex align-items-center logo-container">
-                <img
-                    src="<?= base_url('img/logo.png') ?>"
-                    alt="Logo"
-                    class="nav-logo img-fluid" />
+                <a href="<?= RUTA_ADMIN_HOME ?>">
+                    <img
+                        src="<?= base_url('img/logo.png') ?>"
+                        alt="Logo"
+                        class="nav-logo img-fluid" />
+                </a>
             </div>
         </nav>
     </header>

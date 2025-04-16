@@ -31,10 +31,12 @@
     <header class="container-fluid header p-3 mb-5">
         <nav class="nav-header container">
             <div class="d-flex align-items-center logo-container w-100 justify-content-between">
-                <img
-                    src="<?= base_url('img/logo.png') ?>"
-                    alt="Logo"
-                    class="nav-logo img-fluid" />
+                <a href="<?= RUTA_ADMIN_HOME ?>">
+                    <img
+                        src="<?= base_url('img/logo.png') ?>"
+                        alt="Logo"
+                        class="nav-logo img-fluid" />
+                </a>
                 <div class="links-container">
                     <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
                         <li>
