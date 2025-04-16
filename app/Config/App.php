@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public $baseURL = 'http://localhost/rendicion_cuentas/';
+    public $baseURL = 'https://localhost/rendicion_cuentas/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -199,4 +199,14 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Cookie HTTPOnly
+     * --------------------------------------------------------------------------
+     *
+     * If true, cookies will be set with the HttpOnly flag, making them
+     * inaccessible to JavaScript.
+     */
+    public bool $cookieHTTPOnly = true;
 }
