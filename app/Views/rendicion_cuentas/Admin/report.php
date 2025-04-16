@@ -55,7 +55,7 @@
                                         </li>
                                         <li>
                                             <a
-                                                class="text-white register-btn btn p-md-3 p-sm-1 btn-header-register"
+                                                class="dropdown-item"
                                                 href="<?= RUTA_ADMIN_HISTORIAL ?>"
                                                 title="Ver tu historial">
                                                 Ver historial
