@@ -11,8 +11,24 @@ class Auth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = session();
-        if (!$session->has('categoria_admin') || !$session->has('dni_admin') || !$session->has('nombres_admin')) {
-            return redirect()->to(base_url('login'));
+        $request = service('request');
+        $token = $request->getCookie('auth_token');
+
+        if (
+            !$session->has('categoria_admin') || 
+            !$session->has('dni_admin') || 
+            !$session->has('nombres_admin') || 
+            !$token || 
+            $session->get('estado') === 'deshabilitado'
+        ) {
+            $session->destroy();
+            return redirect()->to(base_url('login'))->with('error', 'Sesión inválida o usuario deshabilitado.');
+        }
+
+        // Validar categoría si se pasa como argumento
+        if ($arguments && !in_array($session->get('categoria_admin'), $arguments)) {
+            $session->destroy();
+            return redirect()->to(base_url('login'))->with('error', 'Acceso denegado. Categoría no autorizada.');
         }
     }
 
