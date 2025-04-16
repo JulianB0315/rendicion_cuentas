@@ -54,16 +54,9 @@ class VerificarAdminController extends BaseController
             'nombres_admin' => $admin['nombres_admin'],
             'categoria_admin' => $admin['categoria_admin'],
             'estado' => $admin['estado'],
+            'auth_token' => $token, // Guardar token en la sesión
+            'token_last_updated' => time(), // Registrar el tiempo de creación del token
             'isLoggedIn' => true,
-        ]);
-
-        // Configurar cookie HttpOnly para el token
-        $response = service('response');
-        $response->setCookie('auth_token', $token, 3600, [
-            'httponly' => true,
-            'secure' => true,
-            'path' => '/',
-            'domain' => '', 
         ]);
 
         $nombre = ucfirst(strtolower(explode(' ', trim($admin['nombres_admin']))[0]));
@@ -71,7 +64,9 @@ class VerificarAdminController extends BaseController
     }
     public function logout()
     {
-        session()->destroy();
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session()->destroy();
+        }
         return redirect()->to(RUTA_LOGIN)->with('success', 'Sesión cerrada correctamente');
     }
 }
