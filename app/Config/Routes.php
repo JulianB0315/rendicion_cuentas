@@ -28,10 +28,12 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('viewQuestions/buscar_rendecion_admin', 'rendicion_cuentas\Admin\GestionAdminController::preguntasSeleccionadas');
     $routes->post('viewQuestions/borrar_pregunta', 'rendicion_cuentas\Admin\GestionAdminController::QuitarPregunta');
     //Rutas de reportes
-    
     $routes->get('mostrar_reporte', 'rendicion_cuentas\Admin\GestionAdminController::MostrarReporte');
     //Generacion de excel(Dentro de reportes)
     $routes->get('viewReportController/generar_excel/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::GenerarExcel/$1');
+    //Rutas de editar rendicion
+    $routes->get('editar_rendicion', 'rendicion_cuentas\Admin\GestionAdminController::EditarRendicion');
+    $routes->get('buscar_edit', 'rendicion_cuentas\Admin\GestionAdminController::BuscarEdit');
     //Rutas de Super admin
     $routes->group('', ['filter' => 'superAdmin'], function ($routes) {
         //Rutas de administrar usuarios
@@ -42,6 +44,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
         $routes->get('UpdateAdmin/(:alphanum)', 'rendicion_cuentas\Admin\GestionSuperAdminController::UpdateAdmin/$1');
         $routes->get('historial', 'rendicion_cuentas\Admin\GestionSuperAdminController::History');
     });
+    //Rutas Editar rendicion
 });
 //Rutas del usuario(Formulario)
 $routes->group('form', function ($routes) {
