@@ -501,13 +501,13 @@ class GestionAdminController extends BaseController
 
     public function BuscarEdit()
     {
-        $id_rendicion = $this->request->getGet('id_rendicion');
+        $id_rendicion = $this->request->getGet('id');
         $rendicion = $this->rendicionModel->find($id_rendicion);
 
         if (!$rendicion) {
             return redirect()->back()->with('error', 'Rendición no encontrada.');
         }
 
-        return view('rendicion_cuentas/Admin/editRendicion', ['rendicion' => $rendicion]);
+        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion]);
     }
 }

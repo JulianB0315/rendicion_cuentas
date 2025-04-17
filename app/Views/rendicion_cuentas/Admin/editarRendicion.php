@@ -81,7 +81,7 @@
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Editar Rendición</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= base_url('#') ?>" method="get" class="mt-2">
+                <form action="<?= base_url('admin/buscar_edit') ?>" method="get" class="mt-2">
                     <div class="form-group">
                         <label for="id">Fecha de la Rendición:</label>
                         <select class="form-select" id="id" name="id" required>
@@ -91,15 +91,15 @@
                             <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
                                 <?php
                                 $rendicionesPerYear = [];
-                                foreach ($rendiciones as $rendicion) {
-                                    $year = date('Y', strtotime($rendicion['fecha']));
-                                    $rendicionesPerYear[$year][] = $rendicion;
+                                foreach ($rendiciones as $rendicion_item) {
+                                    $year = date('Y', strtotime($rendicion_item['fecha']));
+                                    $rendicionesPerYear[$year][] = $rendicion_item;
                                 }
                                 krsort($rendicionesPerYear);
-                                foreach ($rendicionesPerYear as $year => $rendiciones): ?>
+                                foreach ($rendicionesPerYear as $year => $rendiciones_year): ?>
                                     <optgroup label="<?= $year ?>">
-                                        <?php foreach ($rendiciones as $rendicion): ?>
-                                            <option value="<?= $rendicion['id'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
+                                        <?php foreach ($rendiciones_year as $rendicion_item): ?>
+                                            <option value="<?= $rendicion_item['id'] ?>"><?= formatear_fecha_esp(esc($rendicion_item['fecha'])) ?></option>
                                         <?php endforeach; ?>
                                     </optgroup>
                                 <?php endforeach ?>
@@ -113,68 +113,72 @@
             </div>
         </div>
     </div>
-    <div class="container my-5">
-        <div class="row d-flex justify-content-center align-items-center flex-direction-column">
-            <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= base_url('#') ?>" method="post" class="form-container" enctype="multipart/form-data">
-                    <h4>Registrar rendición</h4>
-                    <div class="mb-3 form-group text">
-                        <input
-                            type="date"
-                            class="form-part"
-                            id="fechaRendicion"
-                            name="fechaRendicion"
-                            value=""
-                            required />
-                        <label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
-                    </div>
-                    <div class="mb-3 form-group text">
-                        <input
-                            type="time"
-                            class="form-part"
-                            id="horaRendicion"
-                            name="horaRendicion"
-                            value=""
-                            required />
-                        <label for="horaRendicion" class="form-label">Hora de Rendición</label>
-                    </div>
-                    <div class="mb-3 form-group">
-                        <label for="bannerRendicion" class="btn-banner">
-                            Seleccionar banner de rendición
-                            <i class="fa-regular fa-image" style="margin-left: 7px; font-size: 1.3rem;"></i>
-                        </label>
-                        <input
-                            type="file"
-                            class="form-part"
-                            id="bannerRendicion"
-                            name="bannerRendicion"
-                            accept="image/*"
-                            hidden
-                            required />
-                    </div>
-                    <div id="preview-container" class="mt-3 mb-3 d-none">
-                        <div class="preview-header d-flex justify-content-between align-items-center mb-2">
-                            <span id="file-name" class="text-muted"></span>
-                            <button type="button" id="cancel-image" class="btn btn-sm btn-danger">
-                                <i class="fa-solid fa-xmark"></i> Cancelar
-                            </button>
+    <?php if (isset($rendicion)): ?>
+        <div class="container my-5">
+            <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+                <div class="col-md-6 col-sm-12 p-4">
+                    <form action="<?= base_url('admin/editar_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
+                        <h4>Editar rendición</h4>
+                        <div class="mb-3 form-group text">
+                            <input
+                                type="date"
+                                class="form-part"
+                                id="fechaRendicion"
+                                name="fechaRendicion"
+                                value="<?= $rendicion['fecha'] ?>"
+                                required />
+                            <label for="fechaRendicion" class="form-label">Fecha de Rendición</label>
                         </div>
-                        <div class="preview-image-container">
-                            <img id="preview-image" src="" alt="Vista previa" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+                        <div class="mb-3 form-group text">
+                            <input
+                                type="time"
+                                class="form-part"
+                                id="horaRendicion"
+                                name="horaRendicion"
+                                value="<?= $rendicion['hora_rendicion'] ?>"
+                                required />
+                            <label for="horaRendicion" class="form-label">Hora de Rendición</label>
                         </div>
-                    </div>
-                    <div class="" id="select-eje-container">
-                        <h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
-                        <div id="ejes">
-                        
+                        <div class="mb-4">
+                            <p>Banner actual:</p>
+                            <img src="<?= base_url('img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid mb-3" style="max-height: 200px; border-radius: 8px;">
                         </div>
-                    </div>
-                    <button type="submit" class="btn-form" id="btn-crear-rendicion">Confirmar edición</button>
-                </form>
+                        <div class="mb-3 form-group">
+                            <label for="bannerRendicion" class="btn-banner">
+                                Cambiar banner de rendición
+                                <i class="fa-regular fa-image" style="margin-left: 7px; font-size: 1.3rem;"></i>
+                            </label>
+                            <input
+                                type="file"
+                                class="form-part"
+                                id="bannerRendicion"
+                                name="bannerRendicion"
+                                accept="image/*"
+                                hidden />
+                        </div>
+                        <div id="preview-container" class="mt-3 mb-3 d-none">
+                            <div class="preview-header d-flex justify-content-between align-items-center mb-2">
+                                <span id="file-name" class="text-muted"></span>
+                                <button type="button" id="cancel-image" class="btn btn-sm btn-danger">
+                                    <i class="fa-solid fa-xmark"></i> Cancelar
+                                </button>
+                            </div>
+                            <div class="preview-image-container">
+                                <img id="preview-image" src="" alt="Vista previa" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="" id="select-eje-container">
+                            <h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
+                            <div id="ejes">
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-form" id="btn-crear-rendicion">Confirmar edición</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Acá debería salir la info de la rendición seleccionada a editar -->
+    <?php endif; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
