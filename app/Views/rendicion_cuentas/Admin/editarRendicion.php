@@ -76,7 +76,6 @@
             </div>
         </nav>
     </header>
-    <!-- TODO: hacer que se los input se llenen con data de la rendicion seleccionada, manejar la edicion y corregir estilos entre otros -->
     <div class="container my-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Editar Rendición</h1>
@@ -139,10 +138,6 @@
                                 required />
                             <label for="horaRendicion" class="form-label">Hora de Rendición</label>
                         </div>
-                        <div class="mb-4">
-                            <p>Banner actual:</p>
-                            <img src="<?= base_url('img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid mb-3" style="max-height: 200px; border-radius: 8px;">
-                        </div>
                         <div class="mb-3 form-group">
                             <label for="bannerRendicion" class="btn-banner">
                                 Cambiar banner de rendición
@@ -156,15 +151,17 @@
                                 accept="image/*"
                                 hidden />
                         </div>
-                        <div id="preview-container" class="mt-3 mb-3 d-none">
+                        <div id="preview-container" class="mt-3 mb-3 <?= empty($rendicion['banner_rendicion']) ? 'd-none' : '' ?>">
                             <div class="preview-header d-flex justify-content-between align-items-center mb-2">
-                                <span id="file-name" class="text-muted"></span>
-                                <button type="button" id="cancel-image" class="btn btn-sm btn-danger">
+                                <span id="file-name" class="text-muted">
+                                    <?= $rendicion['banner_rendicion'] ?> (Banner Actual)
+                                </span>
+                                <button type="button" id="cancel-image" class="btn btn-sm btn-danger" style="display: none;">
                                     <i class="fa-solid fa-xmark"></i> Cancelar
                                 </button>
                             </div>
                             <div class="preview-image-container">
-                                <img id="preview-image" src="" alt="Vista previa" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+                                <img id="preview-image" src="<?= base_url('img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
                             </div>
                         </div>
                         <div class="" id="select-eje-container">
@@ -182,6 +179,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/helpers/appHelpers.js') ?>"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/admin/editRendicion.js') ?>"></script>
 </body>
 
 </html>

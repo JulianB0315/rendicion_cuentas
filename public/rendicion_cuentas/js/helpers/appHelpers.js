@@ -89,4 +89,92 @@ const togglePasswordVisibility = (passwordInput, toggleBtn) => {
 		icon.classList.add("fa-eye-slash");
 		icon.classList.remove("fa-eye");
 	}
-}
+};
+/**
+ * Inicializa la funcionalidad de previsualización de imágenes
+ * @param {Object} options - Opciones de configuración
+ */
+const initImagePreview = (options = {}) => {
+    const config = {
+        inputId: "imageInput",
+        previewContainerId: "preview-container",
+        previewImageId: "preview-image",
+        fileNameId: "file-name",
+        cancelBtnId: "cancel-image",
+        hasCurrentImage: false,
+        currentImageLabel: "(Banner actual)",
+        newImageLabel: "(Nueva imagen)",
+        ...options,
+    };
+
+    const fileInput = document.getElementById(config.inputId);
+    const previewContainer = document.getElementById(config.previewContainerId);
+    const previewImage = document.getElementById(config.previewImageId);
+    const fileName = document.getElementById(config.fileNameId);
+    const cancelBtn = document.getElementById(config.cancelBtnId);
+
+    if (!fileInput || !previewContainer) return;
+
+    let currentImageInfo = {
+        src: previewImage ? previewImage.src : '',
+        name: fileName ? fileName.textContent : '',
+    }
+
+    if (config.hasCurrentImage) {
+        if (previewContainer) previewContainer.classList.remove("d-none");
+        if (cancelBtn) cancelBtn.style.display = "none";
+    } else {
+        if (previewContainer) previewContainer.classList.add('d-none');
+    }
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const file = this.files[0];
+
+            if (fileName) {
+                fileName.textContent = file.name + " " + config.newImageLabel;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                if (!previewImage) {
+                    const img = document.createElement("img");
+                    img.id = config.previewImageId;
+                    img.classList.add("img-fluid");
+                    img.style.maxHeight = "200px";
+                    img.style.borderRadius = "0.5rem"
+                    
+                    const container = previewContainer.querySelector(".preview-image-container");
+                    if (container) {
+                        container.appendChild(img);
+                    } else {
+                        const newContainer = document.createElement("div");
+                        newContainer.classList.add("preview-image-container");
+                        newContainer.appendChild(img);
+                        previewContainer.appendChild(newContainer);
+                    }
+                    previewImage = img;
+                }
+                previewImage.src = e.target.result;
+                previewContainer.classList.remove("d-none");
+                if (cancelBtn) {
+                    cancelBtn.style.display = "block";
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            fileInput.value = "";
+            if (config.hasCurrentImage) {
+                if (previewImage) previewImage.src = currentImageInfo.src;
+                if (fileName) fileName.textContent = currentImageInfo.name;
+                this.style.display = "none";
+            } else {
+                previewContainer.classList.add("d-none");
+                if (fileName) fileName.textContent = "";
+                if (previewImage) previewImage.src = "";
+            }
+        });
+    }
+};
