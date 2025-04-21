@@ -117,7 +117,7 @@
         <div class="container my-5">
             <div class="row d-flex justify-content-center align-items-center flex-direction-column">
                 <div class="col-md-6 col-sm-12 p-4">
-                    <form action="<?= base_url('admin/editar_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
+                    <form action="<?= RUTA_ADMIN_EDITAR_RENDICION ?>" method="post" class="form-container" enctype="multipart/form-data">
                         <input type="hidden" name="id_rendicion" value="<?= $rendicion['id'] ?>" />
                         <h4>Editar rendición</h4>
                         <div class="mb-3 form-group text">

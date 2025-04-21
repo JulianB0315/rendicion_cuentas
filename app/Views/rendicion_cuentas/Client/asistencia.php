@@ -41,7 +41,7 @@
     <main class="container main my-5">
         <div class="row">
             <div class="col-12">
-                <form action="<?= base_url('/procesar_asistencia') ?>" method="post" class="form-container mb-4" id="form-asistencia">
+                <form action="<?= RUTA_PROCESAR_ASISTENCIA ?>" method="post" class="form-container mb-4" id="form-asistencia">
                     <div id="">
                         <div class="form-group text">
                             <input

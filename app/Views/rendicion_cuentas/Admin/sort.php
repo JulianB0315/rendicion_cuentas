@@ -40,7 +40,7 @@
         <h1 class="animate__animated animate__fadeInDown header-title mb-5 text-center">Selección de Preguntas - <?= esc($eje['tematica']) ?></h1>
 
         <?php if (!empty($preguntas)): ?>
-            <form action="<?= base_url('admin/procesar_seleccion') ?>" method="post" id="form-preguntas">
+            <form action="<?= RUTA_ADMIN_PROCESAR_SELECCION ?>" method="post" id="form-preguntas">
                 <input type="hidden" name="id_eje_seleccionado" value="<?= esc($id_eje_seleccionado) ?>">
                 <input type="hidden" name="id_rendicion" value="<?= esc($eje['id']) ?>">
 

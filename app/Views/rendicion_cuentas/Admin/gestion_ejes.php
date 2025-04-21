@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-5">
                 <h4>Crear Nuevo Eje</h4>
-                <form action="<?= base_url('admin/crear_eje') ?>" method="post" class="form-container">
+                <form action="<?= RUTA_ADMIN_CREAR_EJE ?>" method="post" class="form-container">
                     <div class="form-group text">
                         <input
                             type="text"
@@ -120,7 +120,7 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <form action="<?= base_url('admin/editar_eje') ?>" method="post" style="display:inline;">
+                                    <form action="<?= RUTA_ADMIN_EDITAR_EJE ?>" method="post" style="display:inline;">
                                         <input type="hidden" name="id_eje" value="<?= esc($eje['id']) ?>">
                                         <input type="hidden" name="estado" value="<?= $eje['estado'] === 'habilitado' ? 'deshabilitado' : 'habilitado' ?>">
                                         <button type="submit" class="btn btn-sm <?= $eje['estado'] === 'habilitado' ? 'btn-danger' : 'btn-success' ?>">
