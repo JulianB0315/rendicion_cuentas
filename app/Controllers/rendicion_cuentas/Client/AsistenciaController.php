@@ -21,20 +21,20 @@ class AsistenciaController extends BaseController
         $year = date('Y');
         $number = '';
         $fecha = date('Y-m-d', strtotime('now -5 hours'));
-        $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
+        $rendicion = $this->RendicionModel->select('id, fecha')
             ->where('fecha >=', $fecha)
             ->orderBy('fecha', 'ASC')
             ->first();
         if (date('Y', strtotime($rendicion['fecha'])) == $year) {
             $rendiciones_del_año = $this->RendicionModel
-                ->select('id_rendicion, fecha')
+                ->select('id, fecha')
                 ->where('YEAR(fecha)', $year)
                 ->orderBy('fecha', 'ASC')
                 ->findAll();
 
             // Si hay rendiciones, determinar si es la primera o segunda
             if (!empty($rendiciones_del_año)) {
-                $number = ($rendiciones_del_año[0]['id_rendicion'] == $rendicion['id_rendicion']) ? 'I' : 'II';
+                $number = ($rendiciones_del_año[0]['id'] == $rendicion['id']) ? 'I' : 'II';
             }
         }
         return view('rendicion_cuentas/Client/asistencia', [
@@ -46,7 +46,7 @@ class AsistenciaController extends BaseController
     public function procesar_asistencia()
     {
         $fecha = date('Y-m-d', strtotime('now -5 hours'));
-        $rendicion = $this->RendicionModel->select('id_rendicion, fecha')
+        $rendicion = $this->RendicionModel->select('id, fecha')
             ->where('fecha >=', $fecha)
             ->orderBy('fecha', 'ASC')
             ->first();
@@ -58,9 +58,9 @@ class AsistenciaController extends BaseController
         }
 
         $usuario = $this->UsuarioModel
-            ->select('asistencia, id_rendicion')
+            ->select('asistencia, id')
             ->where('DNI', $dni)
-            ->where('id_rendicion', $rendicion['id_rendicion'])
+            ->where('id', $rendicion['id'])
             ->first();
 
         if (!$usuario) {
@@ -73,7 +73,7 @@ class AsistenciaController extends BaseController
         try {
             $updated = $this->UsuarioModel->set('asistencia', 'si')
                 ->where('DNI', $dni)
-                ->where('id_rendicion', $rendicion['id_rendicion'])
+                ->where('id', $rendicion['id'])
                 ->update();
 
             if ($updated) {
