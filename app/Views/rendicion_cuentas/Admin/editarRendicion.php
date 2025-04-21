@@ -163,7 +163,7 @@
                                 </button>
                             </div>
                             <div class="preview-image-container">
-                                <img id="preview-image" src="<?= base_url('img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
+                                <img id="preview-image" src="<?= base_url('rendicion_cuentas/img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
                             </div>
                         </div>
                         <button type="submit" class="btn-form" id="btn-crear-rendicion">Confirmar edición</button>

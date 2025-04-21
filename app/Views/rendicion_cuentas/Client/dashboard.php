@@ -61,7 +61,7 @@
 				<img
 					style="border-radius: 1rem;"
 					class="img-fluid w-70 w-xl-50"
-					src="<?= !empty($firstBanner) ? base_url('img/' . $firstBanner) : base_url('img/bannerstatic.jpg') ?>"
+					src="<?= !empty($firstBanner) ? base_url('rendicion_cuentas/img/' . $firstBanner) : base_url('img/bannerstatic.jpg') ?>"
 					alt="Rendición de Cuentas Banner" />
 			</div>
 		</div>
