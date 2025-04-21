@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/index.css") ?>" />
+    <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
 </head>
 
 <body>
@@ -114,9 +114,9 @@
             <?php endif; ?>
         </div>
     </main>
-    <script src="<?= base_url('rendicion_cuentas/js/helpers/appHelpers.js') ?>"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/client/asistencia.js') ?>"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
+    <script src="<?= RUTA_PUBLIC_JS . 'helpers/appHelpers.js' ?>"></script>
+    <script src="<?= RUTA_PUBLIC_JS . 'client/asistencia.js' ?>"></script>
+    <script src="<?= RUTA_PUBLIC_JS . 'public/alerts.js' ?>"></script>
 </body>
 
 </html>

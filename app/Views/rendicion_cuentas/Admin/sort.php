@@ -17,10 +17,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/index.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/conferencias.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/admin/sort.css") ?>" />
+    <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'sort.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'conferencias.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'form.css' ?>" />
 </head>
 
 <body>

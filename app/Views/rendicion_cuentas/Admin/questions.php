@@ -14,9 +14,9 @@
     <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/index.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/questions.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/admin.css') ?>" />
+    <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'questions.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'admin.css' ?>" />
 
     <link
         rel="stylesheet"
@@ -46,7 +46,7 @@
                                     Acciones
                                 </button>
                                 <ul class="dropdown-menu">
-									<li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
+                                    <li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>editarRendicion" class="dropdown-item">Editar Rendición</a></li>
@@ -142,10 +142,10 @@
                 </div>
             </div>
         </div>
-        <?php endif; ?>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php endif; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -15,11 +15,11 @@
     <link
         rel="stylesheet"
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/index.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/admin.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url('rendicion_cuentas/styles/admin/login.css') ?>" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/form.css") ?>" />
-    <link rel="stylesheet" href="<?= base_url("rendicion_cuentas/styles/client/dashboard.css") ?>" />
+    <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'admin.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'login.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'form.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'dashboard.css' ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -49,7 +49,7 @@
                                     Acciones
                                 </button>
                                 <ul class="dropdown-menu">
-									<li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
+                                    <li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>questions" class="dropdown-item">Seleccionar Preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
@@ -310,10 +310,10 @@
         const searchAdminUrl = '<?= RUTA_ADMIN_BUSCAR_ADMIN ?>'
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/admin/login.js') ?>"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/helpers/appHelpers.js') ?>"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/admin/editAdmin.js') ?>"></script>
-    <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
+    <script src="<?= RUTA_JS_HELPERS . 'appHelpers.js' ?>"></script>
+    <script src="<?= RUTA_JS_ADMIN . 'login.js' ?>"></script>
+    <script src="<?= RUTA_JS_ADMIN . 'editAdmin.js' ?>"></script>
+    <script src="<?= RUTA_JS_PUBLIC . 'alerts.js' ?>"></script>
 </body>
 
 </html>
