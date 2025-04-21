@@ -80,6 +80,8 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125);
 
 // Base URL
 define('BASE_URL', 'http://localhost/rendicion_cuentas/');
+// Base URL for assets
+define('BASE_URL_ASSETS', BASE_URL . 'public/rendicion_cuentas/');
 
 // General Routes
 define('RUTA_HOME', BASE_URL);
@@ -134,3 +136,17 @@ define('RUTA_API_RUC', BASE_URL . 'api/ruc/'); // Add number
 
 // Reportes
 define('RUTA_GENERAR_EXCEL', BASE_URL . 'admin/viewReportController/generar_excel/'); // Add ID
+
+// Archivos Públicos
+define('RUTA_PUBLIC_JS', BASE_URL_ASSETS . 'js/');
+define('RUTA_PUBLIC_CSS', BASE_URL_ASSETS . 'styles/');
+define('RUTA_PUBLIC_IMG', BASE_URL_ASSETS . 'img/');
+// Archivos JavaScript
+define('RUTA_JS_ADMIN', RUTA_PUBLIC_JS . 'admin/');
+define('RUTA_JS_CLIENT', RUTA_PUBLIC_JS . 'client/');
+define('RUTA_JS_HELPERS', RUTA_PUBLIC_JS . 'helpers/');
+define('RUTA_JS_PUBLIC', RUTA_PUBLIC_JS . 'public/');
+// Archivos CSS
+define('RUTA_CSS_ADMIN', RUTA_PUBLIC_CSS . 'admin/');
+define('RUTA_CSS_CLIENT', RUTA_PUBLIC_CSS . 'client/');
+
