@@ -32,7 +32,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Generacion de excel(Dentro de reportes)
     $routes->get('viewReportController/generar_excel/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::GenerarExcel/$1');
     //Rutas de editar rendicion
-    $routes->get('editar_rendicion', 'rendicion_cuentas\Admin\GestionAdminController::EditarRendicion');
+    $routes->post('editar_rendicion', 'rendicion_cuentas\Admin\GestionAdminController::EditarRendicion');
     $routes->get('buscar_edit', 'rendicion_cuentas\Admin\GestionAdminController::BuscarEdit');
     //Rutas de Super admin
     $routes->group('', ['filter' => 'superAdmin'], function ($routes) {
