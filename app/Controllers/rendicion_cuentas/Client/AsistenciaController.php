@@ -58,9 +58,9 @@ class AsistenciaController extends BaseController
         }
 
         $usuario = $this->UsuarioModel
-            ->select('asistencia, id')
+            ->select('asistencia, id_rendicion')
             ->where('DNI', $dni)
-            ->where('id', $rendicion['id'])
+            ->where('id_rendicion', $rendicion['id'])
             ->first();
 
         if (!$usuario) {
@@ -73,7 +73,7 @@ class AsistenciaController extends BaseController
         try {
             $updated = $this->UsuarioModel->set('asistencia', 'si')
                 ->where('DNI', $dni)
-                ->where('id', $rendicion['id'])
+                ->where('id_rendicion', $rendicion['id'])
                 ->update();
 
             if ($updated) {
