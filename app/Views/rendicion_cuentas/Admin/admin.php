@@ -43,14 +43,14 @@
 									Acciones
 								</button>
 								<ul class="dropdown-menu">
-									<li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>ejes" class="dropdown-item">Gestión de Ejes</a></li>
+									<li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
 									<li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>questions" class="dropdown-item">Seleccionar Preguntas</a></li>
 									<li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
 									<li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
 									<li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>editarRendicion" class="dropdown-item">Editar Rendición</a></li>
 									<?php if (isset($categoria) && $categoria === 'super_admin'): ?>
 										<li>
-											<a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
+											<a href="<?= RUTA_ADMIN_USERS ?>" class="dropdown-item">Administrar Usuarios</a>
 										</li>
 										<li>
 											<a
@@ -63,7 +63,7 @@
 										</li>
 									<?php endif; ?>
 									<li>
-										<a href="<?= base_url('logout') ?>" class="dropdown-item logout">Cerrar Sesión</a>
+										<a href="<?= RUTA_LOGOUT ?>" class="dropdown-item logout">Cerrar Sesión</a>
 									</li>
 								</ul>
 							</div>
@@ -81,7 +81,7 @@
 	<main class="container my-5">
 		<div class="row">
 			<div class="col-12">
-				<form action="<?= base_url('admin/crear_rendicion') ?>" method="post" class="form-container" enctype="multipart/form-data">
+				<form action="<?= RUTA_ADMIN_CREAR_RENDICION ?>" method="post" class="form-container" enctype="multipart/form-data">
 					<h4>Registrar rendición</h4>
 					<div class="mb-3 form-group text">
 						<input
