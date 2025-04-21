@@ -165,12 +165,6 @@
                                 <img id="preview-image" src="<?= base_url('img/' . $rendicion['banner_rendicion']) ?>" alt="Banner actual" class="img-fluid" style="max-height: 200px; border-radius: 8px;">
                             </div>
                         </div>
-                        <div class="" id="select-eje-container">
-                            <h4 class="mt-4 mb-3">Seleccionar ejes para la rendición</h4>
-                            <div id="ejes">
-
-                            </div>
-                        </div>
                         <button type="submit" class="btn-form" id="btn-crear-rendicion">Confirmar edición</button>
                     </form>
                 </div>
