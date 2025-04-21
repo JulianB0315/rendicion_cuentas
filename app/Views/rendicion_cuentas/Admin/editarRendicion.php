@@ -34,7 +34,7 @@
             <div class="d-flex align-items-center logo-container w-100 justify-content-between">
                 <a href="<?= RUTA_ADMIN_HOME ?>">
                     <img
-                        src="<?= base_url('img/logo.png') ?>"
+                        src="<?= base_url('rendicion_cuentas/img/logo.png') ?>"
                         alt="Logo"
                         class="nav-logo img-fluid" />
                 </a>
