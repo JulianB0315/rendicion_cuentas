@@ -95,6 +95,7 @@ define('RUTA_ADMIN_BUSCAR_RENDICION_Q', BASE_URL . 'admin/questions/buscar_rende
 define('RUTA_ADMIN_BUSCAR_RENDICION_VQ', BASE_URL . 'admin/viewQuestions/buscar_rendecion_admin');
 define('RUTA_ADMIN_BORRAR_PREGUNTA', BASE_URL . 'admin/viewQuestions/borrar_pregunta');
 define('RUTA_ADMIN_CREAR_EJE', BASE_URL . 'admin/crear_eje');
+define('RUTA_ADMIN_EDITAR_EJE', BASE_URL . 'admin/editar_eje');
 define('RUTA_ADMIN_CREAR_RENDICION', BASE_URL . 'admin/crear_rendicion');
 define('RUTA_ADMIN_EDITAR_RENDICION', BASE_URL . 'admin/editar_rendicion');
 define('RUTA_ADMIN_MOSTRAR_REPORTE', BASE_URL . 'admin/mostrar_reporte');
