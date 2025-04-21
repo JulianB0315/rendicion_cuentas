@@ -31,10 +31,12 @@
     <header class="container-fluid header p-3 mb-5">
         <nav class="nav-header container">
             <div class="d-flex align-items-center logo-container w-100 justify-content-between">
-                <img
-                    src="<?= base_url('img/logo.png') ?>"
-                    alt="Logo"
-                    class="nav-logo img-fluid" />
+                <a href="<?= RUTA_ADMIN_HOME ?>">
+                    <img
+                        src="<?= base_url('img/logo.png') ?>"
+                        alt="Logo"
+                        class="nav-logo img-fluid" />
+                </a>
                 <div class="links-container">
                     <ul class="list-unstyled d-flex align-items-center justify-content-evenly links-list">
                         <li>
@@ -78,7 +80,7 @@
     </section>
     <main class="container my-5">
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 mb-5">
                 <h4>Crear Nuevo Eje</h4>
                 <form action="<?= base_url('admin/crear_eje') ?>" method="post" class="form-container">
                     <div class="form-group text">
@@ -95,6 +97,41 @@
                         Crear Eje
                     </button>
                 </form>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h4>Lista de Ejes</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Temática</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($ejes as $eje): ?>
+                            <tr>
+                                <td><?= esc($eje['tematica']) ?></td>
+                                <td>
+                                    <?php if ($eje['estado'] === 'habilitado'): ?>
+                                        <span class="badge bg-success">Habilitado</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">Deshabilitado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form action="<?= base_url('admin/editar_eje') ?>" method="post" style="display:inline;">
+                                        <input type="hidden" name="id_eje" value="<?= esc($eje['id']) ?>">
+                                        <input type="hidden" name="estado" value="<?= $eje['estado'] === 'habilitado' ? 'deshabilitado' : 'habilitado' ?>">
+                                        <button type="submit" class="btn btn-sm <?= $eje['estado'] === 'habilitado' ? 'btn-danger' : 'btn-success' ?>">
+                                            <?= $eje['estado'] === 'habilitado' ? 'Deshabilitar' : 'Habilitar' ?>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
         <?php if (session()->getFlashdata('success')): ?>
@@ -139,6 +176,8 @@
             </div>
         <?php endif; ?>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="<?= base_url('rendicion_cuentas/js/public/alerts.js') ?>"></script>
 </body>
 
 </html>
