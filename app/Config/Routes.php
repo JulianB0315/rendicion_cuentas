@@ -15,8 +15,11 @@ $routes->get('logout', 'rendicion_cuentas\Admin\VerificarAdminController::logout
 $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Inicio de admin
     $routes->get('/', 'rendicion_cuentas\Admin\GestionAdminController::buscarEjes');
-    $routes->post('crear_eje', 'rendicion_cuentas\Admin\GestionAdminController::CrearEje');
     $routes->post('crear_rendicion', 'rendicion_cuentas\Admin\GestionAdminController::CrearRendicion');
+    //Gestion de ejes
+    $routes->get('gestion_eje', 'rendicion_cuentas\Admin\GestionAdminController::Ejes');
+    $routes->post('crear_eje', 'rendicion_cuentas\Admin\GestionAdminController::CrearEje');
+    $routes->post('editar_eje,', 'rendicion_cuentas\Admin\GestionAdminController::EditarEje');
     //Rutas buscar rendicion
     $routes->get('buscar/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::cargarFechas/$1');
     //Rutas Seleccionar preguntas

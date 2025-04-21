@@ -18,6 +18,36 @@ class VerificarAdminController extends BaseController
     {
         $session = session();
         if ($session->get('isLoggedIn')) {
+            // Verificar si el token necesita ser actualizado
+            $admin = $this->AdministradoresModel
+                ->select('estado, categoria_admin')
+                ->where('dni_admin', $session->get('dni_admin'))
+                ->first();
+
+            if (!$admin || $admin['estado'] === 'deshabilitado') {
+                session()->destroy();
+                return redirect()->to(RUTA_LOGIN)->with('error', 'Tu sesión ha expirado o tu cuenta ha sido deshabilitada.');
+            }
+
+            // Actualizar token si ha pasado más de 30 minutos o si la categoría cambió
+            if (time() - $session->get('token_last_updated') > 1800 || $admin['categoria_admin'] !== $session->get('categoria_admin')) {
+                $newToken = bin2hex(random_bytes(32));
+                $session->set([
+                    'auth_token' => $newToken,
+                    'token_last_updated' => time(),
+                    'categoria_admin' => $admin['categoria_admin'], // Actualizar categoría en la sesión
+                ]);
+
+                // Actualizar token en las cookies
+                setcookie('auth_token', $newToken, [
+                    'expires' => time() + 3600,
+                    'path' => '/',
+                    'secure' => true,
+                    'httponly' => true,
+                    'samesite' => 'Strict',
+                ]);
+            }
+
             return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Ya has iniciado sesión');
         }
         return view('rendicion_cuentas/Admin/login_admin');
@@ -54,9 +84,18 @@ class VerificarAdminController extends BaseController
             'nombres_admin' => $admin['nombres_admin'],
             'categoria_admin' => $admin['categoria_admin'],
             'estado' => $admin['estado'],
-            'auth_token' => $token, // Guardar token en la sesión
-            'token_last_updated' => time(), // Registrar el tiempo de creación del token
+            'auth_token' => $token,
+            'token_last_updated' => time(),
             'isLoggedIn' => true,
+        ]);
+
+        // Guardar token en las cookies
+        setcookie('auth_token', $token, [
+            'expires' => time() + 3600,
+            'path' => '/',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Strict',
         ]);
 
         $nombre = ucfirst(strtolower(explode(' ', trim($admin['nombres_admin']))[0]));

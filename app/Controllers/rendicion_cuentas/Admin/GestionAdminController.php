@@ -57,24 +57,14 @@ class GestionAdminController extends BaseController
         } while ($model->where('id', $uuid)->first());
         return $uuid;
     }
-    //Funciones de Dashboard
 
+
+    //Funciones de Dashboard
     public function buscarEjes()
     {
-        $data['ejes'] = $this->ejeModel->findAll();
+        $data['ejes'] = $this->ejeModel->where('estado', 'habilitado')->findAll();
         $data['categoria'] = session()->get('categoria_admin');
         return view('rendicion_cuentas/Admin/admin', $data);
-    }
-
-    public function CrearEje()
-    {
-        $data_eje = [
-            'id' => $this->CreateID('eje'),
-            'tematica' => $this->request->getPost('nombreEje')
-        ];
-        $this->ejeModel->insert($data_eje);
-        session()->setFlashdata('success', 'Eje creado correctamente');
-        return redirect()->to(RUTA_ADMIN_HOME);
     }
 
     public function CrearRendicion()
@@ -129,6 +119,41 @@ class GestionAdminController extends BaseController
         session()->setFlashdata('success', 'Rendición creada correctamente');
         return redirect()->to(RUTA_ADMIN_HOME);
     }
+    //Funcione de gestion de ejes
+    public function Ejes()
+    {
+        $data['ejes'] = $this->ejeModel->findAll();
+        $data['categoria'] = session()->get('categoria_admin');
+        return view('rendicion_cuentas/Admin/gestion_ejes', $data);
+    }
+    public function CrearEje()
+    {
+        $data_eje = [
+            'id' => $this->CreateID('eje'),
+            'tematica' => $this->request->getPost('nombreEje')
+        ];
+        $this->ejeModel->insert($data_eje);
+        session()->setFlashdata('success', 'Eje creado correctamente');
+        return redirect()->to(RUTA_ADMIN_HOME);
+    }
+
+    public function EditarEje()
+    {
+        $id_eje = $this->request->getPost('id_eje');
+        $eje = $this->ejeModel->find($id_eje);
+        if (!$eje) {
+            return redirect()->back()->with('error', 'Eje no encontrado.');
+        }
+
+        $estado = $this->request->getPost('estado');
+        $data = [
+            'estado' => $estado
+        ];
+
+        $this->ejeModel->update($id_eje, $data);
+        return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Eje actualizado correctamente.');
+    }
+
     //Funcion para gestionar preguntas
     public function cargarFechas($Vista)
     {
@@ -285,6 +310,59 @@ class GestionAdminController extends BaseController
             'asistencia_no' => $asistencia_no,
             'id_rendicion' => $id_rendicion
         ]);
+    }
+
+    //Funciones de gestion de rendiciones
+    public function EditarRendicion()
+    {
+        $id_rendicion = $this->request->getPost('id_rendicion');
+        $rendicion = $this->rendicionModel->find($id_rendicion);
+        if (!$rendicion) {
+            return redirect()->back()->with('error', 'Rendición no encontrada.');
+        }
+
+        $fecha = $this->request->getPost('fechaRendicion');
+        $hora = $this->request->getPost('horaRendicion');
+        $banner = $this->request->getFile('bannerRendicion');
+
+        $data = [
+            'fecha' => $fecha,
+            'hora_rendicion' => $hora,
+        ];
+
+        if ($banner && $banner->isValid() && !$banner->hasMoved()) {
+            $uploadPath = FCPATH . 'img';
+            if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
+                return redirect()->back()->with('error', 'Failed to create upload directory.');
+            }
+
+            $bannerPath = uniqid() . '.' . $banner->getClientExtension();
+            if ($banner->move($uploadPath, $bannerPath)) {
+                $data['banner_rendicion'] = $bannerPath;
+
+                // Delete the old banner file if it exists
+                if (!empty($rendicion['banner_rendicion']) && file_exists($uploadPath . '/' . $rendicion['banner_rendicion'])) {
+                    unlink($uploadPath . '/' . $rendicion['banner_rendicion']);
+                }
+            } else {
+                return redirect()->back()->with('error', 'Failed to upload new banner.');
+            }
+        }
+
+        $this->rendicionModel->update($id_rendicion, $data);
+        return redirect()->back()->with('success', 'Rendición actualizada correctamente.');
+    }
+
+    public function BuscarEdit()
+    {
+        $id_rendicion = $this->request->getGet('id');
+        $rendicion = $this->rendicionModel->find($id_rendicion);
+
+        if (!$rendicion) {
+            return redirect()->back()->with('error', 'Rendición no encontrada.');
+        }
+
+        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion]);
     }
 
     public function GenerarExcel($id_rendicion)
@@ -454,56 +532,5 @@ class GestionAdminController extends BaseController
 
         $writer->save('php://output');
         exit;
-    }
-    public function EditarRendicion()
-    {
-        $id_rendicion = $this->request->getPost('id_rendicion');
-        $rendicion = $this->rendicionModel->find($id_rendicion);
-        if (!$rendicion) {
-            return redirect()->back()->with('error', 'Rendición no encontrada.');
-        }
-
-        $fecha = $this->request->getPost('fechaRendicion');
-        $hora = $this->request->getPost('horaRendicion');
-        $banner = $this->request->getFile('bannerRendicion');
-
-        $data = [
-            'fecha' => $fecha,
-            'hora_rendicion' => $hora,
-        ];
-
-        if ($banner && $banner->isValid() && !$banner->hasMoved()) {
-            $uploadPath = FCPATH . 'img';
-            if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
-                return redirect()->back()->with('error', 'Failed to create upload directory.');
-            }
-
-            $bannerPath = uniqid() . '.' . $banner->getClientExtension();
-            if ($banner->move($uploadPath, $bannerPath)) {
-                $data['banner_rendicion'] = $bannerPath;
-
-                // Delete the old banner file if it exists
-                if (!empty($rendicion['banner_rendicion']) && file_exists($uploadPath . '/' . $rendicion['banner_rendicion'])) {
-                    unlink($uploadPath . '/' . $rendicion['banner_rendicion']);
-                }
-            } else {
-                return redirect()->back()->with('error', 'Failed to upload new banner.');
-            }
-        }
-
-        $this->rendicionModel->update($id_rendicion, $data);
-        return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Rendición actualizada correctamente.');
-    }
-
-    public function BuscarEdit()
-    {
-        $id_rendicion = $this->request->getGet('id');
-        $rendicion = $this->rendicionModel->find($id_rendicion);
-
-        if (!$rendicion) {
-            return redirect()->back()->with('error', 'Rendición no encontrada.');
-        }
-
-        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion]);
     }
 }
