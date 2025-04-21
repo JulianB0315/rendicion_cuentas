@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conferencia del dia <?= date('d-m', strtotime(esc($fecha))) ?></title>
+    <title>Rendición del dia <?= date('d-m', strtotime(esc($fecha))) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link
