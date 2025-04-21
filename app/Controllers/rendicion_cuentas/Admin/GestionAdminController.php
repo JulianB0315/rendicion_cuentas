@@ -133,12 +133,12 @@ class GestionAdminController extends BaseController
     public function cargarFechas($Vista)
     {
         $session = session();
-        $categoria = $session->get('categoria_admin'); 
+        $categoria = $session->get('categoria_admin');
         $rendiciones = $this->rendicionModel->findAll();
 
         return view('rendicion_cuentas/Admin/' . $Vista, [
             'rendiciones' => $rendiciones,
-            'categoria' => $categoria, 
+            'categoria' => $categoria,
         ]);
     }
 
@@ -457,46 +457,42 @@ class GestionAdminController extends BaseController
     }
     public function EditarRendicion()
     {
-        $id_rendicion = $this->request->getGet('id_rendicion');
+        $id_rendicion = $this->request->getPost('id_rendicion');
         $rendicion = $this->rendicionModel->find($id_rendicion);
         if (!$rendicion) {
             return redirect()->back()->with('error', 'Rendición no encontrada.');
         }
 
-        if ($this->request->getMethod() === 'post') {
-            $fecha = $this->request->getPost('fechaRendicion');
-            $hora = $this->request->getPost('horaRendicion');
-            $banner = $this->request->getFile('bannerRendicion');
+        $fecha = $this->request->getPost('fechaRendicion');
+        $hora = $this->request->getPost('horaRendicion');
+        $banner = $this->request->getFile('bannerRendicion');
 
-            $data = [
-                'fecha' => $fecha,
-                'hora_rendicion' => $hora,
-            ];
+        $data = [
+            'fecha' => $fecha,
+            'hora_rendicion' => $hora,
+        ];
 
-            if ($banner && $banner->isValid() && !$banner->hasMoved()) {
-                $uploadPath = FCPATH . 'img';
-                if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
-                    return redirect()->back()->with('error', 'Failed to create upload directory.');
-                }
-
-                $bannerPath = uniqid() . '.' . $banner->getClientExtension();
-                if ($banner->move($uploadPath, $bannerPath)) {
-                    $data['banner_rendicion'] = $bannerPath;
-
-                    // Delete the old banner file if it exists
-                    if (!empty($rendicion['banner_rendicion']) && file_exists($uploadPath . '/' . $rendicion['banner_rendicion'])) {
-                        unlink($uploadPath . '/' . $rendicion['banner_rendicion']);
-                    }
-                } else {
-                    return redirect()->back()->with('error', 'Failed to upload new banner.');
-                }
+        if ($banner && $banner->isValid() && !$banner->hasMoved()) {
+            $uploadPath = FCPATH . 'img';
+            if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
+                return redirect()->back()->with('error', 'Failed to create upload directory.');
             }
 
-            $this->rendicionModel->update($id_rendicion, $data);
-            return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Rendición actualizada correctamente.');
+            $bannerPath = uniqid() . '.' . $banner->getClientExtension();
+            if ($banner->move($uploadPath, $bannerPath)) {
+                $data['banner_rendicion'] = $bannerPath;
+
+                // Delete the old banner file if it exists
+                if (!empty($rendicion['banner_rendicion']) && file_exists($uploadPath . '/' . $rendicion['banner_rendicion'])) {
+                    unlink($uploadPath . '/' . $rendicion['banner_rendicion']);
+                }
+            } else {
+                return redirect()->back()->with('error', 'Failed to upload new banner.');
+            }
         }
 
-        return view('rendicion_cuentas/Admin/editRendicion', ['rendicion' => $rendicion]);
+        $this->rendicionModel->update($id_rendicion, $data);
+        return redirect()->to(RUTA_ADMIN_HOME)->with('success', 'Rendición actualizada correctamente.');
     }
 
     public function BuscarEdit()
