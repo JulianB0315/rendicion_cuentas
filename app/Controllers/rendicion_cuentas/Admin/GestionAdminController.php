@@ -75,7 +75,7 @@ class GestionAdminController extends BaseController
             return redirect()->to(RUTA_ADMIN_HOME);
         }
 
-        $uploadPath = FCPATH . 'img';
+        $uploadPath = FCPATH . 'rendicion_cuentas/img';
         if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
             session()->setFlashdata('error', 'Failed to create upload directory');
             return redirect()->to(RUTA_ADMIN_HOME);
@@ -334,7 +334,7 @@ class GestionAdminController extends BaseController
         ];
 
         if ($banner && $banner->isValid() && !$banner->hasMoved()) {
-            $uploadPath = FCPATH . 'img';
+            $uploadPath = FCPATH . 'rendicion_cuentas/img';
             if (!is_dir($uploadPath) && !mkdir($uploadPath, 0777, true) && !is_dir($uploadPath)) {
                 return redirect()->back()->with('error', 'Failed to create upload directory.');
             }
