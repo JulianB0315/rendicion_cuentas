@@ -36,9 +36,6 @@
                     src="<?= base_url('rendicion_cuentas/img/logo.png') ?>"
                     alt="Logo"
                     class="nav-logo img-fluid" />
-                <a href="<?= base_url('usuarioQuestions') ?>" class="text-white register-btn btn py-md-3 px-4 py-sm-2 btn-header-register">
-                    Ver Reporte
-                </a>
             </div>
         </nav>
     </header>
