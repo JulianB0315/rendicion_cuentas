@@ -136,7 +136,7 @@ class GestionAdminController extends BaseController
         $this->ejeModel->insert($data_eje);
         session()->setFlashdata('success', 'Eje creado correctamente');
         // Redirigir al constante de la url de los ejes
-        return redirect()->back();
+        return redirect()->to(RUTA_ADMIN_GESTION_EJES);
     }
 
     public function EditarEje()
@@ -154,7 +154,7 @@ class GestionAdminController extends BaseController
 
         $this->ejeModel->update($id_eje, $data);
         // Redirigir al constante de la url de los ejes
-        return redirect()->back()->with('success', 'Eje actualizado correctamente.');
+        return redirect()->to(RUTA_ADMIN_GESTION_EJES)->with('success', 'Eje actualizado correctamente.');
     }
 
     //Funcion para gestionar preguntas
