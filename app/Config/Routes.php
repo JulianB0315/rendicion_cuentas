@@ -58,7 +58,7 @@ $routes->group('form', function ($routes) {
 $routes->get('conferencias/(:alphanum)', 'rendicion_cuentas\Client\DasboardUserController::Conferencia/$1');
 $routes->get('conferencias/obtenerPreguntas/(:alphanum)/(:alphanum)', 'rendicion_cuentas\Client\DasboardUserController::obtenerPreguntas/$1/$2');
 // Rutas de asistencia
-$routes->get('asistencia', 'Client\::');
+$routes->get('asistencia', 'rendicion_cuentas\Client\AsistenciaController::index');
 $routes->post('procesar_asistencia', 'rendicion_cuentas\Client\AsistenciaController::procesar_asistencia');
 // Rutas de usuarioQuestions
 $routes->get('usuarioQuestions', 'rendicion_cuentas\Client\DasboardUserController::Report');
