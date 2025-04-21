@@ -12,7 +12,8 @@ class EjeModel extends \CodeIgniter\Model
     protected $allowedFields =
     [
         'id',
-        'tematica'
+        'tematica',
+        'estado',
     ];
 
     // Dates
