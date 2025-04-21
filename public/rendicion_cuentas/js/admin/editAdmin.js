@@ -67,7 +67,7 @@ const cleanSearchResult = () => {
 };
 const searchAdmin = async (dni) => {
 	try {
-		const response = await fetch(`${baseUrl}/admin/buscar_admin?dni-admin=${dni}`);
+		const response = await fetch(`${searchAdminUrl}?dni-admin=${dni}`);
 		const data = await response.json();
 		if (data.status === "success") {
 			resultTable.innerHTML = `
@@ -87,7 +87,7 @@ const searchAdmin = async (dni) => {
 								<td>${data.data.nombres_admin}</td>
 								<td>${data.data.categoria_admin}</td>
 								<td class="d-flex justify-content-around">
-									<form action="${baseUrl}/admin/UpdateAdmin/habilitar" method="GET">
+									<form action="${enableAdminUrl}" method="GET">
 										<input type="hidden" name="dni-admin" value="${data.data.dni_admin}">
 										<input type="hidden" name="motivo" value="Volvió a trabajar en el área">
 										<button type='submit' class="btn-action-admin enable m-1">
