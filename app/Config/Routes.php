@@ -19,7 +19,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Gestion de ejes
     $routes->get('gestion_eje', 'rendicion_cuentas\Admin\GestionAdminController::Ejes');
     $routes->post('crear_eje', 'rendicion_cuentas\Admin\GestionAdminController::CrearEje');
-    $routes->post('editar_eje,', 'rendicion_cuentas\Admin\GestionAdminController::EditarEje');
+    $routes->post('editar_eje', 'rendicion_cuentas\Admin\GestionAdminController::EditarEje');
     //Rutas buscar rendicion
     $routes->get('buscar/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::cargarFechas/$1');
     //Rutas Seleccionar preguntas
