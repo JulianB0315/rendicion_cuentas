@@ -121,7 +121,7 @@
                     <ul class="list-group">
                         <?php foreach ($ejes as $eje): ?>
                             <li class="list-group-item">
-                                <form action="<?= base_url('admin/sorteo_preguntas/' . $eje['id']) ?>" method="get">
+                                <form action="<?= RUTA_ADMIN_SORTEO_PREGUNTAS . $eje['id'] ?>" method="get">
                                     <span class="eje-info">
                                         <?= $eje['tematica'] ?>
                                         <small class="text-muted">

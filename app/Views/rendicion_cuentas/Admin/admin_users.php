@@ -306,7 +306,8 @@
         <?php endif; ?>
     </main>
     <script>
-        const baseUrl = '<?= base_url() ?>';
+        const enableAdminUrl = '<?= RUTA_ADMIN_EDITAR ?>/habilitar'
+        const searchAdminUrl = '<?= RUTA_ADMIN_BUSCAR_ADMIN ?>'
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('rendicion_cuentas/js/admin/login.js') ?>"></script>

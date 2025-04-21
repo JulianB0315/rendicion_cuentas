@@ -138,7 +138,7 @@
                                                             <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
                                                         </div>
                                                         <div>
-                                                            <form action="<?= base_url('admin/viewQuestions/borrar_pregunta') ?>" method="post">
+                                                            <form action="<?= RUTA_ADMIN_BORRAR_PREGUNTA ?>" method="post">
                                                                 <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id']) ?>">
                                                                 <button type="submit" class="btn btn-danger">Borrar</button>
                                                             </form>
