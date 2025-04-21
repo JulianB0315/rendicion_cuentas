@@ -130,7 +130,8 @@ class GestionAdminController extends BaseController
     {
         $data_eje = [
             'id' => $this->CreateID('eje'),
-            'tematica' => $this->request->getPost('nombreEje')
+            'tematica' => $this->request->getPost('nombreEje'), 
+            'estado' => 'habilitado'
         ];
         $this->ejeModel->insert($data_eje);
         session()->setFlashdata('success', 'Eje creado correctamente');
