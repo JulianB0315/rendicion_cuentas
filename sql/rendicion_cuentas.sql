@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2025 a las 16:46:47
+-- Tiempo de generación: 22-04-2025 a las 16:08:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -54,7 +54,7 @@ INSERT INTO `administradores` (`dni_admin`, `nombres_admin`, `password`, `catego
 CREATE TABLE `eje` (
   `id` varchar(8) NOT NULL,
   `tematica` varchar(120) NOT NULL,
-  `estado` enum('hablitado','deshabilitado') NOT NULL DEFAULT 'hablitado'
+  `estado` enum('habilitado','deshabilitado') NOT NULL DEFAULT 'habilitado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
