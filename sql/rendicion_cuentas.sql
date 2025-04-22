@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2025 a las 16:08:30
+-- Tiempo de generación: 22-04-2025 a las 18:39:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,8 +42,7 @@ CREATE TABLE `administradores` (
 --
 
 INSERT INTO `administradores` (`dni_admin`, `nombres_admin`, `password`, `categoria_admin`, `estado`, `creado_en`, `actualizado_en`) VALUES
-('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'admin', 'habilitado', '2025-03-12 16:06:51', '2025-04-21 14:17:43'),
-('76628500', 'JULIAN   BURGA BRACAMONTE', '$2y$10$ez.Z3nIhfs3etQIiwmx0SuO6mf0TsiabU9OBiRCCMQCy9VQL59DxK', 'admin', 'habilitado', '2025-04-16 17:05:50', '2025-04-21 14:17:34');
+('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'admin', 'habilitado', '2025-03-12 16:06:51', '2025-04-21 14:17:43');
 
 -- --------------------------------------------------------
 
