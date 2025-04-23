@@ -42,7 +42,7 @@ CREATE TABLE `administradores` (
 --
 
 INSERT INTO `administradores` (`dni_admin`, `nombres_admin`, `password`, `categoria_admin`, `estado`, `creado_en`, `actualizado_en`) VALUES
-('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'admin', 'habilitado', '2025-03-12 16:06:51', '2025-04-21 14:17:43');
+('40346175', 'MARTHA LUZ TUÑOQUE JULCAS', '$2y$10$n7ZurrZsQR/Ha6liA4SoGun3jEggeie2hxBA09wXeVP8mOplHWT8e', 'super_admin', 'habilitado', '2025-03-12 16:06:51', '2025-04-21 14:17:43');
 
 -- --------------------------------------------------------
 

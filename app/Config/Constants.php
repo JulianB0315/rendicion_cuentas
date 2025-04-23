@@ -79,7 +79,7 @@ defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9);      // lowest au
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); 
 
 // Base URL
-define('BASE_URL', 'http://localhost/rendicion_cuentas/');
+define('BASE_URL', 'http://localhost/');
 // Base URL for assets
 define('BASE_URL_ASSETS', BASE_URL . 'public/rendicion_cuentas/');
 
