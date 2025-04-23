@@ -294,17 +294,18 @@ class GestionAdminController extends BaseController
         $usuarios = $this->usuarioModel->where('id_rendicion', $id_rendicion)->findAll();
         $asistencia_si = $this->usuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'si')->countAllResults();
         $asistencia_no = $this->usuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'no')->countAllResults();
-        $ejes = $this->ejeModel->findAll();
 
-        // Obtener preguntas de cada usuario
         foreach ($usuarios as &$usuario) {
             $usuario['preguntas'] = $this->preguntaModel
-                ->select('pregunta.*, preguntas_seleccionadas.id_eje_seleccionado, eje.tematica')
-                ->join('preguntas_seleccionadas', 'preguntas_seleccionadas.id_pregunta = pregunta.id')
-                ->join('ejes_seleccionados', 'ejes_seleccionados.id = preguntas_seleccionadas.id_eje_seleccionado')
-                ->join('eje', 'eje.id = ejes_seleccionados.id_eje')
+                ->select('pregunta.contenido, eje.tematica')
+                ->join('eje', 'eje.id = pregunta.id_eje', 'left')
                 ->where('pregunta.id_usuario', $usuario['id'])
                 ->findAll();
+
+            // Ensure users without questions still have an empty array for 'preguntas'
+            if (empty($usuario['preguntas'])) {
+                $usuario['preguntas'] = [];
+            }
         }
 
         return view('rendicion_cuentas/Admin/viewReport', [
@@ -364,8 +365,8 @@ class GestionAdminController extends BaseController
         if (!$rendicion) {
             return redirect()->back()->with('error', 'Rendición no encontrada.');
         }
-
-        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion]);
+        $rendiciones = $this->rendicionModel->findAll();
+        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion, 'rendiciones' => $rendiciones]);
     }
 
     public function GenerarExcel($id_rendicion)
@@ -382,7 +383,11 @@ class GestionAdminController extends BaseController
 
         foreach ($usuarios as $key => $usuario) {
             $usuarios[$key]['preguntas'] = $this->preguntaModel
-                ->where('id_usuario', $usuario['id_usuario'])
+                ->select('pregunta.contenido')
+                ->join('preguntas_seleccionadas', 'preguntas_seleccionadas.id_pregunta = pregunta.id')
+                ->join('ejes_seleccionados', 'ejes_seleccionados.id = preguntas_seleccionadas.id_eje_seleccionado')
+                ->where('pregunta.id_usuario', $usuario['id'])
+                ->where('ejes_seleccionados.id_rendicion', $id_rendicion)
                 ->findAll();
         }
 
@@ -439,7 +444,6 @@ class GestionAdminController extends BaseController
                 $preguntas = 'No hay preguntas para este usuario.';
             }
             $sheet->setCellValue('I' . $row, $preguntas);
-            // Activar ajuste de texto para visualizar correctamente los saltos de línea
             $sheet->getStyle('I' . $row)->getAlignment()->setWrapText(true);
             $row++;
         }
@@ -460,73 +464,8 @@ class GestionAdminController extends BaseController
         $sheet->setCellValue('K5', 'Sexo Femenino');
         $sheet->setCellValue('L5', $sexo_f);
 
-        /* ----- GRÁFICO DE ASISTENCIA ----- */
-        $dataSeriesLabels = [
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$2", null, 1),
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$3", null, 1),
-        ];
-        $xAxisTickValues = [
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$2:\$K\$3", null, 2),
-        ];
-        $dataSeriesValues = [
-            new DataSeriesValues('Number', "'Reporte de Usuarios'!\$L\$2:\$L\$3", null, 2),
-        ];
-        $series = new DataSeries(
-            DataSeries::TYPE_PIECHART,
-            null,
-            range(0, count($dataSeriesValues) - 1),
-            $dataSeriesLabels,
-            $xAxisTickValues,
-            $dataSeriesValues
-        );
-        $plotArea = new PlotArea(null, [$series]);
-        $chartTitle = new Title('Asistencia');
-        $chart1 = new Chart(
-            'chart1',
-            $chartTitle,
-            null,
-            $plotArea
-        );
-        $chart1->setTopLeftPosition('K7');
-        $chart1->setBottomRightPosition('P20');
-        $sheet->addChart($chart1);
-
-        /* ----- GRÁFICO DE SEXO ----- */
-        $dataSeriesLabels2 = [
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$4", null, 1),
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$5", null, 1),
-        ];
-        $xAxisTickValues2 = [
-            new DataSeriesValues('String', "'Reporte de Usuarios'!\$K\$4:\$K\$5", null, 2),
-        ];
-        $dataSeriesValues2 = [
-            new DataSeriesValues('Number', "'Reporte de Usuarios'!\$L\$4:\$L\$5", null, 2),
-        ];
-        $series2 = new DataSeries(
-            DataSeries::TYPE_PIECHART,
-            null,
-            range(0, count($dataSeriesValues2) - 1),
-            $dataSeriesLabels2,
-            $xAxisTickValues2,
-            $dataSeriesValues2
-        );
-        $plotArea2 = new PlotArea(null, [$series2]);
-        $chartTitle2 = new Title('Sexo');
-        $chart2 = new Chart(
-            'chart2',
-            $chartTitle2,
-            null,
-            $plotArea2
-        );
-        $chart2->setTopLeftPosition('K21');
-        $chart2->setBottomRightPosition('P34');
-        $sheet->addChart($chart2);
-
-        // Preparar y enviar el archivo Excel con gráficos incluidos
+        // Preparar y enviar el archivo Excel
         $writer = new Xlsx($spreadsheet);
-        $writer->setIncludeCharts(true);
-
-        // Generar un nombre de archivo único usando fecha y hora
         $filename = 'reporte_usuarios_' . $id_rendicion . '_' . date('Ymd_His') . '.xlsx';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

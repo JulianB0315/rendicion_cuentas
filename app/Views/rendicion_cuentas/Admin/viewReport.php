@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
     <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'admin.css' ?>" />
     <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'admin.css' ?>" />
-    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'view-report.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'view-report.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'conferencias.css' ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
