@@ -71,25 +71,47 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <?php if (isset($usuarios) && !empty($usuarios)): ?>
-                    <table class="table text-center table-ejes">
-                        <thead>
-                            <tr>
-                                <th>DNI</th>
-                                <th>Nombre</th>
-                                <th>Sexo</th>
-                                <th>Tipo de Participación</th>
-                                <th>Título</th>
-                                <th>RUC</th>
-                                <th>Nombre de la Organización</th>
-                                <th>Asistencia</th>
-                                <th>Eje</th>
-                                <th>Pregunta</th>
-                            </tr>
-                        </thead>
-                        <?php foreach ($usuarios as $usuario): ?>
-                            <tbody>
-                                <?php if (!empty($usuario['preguntas'])): ?>
-                                    <?php foreach ($usuario['preguntas'] as $pregunta): ?>
+                    <div class="table-responsive">
+                        <table class="table text-center table-ejes">
+                            <thead>
+                                <tr>
+                                    <th>DNI</th>
+                                    <th>Nombre</th>
+                                    <th>Sexo</th>
+                                    <th>Tipo de Participación</th>
+                                    <th>Título</th>
+                                    <th>RUC</th>
+                                    <th>Nombre de la Organización</th>
+                                    <th>Asistencia</th>
+                                    <th>Eje</th>
+                                    <th>Pregunta</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($usuarios as $usuario): ?>
+                                <tbody>
+                                    <?php if (!empty($usuario['preguntas'])): ?>
+                                        <?php foreach ($usuario['preguntas'] as $pregunta): ?>
+                                            <tr>
+                                                <td><?= esc($usuario['DNI']) ?></td>
+                                                <td><?= esc($usuario['nombres']) ?></td>
+                                                <td><?= esc($usuario['sexo']) ?></td>
+                                                <td><?= esc($usuario['tipo_participacion']) ?></td>
+                                                <td><?= esc($usuario['titulo']) ?></td>
+                                                <td><?= esc($usuario['ruc_empresa']) ?></td>
+                                                <td><?= esc($usuario['nombre_empresa']) ?></td>
+                                                <td><?= esc($usuario['asistencia']) ?></td>
+                                                <td><?= esc($pregunta['tematica']) ?></td>
+                                                <td class="pregunta-container">
+                                                    <button class="btn btn-form btn-pregunta" data-pregunta="<?= esc($pregunta['contenido']) ?>">
+                                                        Ver Pregunta
+                                                    </button>
+                                                    <div class="pregunta-content">
+                                                        <?= esc($pregunta['contenido']) ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
                                         <tr>
                                             <td><?= esc($usuario['DNI']) ?></td>
                                             <td><?= esc($usuario['nombres']) ?></td>
@@ -99,34 +121,14 @@
                                             <td><?= esc($usuario['ruc_empresa']) ?></td>
                                             <td><?= esc($usuario['nombre_empresa']) ?></td>
                                             <td><?= esc($usuario['asistencia']) ?></td>
-                                            <td><?= esc($pregunta['tematica']) ?></td>
-                                            <td class="pregunta-container">
-                                                <button class="btn btn-form btn-pregunta" data-pregunta="<?= esc($pregunta['contenido']) ?>">
-                                                    Ver Pregunta
-                                                </button>
-                                                <div class="pregunta-content">
-                                                    <?= esc($pregunta['contenido']) ?>
-                                                </div>
-                                            </td>
+                                            <td><span class="text-muted">Sin eje asignado</span></td>
+                                            <td><span class="text-muted">Sin preguntas</span></td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td><?= esc($usuario['DNI']) ?></td>
-                                        <td><?= esc($usuario['nombres']) ?></td>
-                                        <td><?= esc($usuario['sexo']) ?></td>
-                                        <td><?= esc($usuario['tipo_participacion']) ?></td>
-                                        <td><?= esc($usuario['titulo']) ?></td>
-                                        <td><?= esc($usuario['ruc_empresa']) ?></td>
-                                        <td><?= esc($usuario['nombre_empresa']) ?></td>
-                                        <td><?= esc($usuario['asistencia']) ?></td>
-                                        <td><span class="text-muted">Sin eje asignado</span></td>
-                                        <td><span class="text-muted">Sin preguntas</span></td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        <?php endforeach; ?>
-                    </table>
+                                    <?php endif; ?>
+                                </tbody>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
                 <?php else: ?>
                     <div class="col-12 my-4">
                         <div class="alert alert-warning" id="warning-alert">
