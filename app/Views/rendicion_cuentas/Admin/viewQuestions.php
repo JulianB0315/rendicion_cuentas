@@ -110,55 +110,76 @@
             </div>
         </div>
     </div>
-
-    <?php if (isset($ejes) && !empty($ejes)): ?>
-        <div class="container my-5">
-            <div class="row d-flex justify-content-center align-items-center flex-direction-column">
-                <h3 class="header-title text-center">Ejes de la Rendición</h3>
-                <div class="col-md-6 col-sm-12 p-4">
-                    <div class="accordion">
-                        <?php foreach ($ejes as $eje): ?>
-                            <div class="accordion-item" id="eje<?= $eje['id_eje_seleccionado'] ?>">
-                                <h2 class="accordion-header" id="heading<?= $eje['id_eje_seleccionado'] ?>">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse<?= $eje['id_eje_seleccionado'] ?>"
-                                        aria-expanded="false" aria-controls="collapse<?= $eje['id_eje_seleccionado'] ?>">
-                                        <?= esc($eje['tematica']) ?>
-                                    </button>
-                                </h2>
-                                <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse"
-                                    aria-labelledby="heading<?= $eje['id_eje_seleccionado'] ?>" data-bs-parent="#eje<?= $eje['id_eje_seleccionado'] ?>">
-                                    <div class="accordion-body">
-                                        <?php if (!empty($eje['preguntas'])): ?>
-                                            <ul class="list-group">
-                                                <?php foreach ($eje['preguntas'] as $pregunta): ?>
-                                                    <li class="list-group-item justify-content-between">
-                                                        <div class="pregunta-item">
-                                                            <strong class="nombre-usuario"><?= esc($pregunta['nombres']) ?></strong>
-                                                            <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
-                                                        </div>
-                                                        <div>
-                                                            <form action="<?= RUTA_ADMIN_BORRAR_PREGUNTA ?>" method="post">
-                                                                <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id']) ?>">
-                                                                <button type="submit" class="btn btn-danger">Borrar</button>
-                                                            </form>
-                                                        </div>
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        <?php else: ?>
-                                            <p class="text-muted text-center my-2">
-                                                No se encontraron preguntas seleccionadas para este eje.
-                                            </p>
-                                        <?php endif; ?>
+    <?php if (isset($ejes) && !empty($ejes) && isset($_GET['id_rendicion'])): ?>
+        <div class="container my-4 text-center">
+            <button class="btn btn-toggle-acordeon m-2" id="btn-toggle-acordeon">
+                Ver preguntas
+            </button>
+            <!-- CAMBIAR RUTA A LA OFICIAL DE LA PÁGINA -->
+            <a href="<?= base_url('admin/presentarPreguntas/' . esc($_GET['id_rendicion'])) ?>" class="btn btn-present m-2">
+                Presentar
+                <i class="fa-solid fa-projector ms-2"></i>
+            </a>
+        </div>
+        <div id="acordeon-normal" style="display:none;">
+            <div class="container my-5">
+                <div class="row d-flex justify-content-center align-items-center flex-direction-column">
+                    <h3 class="header-title text-center">Ejes de la Rendición</h3>
+                    <div class="col-md-6 col-sm-12 p-4">
+                        <div class="accordion">
+                            <?php foreach ($ejes as $eje): ?>
+                                <div class="accordion-item" id="eje<?= $eje['id_eje_seleccionado'] ?>">
+                                    <h2 class="accordion-header" id="heading<?= $eje['id_eje_seleccionado'] ?>">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse<?= $eje['id_eje_seleccionado'] ?>"
+                                            aria-expanded="false" aria-controls="collapse<?= $eje['id_eje_seleccionado'] ?>">
+                                            <?= esc($eje['tematica']) ?>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse"
+                                        aria-labelledby="heading<?= $eje['id_eje_seleccionado'] ?>" data-bs-parent="#eje<?= $eje['id_eje_seleccionado'] ?>">
+                                        <div class="accordion-body">
+                                            <?php if (!empty($eje['preguntas'])): ?>
+                                                <ul class="list-group">
+                                                    <?php foreach ($eje['preguntas'] as $pregunta): ?>
+                                                        <li class="list-group-item justify-content-between">
+                                                            <div class="pregunta-item">
+                                                                <strong class="nombre-usuario"><?= esc($pregunta['nombres']) ?></strong>
+                                                                <p class="contenido-pregunta mb-0"><?= esc($pregunta['contenido']) ?></p>
+                                                            </div>
+                                                            <div>
+                                                                <form action="<?= RUTA_ADMIN_BORRAR_PREGUNTA ?>" method="post">
+                                                                    <input type="hidden" name="id_pregunta_seleccionada" value="<?= esc($pregunta['id']) ?>">
+                                                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                                                </form>
+                                                            </div>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php else: ?>
+                                                <p class="text-muted text-center my-2">
+                                                    No se encontraron preguntas seleccionadas para este eje.
+                                                </p>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            const btnToggle = document.getElementById('btn-toggle-acordeon');
+            const acordeon = document.getElementById('acordeon-normal');
+            let visible = false;
+            btnToggle.addEventListener('click', function() {
+                visible = !visible;
+                acordeon.style.display = visible ? 'block' : 'none';
+                btnToggle.textContent = visible ? 'Ocultar preguntas' : 'Ver preguntas';
+            });
+        </script>
     <?php endif; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

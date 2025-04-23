@@ -115,6 +115,32 @@ label{
     background-color: var(--primary-color);
     color: var(--white);
 }
+.btn-toggle-acordeon {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+.btn-toggle-acordeon:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    color: var(--white);
+}
+.btn-present {
+    background-color: #45b07c;
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+.btn-present:hover {
+    background-color: #3a9b66;
+    transform: translateY(-2px);
+    color: var(--white);
+}
 @media (max-width: 768px) {
 	.nav-logo {
 		height: 70px;

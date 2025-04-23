@@ -274,7 +274,33 @@ class GestionAdminController extends BaseController
         $rendiciones = $this->rendicionModel->findAll();
         return view('rendicion_cuentas/Admin/viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
     }
+    public function presentarPreguntas($id_rendicion)
+    {
+        $ejes_seleccionados = $this->ejesSeleccionadosModel
+            ->where('id_rendicion', $id_rendicion)
+            ->findAll();
 
+        $ejes = array_map(function ($eje) {
+            $ejeData = $this->ejeModel->find($eje['id_eje']);
+            $preguntas = $this->preguntasSeleccionadasModel
+                ->select('preguntas_seleccionadas.id, pregunta.contenido, pregunta.fecha_registro, usuario.nombres')
+                ->join('pregunta', 'pregunta.id = preguntas_seleccionadas.id_pregunta')
+                ->join('usuario', 'usuario.id = pregunta.id_usuario')
+                ->where('preguntas_seleccionadas.id_eje_seleccionado', $eje['id'])
+                ->findAll();
+
+            return [
+                'tematica' => $ejeData['tematica'],
+                'id_eje_seleccionado' => $eje['id'],
+                'preguntas' => $preguntas
+            ];
+        }, $ejes_seleccionados);
+
+        return view('rendicion_cuentas/Admin/presentarPreguntas', [
+            'ejes' => $ejes,
+            'id_rendicion' => $id_rendicion
+        ]);
+    }
     public function QuitarPregunta()
     {
         $id_pregunta_seleccionada = $this->request->getPost('id_pregunta_seleccionada');

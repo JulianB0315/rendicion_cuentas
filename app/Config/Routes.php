@@ -30,6 +30,8 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
     //Rutas Preguntas seleccionadas
     $routes->get('viewQuestions/buscar_rendecion_admin', 'rendicion_cuentas\Admin\GestionAdminController::preguntasSeleccionadas');
     $routes->post('viewQuestions/borrar_pregunta', 'rendicion_cuentas\Admin\GestionAdminController::QuitarPregunta');
+    // RUTA PARA PRESENTACIÓN DE PREGUNTAS, CAMBIAR RUTA
+    $routes->get('presentarPreguntas/(:alphanum)', 'rendicion_cuentas\Admin\GestionAdminController::presentarPreguntas/$1');
     //Rutas de reportes
     $routes->get('mostrar_reporte', 'rendicion_cuentas\Admin\GestionAdminController::MostrarReporte');
     //Generacion de excel(Dentro de reportes)
