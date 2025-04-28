@@ -75,6 +75,15 @@
             </div>
         </nav>
     </header>
+    <div class="container-fluid w-100 mb-3">
+        <a href="<?= base_url('admin') ?>" class="btn ms-3"
+            style="background-color: var(--primary-color); color: white; font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.2s, color 0.2s;"
+            onmouseover="this.style.backgroundColor='var(--secondary-color)'; this.style.color='#fff';"
+            onmouseout="this.style.backgroundColor='var(--primary-color)'; this.style.color='white';">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+    </div>
     <div class="container my-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Reporte de Rendiciones</h1>

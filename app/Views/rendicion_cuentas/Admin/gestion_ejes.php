@@ -17,6 +17,7 @@
         href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css" />
     <link rel="stylesheet" href="<?= RUTA_PUBLIC_CSS . 'index.css' ?>" />
     <link rel="stylesheet" href="<?= RUTA_CSS_ADMIN . 'admin.css' ?>" />
+    <link rel="stylesheet" href="<?= RUTA_CSS_CLIENT . 'dashboard.css' ?>" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -73,6 +74,15 @@
             </div>
         </nav>
     </header>
+    <div class="container-fluid w-100 mb-3">
+        <a href="<?= base_url('admin') ?>" class="btn ms-3"
+            style="background-color: var(--primary-color); color: white; font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.2s, color 0.2s;"
+            onmouseover="this.style.backgroundColor='var(--secondary-color)'; this.style.color='#fff';"
+            onmouseout="this.style.backgroundColor='var(--primary-color)'; this.style.color='white';">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+    </div>
     <section class="text-center mt-3">
         <h1 class="animate__animated animate__fadeInDown header-title">
             Gestión de Ejes
