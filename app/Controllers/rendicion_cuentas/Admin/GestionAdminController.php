@@ -251,6 +251,16 @@ class GestionAdminController extends BaseController
     public function preguntasSeleccionadas()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
+        $rendiciones = $this->rendicionModel->findAll();
+
+        // Si no hay id, selecciona la rendición más reciente
+        if (!$id_rendicion && !empty($rendiciones)) {
+            usort($rendiciones, function($a, $b) {
+                return strtotime($b['fecha']) <=> strtotime($a['fecha']);
+            });
+            $id_rendicion = $rendiciones[0]['id'];
+        }
+
         $ejes_seleccionados = $this->ejesSeleccionadosModel
             ->where('id_rendicion', $id_rendicion)
             ->findAll();
@@ -271,9 +281,13 @@ class GestionAdminController extends BaseController
             ];
         }, $ejes_seleccionados);
 
-        $rendiciones = $this->rendicionModel->findAll();
-        return view('rendicion_cuentas/Admin/viewQuestions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/viewQuestions', [
+            'ejes' => $ejes,
+            'rendiciones' => $rendiciones,
+            'id_rendicion' => $id_rendicion
+        ]);
     }
+
     public function presentarPreguntas($id_rendicion)
     {
         $ejes_seleccionados = $this->ejesSeleccionadosModel
@@ -317,6 +331,16 @@ class GestionAdminController extends BaseController
     public function MostrarReporte()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
+        $rendiciones = $this->rendicionModel->findAll();
+
+        // Si no hay id, selecciona la rendición más reciente
+        if (!$id_rendicion && !empty($rendiciones)) {
+            usort($rendiciones, function($a, $b) {
+                return strtotime($b['fecha']) <=> strtotime($a['fecha']);
+            });
+            $id_rendicion = $rendiciones[0]['id'];
+        }
+
         $usuarios = $this->usuarioModel->where('id_rendicion', $id_rendicion)->findAll();
         $asistencia_si = $this->usuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'si')->countAllResults();
         $asistencia_no = $this->usuarioModel->where('id_rendicion', $id_rendicion)->where('asistencia', 'no')->countAllResults();
@@ -328,7 +352,6 @@ class GestionAdminController extends BaseController
                 ->where('pregunta.id_usuario', $usuario['id'])
                 ->findAll();
 
-            // Ensure users without questions still have an empty array for 'preguntas'
             if (empty($usuario['preguntas'])) {
                 $usuario['preguntas'] = [];
             }
@@ -338,7 +361,8 @@ class GestionAdminController extends BaseController
             'usuarios' => $usuarios,
             'asistencia_si' => $asistencia_si,
             'asistencia_no' => $asistencia_no,
-            'id_rendicion' => $id_rendicion
+            'id_rendicion' => $id_rendicion,
+            'rendiciones' => $rendiciones
         ]);
     }
 
@@ -386,13 +410,26 @@ class GestionAdminController extends BaseController
     public function BuscarEdit()
     {
         $id_rendicion = $this->request->getGet('id');
+        $rendiciones = $this->rendicionModel->findAll();
+
+        // Si no hay id, selecciona la rendición más reciente
+        if (!$id_rendicion && !empty($rendiciones)) {
+            usort($rendiciones, function($a, $b) {
+                return strtotime($b['fecha']) <=> strtotime($a['fecha']);
+            });
+            $id_rendicion = $rendiciones[0]['id'];
+        }
+
         $rendicion = $this->rendicionModel->find($id_rendicion);
 
         if (!$rendicion) {
             return redirect()->back()->with('error', 'Rendición no encontrada.');
         }
-        $rendiciones = $this->rendicionModel->findAll();
-        return view('rendicion_cuentas/Admin/editarRendicion', ['rendicion' => $rendicion, 'rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/editarRendicion', [
+            'rendicion' => $rendicion,
+            'rendiciones' => $rendiciones,
+            'id_rendicion' => $id_rendicion
+        ]);
     }
 
     public function GenerarExcel($id_rendicion)
