@@ -76,7 +76,7 @@
         </nav>
     </header>
     <div class="container my-5">
-    <h1 class="animate__animated animate__fadeInDown header-title text-center">Preguntas seleccionadas</h1>
+        <h1 class="animate__animated animate__fadeInDown header-title text-center">Preguntas seleccionadas</h1>
         <div class="accordion" id="acordeonProyector">
             <?php foreach ($ejes as $eje): ?>
                 <div class="accordion-item">
@@ -89,10 +89,15 @@
                     <div id="collapse<?= $eje['id_eje_seleccionado'] ?>" class="accordion-collapse collapse">
                         <div class="accordion-body fs-proyector">
                             <?php if (!empty($eje['preguntas'])): ?>
-                                <?php foreach ($eje['preguntas'] as $pregunta): ?>
-                                    <div class="pregunta-item">
-                                        <strong class="nombre-usuario"><?= esc($pregunta['nombres']) ?></strong>
-                                        <p class="contenido-pregunta"><?= esc($pregunta['contenido']) ?></p>
+                                <?php foreach ($eje['preguntas'] as $i => $pregunta): ?>
+                                    <div class="pregunta-item d-flex flex-column mb-5 p-3 bg-transparent border-0">
+                                        <span class="px-3 d-flex align-items-center w-100 justify-content-between mb-2">
+                                            <span class="nombre-usuario flex-grow-1"><?= esc($pregunta['nombres']) ?></span>
+                                            <span class="rounded-circle text-white d-flex justify-content-center align-items-center num-span fw-bold me-3">
+                                                <?= $i + 1 ?>
+                                            </span>
+                                        </span>
+                                        <div class="contenido-pregunta ps-5 mt-2"><?= esc($pregunta['contenido']) ?></div>
                                     </div>
                                 <?php endforeach; ?>
                             <?php else: ?>
