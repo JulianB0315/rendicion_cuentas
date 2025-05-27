@@ -49,7 +49,7 @@
                                     <li><a href="<?= RUTA_ADMIN_GESTION_EJES ?>" class="dropdown-item">Gestión de Ejes</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>viewQuestions" class="dropdown-item">Ver preguntas</a></li>
                                     <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>report" class="dropdown-item">Reportes</a></li>
-                                    <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>editarRendicion" class="dropdown-item">Editar Rendición</a></li>
+                                    <li><a href="<?= RUTA_ADMIN_BUSCAR_RENDICION ?>editarRendición" class="dropdown-item">Editar Rendición</a></li>
                                     <?php if (isset($categoria) && $categoria === 'super_admin'): ?>
                                         <li>
                                             <a href="<?= base_url('admin/admin_users') ?>" class="dropdown-item">Administrar Usuarios</a>
@@ -85,45 +85,47 @@
             Volver
         </a>
     </div>
-    <div class="container my-5">
+    <div class="container mt-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Seleccionar preguntas</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= RUTA_ADMIN_BUSCAR_RENDICION_Q ?>" method="get" class="mt-2">
+                <form class="mt-2">
                     <div class="form-group">
                         <label for="id">Fecha de la Rendición:</label>
                         <select class="form-select" id="id" name="id" required>
-                            <option value="" disabled selected>
+                            <option value="" disabled <?= empty($id_rendicion) ? 'selected' : '' ?>>
                                 Seleccione una fecha de rendición
                             </option>
-                            <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                                <?php
-                                $rendicionesPerYear = [];
-                                foreach ($rendiciones as $rendicion) {
-                                    $year = date('Y', strtotime($rendicion['fecha']));
-                                    $rendicionesPerYear[$year][] = $rendicion;
-                                }
-                                krsort($rendicionesPerYear);
-                                foreach ($rendicionesPerYear as $year => $rendiciones): ?>
-                                    <optgroup label="<?= $year ?>">
-                                        <?php foreach ($rendiciones as $rendicion): ?>
-                                            <option value="<?= $rendicion['id'] ?>"><?= formatear_fecha_esp(esc($rendicion['fecha'])) ?></option>
-                                        <?php endforeach; ?>
-                                    </optgroup>
-                                <?php endforeach ?>
-                            <?php else: ?>
-                                <option value="">No hay rendiciones disponibles</option>
-                            <?php endif; ?>
+                            <?php
+                            $rendicionesPerYear = [];
+                            foreach ($rendiciones as $rendicion) {
+                                $year = date('Y', strtotime($rendicion['fecha']));
+                                $rendicionesPerYear[$year][] = $rendicion;
+                            }
+                            krsort($rendicionesPerYear);
+                            foreach ($rendicionesPerYear as $year => $rendiciones_year):
+                                // Ordena por fecha descendente dentro del año
+                                usort($rendiciones_year, function($a, $b) {
+                                    return strtotime($b['fecha']) <=> strtotime($a['fecha']);
+                                });
+                            ?>
+                                <optgroup label="<?= $year ?>">
+                                    <?php foreach ($rendiciones_year as $rendicion_item): ?>
+                                        <option value="<?= $rendicion_item['id'] ?>" <?= (isset($id_rendicion) && $id_rendicion == $rendicion_item['id']) ? 'selected' : '' ?>>
+                                            <?= formatear_fecha_esp(esc($rendicion_item['fecha'])) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-form">Buscar</button>
                 </form>
             </div>
         </div>
     </div>
 
     <?php if (isset($ejes) && !empty($ejes)): ?>
-        <div class="container my-5">
+        <div class="container my-2">
             <div class="row d-flex justify-content-center align-items-center flex-direction-column">
                 <h3 class="header-title text-center">Ejes de la Rendición</h3>
                 <div class="col-md-6 col-sm-12 p-4">
@@ -155,6 +157,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="<?= RUTA_JS_HELPERS . 'appHelpers.js' ?>"></script>
+    <script>
+    initRendicionSelect({
+        selectId: 'id',
+        paramName: 'id',
+        baseUrl: '<?= RUTA_ADMIN_BUSCAR_RENDICION_Q ?>',
+        selectedId: '<?= isset($id_rendicion) ? $id_rendicion : '' ?>'
+    });
+    </script>
 </body>
 
 </html>
