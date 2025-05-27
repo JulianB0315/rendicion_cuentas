@@ -85,44 +85,46 @@
             Volver
         </a>
     </div>
-    <div class="container my-5">
+    <div class="container mt-5">
         <div class="row d-flex justify-content-center align-items-center flex-direction-column">
             <h1 class="animate__animated animate__fadeInDown header-title text-center">Editar Rendición</h1>
             <div class="col-md-6 col-sm-12 p-4">
-                <form action="<?= RUTA_ADMIN_BUSCAR_EDIT ?>" method="get" class="mt-2">
+                <form class="mt-2">
                     <div class="form-group">
                         <label for="id">Fecha de la Rendición:</label>
                         <select class="form-select" id="id" name="id" required>
-                            <option value="" disabled selected>
+                            <option value="" disabled <?= empty($id_rendicion) ? 'selected' : '' ?>>
                                 Seleccione una fecha de rendición
                             </option>
-                            <?php if (isset($rendiciones) && !empty($rendiciones)): ?>
-                                <?php
-                                $rendicionesPerYear = [];
-                                foreach ($rendiciones as $rendicion_item) {
-                                    $year = date('Y', strtotime($rendicion_item['fecha']));
-                                    $rendicionesPerYear[$year][] = $rendicion_item;
-                                }
-                                krsort($rendicionesPerYear);
-                                foreach ($rendicionesPerYear as $year => $rendiciones_year): ?>
-                                    <optgroup label="<?= $year ?>">
-                                        <?php foreach ($rendiciones_year as $rendicion_item): ?>
-                                            <option value="<?= $rendicion_item['id'] ?>"><?= formatear_fecha_esp(esc($rendicion_item['fecha'])) ?></option>
-                                        <?php endforeach; ?>
-                                    </optgroup>
-                                <?php endforeach ?>
-                            <?php else: ?>
-                                <option value="">No hay rendiciones disponibles</option>
-                            <?php endif; ?>
+                            <?php
+                            $rendicionesPerYear = [];
+                            foreach ($rendiciones as $rendicion_item) {
+                                $year = date('Y', strtotime($rendicion_item['fecha']));
+                                $rendicionesPerYear[$year][] = $rendicion_item;
+                            }
+                            krsort($rendicionesPerYear);
+                            foreach ($rendicionesPerYear as $year => $rendiciones_year):
+                                // Ordena por fecha descendente dentro del año
+                                usort($rendiciones_year, function ($a, $b) {
+                                    return strtotime($b['fecha']) <=> strtotime($a['fecha']);
+                                });
+                            ?>
+                                <optgroup label="<?= $year ?>">
+                                    <?php foreach ($rendiciones_year as $rendicion_item): ?>
+                                        <option value="<?= $rendicion_item['id'] ?>" <?= (isset($id_rendicion) && $id_rendicion == $rendicion_item['id']) ? 'selected' : '' ?>>
+                                            <?= formatear_fecha_esp(esc($rendicion_item['fecha'])) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-form">Buscar</button>
                 </form>
             </div>
         </div>
     </div>
     <?php if (isset($rendicion)): ?>
-        <div class="container my-5">
+        <div class="container my-2">
             <div class="row d-flex justify-content-center align-items-center flex-direction-column">
                 <div class="col-md-6 col-sm-12 p-4">
                     <form action="<?= RUTA_ADMIN_EDITAR_RENDICION ?>" method="post" class="form-container" enctype="multipart/form-data">
@@ -180,11 +182,61 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success" id="success-alert">
+            <div class="alert-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="alert-content">
+                <?= session()->getFlashdata('success') ?>
+            </div>
+            <button type="button" class="close-alert">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger" id="error-alert">
+            <div class="alert-icon">
+                <i class="fa-solid fa-circle-x"></i>
+            </div>
+            <div class="alert-content">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+            <button type="button" class="close-alert">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('warning')): ?>
+        <div class="alert alert-warning" id="warning-alert">
+            <div class="alert-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="alert-content">
+                <?= session()->getFlashdata('warning') ?>
+            </div>
+            <button type="button" class="close-alert">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    <?php endif; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="<?= RUTA_JS_HELPERS . 'appHelpers.js' ?>"></script>
     <script src="<?= RUTA_JS_ADMIN . 'editRendicion.js' ?>"></script>
+    <script src="<?= RUTA_JS_PUBLIC . 'alerts.js' ?>"></script>
+    <script>
+        initRendicionSelect({
+            selectId: 'id',
+            paramName: 'id',
+            baseUrl: '<?= base_url('admin/buscar_edit') ?>',
+            selectedId: '<?= isset($id_rendicion) ? $id_rendicion : '' ?>'
+        });
+    </script>
 </body>
 
 </html>
