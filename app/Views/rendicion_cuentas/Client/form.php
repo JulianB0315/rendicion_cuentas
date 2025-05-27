@@ -150,11 +150,32 @@
 									id="organizacion"
 									name="titular"
 									value="ORGANIZACION" />
-								<label
+									<label
 									class="form-check-label"
 									for="organizacion">Organización</label>
+								</div>
 							</div>
-						</div>
+							<div id="org-has-ruc" style="display: none; margin-top: 15px;">
+								<label class="d-block mb-2">¿La organización cuenta con RUC?</label>
+								<div class="form-check form-check-inline">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="tiene-ruc"
+										name="tiene_ruc"
+										value="SI" />
+									<label class="form-check-label" for="tiene-ruc">Sí</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										type="radio"
+										class="form-check-input"
+										id="no-tiene-ruc"
+										name="tiene_ruc"
+										value="NO" />
+									<label class="form-check-label" for="no-tiene-ruc">No</label>
+								</div>
+							</div>
 						<div id="organizacion-info" style="display: none">
 							<div class="form-group text">
 								<input
