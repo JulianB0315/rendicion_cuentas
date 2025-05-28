@@ -97,11 +97,11 @@ class FormularioUserController extends BaseController
             ->first();
         if ($usuario_existente!== null) {
             return response()->setJSON([
-                'existe' => 'false',
+                'existe' => 'true',
             ]);
         }
         return response()->setJSON([
-            'existe' => 'true',
+            'existe' => 'false',
         ]);
     }
     public function ProcesarFormulario()
