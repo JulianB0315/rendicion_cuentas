@@ -92,57 +92,60 @@ const validarInputs = () => {
 };
 
 const buscarPersona = () => {
-	const dniValue = dni.value;
+    const dniValue = dni.value;
 
-	// Reiniciar campos
-	errorDniMsg.innerHTML = "";
-	nombresInfo.innerHTML = "";
-	nombre.value = "";
+    // Reiniciar campos
+    errorDniMsg.innerHTML = "";
+    nombresInfo.innerHTML = "";
+    nombre.value = "";
 
-	// Validar formato básico
-	if (!/^\d+$/.test(dniValue)) {
-		errorDniMsg.innerHTML = "El DNI debe contener solo números";
-		return;
-	}
+    // Validar formato básico
+    if (!/^\d+$/.test(dniValue)) {
+        errorDniMsg.innerHTML = "El DNI debe contener solo números";
+        return;
+    }
 
-	// No consultar API si no tiene 8 dígitos
-	if (dniValue.length !== 8) {
-		if (dniValue.length > 0) {
-			errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
-		}
-		return;
-	}
+    // No consultar API si no tiene 8 dígitos
+    if (dniValue.length !== 8) {
+        if (dniValue.length > 0) {
+            errorDniMsg.innerHTML = "El DNI debe tener 8 dígitos";
+        }
+        return;
+    }
 
-	// Usar el helper para consultar DNI
-	fetchDocData(
-		"dni",
-		dniValue,
-		dniLoader,
-		(data) => {
-			const persona = Array.isArray(data) ? data[0] : data;
-			if (!persona || !persona.nombres) {
-				errorDniMsg.innerHTML =
-					"No se encontró ninguna persona con ese DNI";
-				return;
-			}
+    // Usar el helper para consultar DNI
+    fetchDocData(
+        "dni",
+        dniValue,
+        dniLoader,
+        (data) => {
+            const persona = Array.isArray(data) ? data[0] : data;
+            if (!persona || !persona.nombres) {
+                errorDniMsg.innerHTML =
+                    "No se encontró ninguna persona con ese DNI";
+                return;
+            }
 
-			const nombreCompleto = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
-			if (nombreCompleto === "undefined") {
-				errorDniMsg.innerHTML =
-					"No se encontró ninguna persona con ese DNI";
-				return;
-			}
+            const nombreCompleto = `${persona.nombres} ${persona.apellido_paterno} ${persona.apellido_materno}`;
+            if (nombreCompleto === "undefined") {
+                errorDniMsg.innerHTML =
+                    "No se encontró ninguna persona con ese DNI";
+                return;
+            }
 
-			nombre.value = nombreCompleto;
-			nombresInfo.innerHTML =
-				"Si el nombre es incorrecto, por favor, revise el DNI ingresado";
-			validarInputs();
-		},
-		(errorMsg) => {
-			errorDniMsg.innerHTML = errorMsg;
-			validarInputs();
-		}
-	);
+            nombre.value = nombreCompleto;
+            nombresInfo.innerHTML =
+                "Si el nombre es incorrecto, por favor, revise el DNI ingresado";
+            validarInputs();
+            
+            // Verificar si el DNI ya está registrado
+            verificarRegistro(dniValue);
+        },
+        (errorMsg) => {
+            errorDniMsg.innerHTML = errorMsg;
+            validarInputs();
+        }
+    );
 };
 
 const buscarOrg = () => {
@@ -191,6 +194,41 @@ const buscarOrg = () => {
 			validarInputs();
 		}
 	);
+};
+
+// Verificar si el DNI ya está registrado en esta rendición
+const verificarRegistro = (dniValue) => {
+    if (dniValue.length !== 8) return;
+    
+    const id_rendicion = document.querySelector('input[name="id_rendicion"]').value;
+    
+    // Mostrar indicador de carga
+    dniLoader.classList.remove("d-none");
+    
+    fetch(`${baseUrl}/form/verificar_registro/${dniValue}/${id_rendicion}`)
+        .then(response => response.json())
+        .then(data => {
+            dniLoader.classList.add("d-none");
+            
+            // Si existe=false, significa que el usuario YA está registrado (confuso pero así está implementado)
+            if (data.existe === 'false') {
+                errorDniMsg.innerHTML = "Este DNI ya está registrado para esta rendición de cuentas";
+                errorDniMsg.classList.add("text-danger");
+                // Deshabilitar el botón next y submit
+                nextBtn.disabled = true;
+				mascInput.disabled = true;
+				femInput.disabled = true;
+				asistente.disabled = true;
+				orador.disabled = true;
+                submitBtn.disabled = true;
+                nextBtn.classList.remove("active");
+                submitBtn.classList.remove("active");
+            }
+        })
+        .catch(error => {
+            dniLoader.classList.add("d-none");
+            console.error("Error al verificar registro:", error);
+        });
 };
 
 // Eventos para la opción de RUC
