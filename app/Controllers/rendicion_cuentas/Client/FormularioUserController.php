@@ -89,7 +89,21 @@ class FormularioUserController extends BaseController
             echo $fecha;
         }
     }
-
+    public function BloquearFormulario($dni, $id_rendicion)
+    {
+        $usuario_existente = $this->usuarioModel
+            ->where('DNI', $dni)
+            ->where('id_rendicion', $id_rendicion)
+            ->first();
+        if ($usuario_existente!== null) {
+            return response()->setJSON([
+                'existe' => 'false',
+            ]);
+        }
+        return response()->setJSON([
+            'existe' => 'true',
+        ]);
+    }
     public function ProcesarFormulario()
     {
         $dni = $this->request->getPost('dni');

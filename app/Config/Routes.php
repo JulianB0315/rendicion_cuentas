@@ -55,6 +55,7 @@ $routes->group('/admin', ['filter' => 'auth'], function ($routes) {
 $routes->group('form', function ($routes) {
     $routes->get('/', 'rendicion_cuentas\Client\FormularioUserController::BuscarRendicion');
     $routes->post('procesar_formulario', 'rendicion_cuentas\Client\FormularioUserController::ProcesarFormulario');
+    $routes->get('verificar_registro\(:alphanum)','rendicion_cuentas\Client\FormularioUserController::BloquearFormulario\$1');
 });
 // Rutas de conferencias detalle
 $routes->get('conferencias/(:alphanum)', 'rendicion_cuentas\Client\DasboardUserController::Conferencia/$1');
