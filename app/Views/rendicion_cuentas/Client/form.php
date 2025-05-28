@@ -44,6 +44,7 @@
 		<div class="row">
 			<div class="col-12">
 				<form action="<?= RUTA_PROCESAR_FORM ?>" method="post" class="form-container" id="form-registro">
+					<input type="hidden" name="id_rendicion" value="<?= esc($id_rendicion) ?>" />
 					<div id="persona-info">
 						<div class="form-group text">
 							<input
@@ -296,6 +297,9 @@
 	</main>
 
 	<!-- Bootstrap JS and dependencies -->
+	<script>
+		const baseUrl = window.location.origin + '/rendicion_cuentas/';
+	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
