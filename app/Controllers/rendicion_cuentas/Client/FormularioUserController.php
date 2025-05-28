@@ -110,10 +110,10 @@ class FormularioUserController extends BaseController
         $id_rendicion = $this->request->getPost('id_rendicion');
         $usuario_existente = $this->usuarioModel
             ->where('DNI', $dni)
-            ->where('id', $id_rendicion)
+            ->where('id_rendicion', $id_rendicion)
             ->first();
 
-        if ($usuario_existente) {
+        if ($usuario_existente  !== null) {
             return redirect()->back()->with('error', 'El usuario con este DNI ya está registrado en la rendición actual');
         }
         $id_rendicion = $this->request->getPost('id_rendicion');

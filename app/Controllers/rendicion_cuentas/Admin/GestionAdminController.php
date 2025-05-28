@@ -130,7 +130,7 @@ class GestionAdminController extends BaseController
     {
         $data_eje = [
             'id' => $this->CreateID('eje'),
-            'tematica' => $this->request->getPost('nombreEje'), 
+            'tematica' => $this->request->getPost('nombreEje'),
             'estado' => 'habilitado'
         ];
         $this->ejeModel->insert($data_eje);
@@ -173,6 +173,10 @@ class GestionAdminController extends BaseController
     public function BuscarRendicion()
     {
         $id = $this->request->getGet('id');
+        $rendiciones = $this->rendicionModel->orderBy('fecha', 'DESC')->findAll();
+        if (!$id && !empty($rendiciones)) {
+            $id = $rendiciones[0]['id'];
+        }
         $ejes_seleccionados = $this->ejesSeleccionadosModel
             ->where('id_rendicion', $id)
             ->findAll();
@@ -184,8 +188,7 @@ class GestionAdminController extends BaseController
                 'id' => $eje['id']
             ];
         }, $ejes_seleccionados);
-        $rendiciones = $this->rendicionModel->findAll();
-        return view('rendicion_cuentas/Admin/questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones]);
+        return view('rendicion_cuentas/Admin/questions', ['ejes' => $ejes, 'rendiciones' => $rendiciones, 'id_rendicion' => $id]);
     }
 
     public function BuscarPreguntas($id_eje_seleccionado)
@@ -251,11 +254,11 @@ class GestionAdminController extends BaseController
     public function preguntasSeleccionadas()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
-        $rendiciones = $this->rendicionModel->findAll();
+        $rendiciones = $this->rendicionModel->orderBy('fecha', 'DESC')->findAll();
 
         // Si no hay id, selecciona la rendición más reciente
         if (!$id_rendicion && !empty($rendiciones)) {
-            usort($rendiciones, function($a, $b) {
+            usort($rendiciones, function ($a, $b) {
                 return strtotime($b['fecha']) <=> strtotime($a['fecha']);
             });
             $id_rendicion = $rendiciones[0]['id'];
@@ -331,11 +334,11 @@ class GestionAdminController extends BaseController
     public function MostrarReporte()
     {
         $id_rendicion = $this->request->getGet('id_rendicion');
-        $rendiciones = $this->rendicionModel->findAll();
+        $rendiciones = $this->rendicionModel->orderBy('fecha', 'DESC')->findAll();
 
         // Si no hay id, selecciona la rendición más reciente
         if (!$id_rendicion && !empty($rendiciones)) {
-            usort($rendiciones, function($a, $b) {
+            usort($rendiciones, function ($a, $b) {
                 return strtotime($b['fecha']) <=> strtotime($a['fecha']);
             });
             $id_rendicion = $rendiciones[0]['id'];
@@ -402,7 +405,6 @@ class GestionAdminController extends BaseController
                 return redirect()->back()->with('error', 'Failed to upload new banner.');
             }
         }
-
         $this->rendicionModel->update($id_rendicion, $data);
         return redirect()->back()->with('success', 'Rendición actualizada correctamente.');
     }
@@ -410,11 +412,11 @@ class GestionAdminController extends BaseController
     public function BuscarEdit()
     {
         $id_rendicion = $this->request->getGet('id');
-        $rendiciones = $this->rendicionModel->findAll();
+        $rendiciones = $this->rendicionModel->orderBy('fecha', 'DESC')->findAll();
 
         // Si no hay id, selecciona la rendición más reciente
         if (!$id_rendicion && !empty($rendiciones)) {
-            usort($rendiciones, function($a, $b) {
+            usort($rendiciones, function ($a, $b) {
                 return strtotime($b['fecha']) <=> strtotime($a['fecha']);
             });
             $id_rendicion = $rendiciones[0]['id'];

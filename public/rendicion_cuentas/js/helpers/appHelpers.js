@@ -178,3 +178,37 @@ const initImagePreview = (options = {}) => {
         });
     }
 };
+
+/**
+ * Inicializa el select de rendiciones para que seleccione la más reciente
+ * y redirija automáticamente a la URL deseada al cargar o al cambiar.
+ * 
+ * @param {Object} options
+ * @param {string} options.selectId - ID del select de rendiciones
+ * @param {string} options.paramName - Nombre del parámetro GET (ej: 'id_rendicion' o 'id')
+ * @param {string} options.baseUrl - URL base a la que redirigir (sin parámetros)
+ * @param {string|undefined} options.selectedId - ID de la rendición actualmente seleccionada (si existe)
+ */
+function initRendicionSelect({ selectId, paramName, baseUrl, selectedId }) {
+    document.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        // Si no hay valor seleccionado, selecciona la opción más reciente (primer option no disabled)
+        if (!selectedId) {
+            const firstOption = select.querySelector('option:not([disabled])');
+            if (firstOption) {
+                select.value = firstOption.value;
+                window.location.href = baseUrl + '?' + paramName + '=' + firstOption.value;
+                return; // Evita doble redirección
+            }
+        }
+
+        // Al cambiar el select, redirige a la URL correcta
+        select.addEventListener('change', function () {
+            if (this.value) {
+                window.location.href = baseUrl + '?' + paramName + '=' + this.value;
+            }
+        });
+    });
+}
