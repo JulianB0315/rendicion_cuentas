@@ -211,7 +211,7 @@ const verificarRegistro = (dniValue) => {
             dniLoader.classList.add("d-none");
             
             // Si existe=false, significa que el usuario YA está registrado (confuso pero así está implementado)
-            if (data.existe === 'false') {
+            if (data.existe === 'true') {
                 errorDniMsg.innerHTML = "Este DNI ya está registrado para esta rendición de cuentas";
                 errorDniMsg.classList.add("text-danger");
                 // Deshabilitar el botón next y submit
@@ -223,7 +223,13 @@ const verificarRegistro = (dniValue) => {
                 submitBtn.disabled = true;
                 nextBtn.classList.remove("active");
                 submitBtn.classList.remove("active");
-            }
+            } else {
+				mascInput.disabled = false;
+				femInput.disabled = false;
+				asistente.disabled = false;
+				orador.disabled = false;
+				nextBtn.disabled = false;
+			}
         })
         .catch(error => {
             dniLoader.classList.add("d-none");
